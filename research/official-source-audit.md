@@ -176,3 +176,107 @@ fillmorejazzfestival.com (dead/hijacked), intloceanfilmfest.org/festival (not fo
 - **Machine-readable dataset:** [`data/events.json`](../data/events.json); CSV export at [`data/events.csv`](../data/events.csv).
 - **Public-site behavior:** only `bucket: recurring` / `special` with `status: verified` can enter the main tables; all other statuses route to the review page.
 - **Minimum recheck before adding a row:** official source URL, SF city location, date/cadence, and an explicit review reason for any missing required field. Update the stable counts in `verify.py` only together with an entry in this audit.
+
+## Final integration re-verification — 2026-10-18 (arena/d71d78cc-maltaproj7)
+
+Every source URL in `data/events.json` was re-fetched from the official publisher page on 2026-10-18 (organizer, official venue, or government source). The pending independent-audit findings were applied, corrections were made only where an official source states the value, and residual problems were published as field-level flags on the Flagged for Review page. Nothing was inferred: values that the linked source does not state are left blank.
+
+**Outcome totals of this session before cross-session reconciliation:** 77 records = 72 published city-only rows (55 recurring / 17 special) + 5 review-register rows; 13 field-level flags; 8 categories. After reconciliation with the parallel `arena/08676041`/`arena/1bde1cd1` integration (PRs #9–#12), the final dataset is 103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows; 13 field-level flags. See the reconciliation appendix below.
+
+### Corrections applied to published rows
+
+| Row | Correction | Source(s) used |
+|---|---|---|
+| `fillmore-jazz-festival-2026` | Official source replaced with fillmorejazzfest.com (old domain fillmorejazzfestival.com is no longer organizer-controlled); dates stated as July 4–5, 2026 per SF Travel July guide + organizer July-Fourth-weekend press. | [fillmorejazzfest.com](https://www.fillmorejazzfest.com/) · [SF Travel July 2026](https://www.sftravel.com/article/san-francisco-festivals-events-july) |
+| `comedy-day-2026` | Date corrected Sep 13 → Sunday, September 20, 2026; time 12:00–5:00pm; admission Free. Sep 13 was the Opera in the Park date at the same meadow. | [comedyday.org](https://comedyday.org/) · [SF Rec & Parks Tentative Calendars](https://sfrecpark.org/1310/Tentative-Calendars-of-Special-Events) · [SF Travel Sep 2026](https://www.sftravel.com/article/san-francisco-festivals-events-september) |
+| `fleet-week-sf-2026` | Source switched to fleetweeksf.org (calendar page has no posted events); date_text lists umbrella Oct 4–12 (SF Travel) with organizer components: ship tours Oct 7–12, air show Oct 9–11 noon–4pm, Fleet Fest Oct 10–11. | [fleetweeksf.org](https://fleetweeksf.org/) · [air show page](https://fleetweeksf.org/air-show/) · [SF Travel Fleet Week guide](https://www.sftravel.com/article/where-you-need-to-watch-blue-angels-fly-over-san-francisco-during-fleet-week) |
+| `sf-international-arts-festival-2026` | Dates corrected Apr 30–May 10 → April 29–May 10, 2026 per official 2026 archive heading. | [SFIAF 2026 archive](https://www.sfiaf.org/2026_festival) |
+| `international-ocean-film-festival-2026` | Source replaced (organizer /festival and /awards now 404) with Fort Mason venue listing; venues Cowell Theater Pier 2 + BATS Bayfront; admission $20–$450; Saturday hours copied verbatim and flagged. | [Fort Mason event listing](https://fortmason.org/event/international-ocean-film-festival-2026/2026-04-12/) |
+| `world-arts-west-dance-festival-2026` | Source replaced (event URL now 404) with Presidio Trust press release; filled Sun Sep 6, 2026, 1–4pm, East Meadow at Presidio Tunnel Tops, Free; third/final weekend of three-weekend festival. | [Presidio Trust press release](https://presidio.gov/about/press/world-arts-west-enlivens-presidio-tunnel-tops-sept-6/) |
+| `muni-heritage-weekend-2026` | Filled 10:00am–4:00pm, SF Railway Museum 77 Steuart St, free rides/entry. | [SFMTA event page](https://www.sfmta.com/calendar/muni-heritage-weekend-2026) |
+| `italian-heritage-parade-2026` | Edition-specific organizer retrospective used; Oct 11, 2026 (158th annual) confirmed; route not restated on source. | [Organizer retrospective](https://sfitalianheritage.org/san-francisco-italian-heritage-parade-celebrates-158-years-with-grand-marshal-joe-mantegna/) |
+| `juneteenth-sf-freedom-celebration-2026` | Filled Jun 13, 2026, eight-block Fillmore St; authority relabeled Government source (SF.gov); no-cost. | [SF.gov Juneteenth 2026](https://www.sf.gov/san-francisco-celebrates-juneteenth-2026) |
+| `juneteenth-market-street-parade-2026` | Filled Jun 20, 2026 (fourth annual), 11:00am start at Market & Second → Embarcadero Plaza; no-cost. | [SF.gov Juneteenth 2026](https://www.sf.gov/san-francisco-celebrates-juneteenth-2026) |
+| `juneteenth-on-the-waterfront-2026` | Source switched to Foodwise organizer page; Jun 7, 2026 (sixth annual), 11am–4pm, Ferry Building front plaza, free entry. | [Foodwise event page](https://foodwise.org/events/pop-ups-on-the-plaza-juneteenth-on-the-waterfront/) |
+| `sundown-cinema-inside-out-2026` | Filled 7:00pm, Civil War Parade Ground (Graham St), Free. | [Presidio Trust press release](https://presidio.gov/about/press/presidio-unveils-vibrant-2026-summer-event-lineup) |
+| `scaregrove-2026` | Filled Fri Oct 30, 2026, 3–9pm, Sigmund Stern Grove (19th & Sloat), Free; Mobile Rec 12–8pm listing documented as a separate program. | [SF Rec & Parks calendar](https://sfrecpark.org/Calendar.aspx) |
+| `foodwise-black-holiday-market-2026` | Filled Dec 12, 2026, 9am–2pm, south arcade Ferry Building, free entry. | [Foodwise event page](https://foodwise.org/events/pop-ups-on-the-plaza-black-holiday-market/) |
+| `cloudflare-connect-2026` | Filled Oct 19–21, 2026, Moscone West, $595 conference pass ($495 group/University). | [cloudflare.com/connect](https://www.cloudflare.com/connect/) |
+| `informs-annual-meeting-2026` | Filled Nov 1–4, 2026, Moscone Center South & Marriott Marquis. | [INFORMS 2026 page](https://meetings.informs.org/wordpress/annual/) |
+| `microsoft-ignite-2026` | Filled Nov 17–20, 2026, Moscone Center 747 Howard St; admission left blank (not on linked page). | [ignite.microsoft.com](https://ignite.microsoft.com/) · [Moscone Center listing](https://www.moscone.com/events/microsoft-ignite-2026) |
+| `agu-annual-meeting-2026` | Filled Dec 7–11, 2026; location limited to 'San Francisco, CA' (venue not named on source). | [AGU26 page](https://www.agu.org/annual-meeting) |
+| `sf-marathon-2026` | Dates July 24–26, 2026 (page body; 2027 header is next-year marketing); location scoped to SF components; bridge-crossing geography flagged. | [race-weekend](https://www.thesfmarathon.com/race-weekend/) · [full-marathon course](https://www.thesfmarathon.com/full-marathon/) |
+| `carnaval-sf-2026` | Location replaced with source-stated description (17 blocks Mission District; parade 24th & Bryant → Mission → 15th); filled festival 11am–6pm, parade 10am–2pm; 'Harrison Street' detail dropped and flagged. | [Carnaval SF special events](https://carnavalsanfrancisco.org/special-events/) |
+| `hardly-strictly-bluegrass-2026` | Filled Oct 2–4, 2026; gates 11am Fri / 9am Sat–Sun, music ends 7pm; free; RecPark Oct 2–5 window flagged. | [HSB 2026 FAQ](https://hardlystrictlybluegrass.com/info-faq-2026/) |
+| `up-your-alley-2026` | Filled Sun Jul 26, 2026, 11am–6pm, precise Folsom/9th/10th/Dore footprint, donation at gate. | [Folsom Street FAQ](https://www.folsomstreet.org/faq) |
+| `folsom-street-fair-2026` | Filled Sun Sep 27, 2026, 11am–6pm, Folsom 7th–13th footprint, donation at gate. | [Folsom Street Fair page](https://www.folsomstreet.org/folsom-street-fair) |
+| `castro-street-fair-2026` | Filled Sun Oct 4, 2026 (52nd annual), 11am–6pm, Castro & Market, suggested donation $10–20. | [Castro Street Fair page](https://castrostreetfair.org/fair/) |
+| `nihonmachi-street-fair-2026` | Filled Aug 1–2, 2026 (52nd annual), Japantown; unverified street span dropped and flagged. | [Nihonmachi Street Fair](https://www.nihonmachistreetfair.org/home-1) |
+| `pistahan-2026` | Filled Aug 8–9, 2026 (33rd annual); parade Sat 11am–12noon from Civic Center Plaza along Market (8th–4th) to 4th & Mission at Yerba Buena Gardens; festival free. | [pistahan.net](https://www.pistahan.net/) · [parade page](https://www.pistahan.net/parade) |
+| `north-beach-festival-2026` | Filled Jun 20–21, 2026 (70th annual), Filbert–Broadway / Stockton–Grant footprint. | [North Beach Festival](https://www.northbeachfestival.org/) |
+| `haight-ashbury-street-fair-2026` | Filled Sun Sep 20, 2026, 11am–5:30pm, Haight St between Masonic and Stanyan, free. | [SFMTA travel update](https://www.sfmta.com/travel-updates/haight-ashbury-street-fair-sunday-september-20-2026) · [organizer vending page](https://www.haightashburystreetfair.org/vending) |
+| `sf-aloha-run-2026` | No field changes; re-verification failure recorded in notes and flags (organizer site unreachable). | [sfaloharun.com](https://sfaloharun.com/) (unreachable) |
+| `sf-porchfest-2026` | Filled Free; notes: 8th annual, 100 acts in the Mission; set times left blank; kick-off May 29 at Hotel Utah. | [app.sfporchfest.org](https://app.sfporchfest.org/) |
+| `sf-dance-film-festival-2026` | Filled SF venue list (Lucasfilm Premier, Delancey Street, Catharine Clark, SHACK15, Brava) and ticketing note. | [SFDFF Fall Festival 2026](https://sfdancefilmfest.org/fall-festival-2026/) |
+| `sf-transgender-film-festival-2026` | Filled Nov 12–14, 2026 in-person 7–10pm; online hybrid through Nov 22. | [SF/Arts listing](https://sfarts.org/event/29th-anniversary-san-francisco-transgender-film-festival-2O89YYfq6cS0gq7oZDYObg/) |
+| `chinese-new-year-parade-2027` | Filled 5:15pm start; free along route / bleacher tickets sold. | [Chinese New Year Parade FAQ](https://chineseparade.com/faq/) |
+| `st-patricks-parade-2026` | Filled Mar 14, 2026 (175th annual), 11:30am start, 2nd & Market → Civic Center. | [UISF parade page](https://uissf.org/st-patricks-day-parade) |
+| `flower-piano-2026` | Admission filled Free–$18 (Zoox Lounge ticketed); 11th year / 12 pianos noted. | [GGGP event page](https://gggp.org/event/flower-piano-2026/) |
+| `sfjff-2026` | Source URL updated to the working JFI 2026 archive; July 16 – August 2, 2026 (SFJFF 46) confirmed; review-only retained (mixed geography). | [JFI SFJFF 2026 archive](https://jfi.org/film-festival/festival-archive/sfjff-2026) |
+| `sf-fringe-2026` | Source authority corrected to 'Legacy source — NOT verified official'; legacy domain now serves unrelated 404 content; review-only retained. | [sffringe.org](https://www.sffringe.org/) (now unrelated content) |
+| `bay-area-aloha-festival` | Outside-city exclusion retained; source unreachable at re-verification recorded. | [bayareaalohafestival.com](https://www.bayareaalohafestival.com/) (unreachable) |
+
+Rows re-verified as already correct (no field changes): all PCFMA market rows (Castro, Divisadero, Fillmore, Hayes Valley, Inner Sunset), Alemany Farmers Market, Ferry Plaza Farmers Market, Mission Community Market, Sunday Streets SF, Stern Grove Festival, Free Shakespeare in the Park (SF run Sep 5–27 at McLaren + Sue Bierman), Cherry Blossom Festival 2027, SF Pride 2027, Bay to Breakers 2027 (May 16, 2027 hero date; stray May 18 copy flagged), CAAMFest 2026 SF program (May 7–10; five SF venues), SF Silent Film Festival 2026 (May 6–10, Castro Theatre), SF Black Film Festival 2026 (Jun 18–21), 3rd i South Asian Film Festival 2026 (Oct 9–11), Lit Crawl SF 2026 (Oct 24), Opera in the Park cancellation, and SFFILM 2026 review row (Apr 24 – May 4).
+
+### Rows added during final integration (each verified from an official source)
+
+| New row | Date(s) | Source |
+|---|---|---|
+| `mayors-juneteenth-kickoff-2026` | Jun 5, 2026, City Hall | SF.gov |
+| `juneteenth-bayview-fathers-day-festival-2026` | Jun 21, 2026, Gilman Park | SF.gov |
+| `memorial-day-commemoration-presidio-2026` | May 25, 2026 (159th annual) | Presidio Trust press release |
+| `parks4all-brewfest-2026` | May 30, 2026 (4th annual) | Presidio Trust press release |
+| `bay-area-international-deaf-dance-festival-2026` | Aug 16, 2026 (14th annual) | Presidio Trust press release |
+| `community-arts-market-presidio-2026` | Jul 18–19, 2026 (2nd annual) | Presidio Trust press release |
+| `fiesta-en-el-parque-2026` | Aug 1, 2026 | Presidio Trust press release |
+| `i-am-an-american-exhibition-2026` | Fridays–Tuesdays through Aug 31, 2026 | Presidio Trust press release |
+| `exclusion-presidio-exhibition-2026` | Fridays–Sundays through Aug 31, 2026 | Presidio Trust press release |
+| `spring-awakening-art-cumbia-2026` | May 16, 2026 | Presidio Trust press release |
+| `intertribal-dance-gathering-2026` | May 30, 2026 | Presidio Trust press release |
+| `presidio-soccer-festival-2026` | Jun 13, 2026 | Presidio Trust press release |
+| `carnaval-fat-tuesday-2026` | Feb 17, 2026 | Carnaval SF |
+| `carnaval-king-queen-competition-2026` | Mar 28, 2026 | Carnaval SF |
+| `carnaval-cubacaribe-2026` | Apr 15, 2026 (20th annual) | Carnaval SF |
+| `carnaval-pride-night-2026` | Apr 24, 2026 | Carnaval SF |
+| `carnaval-nightlife-calacademy-2026` | May 7, 2026 | Carnaval SF |
+| `carnaval-business-mixer-2026` | Oct 14, 2026 | Carnaval SF |
+
+### Field-level flags published for manual review
+
+13 flags are rendered on `flagged.html` with source links: Comedy Day date evidence (image-only on organizer site), Fillmore Jazz domain swap, Fleet Week umbrella-date discrepancy, SF Marathon bridge-course geography + 2027 header confusion, Hardly Strictly Oct 2–4 vs RecPark Oct 2–5, IOFF dead organizer URLs + posted Saturday hours typo, SF Aloha Run source unreachable at re-verification, Bay Area Aloha source unreachable at re-verification, Scaregrove dual listings (main vs Mobile Rec), Carnaval unverified Harrison Street detail removed, Nihonmachi street span not restated on source, Bay to Breakers stray May 18 copy, SF Fringe domain serving unrelated content.
+
+### Re-verification method
+
+- Fetch tool re-retrieved each `source_url` on 2026-10-18 and confirmed the row's core claims (name, date/cadence, location) in the returned text.
+- A value is published only when the linked source states it; optional fields stay blank otherwise (em dash policy).
+- Where two official sources disagree, both are cited and the disagreement is flagged; the organizer's own dates win for event dates unless unavailable.
+- The reproducible patch applied during this session is preserved at `research/integration-patch-2026-10-18.py`.
+
+
+## Cross-session reconciliation appendix — 2026-10-18 (arena/d71d78cc-maltaproj7)
+
+Two parallel integration sessions (`arena/08676041-maltaproj7`, `arena/1bde1cd1-maltaproj7`, PRs #9–#12) and this session (`arena/d71d78cc-maltaproj7`) independently re-verified the catalog on 2026-10-18 and published overlapping corrections. The final dataset is a strict union of both datasets with the following row-level dispositions:
+
+| Contested row(s) | Disposition | Rationale |
+|---|---|---|
+| `comedy-day-2026` | **Published** (Sunday, September 20, 2026) with field flag | The date is stated by official sources: SF Recreation and Parks' Tentative Calendars of Special Events (government) and the SF Travel September guide; the organizer page confirms the edition, venue, hours, and free admission but states the date only in a banner image. The parallel session demoted the row because the organizer text lacks a date; the government-source evidence resolves that gap and the flag preserves the residual image-only caveat. |
+| `haight-ashbury-street-fair-2026` | **Published** (Sunday, September 20, 2026) with source switched to the organizer's vending page | The organizer's own vending page states 'Event Date: Sunday, September 20, 2026' and the SFMTA travel-update page (government) states the date, hours, and Haight Street (Masonic–Stanyan) span. The parallel demotion (organizer homepage text lacks a date) is resolved by the organizer subpage. |
+| `sf-marathon-2026` | **Review register** (parallel session's treatment), with `sf-marathon-expo-2026` published separately | Strict city-only consistency: the full-marathon and first-half courses cross the Golden Gate Bridge into the Marin headlands side, matching the mixed-geography treatment used for multi-city film festivals. Course detail, 2026 date evidence, and the organizer's 2027 marketing header are recorded in the review row and flags. |
+| `sf-aloha-run-2026` | **Review register** (parallel session's treatment) | The organizer site is unreachable at re-verification, so no value can be confirmed from a live official source and the row must not be published as verified. Captured values are retained on the review page with the unreachability flag. |
+| `international-ocean-film-festival-2026` | **Published** (this session's treatment) | The parallel session demoted the row because the organizer's festival page is dead; this session substituted the official Fort Mason venue listing (which states the April 10–12 dates, Cowell Theater/Bayfront Theatre venues, and $20–$450 range) per the independent audit's 'replace the source' instruction. The venue listing's posted Saturday hours typo remains flagged. |
+| `fillmore-jazz-festival-2026` + `fillmore-jazz-festival-2027` | **Both published** (separate edition rows) | 2026 edition documented with the canonical organizer domain; 2027 edition (July 3–4, 2027) from the organizer site as the next edition. |
+| `juneteenth-mayor-kickoff-2026` (parallel) vs `mayors-juneteenth-kickoff-2026` (this session) | **Duplicate collapsed** into `mayors-juneteenth-kickoff-2026` | Same June 5, 2026 City Hall kickoff; the retained row carries the source-stated 5–8 p.m. hours and registration note. |
+| `calacademy-nightlife` (recurring series) + `carnaval-nightlife-calacademy-2026` (dated co-presentation) | **Both published** | Different records: the weekly NightLife series and the specific Carnaval-branded May 7, 2026 evening. |
+| All other parallel-only rows (Heart of the City and Fort Mason farmers markets, Exploratorium After Dark, Downtown First Thursdays, Valencia LIVE, AIDS Walk, SF Sketchfest 2027, YBG Festival, Outside Lands, Portola, Jerry Day, Escape from Alcatraz Triathlon, Day of the Dead Procession, Illuminate SF, Fourth of July Fireworks, People in Plazas, Merola Summer Festival, and the review rows Frameline50, Noise Pop, Golden Gate Bandshell Concerts, SFJAZZ Summer Sessions, Third Thursdays On Ellis, SF Opera Summer Season) | **Imported unchanged** | Peer verification accepted as published/flagged there. |
+
+Final dataset: **103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows; 13 field-level flags; 8 categories.** Both sessions' full audit narratives are preserved in this file and in COORDINATION.md.

@@ -4,16 +4,18 @@ A static GitHub Pages catalog of **publicly advertised events in the City and Co
 
 ## What is included
 
-- **69 publishable city-only rows:** 58 regularly occurring and 11 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including reconciliation with a parallel peer contribution, PR #9).
+- **90 publishable city-only rows:** 71 regularly occurring and 19 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of two parallel integration contributions, PRs #9–#13).
 - **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
-- **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification and four peer contributions held at reconciliation).
+- **Thirteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
+- **13 field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
 
 The catalog is a reproducible snapshot of official-source evidence, **not** a claim to list every private, unlisted, or newly announced event in San Francisco. Dates and operational details can change; check the linked source before attending.
 
 ## Data and audit trail
 
-- `data/events.json` — source of truth; includes catalog metadata, publishable records, source authority, and review statuses.
+- `data/events.json` — source of truth; includes catalog metadata, publishable records, source authority, review statuses, and the field-level `flags` register.
+- `research/integration-patch-2026-10-18.py` — reproducible patch script used to apply this session's integration corrections and additions.
 - `data/events.csv` — generated export of every data record, including review-only rows.
 - `research/official-source-audit.md` — row-level source matrix, review register, and material scope decisions.
 - `COORDINATION.md` — work ledger, handoff notes, and deployment/verification record.

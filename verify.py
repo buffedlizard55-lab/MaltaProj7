@@ -57,9 +57,13 @@ def main() -> int:
     document = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     catalog = document.get("catalog")
     events = document.get("events")
+    flags = document.get("flags", [])
     if not isinstance(catalog, dict) or not isinstance(events, list):
         error("data/events.json must be a catalog object with an events list")
         events = []
+    if not isinstance(flags, list):
+        error("data/events.json flags must be an array")
+        flags = []
 
     ids: set[str] = set()
     published: list[dict] = []
@@ -95,14 +99,14 @@ def main() -> int:
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
     # Update these constants only with a corresponding audit entry in
-    # research/official-source-audit.md (2026-10-18 snapshot after PR #9
-    # reconciliation: 69 = 58 + 11, 16 review).
-    if len(published) != 69:
-        error(f"expected 69 published rows, found {len(published)}")
-    if len(recurring) != 58 or len(special) != 11:
-        error(f"expected 58 recurring / 11 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 16:
-        error(f"expected 16 review records, found {len(review)}")
+    # research/official-source-audit.md (2026-10-18 final integration
+    # reconciliation: 90 = 71 + 19, 13 review, 13 field-level flags).
+    if len(published) != 90:
+        error(f"expected 90 published rows, found {len(published)}")
+    if len(recurring) != 71 or len(special) != 19:
+        error(f"expected 71 recurring / 19 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 13:
+        error(f"expected 13 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -207,12 +211,14 @@ def main() -> int:
         check_internal_links(path, text)
 
     # Each generated public/review table has exactly one source link for each row.
+    # flagged.html also carries one link per field-level flag source.
+    flag_source_links = sum(len(flag.get("sources", [])) for flag in flags)
     expected_counts = {
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
         ROOT / "all-events.html": len(published),
-        ROOT / "flagged.html": len(review),
+        ROOT / "flagged.html": len(review) + flag_source_links,
     }
     for path, expected in expected_counts.items():
         actual = source_link_count(path)
@@ -263,7 +269,7 @@ def main() -> int:
 
     print(
         f"published={len(published)} recurring={len(recurring)} special={len(special)} "
-        f"review={len(review)} categories={len(categories)} "
+        f"review={len(review)} flags={len(flags)} categories={len(categories)} "
         f"authorities={dict(sorted(Counter(e['source_authority'] for e in published).items()))}"
     )
     if ERRORS:
