@@ -280,3 +280,21 @@ Two parallel integration sessions (`arena/08676041-maltaproj7`, `arena/1bde1cd1-
 | All other parallel-only rows (Heart of the City and Fort Mason farmers markets, Exploratorium After Dark, Downtown First Thursdays, Valencia LIVE, AIDS Walk, SF Sketchfest 2027, YBG Festival, Outside Lands, Portola, Jerry Day, Escape from Alcatraz Triathlon, Day of the Dead Procession, Illuminate SF, Fourth of July Fireworks, People in Plazas, Merola Summer Festival, and the review rows Frameline50, Noise Pop, Golden Gate Bandshell Concerts, SFJAZZ Summer Sessions, Third Thursdays On Ellis, SF Opera Summer Season) | **Imported unchanged** | Peer verification accepted as published/flagged there. |
 
 Final dataset: **103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows; 13 field-level flags; 8 categories.** Both sessions' full audit narratives are preserved in this file and in COORDINATION.md.
+
+
+## Coverage-gap pass — 2026-10-18 (arena/5e333a6e-maltaproj7)
+
+Count-guard change in `verify.py`: **93 → 133 published (74 → 84 recurring, 19 → 49 special), 12 → 13 review, 16 → 23 flags.** Every added value was read on 2026-10-18 from the linked official page; the reproducible patch is `research/patch-5e333a6e.py` and the full review narrative is `research/review-5e333a6e.md`.
+
+| Group | Rows added | Official source type |
+|---|---|---|
+| Conventions at Moscone Center (2026 past + 2027 upcoming) | AI Engineer World's Fair, AMD Advancing AI, NPH Affordable Housing Conference, CoreWeave Fully Connected, SEMICON West, TechCrunch Disrupt, Current SF, Winter FancyFaire, ASCO GI, SPIE Photonics West, ASCO GU, ORS, TDX, AAD, AMCP, Atlassian Team '27, ASRS (17) | Official venue (moscone.com/events/…) |
+| Organizer-sourced conferences | GDC Festival of Gaming 2027, RSAC 2027, Dreamforce 2027 (venue flagged), J.P. Morgan Healthcare 2027 (venue flagged) (4) | Official organizer |
+| Museum free days | FAMSF Free Saturdays (weekly), FAMSF Free First Tuesdays (monthly) | Official venue |
+| Markets / arts | Fort Mason Night Market (monthly; season flagged), SF Open Studios 52nd annual (studio start flagged) | Official venue |
+| Neighborhood events | Autumn Moon Festival (hours flagged), Cole Valley Street Fair, Bearrison Street Fair, Potrero Hill Festival (hours flagged), Clement Street Art Fair, Brava Block Party, SF Lowriders King of the Streets, Diplo's Run Club 5K, Lower Polk Live, From the E Night Market, Noe Valley Night Market | SFMTA (government) except Autumn Moon (organizer) |
+| Sports | SF Half Marathon & 5K 2027 | Official organizer |
+| Pride-week 2026 | Pink Triangle, Trans March, Dyke March | SF Pride official events page / SFMTA |
+| Review register | Litquake 2026 (Berkeley venue in official schedule; conflicting opening date) | Official organizer |
+
+Classification rule applied: a row is *recurring* only where the linked source says "annual", "every", "monthly", etc. Single-date SFMTA notices that state no recurrence (Lower Polk Live, From the E, Noe Valley Night Market, Clement Street Art Fair, Brava Block Party, King of the Streets) and conferences are *special*. Sunday Streets Excelsior (Oct 18) is already covered by `sunday-streets-2026`.

@@ -4,11 +4,11 @@ A static GitHub Pages catalog of **publicly advertised events in the City and Co
 
 ## What is included
 
-- **93 publishable city-only rows:** 74 regularly occurring and 19 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of three parallel integration contributions, PRs #9–#14).
+- **133 publishable city-only rows:** 84 regularly occurring and 49 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of three parallel integration contributions, PRs #9–#14, and the arena/5e333a6e coverage-gap pass adding Moscone Center conventions, SFMTA-documented neighborhood events, FAMSF free days, and Pride-week marches).
 - **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
-- **Twelve review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
-- **16 field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
+- **Thirteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
+- **23 field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
 
 The catalog is a reproducible snapshot of official-source evidence, **not** a claim to list every private, unlisted, or newly announced event in San Francisco. Dates and operational details can change; check the linked source before attending.
 
@@ -16,6 +16,7 @@ The catalog is a reproducible snapshot of official-source evidence, **not** a cl
 
 - `data/events.json` — source of truth; includes catalog metadata, publishable records, source authority, review statuses, and the field-level `flags` register.
 - `research/integration-patch-2026-10-18.py` — reproducible patch script used to apply this session's integration corrections and additions.
+- `research/patch-5e333a6e.py` and `research/review-5e333a6e.md` — coverage-gap patch (40 published rows, 1 review row, 7 flags) and the line-by-line repo review that motivated it.
 - `data/events.csv` — generated export of every data record, including review-only rows.
 - `research/official-source-audit.md` — row-level source matrix, review register, and material scope decisions.
 - `COORDINATION.md` — work ledger, handoff notes, and deployment/verification record.
