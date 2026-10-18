@@ -118,3 +118,12 @@ Research evidence, exact supporting excerpts, retrieval dates, and official URLs
 - Merge: pending.
 - GitHub Pages URL: pending.
 - Deployment checks: pending.
+
+---
+
+## Reconciliation addendum — `arena/f3cb0dad-maltaproj7`
+
+- 2026-10-18 — This session has read the concurrent-session arbitration record and accepts the catalog-enrichment scope assigned there: `data/events.json`, `research/**`, and the source-audit rebuild that consumes them. No peer claim is being overwritten.
+- 2026-10-18 — The independent audit findings are incorporated in the reconciled data/model: Mission Community Market is seasonal (mid-March–mid-November); generic source-directory rows are not treated as individual events; recurring annual traditions are distinguished from dated special events; and local validation is not presented as a live external-source crawl.
+- 2026-10-18 — Multi-city/cancelled/outside-city/essentially incomplete items are review-only in the reconciled model. CAAMFest is being narrowed to its explicitly sourced San Francisco program rather than represented as a city-exclusive umbrella festival.
+- Current rebase status: preserving the richer row-level source audit while replaying the static-site rebuild. Follow-up local build, navigation, source-link, PR, and Pages results will be recorded after the replay completes.
