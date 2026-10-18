@@ -1,3 +1,19 @@
+# Active coordination — session `arena/5e333a6e-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/5e333a6e-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as earlier sessions).
+
+**Pre-claim inspection (UTC):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty; no remote branches besides `main`. Every task on every earlier board is DONE/merged; no active claims exist. Baseline `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16, categories=8).
+
+Since no other session holds a claim, this session takes the review, coverage, and final-integration tasks below. That includes the shared outputs (data, index, navigation), which the brief allows for a final integration session.
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Repo review: structural audit of `data/events.json` (duplicates, cadence semantics, URL hygiene) + spot re-verification of rows against official sources | in progress | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `research/review-5e333a6e.md` (new), `data/events.json` (fixes only) |
+| S2 | Coverage gap pass: add major SF-city events missing from the catalog, each verified on an official organizer/venue/government page | in progress | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (new rows + flags), `research/review-5e333a6e.md` |
+| S3 | Final integration: rebuild, verify, link check, PR to `main`, merge, confirm Pages, record results | unclaimed→claimed | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `COORDINATION.md` |
+
+---
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
