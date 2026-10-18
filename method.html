@@ -12,63 +12,40 @@
 <header class="site-header"><div class="shell">
   <p class="eyebrow">Official-source catalog · 2026-10-18</p>
   <h1>San Francisco Events</h1>
-  <p class="lede">City and County of San Francisco only. Lists are ordered by date with upcoming events first, every row shows what it costs to attend, and every row links to the official source used for verification.</p>
+  <p class="lede">City and County of San Francisco only. Free upcoming events first. Other admission types, past editions and research records are separated and clearly labeled; every event table row links its source.</p>
 </div></header>
 <main id="content" class="shell main">
-<nav class="nav" aria-label="Primary"><a class="" href="index.html">Dashboard</a><a class="" href="free.html">Free events (main)</a><a class="" href="paid.html">Paid & ticketed</a><a class="" href="upcoming.html">Upcoming by date</a><a class="" href="recurring.html">Regularly occurring</a><a class="" href="special.html">Special events</a><a class="" href="categories.html">Categories</a><a class="" href="all-events.html">All events</a><a class="" href="flagged.html">Flagged for Review</a><a class="active" href="method.html">Method & sources</a></nav>
+<nav class="nav" aria-label="Primary"><a class=""  href="index.html">Dashboard</a><a class=""  href="upcoming.html">Upcoming</a><a class=""  href="free.html">Free upcoming</a><a class=""  href="paid.html">Paid & partly free</a><a class=""  href="recurring.html">Regularly occurring</a><a class=""  href="special.html">Special events</a><a class=""  href="categories.html">Categories</a><a class=""  href="all-events.html">All events</a><a class=""  href="flagged.html">Flagged for Review</a><a class="active" aria-current=page href="method.html">Method & sources</a></nav>
+<noscript><p class="notice">Dates on this no-JavaScript view are a snapshot as of 2026-10-18. Some may have passed; confirm with the linked organizer before attending.</p></noscript>
 
 <section class="section-head"><div><h2>Method, sources, and findings</h2>
-<p>A reproducible snapshot of publicly advertised San Francisco city events, organised free-first.</p></div></section>
-<section class="panel"><h3>How the site is organised</h3><ol>
-<li><strong>Free events are the main section.</strong> <a href="free.html">Free events (main)</a> contains only rows
-whose linked official source states the event is free or free for part of the programme.</li>
-<li><strong>Paid events are a separate section.</strong> <a href="paid.html">Paid &amp; ticketed</a> collects and
-organises the priced, ticketed, registration-only and unpriced rows so they never mix into the free list.</li>
-<li><strong>Focus areas come first.</strong> Inside the free list the order is gaming, then music and performing arts,
-then AI and technology, then everything else — the ordering the brief asks for. Focus areas are derived from each
-row's verified category and its own name, never from hand-written prose, and the Focus control filters any list by
-them.</li>
-<li><strong>Regular patterns are separated from dated specials.</strong> <a href="recurring.html">Regularly
-occurring</a> holds weekly, monthly, seasonal and annual programs; <a href="special.html">Special events</a> holds
-dated one-offs. Each of those pages, and every category page, shows its free rows first and its non-free rows in a
-second table.</li>
-<li><strong>Everything is also available in one date-ordered list</strong> on
-<a href="upcoming.html">Upcoming by date</a> and <a href="all-events.html">All events</a>.</li>
-</ol></section>
+<p>A reproducible snapshot of publicly advertised San Francisco city events.</p></div></section>
 <section class="panel"><h3>Publish rule</h3><ol>
 <li>Each active row needs a title, source-stated date/cadence, San Francisco city location, organizer, and HTTPS source link.</li>
 <li>Accepted sources are official organizers, official venues, government sources, and clearly labeled trusted civic sources. The source type is visible in every row.</li>
-<li>Optional time and admission fields are not inferred. An em dash means the captured source did not state that optional value; “Not stated” in the Cost column means no price was published.</li>
+<li>Optional time and admission fields are not inferred. An em dash means the captured source did not state that optional value; “Not stated” in the Cost column means admission cost is not confirmed.</li>
 <li>Multi-city programs, cancelled events, outside-city events, and records missing essential evidence are not added to public tables. They stay on <a href="flagged.html">Flagged for Review</a> with a source and explanation.</li>
 </ol></section>
 <section class="panel"><h3>How date ordering and the executive summary work</h3><ul class="analysis-list">
-<li>Every list is generated with upcoming rows first, ordered by start date, with completed editions pushed to the bottom and labelled <em>Completed</em>.</li>
-<li>A small script re-computes each row's status against the visitor's actual current date, so the "Upcoming" / "Completed" / "Ongoing now" badge and the "in N days" label stay correct after the static build date. The same script refreshes every relative label on the dashboard's lists.</li>
-<li>The dashboard's executive summary is <strong>free-first</strong>: it shows the free events closest to today, how many free events start in the next 7, 30 and 90 days, how many free programs are running now, and then — in its own clearly labelled panel — the nearest paid, registration-only or unpriced events. A build-time list is included for readers without JavaScript.</li>
+<li>Primary dashboard, Upcoming and Free pages contain only dated confirmed-free rows still current as of the audit. Secondary research views include completed and non-free rows; those tables place upcoming first and completed editions last.</li>
+<li>A small script re-computes each row's status against the visitor's actual current date, so the "Upcoming" / "Completed" badge and the "in N days" label stay correct after the static build date.</li>
+<li>The dashboard shows only confirmed-free dated events not yet past. Its nearest-events panel and 7/30/90-day counts use the visitor's local date; paid, mixed, unknown cost and undated rows stay out. The no-JavaScript view is explicitly dated to the audit snapshot.</li>
 </ul></section>
 <section class="panel"><h3>How cost is labelled</h3><p>Cost classes are derived only from the admission text that the
-linked official page stated. Nothing is inferred from an event's type.</p>
+linked official page stated. Nothing is inferred from an event's type. A waived fundraising minimum by itself does not establish free entry.</p>
 <div class="legend">
 <span class="cost cost-free">Free</span> the source states no charge
 <span class="cost cost-mixed">Free or partly free</span> some programmes free, others ticketed
-<span class="cost cost-paid">Paid / ticketed</span> the source states a price, pass or ticket
-<span class="cost cost-restricted">Registration only</span> the source names registration or an invitation but publishes no price
-<span class="cost cost-unknown">Not stated</span> the source published no price — <strong>never</strong> treated as free
+<span class="cost cost-paid">Paid / ticketed</span> the source states a charge, ticket sale or paid pass
+<span class="cost cost-unknown">Not stated</span> a free or paid admission price was not confirmed — <strong>never</strong> treated as free
 </div>
-<p>Current split: <strong>45 free</strong>, <strong>12 free or partly free</strong>, <strong>13 paid / ticketed</strong>, <strong>4 registration only</strong>, <strong>77 cost not stated</strong>. Only the free and partly-free classes appear in the main list. The rows with an
-unstated cost are listed, with their source links, on the <a href="flagged.html">Flagged for Review</a> page and in
-the separate <a href="paid.html">Paid &amp; ticketed</a> section.</p>
-<p><strong>Registration wording is not a price.</strong> Where a source says only “Registration required” or “By
-invitation only”, the row is labelled <em>Registration only — no price published</em> rather than “Paid”, because
-asserting a price would be an inference. Four rows are affected and they are recorded in
-<a href="flagged.html#flag-registration-only-cost-class">flag-registration-only-cost-class</a>.</p></section>
+<p>Current split: <strong>54 free</strong>, <strong>16 paid / ticketed</strong>, <strong>12 free or partly ticketed</strong>, <strong>76 not stated</strong>. The rows without a confirmed cost are listed, with their source links, on the
+<a href="flagged.html">Flagged for Review</a> page.</p></section>
 <section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
-<li>The audit has 99 recurring and 52 dated-special verified rows across 9 categories; 57 of the 151 published rows are still upcoming as of 2026-10-18.</li>
-<li>Free coverage: 57 rows are free or partly free, and 12 of those are still upcoming. 77 rows have no published price, so they cannot be counted as free even where attendance may in fact cost nothing.</li>
-<li>The recurring list breaks down as <strong>14 weekly</strong>, <strong>3 monthly</strong>, <strong>10 seasonal</strong>, <strong>72 annual</strong>. The classification is based on cadence, not whether an event is free or public.</li>
-<li>The largest audited categories are <strong>Community &amp; culture (39)</strong>, <strong>Music &amp; performing arts (23)</strong>, <strong>Fairs &amp; nightlife (20)</strong>. This describes the verified source set, not all activity in San Francisco.</li>
+<li>The audit has 101 recurring and 57 dated-special verified rows across 9 categories; 63 of the 158 published rows are still upcoming as of 2026-10-18.</li>
+<li>The recurring list breaks down as <strong>14 weekly</strong>, <strong>4 monthly</strong>, <strong>9 seasonal</strong>, <strong>74 annual</strong>. The classification is based on cadence, not whether an event is free or public.</li>
+<li>The largest audited categories are <strong>Community &amp; culture (40)</strong>, <strong>Food &amp; markets (24)</strong>, <strong>Music &amp; performing arts (24)</strong>. This describes the verified source set, not all activity in San Francisco.</li>
 <li>Most 2026 editions in this snapshot had already taken place by the October 18, 2026 check date, while several rows document confirmed 2027 editions. Rows record the audited edition, not a promise that the same dates repeat.</li>
-<li>Focus-area gaps are published rather than papered over. As of October 18, 2026: no <em>upcoming</em> in-person free gaming event inside the city could be verified from an official source (<a href="flagged.html#flag-free-gaming-coverage-gap">flag-free-gaming-coverage-gap</a>); none of the 16 AI &amp; technology rows carries a source-stated free admission (<a href="flagged.html#flag-free-ai-coverage-gap">flag-free-ai-coverage-gap</a>); and 2027 dates for Hardly Strictly Bluegrass are published only by secondary aggregators (<a href="flagged.html#flag-hsb-2027-dates-unconfirmed">flag-hsb-2027-dates-unconfirmed</a>).</li>
 <li>The review register makes scope and cancellation decisions visible instead of deleting difficult records or asserting unsupported city-only coverage.</li>
 </ul></section>
 <section class="panel"><h3>Directories and coverage boundaries</h3>
@@ -77,18 +54,16 @@ asserting a price would be an inference. Four rows are affected and they are rec
 <li><a href="https://sfpl.org/events">San Francisco Public Library — Upcoming Events</a>: branch programs and talks across the city system.</li>
 <li><a href="https://sfcityguides.org/">San Francisco City Guides</a>: free volunteer-led walking tours (70+ tours, a program of SFPL); individual tours run on varying schedules via their tour finder.</li>
 <li><a href="https://sfrecpark.org/Calendar.aspx">SF Recreation and Park calendar</a>: park programs and seasonal city events; individual dated listings (for example Scaregrove) become special-event rows.</li>
-<li><a href="https://sf.gov/events/upcoming">SF.gov citywide meetings and events</a>: the city's own calendar, including free civic programs; dated listings become rows when a city page states the date and location.</li>
 </ul>
 <p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
-<section class="panel"><h3>Line-by-line verification</h3><p>Every published and review row is checked against its
-linked official source page, and each session's pass is logged row by row with quoted source text:
-<a href="research/reverification-3977d9cb.md">research/reverification-3977d9cb.md</a> (this pass),
-<a href="research/review-3977d9cb.md">research/review-3977d9cb.md</a> (repository review and irregularities),
-<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>,
+<section class="panel"><h3>Line-by-line verification</h3><p>The eight primary free-upcoming rows were rechecked for this session with field-level source evidence in
+<a href="research/review-f65449c5.md">research/review-f65449c5.md</a>. A parallel pass re-fetched 41 official pages on 2026-10-18 — every row still upcoming or ongoing, plus the gaming, music and AI rows and the free recurring programmes — and is logged with quoted source text in
+<a href="research/verification-8c40d1c6.md">research/verification-8c40d1c6.md</a> (patch: <a href="research/patch-8c40d1c6.py">research/patch-8c40d1c6.py</a>); it added six rows, filled four cost fields and recorded six field-level flags. Prior catalog-wide auditing is recorded in
+<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with earlier passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
 <a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. Values not stated by a source
-were blanked and flagged rather than inferred; dead or moved official links were re-pointed to live pages.</p></section>
+were blanked and flagged rather than inferred. Static link checks do not live-fetch external sites; consult the organizer for changes.</p></section>
 <section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in
 <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is
 <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing
@@ -105,11 +80,11 @@ a row, re-check the official source and update the review reason when evidence i
 
 const DATA = (() => { try { return JSON.parse(document.getElementById('sf-events-data').textContent); } catch (e) { return []; } })();
 const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
-const FREE = new Set(['free', 'mixed']);
 const dayDiff = (iso) => { if (!iso) return null; const d = new Date(iso + 'T00:00:00'); return Math.round((d - TODAY) / 86400000); };
 const fmtDay = (iso) => { if (!iso) return ''; const d = new Date(iso + 'T00:00:00');
   return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); };
-const A = (url, text) => '<a href=' + JSON.stringify(url) + ' target=_blank rel=noopener noreferrer>' + text + '</a>';
+const H = (text) => String(text || '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const A = (url, text) => '<a href=' + JSON.stringify(H(url)) + ' target=_blank rel="noopener noreferrer">' + H(text) + '</a>';
 const relative = (start, end) => {
   const s = dayDiff(start), e = dayDiff(end || start);
   if (s === null && e === null) return '';
@@ -120,114 +95,98 @@ const relative = (start, end) => {
   if (e !== null) return 'ongoing — ends ' + fmtDay(end);
   return '';
 };
-// 1. Live relative labels everywhere (table rows and dashboard lists).
-for (const rel of document.querySelectorAll('.rel[data-start], .rel[data-end]')) {
-  const label = relative(rel.dataset.start, rel.dataset.end);
-  if (label === 'past') { rel.textContent = 'Completed edition'; } else if (label) { rel.textContent = label; }
-}
+// Update status and ordering from the visitor's local date, not the build date.
 for (const row of document.querySelectorAll('tbody tr')) {
   const rel = row.querySelector('.rel');
+  if (!rel) continue;
+  const label = relative(rel.dataset.start, rel.dataset.end);
+  rel.textContent = label;
+  const status = label === 'past' ? 'completed' : (label === '' ? 'undated' : 'upcoming');
+  row.dataset.status = status;
+  row.dataset.daterank = (status === 'upcoming' ? '0' : status === 'undated' ? '1' : '2') + '-' + (rel.dataset.start || rel.dataset.end || '9999-99-99');
   const badge = row.querySelector('.badge.status-upcoming, .badge.status-completed, .badge.status-undated');
-  if (!badge || !rel) continue;
-  const live = relative(rel.dataset.start, rel.dataset.end);
-  const isPast = live === 'past';
-  const isOngoing = live.indexOf('ongoing') === 0;
-  badge.textContent = isPast ? 'Completed' : (isOngoing ? 'Ongoing now' : (live === '' ? badge.textContent : 'Upcoming'));
-  badge.className = 'badge ' + (isPast ? 'status-completed' : (live === '' ? 'status-undated' : 'status-upcoming'));
-}
-// 2. Executive summary — free and upcoming first, paid kept in its own panel.
-const costBadge = (r) => r.cost_class === 'free' ? '<span class="cost cost-free">Free</span>'
-  : (r.cost_class === 'mixed' ? '<span class="cost cost-mixed">Free or partly free</span>'
-  : (r.cost_class === 'paid' ? '<span class="cost cost-paid">Paid / ticketed</span>'
-  : (r.cost_class === 'restricted' ? '<span class="cost cost-restricted">Registration only — no price published</span>'
-  : '<span class="cost cost-unknown">Cost not stated</span>')));
-const rowHtml = (r) => {
-  const when = r.start ? fmtDay(r.start) : (r.end ? fmtDay(r.end) : '');
-  const rel = relative(r.start, r.end);
-  return '<li><span class="when">' + when + (rel ? '<small>' + rel + '</small>' : '') + '</span>'
-    + '<span class="what">' + A(r.source_url, r.name)
-    + '<span class="meta">' + r.category + ' · ' + r.bucket_label + ' · ' + r.location + '</span>'
-    + '<span class="meta">' + costBadge(r) + '</span></span></li>';
-};
-const nextUp = document.getElementById('next-up');
-if (nextUp && DATA.length) {
-  const endOf = (r) => r.end || r.start;
-  const upcoming = DATA.filter((r) => { const e = endOf(r); return e && dayDiff(e) >= 0; });
-  const startsSoon = upcoming.filter((r) => { const s = dayDiff(r.start); return s === null || s >= 0; })
-    .sort((a, b) => (a.start || '9999').localeCompare(b.start || '9999'));
-  const ongoing = upcoming.filter((r) => { const s = dayDiff(r.start); return s !== null && s < 0; })
-    .sort((a, b) => (a.end || '').localeCompare(b.end || ''));
-  const freeSoon = startsSoon.filter((r) => FREE.has(r.cost_class));
-  const freeOngoing = ongoing.filter((r) => FREE.has(r.cost_class));
-  const paidSoon = startsSoon.filter((r) => !FREE.has(r.cost_class));
-  const paidOngoing = ongoing.filter((r) => !FREE.has(r.cost_class));
-  const horizons = [7, 30, 90].map((h) => freeSoon.filter((r) => {
-    const s = dayDiff(r.start); return s !== null && s >= 0 && s <= h;
-  }).length);
-  const strip = document.getElementById('today-strip');
-  if (strip) {
-    strip.innerHTML = '<span class="today-pill pill-strong">Today: ' + TODAY.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '</span>'
-      + '<span class="today-pill">Free starting in 7 days: ' + horizons[0] + '</span>'
-      + '<span class="today-pill">Free starting in 30 days: ' + horizons[1] + '</span>'
-      + '<span class="today-pill">Free starting in 90 days: ' + horizons[2] + '</span>'
-      + '<span class="today-pill">Free running now: ' + freeOngoing.length + '</span>'
-      + '<span class="today-pill pill-muted">Upcoming paid or no price published: ' + paidSoon.length + '</span>';
-  }
-  const freeNext = freeSoon.slice(0, 10).concat(freeOngoing.slice(0, 3));
-  nextUp.innerHTML = freeNext.length ? freeNext.map(rowHtml).join('')
-    : '<li><span class="what">No free events are currently listed as upcoming on this snapshot. '
-      + 'Rows whose source published no price are never counted as free.</span></li>';
-  const freeList = document.getElementById('free-upcoming');
-  if (freeList) {
-    const freeWindow = freeSoon.filter((r) => { const s = dayDiff(r.start); return s !== null && s <= 120; }).slice(0, 12);
-    freeList.innerHTML = freeWindow.length ? freeWindow.map(rowHtml).join('')
-      : '<li><span class="what">No free events start in the next 120 days on this snapshot.</span></li>';
-  }
-  const paidList = document.getElementById('paid-next-up');
-  if (paidList) {
-    const paidNext = paidSoon.slice(0, 6).concat(paidOngoing.slice(0, 2));
-    paidList.innerHTML = paidNext.length ? paidNext.map(rowHtml).join('')
-      : '<li><span class="what">No paid or unpriced events are currently listed as upcoming.</span></li>';
+  if (badge) {
+    badge.textContent = status === 'completed' ? 'Completed' : status === 'undated' ? 'Date not published'
+      : label.startsWith('ongoing') ? 'Ongoing now' : 'Upcoming';
+    badge.className = 'badge status-' + status;
   }
 }
-// 3. Search / focus / category / cost / when filters and sorting.
+// The executive summary is strictly free AND upcoming; undated traditions are not future dates.
+const freeDated = DATA.filter((r) => r.cost_class === 'free' && (r.end || r.start) && dayDiff(r.end || r.start) >= 0);
+const startsSoon = freeDated.filter((r) => dayDiff(r.start) >= 0)
+  .sort((a, b) => a.start.localeCompare(b.start) || a.name.localeCompare(b.name));
+const ongoing = freeDated.filter((r) => dayDiff(r.start) < 0)
+  .sort((a, b) => (a.end || '').localeCompare(b.end || '') || a.name.localeCompare(b.name));
+const strip = document.getElementById('today-strip');
+if (strip) {
+  const horizons = [7, 30, 90].map((h) => startsSoon.filter((r) => dayDiff(r.start) <= h).length);
+  strip.innerHTML = '<span class="today-pill">Today: ' + H(TODAY.toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'})) + '</span>'
+    + '<span class="today-pill">Free starts in 7 days: ' + horizons[0] + '</span>'
+    + '<span class="today-pill">In 30 days: ' + horizons[1] + '</span>'
+    + '<span class="today-pill">In 90 days: ' + horizons[2] + '</span>'
+    + '<span class="today-pill">Free programs ongoing: ' + ongoing.length + '</span>';
+}
+const count = document.getElementById('free-count');
+if (count) count.textContent = freeDated.length;
+const nextUp = document.getElementById('next-up-list');
+if (nextUp) {
+  const rowHtml = (r) => '<li><span class="when">' + H(fmtDay(r.start))
+    + '<small>' + H(relative(r.start, r.end)) + '</small></span><span class="what">'
+    + A(r.source_url, r.name) + '<span class="meta">' + H(r.category) + ' · ' + H(r.bucket_label)
+    + ' · ' + H(r.location) + ' · <span class="cost cost-free">Free</span></span></span></li>';
+  const nearest = startsSoon.slice(0, 10).concat(ongoing.slice(0, 3));
+  nextUp.innerHTML = nearest.length ? nearest.map(rowHtml).join('')
+    : '<li>No confirmed free upcoming dates remain in this snapshot. Check the linked recurring catalog for new announcements.</li>';
+}
+// 3. Search / category / cost filters.
 for (const table of document.querySelectorAll('[data-filter-table]')) {
   const input = document.querySelector('#' + table.dataset.searchControl);
   const select = document.querySelector('#' + table.dataset.categoryControl);
   const cost = document.querySelector('#' + (table.dataset.costControl || 'missing-cost-control'));
   const when = document.querySelector('#' + (table.dataset.whenControl || 'missing-when-control'));
-  const focus = document.querySelector('#' + (table.dataset.focusControl || 'missing-focus-control'));
   const sorter = document.querySelector('#' + (table.dataset.sortControl || 'missing-sort-control'));
   const apply = () => {
     const term = (input?.value || '').toLowerCase();
     const category = select?.value || '';
     const costFilter = cost?.value || '';
     const whenFilter = when?.value || '';
-    const focusFilter = focus?.value || '';
     for (const row of table.tBodies[0].rows) {
       const matchText = !term || row.textContent.toLowerCase().includes(term);
       const matchCategory = !category || row.dataset.category === category;
       const matchCost = !costFilter || row.dataset.cost === costFilter;
       const matchWhen = !whenFilter || row.dataset.status === whenFilter;
-      const matchFocus = !focusFilter || row.dataset.focus === focusFilter;
-      row.hidden = !(matchText && matchCategory && matchCost && matchWhen && matchFocus);
+      const liveMatch = !table.hasAttribute('data-live-upcoming') || row.dataset.status === 'upcoming';
+      row.hidden = !(matchText && matchCategory && matchCost && matchWhen && liveMatch);
     }
   };
+  // Date-first ordering must be recomputed even if the visitor never touches Sort.
+  const tbody = table.tBodies[0];
+  if (tbody) Array.from(tbody.rows).sort((a, b) =>
+    (a.dataset.daterank + '|' + (a.dataset.name || '')).localeCompare(b.dataset.daterank + '|' + (b.dataset.name || ''))
+  ).forEach((row) => tbody.appendChild(row));
+  apply();
+  if (table.hasAttribute('data-live-upcoming')) {
+    const note = table.closest('section')?.querySelector('.live-empty') || table.parentElement.nextElementSibling;
+    const visible = Array.from(table.tBodies[0].rows).filter((row) => !row.hidden).length;
+    if (note?.classList.contains('live-empty')) note.hidden = visible > 0;
+    const focusCount = table.closest('.focus-group')?.querySelector('.focus-count');
+    if (focusCount) focusCount.textContent = visible + ' free upcoming on ' + TODAY.toLocaleDateString();
+    const total = document.querySelector('[data-live-total]');
+    if (total) total.textContent = document.querySelectorAll('table[data-live-upcoming] tbody tr:not([hidden])').length + ' dated free upcoming';
+  }
   input?.addEventListener('input', apply); select?.addEventListener('change', apply);
   cost?.addEventListener('change', apply); when?.addEventListener('change', apply);
-  focus?.addEventListener('change', apply);
   if (sorter) {
     const tbody = table.tBodies[0];
-    const key = (row) => {
-      const mode = sorter.value;
-      if (mode === 'name') return row.dataset.name || '';
-      if (mode === 'category') return row.dataset.category || '';
-      if (mode === 'cost') return row.dataset.costrank + '|' + (row.dataset.daterank || '') + '|' + (row.dataset.name || '');
-      if (mode === 'focus') return row.dataset.focusrank + '|' + (row.dataset.daterank || '') + '|' + (row.dataset.name || '');
-      return row.dataset.daterank + '|' + (row.dataset.name || '');
-    };
     sorter.addEventListener('change', () => {
+      const mode = sorter.value;
       const rows = Array.from(tbody.rows);
+      const key = (row) => {
+        if (mode === 'name') return row.dataset.name || '';
+        if (mode === 'category') return row.dataset.category || '';
+        if (mode === 'cost') return row.dataset.costrank + '|' + (row.dataset.name || '');
+        return row.dataset.daterank + '|' + (row.dataset.name || '');
+      };
       rows.sort((a, b) => key(a).localeCompare(key(b)));
       rows.forEach((row) => tbody.appendChild(row));
       apply();
