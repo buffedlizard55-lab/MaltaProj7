@@ -21,6 +21,24 @@ ROOT = Path(__file__).parent.resolve()
 DATA_PATH = ROOT / "data" / "events.json"
 ERRORS: list[str] = []
 
+sys.path.insert(0, str(ROOT))
+try:  # the cost classifier lives with the generator so both agree on the policy
+    from build import cost_class
+except Exception:  # pragma: no cover - standalone fallback
+    def cost_class(admission: str) -> str:
+        text = (admission or "").strip().lower()
+        if not text:
+            return "not-stated"
+        has_free = any(h in text for h in ("free", "no-cost", "no cost",
+                                           "no fundraising minimum", "suggested"))
+        if has_free:
+            if "$" in text or any(h in text for h in ("ticketed", "tickets sold",
+                                                       "reserved", "seating tickets",
+                                                       "hospitality packages")):
+                return "mixed"
+            return "free"
+        return "paid"
+
 
 def error(message: str) -> None:
     ERRORS.append(message)
@@ -115,12 +133,26 @@ def main() -> int:
     # three-way integration with PRs #18-#22: +1 verified recurring row
     # (San Francisco Pride Celebration & Parade 2026) and 3 new field-level flags
     # (fillmore-jazz-2027-span, bhangra-location-conflict, haight-cross-source).
-    if len(published) != 140:
-        error(f"expected 140 published rows, found {len(published)}")
-    if len(recurring) != 95 or len(special) != 45:
-        error(f"expected 95 recurring / 45 special, found {len(recurring)} / {len(special)}")
+    # 2026-10-18 arena/e79e0de2-maltaproj7: date-first/freeness rebuild pass.
+    # +8 verified rows added from official organizer/government sources
+    # (AI Engineer Code Summit 2026, Day of the Devs SF Edition 2026, Union Square
+    # Plaza Free Park Programs, SFIAC & Olympic Club Cornhole Tournament, Hayes
+    # Valley Farmers Market & Shared Spaces, Foodwise Sunday Supper, Dia de los
+    # Muertos/Halloween at Mission Community Market, Fall Fruit Celebration,
+    # Mission Community Market last day of the season, Fall Holiday Farmers
+    # Market) plus 2 rows re-sourced to the organiser's own site (Bearrison
+    # Street Fair, Potrero Hill Festival). New "Technology, AI & gaming"
+    # category created by moving 14 clearly tech/AI/gaming rows out of
+    # "Professional & academic". Total: 148 published (98 recurring + 50
+    # special), 16 review records, 34 field-level flags, 9 categories.
+    if len(published) != 148:
+        error(f"expected 148 published rows, found {len(published)}")
+    if len(recurring) != 98 or len(special) != 50:
+        error(f"expected 98 recurring / 50 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
+    if len(flags) != 34:
+        error(f"expected 34 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -206,7 +238,8 @@ def main() -> int:
         error("catalog geography statement does not enforce city-only scope")
 
     root_pages = [
-        ROOT / "index.html", ROOT / "recurring.html", ROOT / "special.html",
+        ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html",
+        ROOT / "recurring.html", ROOT / "special.html",
         ROOT / "annual-special.html", ROOT / "categories.html", ROOT / "all-events.html",
         ROOT / "flagged.html", ROOT / "method.html",
     ]
@@ -227,12 +260,19 @@ def main() -> int:
     # Each generated public/review table has exactly one source link for each row.
     # flagged.html also carries one link per field-level flag source.
     flag_source_links = sum(len(flag.get("sources", [])) for flag in flags)
+    cost_not_stated = [event for event in published if not str(event.get("admission") or "").strip()]
+    free_rows = [
+        event for event in published
+        if cost_class(str(event.get("admission") or "")) in {"free", "mixed"}
+    ]
     expected_counts = {
+        ROOT / "upcoming.html": len(published),
+        ROOT / "free.html": len(free_rows),
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
         ROOT / "all-events.html": len(published),
-        ROOT / "flagged.html": len(review) + flag_source_links,
+        ROOT / "flagged.html": len(review) + flag_source_links + len(cost_not_stated),
     }
     for path, expected in expected_counts.items():
         actual = source_link_count(path)
@@ -254,7 +294,8 @@ def main() -> int:
 
     for category in categories:
         matching = [event for event in published if event["category"] == category]
-        files = [path for path in category_pages if f">{category.replace('&', '&amp;')}<" in read(path)]
+        heading = f"<h2>{html.escape(category)}</h2>"
+        files = [path for path in category_pages if heading in read(path)]
         if len(files) != 1:
             error(f"could not identify one category page for {category}")
         elif source_link_count(files[0]) != len(matching):
@@ -275,6 +316,72 @@ def main() -> int:
             error(f"dashboard authority summary missing {count} {authority}")
     if "Official source ↗" in index_html or "Official source ↗" in all_html:
         error("generated pages still use the inaccurate 'Official source' link text")
+
+    # --- date-first ordering and cost disclosure checks (2026-10-18) ---
+    upcoming_html = read(ROOT / "upcoming.html")
+    free_html = read(ROOT / "free.html")
+    method_html = read(ROOT / "method.html")
+    for event in published:
+        for label, page_html in (("upcoming.html", upcoming_html), ("all-events.html", all_html)):
+            if html.escape(event["name"], quote=True) not in page_html:
+                error(f"{label} missing row name for {event['id']}")
+            if html.escape(event["source_url"], quote=True) not in page_html:
+                error(f"{label} missing source URL for {event['id']}")
+    # The upcoming list must lead with upcoming rows and keep them in date order.
+    statuses = re.findall(r'data-status="([a-z\-]+)"', upcoming_html)
+    if not statuses:
+        error("upcoming.html has no filterable rows")
+    else:
+        order = {"upcoming": 0, "undated": 1, "completed": 2}
+        ranks = [order.get(status, 9) for status in statuses]
+        if ranks != sorted(ranks):
+            error("upcoming.html is not ordered with upcoming rows first")
+        if ranks and ranks[0] != 0:
+            error("upcoming.html does not start with an upcoming row")
+    dateranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', upcoming_html)
+    upcoming_ranks = [rank for rank in dateranks if rank.startswith("0-")]
+    if upcoming_ranks != sorted(upcoming_ranks):
+        error("upcoming.html upcoming rows are not in ascending date order")
+    # free.html must contain only rows the source describes as free or partly free.
+    free_costs = re.findall(r'data-cost="([a-z\-]+)"', free_html)
+    if len(free_costs) != len(free_rows):
+        error(f"free.html: expected {len(free_rows)} rows, found {len(free_costs)}")
+    for cost in free_costs:
+        if cost not in {"free", "mixed"}:
+            error(f"free.html contains a {cost!r} row; only source-stated free rows belong there")
+    for event in free_rows:
+        if html.escape(event["name"], quote=True) not in free_html:
+            error(f"free.html missing free row {event['id']}")
+    # Rows whose source published no price are disclosed on the Flagged page.
+    for event in cost_not_stated:
+        if html.escape(event["name"], quote=True) not in flagged_html:
+            error(f"flagged.html missing cost-not-stated row {event['id']}")
+    if "Not stated" not in flagged_html:
+        error("flagged.html does not disclose rows whose cost was not stated")
+    # Dashboard must expose the executive summary and the free-focus view.
+    for needle in ("next-up", "free-upcoming", "Executive summary", "Free to attend"):
+        if needle not in index_html:
+            error(f"dashboard missing {needle!r} section")
+    if "Not stated" not in index_html:
+        error("dashboard does not explain the 'Not stated' cost label")
+    if "cost_class" not in index_html or "sf-events-data" not in index_html:
+        error("dashboard is missing the embedded dataset used for the live next-up summary")
+    if "Not stated" not in method_html or "cost" not in method_html.lower():
+        error("method.html does not document the cost policy")
+    # The embedded dataset must cover every published row.
+    blob = re.search(r'id="sf-events-data">(.*?)</script>', index_html, re.S)
+    if not blob:
+        error("dashboard is missing the embedded event dataset")
+    else:
+        payload = json.loads(blob.group(1).replace("<\\/", "</"))
+        embedded = {item["id"] for item in payload}
+        missing = {event["id"] for event in published} - embedded
+        if missing:
+            error(f"dashboard dataset missing {len(missing)} published rows")
+    if "Technology, AI & gaming" not in categories:
+        error("expected the new Technology, AI & gaming category")
+    if not (ROOT / "categories" / "technology-ai-and-gaming.html").exists():
+        error("missing categories/technology-ai-and-gaming.html")
 
     if not (ROOT / "research" / "official-source-audit.md").exists():
         error("missing research/official-source-audit.md")
