@@ -225,6 +225,8 @@ def main() -> int:
     placeholder_fragments = (
         "see organizer", "see schedule", "program-specific", "see race", "see neighborhood",
         "see performance", "see sfmta", "see city", "see presidio", "not stated in captured",
+        "no admission charge is stated", "no admission price is stated", "no admission charge was stated",
+        "no admission price was stated", "does not state an admission charge", "does not state an admission price",
         "see official", "see event page", "varies; see", "tba", "tbd",
     )
     sf_markers = (
@@ -477,16 +479,32 @@ def main() -> int:
             ranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', table)
             if ranks != sorted(ranks):
                 error(f"{label}: rows in the {heading.group(1) if heading else '?'} focus block are not date-first")
-    # A label stating 'Free' cannot be derived from a waived fundraising goal.
+    # A label stating 'Free' cannot be derived from a waived fundraising goal,
+    # registration-only wording, or a record that explicitly says the source did
+    # not state an admission price.
     if cost_class("No fundraising minimum required") != "not-stated":
         error("fundraising minimum misclassified as free admission")
     if cost_class("Registration required") != "not-stated":
         error("registration alone misclassified as a paid ticket")
+    if cost_class("Free (no admission charge is stated)") != "not-stated":
+        error("source-silent admission wording misclassified as free")
     # Duplicate DOM IDs break the live executive summary or the focus jump links.
     for path in [*root_pages, *category_pages]:
         ids = re.findall(r'<[a-z][^>]*\sid="([^"]+)"', read(path), re.I)
         if len(ids) != len(set(ids)):
             error(f"{path.relative_to(ROOT)}: duplicate HTML ids")
+    # The Sunday Streets source confirms free activities, not an event-admission
+    # price. Keep both 2026 rows unpriced and preserve the source-linked finding.
+    sunday_streets_ids = {"sunday-streets-2026", "sunday-streets-excelsior-2026"}
+    for event in published:
+        if event.get("id") in sunday_streets_ids and str(event.get("admission", "")).strip():
+            error(f"{event['id']}: admission must stay blank; the source confirms free activities but not free event entry")
+    sunday_flag = next((flag for flag in flags if flag.get("id") == "flag-sundaystreets-free-wording"), None)
+    if not sunday_flag:
+        error("missing flag-sundaystreets-free-wording for the source-silent admission value")
+    elif html.escape(sunday_flag.get("issue", ""), quote=True) not in flagged_html:
+        error("flagged.html does not expose the Sunday Streets admission-evidence finding")
+
     # Rows whose source did not establish a price are disclosed on Flagged.
     for event in cost_not_stated:
         if html.escape(event["name"], quote=True) not in flagged_html:

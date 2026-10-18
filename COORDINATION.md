@@ -1,3 +1,35 @@
+# Active coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/75cf25a7-maltaproj7`. Arena pins this session to the named branch; the requested
+`session-<id>/<task>` branch naming cannot be used here, so all changes stay on the platform-fixed branch.
+
+**Pre-claim snapshot:** the local checkout was at `4877da9` (PR #35); `gh pr list --state open` showed no open PRs,
+and the baseline `python3 build.py && python3 verify.py` passed (162 published rows, 17 review records, 51
+field-level flags). Before the claim could be pushed, required pull-rebases fetched newer merged peer work: `0fb0c33`
+(PRs #36–#37, session `arena/55c5243c-maltaproj7`) and then `347cf32` (PR #38, session
+`arena/04813d69-maltaproj7`). Both rebase conflicts were confined to this shared coordination ledger because each
+session prepended its own record. They were resolved by retaining the complete upstream ledger verbatim and adding
+this session's record; no peer source, review, README, tests, workflow, data or generated pages were discarded. PR #38
+records the same Sunday Streets source text but treated its quoted “free activities” wording as sufficient for the
+free list; this session applied the user's stricter “leave unconfirmed values blank” rule to the admission field only.
+
+## Task board — arena/75cf25a7-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| T1 | Conservative admission-evidence reconciliation for Sunday Streets: re-check official wording, blank admission where unstated, update the existing flag/counts, rebuild, verify and document | **done** | arena/75cf25a7-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `research/reverification-75cf25a7.md`, `README.md`, `build.py`, `verify.py`, `data/events.csv`, generated HTML |
+| T2 | Final integration: create a PR from this fixed branch, merge after build/tests pass, confirm GitHub Pages deployment, and record PR/deploy outcome | **in progress** | arena/75cf25a7-maltaproj7 | 2026-10-18T17:09Z | `COORDINATION.md`, PR metadata, GitHub Pages deployment record |
+
+## T1 completion record — source evidence, decision, and checks
+
+- **Official pages fetched 2026-10-18:** [Sunday Streets 2026 season](https://sundaystreetssf.com/) lists “Tenderloin • June 14th”, “Mission • July 19th”, “Bayview • August 23rd”, “Excelsior • October 18th”; [About](https://sundaystreetssf.com/about/) states, “Event routes are 1-4 miles in length, with fun, free activities provided by local nonprofits, community groups and small businesses”; [Excelsior 2026](https://sundaystreetssf.com/sunday-streets-excelsior-2026/) gives “Sunday, October 18, 2026 · 11 AM – 4 PM” and “Mission Street between Geneva Avenue and Theresa Street,” and lists a separate “Excelsior 5k Walktober” with a registration link. No admission price appears in the returned page content. All chunks for the About and Excelsior pages were read.
+- **Decision:** the organizer confirms that activities are free, but does not state free event admission or a general attendee price. `admission` is now blank on `sunday-streets-2026` and `sunday-streets-excelsior-2026`; neither row is counted in the confirmed-free main pages. They remain source-linked in the full catalog and on Flagged for Review as **Not stated**. This does not assert that an entry fee is charged. The separate 5K registration price remains unverified.
+- **Flagging:** retained and updated `flag-sundaystreets-free-wording` with the source wording, decision, and official links; the issue is nonblocking and visible on the site's Flagged for Review page. No new flag was added.
+- **Derived counts:** 18 dated confirmed-free upcoming rows; 54 free, 12 partly free, 16 paid/ticketed and 80 not stated overall; 67 published rows upcoming overall; 162 published (102 recurring + 60 special), 17 review records, 51 flags, nine categories.
+- **Verification:** `python3 -m unittest discover -s tests -v` — 11 passed; `python3 build.py` — built all 162 rows/pages; `python3 verify.py` — `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. The verifier now guards the source-silent admission wording and requires both Sunday Streets fields to stay blank with the flag rendered. Row-set checks confirm neither appears in the Dashboard/Upcoming/Free tables; local links (including the new research log) resolve. Changes are in commit `d614395` on `arena/75cf25a7-maltaproj7`.
+
+---
+
 # Active coordination — session arena/04813d69-maltaproj7 (2026-10-18)
 
 **Session ID:** `arena/04813d69-maltaproj7` (platform-fixed branch; per Arena environment rules all work stays on `arena/04813d69-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented deviation as every prior session in this ledger).
