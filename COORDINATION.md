@@ -34,15 +34,76 @@ remaining brief-driven work and also acts as the final integration session the b
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| C1 | Repo review line-by-line + independent official-source re-verification, prioritised on upcoming rows, free rows and the gaming/music/AI focus set; fill `admission` only where the linked official page states it; log every check with quoted source text | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `research/reverification-3977d9cb.md` (new), `research/review-3977d9cb.md` (new) |
-| C2 | Free-first information architecture: main sections show free upcoming events only; new separate **Paid & ticketed** section page for paid rows and cost-not-stated rows; executive summary rebuilt around free + upcoming; hard-coded focus cards replaced with dataset-generated Gaming / Music / AI focus lists (free first, everything else after) | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `build.py`, generated `*.html`, `categories/*.html`, `assets/style.css` |
-| C3 | Data corrections and additions that verification supports (official sources only), plus new field-level flags for every irregularity found | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `data/events.json`, `data/events.csv`, `research/patch-3977d9cb.py` (new) |
-| C4 | Verification harness: extend `verify.py` for the new free/paid separation and pages, keep every existing guard, re-run local link crawl | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `verify.py` |
-| C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
-| C6 | Final integration: rebuild, verify, crawl local links, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links here | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `COORDINATION.md`, `.github/**` |
+| C1 | Repo review line-by-line + independent official-source re-verification, prioritised on upcoming rows, free rows and the gaming/music/AI focus set; fill `admission` only where the linked official page states it; log every check with quoted source text | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `research/reverification-3977d9cb.md` (new), `research/review-3977d9cb.md` (new) |
+| C2 | Free-first information architecture: main sections show free upcoming events only; new separate **Paid & ticketed** section page for paid rows and cost-not-stated rows; executive summary rebuilt around free + upcoming; hard-coded focus cards replaced with dataset-generated Gaming / Music / AI focus lists (free first, everything else after) | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `build.py`, generated `*.html`, `categories/*.html`, `assets/style.css` |
+| C3 | Data corrections and additions that verification supports (official sources only), plus new field-level flags for every irregularity found | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `data/events.json`, `data/events.csv`, `research/patch-3977d9cb.py` (new) |
+| C4 | Verification harness: extend `verify.py` for the new free/paid separation and pages, keep every existing guard, re-run local link crawl | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `verify.py` |
+| C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
+| C6 | Final integration: rebuild, verify, crawl local links, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links here | in progress | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `COORDINATION.md`, `.github/**` |
 
 **Scope boundaries honoured:** no other session has an open claim, so no shared file is contested. This session edits
 only the files listed above. `.github/workflows/pages.yml` is inspected, not rewritten, unless the deploy fails.
+
+## Session record — arena/3977d9cb-maltaproj7 (C1–C6)
+
+- **C1 (Repository review + official-source re-verification).** Reviewed every file in the repository line by line
+  (`build.py`, `verify.py`, `data/events.json`, `data/events.csv`, all 18 generated pages, the Pages workflow,
+  `README.md`, `COORDINATION.md`, and the nine earlier `research/` documents) and re-fetched 20 official pages on
+  2026-10-18. **18 irregularities (R1–R18)** are documented with evidence, severity and the action taken in
+  `research/review-3977d9cb.md`; the row-by-row source log with quoted official text is
+  `research/reverification-3977d9cb.md`. Official pages re-fetched this session include
+  <https://www.sfmta.com/travel-updates/lower-polk-live-friday-october-23-2026>,
+  <https://www.sfmta.com/travel-updates/e-night-market-friday-october-23-2026>, <https://sundaystreetssf.com/>,
+  <https://sundaystreetssf.com/sunday-streets-excelsior-2026/>, <https://sundaystreetssf.com/about>,
+  <https://foodwise.org/events/dia-de-los-muertos-and-halloween-at-mission-community-market/>,
+  <https://www.litquake.org/litcrawl>, <https://hardlystrictlybluegrass.com/>, <https://www.dayofthedevs.org/>,
+  <https://opensourceaiweek.com/> (+ `/the-debates/` and `/open-source-ai-awards/`), <https://luma.com/592fcwx2>,
+  <https://luma.com/7ebvz0oq>, <https://www.thepointart.com/hunters-point-shipyard>, the Shipyard Trust for the Arts
+  official listing on Eventbrite, and <https://sf.gov/events/upcoming>.
+- **C2 (Free-first information architecture).** `free.html` is now the **main section** (only source-stated free /
+  partly-free rows, ordered gaming → music → AI → everything else, then upcoming-first); new **`paid.html`** is the
+  separate section (priced/ticketed/registration-only rows, then rows with no published price);
+  `recurring.html`, `special.html`, `annual-special.html` and all nine category pages render free rows first and
+  non-free rows in a second labelled table; the dashboard's executive summary is free-first (free events nearest
+  today, free-starting counters for 7/30/90 days, free programs running now) with the paid events in their own
+  clearly labelled panel; the hand-written focus prose (which had listed paid conferences under a "free events"
+  heading and asserted counts the dataset did not support) was replaced by `build.py:focus_card`, generated only from
+  verified rows. Mobile pass: scrollable pill nav, single-column focus grid, card-style rows under 760 px, larger tap
+  targets. New cost class `restricted` for "registration required" / "invitation only" wording, which previously
+  asserted a price that no source published.
+- **C3 (Data changes).** +3 published rows and +1 review record, every value quoted from an official page:
+  Hunters Point Shipyard Fall Open Studios (Oct 17–18, 2026, **free admission & parking**), Open Source AI Week —
+  Open Weight Debate Night (Oct 19, 2026, GitHub Office, SF, cost not published), Open Source AI Awards Night
+  (Oct 23, 2026, Founder's Inc, SF, cost not published), and Open Source AI Week 2026 held as `partial_sf_program`
+  because it is Bay Area–wide. +8 field-level flags (34 → 42). Reproducible via `research/patch-3977d9cb.py`
+  (idempotent, declarative upsert). No existing row's sourced text was altered.
+- **C4 (Verification harness).** `verify.py` now proves the free/paid separation by **row identity**
+  (`data-name` + `data-daterank` multisets) rather than name substrings — necessary because two editions share the
+  name "San Francisco Pride Celebration & Parade" and "Italian Heritage Parade" is a substring of the 2027 row's name;
+  asserts focus-first ordering and per-focus-block date ordering on `free.html`, upcoming-first ordering on every
+  `paid.html` table, `paid.html` in every page's navigation, the new cost classes, and the free-first executive
+  summary ids. Its "cost not stated" set and its fallback classifier were re-synced with `build.py`.
+  `python3 build.py && python3 verify.py` → `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+- **C5 (Docs).** `README.md` rewritten for the free-first structure and the new counts; the Method & sources page now
+  documents the free/paid split, the focus ordering, the registration-only cost class, the repeating-program badge,
+  the coverage gaps, and links this session's logs.
+- **Final counts (re-derived from `data/events.json`, not copied):** 167 data records = **151 published**
+  (99 regularly occurring + 52 special) across 9 categories, **17 review records**, **42 field-level flags**;
+  57 upcoming rows; **57 free or partly free (12 upcoming)**; 13 priced/ticketed; 4 registration-or-invitation-only;
+  77 with no published price; 20 generated pages.
+- **Irregularities flagged for the owner (all nonblocking, all published on Flagged for Review with source links):**
+  `flag-free-gaming-coverage-gap` (no upcoming in-person free gaming event verifiable inside the city — the nearest
+  free-admission gaming event, GobbleCon, is in Burlingame), `flag-free-ai-coverage-gap` (0 of 16 AI/technology rows
+  carry a source-stated free admission), `flag-hsb-2027-dates-unconfirmed` (2027 Hardly Strictly Bluegrass dates are
+  aggregator-only), `flag-dual-edition-cost-evidence` (same parade free on one edition, unpriced on the other),
+  `flag-registration-only-cost-class`, `flag-open-source-ai-cost`, `flag-open-source-ai-awards-time` (official pages
+  disagree: 5–9 PM vs 5–10 PM), `flag-shipyard-open-studios-source` (organizer domain served an interstitial page).
+  Also noted in `research/review-3977d9cb.md`: 18 rows with no single date (badge + filter added, no dates invented),
+  7 rows with venue text the source did not fully state, 4 rows with "Organizer not named in source", 3 rows resting
+  on SF Travel as a trusted civic source, and the empty historical section header at the end of this ledger (R16),
+  which was left untouched rather than reconstructed.
+- **Handoff/conflicts:** no other session branch existed at claim time and none appeared during this pass; no merge
+  conflict occurred, and no file outside this session's claimed scope was edited.
 
 ---
 

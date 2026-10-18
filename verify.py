@@ -37,7 +37,42 @@ except Exception:  # pragma: no cover - standalone fallback
                                                        "hospitality packages")):
                 return "mixed"
             return "free"
-        return "paid"
+        if any(h in text for h in ("$", "tickets sold", "pass", "price", "ticket")):
+            return "paid"
+        if any(h in text for h in ("registration required", "invitation only",
+                                   "by invitation", "application only", "apply to attend")):
+            return "restricted"
+        return "not-stated"
+
+
+def rendered_rows(page_html: str) -> list[dict]:
+    """Every filterable table row's data attributes, in document order."""
+    rows = []
+    for match in re.finditer(r"<tr\b([^>]*data-category=\"[^\"]*\"[^>]*)>", page_html):
+        # attribute values are HTML-escaped by the generator; compare on unescaped text
+        rows.append({
+            key: html.unescape(value)
+            for key, value in re.findall(r'data-([a-z\-]+)=\"([^\"]*)\"', match.group(1))
+        })
+    return rows
+
+
+def daterank(event: dict, as_of) -> str:
+    """Mirror build.sort_key's group prefix so rendered rows can be matched by identity."""
+    end = event.get("end_date") or event.get("start_date") or ""
+    group = 1
+    if end and as_of:
+        try:
+            group = 0 if date.fromisoformat(end) >= as_of else 2
+        except ValueError:
+            group = 1
+    elif not end:
+        group = 1
+    return f"{group}-{event.get('start_date') or event.get('end_date') or '9999-99-99'}"
+
+
+def row_identity(event: dict, as_of) -> tuple:
+    return (str(event.get("name", "")).lower(), daterank(event, as_of))
 
 
 def error(message: str) -> None:
@@ -145,14 +180,29 @@ def main() -> int:
     # category created by moving 14 clearly tech/AI/gaming rows out of
     # "Professional & academic". Total: 148 published (98 recurring + 50
     # special), 16 review records, 34 field-level flags, 9 categories.
-    if len(published) != 148:
-        error(f"expected 148 published rows, found {len(published)}")
-    if len(recurring) != 98 or len(special) != 50:
-        error(f"expected 98 recurring / 50 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 16:
-        error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 34:
-        error(f"expected 34 field-level flags, found {len(flags)}")
+    # 2026-10-18 arena/3977d9cb-maltaproj7 free-first restructure + verification pass:
+    # +3 verified rows from official organizer pages (Hunters Point Shipyard Fall Open
+    # Studios 2026 — Shipyard Trust for the Arts official listing; Open Source AI Week
+    # Open Weight Debate Night and Open Source AI Awards Night — opensourceaiweek.com
+    # official event pages), +1 review record (Open Source AI Week 2026, Bay Area-wide
+    # program held out of the city-only tables), +6 field-level flags. The cost
+    # classifier also stopped treating "registration required" / "invitation only" as
+    # evidence of a price (new "restricted" class), which moves 4 rows out of "paid"
+    # without changing any row's sourced text. Seven new flags record the additions,
+    # the two coverage gaps (free gaming, free AI), the Hardly Strictly Bluegrass 2027
+    # date discrepancy, the registration-only cost class, the Awards Night time
+    # conflict, the shipyardartists.com access problem and the dual-edition cost
+    # evidence question. Totals: 151 published (99 recurring + 52 special),
+    # 17 review records, 42 field-level flags, 9 categories.
+    # Log: research/reverification-3977d9cb.md and research/review-3977d9cb.md.
+    if len(published) != 151:
+        error(f"expected 151 published rows, found {len(published)}")
+    if len(recurring) != 99 or len(special) != 52:
+        error(f"expected 99 recurring / 52 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 17:
+        error(f"expected 17 review records, found {len(review)}")
+    if len(flags) != 42:
+        error(f"expected 42 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -239,7 +289,7 @@ def main() -> int:
 
     root_pages = [
         ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html",
-        ROOT / "recurring.html", ROOT / "special.html",
+        ROOT / "paid.html", ROOT / "recurring.html", ROOT / "special.html",
         ROOT / "annual-special.html", ROOT / "categories.html", ROOT / "all-events.html",
         ROOT / "flagged.html", ROOT / "method.html",
     ]
@@ -260,14 +310,28 @@ def main() -> int:
     # Each generated public/review table has exactly one source link for each row.
     # flagged.html also carries one link per field-level flag source.
     flag_source_links = sum(len(flag.get("sources", [])) for flag in flags)
-    cost_not_stated = [event for event in published if not str(event.get("admission") or "").strip()]
+    # "Cost not stated" is a cost-class judgement, not a blank-field judgement: a row can
+    # carry sourced wording such as "Registration required" and still publish no price.
+    cost_not_stated = [
+        event for event in published
+        if cost_class(str(event.get("admission") or "")) == "not-stated"
+    ]
+    restricted_rows = [
+        event for event in published
+        if cost_class(str(event.get("admission") or "")) == "restricted"
+    ]
     free_rows = [
         event for event in published
         if cost_class(str(event.get("admission") or "")) in {"free", "mixed"}
     ]
+    nonfree_rows = [
+        event for event in published
+        if cost_class(str(event.get("admission") or "")) not in {"free", "mixed"}
+    ]
     expected_counts = {
         ROOT / "upcoming.html": len(published),
         ROOT / "free.html": len(free_rows),
+        ROOT / "paid.html": len(nonfree_rows),
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
@@ -281,6 +345,85 @@ def main() -> int:
 
     all_html = read(ROOT / "all-events.html")
     flagged_html = read(ROOT / "flagged.html")
+    paid_html = read(ROOT / "paid.html")
+
+    def strip_embedded(text: str) -> str:
+        """Remove the embedded JSON dataset so absence checks test rendered rows only."""
+        return re.sub(r'<script type="application/json" id="sf-events-data">.*?</script>', "", text, flags=re.S)
+
+    paid_rows_html = strip_embedded(paid_html)
+    free_rows_html = strip_embedded(read(ROOT / "free.html"))
+
+    # The brief: free events are the main section, paid events a separate section.
+    paid_costs = re.findall(r'data-cost="([a-z\-]+)"', paid_html)
+    if len(paid_costs) != len(nonfree_rows):
+        error(f"paid.html: expected {len(nonfree_rows)} rows, found {len(paid_costs)}")
+    for cost in paid_costs:
+        if cost in {"free", "mixed"}:
+            error(f"paid.html contains a {cost!r} row; free rows belong only in the main free section")
+    for event in nonfree_rows:
+        if html.escape(event["source_url"], quote=True) not in paid_html:
+            error(f"paid.html missing source URL for {event['id']}")
+    # Row-identity comparison (names alone collide across editions, e.g. two Pride rows).
+    paid_identities = Counter(
+        (row.get("name", ""), row.get("daterank", "")) for row in rendered_rows(paid_rows_html)
+    )
+    expected_paid = Counter(row_identity(event, as_of) for event in nonfree_rows)
+    for identity, count in expected_paid.items():
+        if paid_identities.get(identity, 0) != count:
+            error(f"paid.html row mismatch for {identity[0]!r}: expected {count}, found {paid_identities.get(identity, 0)}")
+    for identity in paid_identities:
+        if identity not in expected_paid:
+            error(f"paid.html renders a row that is not a non-free row: {identity[0]!r}")
+    if restricted_rows:
+        if "cost-restricted" not in paid_html:
+            error("paid.html does not label registration-only rows distinctly")
+        for event in restricted_rows:
+            if html.escape(event["name"], quote=True) not in paid_html:
+                error(f"paid.html missing registration-only row {event['id']}")
+
+    # Every page must offer the free-first navigation, including the paid section.
+    for path in [*root_pages, *category_pages]:
+        text = read(path)
+        if not text:
+            continue
+        prefix = "../" if path.parent.name == "categories" else ""
+        for needle in (f'href="{prefix}free.html"', f'href="{prefix}paid.html"'):
+            if needle not in text:
+                error(f"{path.relative_to(ROOT)}: navigation is missing {needle}")
+
+    # The free main list must be ordered focus-first (gaming, music, AI, then the rest),
+    # and each focus block must itself keep upcoming rows before completed ones.
+    free_html_for_order = read(ROOT / "free.html")
+    focus_ranks = re.findall(r'data-focusrank="(\d)"', free_html_for_order)
+    if not focus_ranks:
+        error("free.html has no focus-ordered rows")
+    elif focus_ranks != sorted(focus_ranks):
+        error("free.html is not ordered with the gaming / music / AI focus areas first")
+    order = {"upcoming": 0, "undated": 1, "completed": 2}
+    row_pairs = re.findall(r'data-focusrank="(\d)"[^>]*data-status="([a-z\-]+)"', free_html_for_order)
+    if len(row_pairs) != len(free_rows):
+        error(f"free.html: expected {len(free_rows)} focus-annotated rows, found {len(row_pairs)}")
+    blocks: list[list[str]] = []
+    current: list[str] = []
+    previous_focus = None
+    for focus_rank, status in row_pairs:
+        if focus_rank != previous_focus and current:
+            blocks.append(current)
+            current = []
+        current.append(status)
+        previous_focus = focus_rank
+    if current:
+        blocks.append(current)
+    for block in blocks:
+        ranks = [order.get(status, 9) for status in block]
+        if ranks != sorted(ranks):
+            error("free.html focus block is not ordered with upcoming rows first")
+    # The separate paid section must keep upcoming rows first inside each of its tables.
+    for table_html in re.split(r'<table[^>]*data-filter-table', paid_html)[1:]:
+        ranks = [order.get(status, 9) for status in re.findall(r'data-status="([a-z\-]+)"', table_html)]
+        if ranks != sorted(ranks):
+            error("paid.html table is not ordered with upcoming rows first")
     for event in published:
         if html.escape(event["source_url"], quote=True) not in all_html:
             error(f"all-events.html missing source URL for {event['id']}")
@@ -349,9 +492,16 @@ def main() -> int:
     for cost in free_costs:
         if cost not in {"free", "mixed"}:
             error(f"free.html contains a {cost!r} row; only source-stated free rows belong there")
-    for event in free_rows:
-        if html.escape(event["name"], quote=True) not in free_html:
-            error(f"free.html missing free row {event['id']}")
+    free_identities = Counter(
+        (row.get("name", ""), row.get("daterank", "")) for row in rendered_rows(free_rows_html)
+    )
+    expected_free = Counter(row_identity(event, as_of) for event in free_rows)
+    for identity, count in expected_free.items():
+        if free_identities.get(identity, 0) != count:
+            error(f"free.html row mismatch for {identity[0]!r}: expected {count}, found {free_identities.get(identity, 0)}")
+    for identity in free_identities:
+        if identity not in expected_free:
+            error(f"free.html renders a row that is not a source-stated free row: {identity[0]!r}")
     # Rows whose source published no price are disclosed on the Flagged page.
     for event in cost_not_stated:
         if html.escape(event["name"], quote=True) not in flagged_html:
@@ -359,9 +509,15 @@ def main() -> int:
     if "Not stated" not in flagged_html:
         error("flagged.html does not disclose rows whose cost was not stated")
     # Dashboard must expose the executive summary and the free-focus view.
-    for needle in ("next-up", "free-upcoming", "Executive summary", "Free to attend"):
+    for needle in (
+        "next-up", "free-upcoming", "paid-next-up", "today-strip",
+        "Executive summary — free and upcoming", "Free to attend",
+        "Separate section", "focus-gaming", "focus-music", "focus-ai", "focus-other",
+    ):
         if needle not in index_html:
             error(f"dashboard missing {needle!r} section")
+    if "Free and upcoming" not in index_html and "free and upcoming" not in index_html:
+        error("dashboard executive summary is not labelled as free-first")
     if "Not stated" not in index_html:
         error("dashboard does not explain the 'Not stated' cost label")
     if "cost_class" not in index_html or "sf-events-data" not in index_html:
