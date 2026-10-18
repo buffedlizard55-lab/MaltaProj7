@@ -15,7 +15,7 @@
   <p class="lede">City and County of San Francisco only. Lists are ordered by date with upcoming events first, every row shows what it costs to attend, and every row links to the official source used for verification.</p>
 </div></header>
 <main id="content" class="shell main">
-<nav class="nav" aria-label="Primary"><a class="" href="index.html">Dashboard</a><a class="" href="upcoming.html">Upcoming</a><a class="" href="free.html">Free to attend</a><a class="" href="recurring.html">Regularly occurring</a><a class="" href="special.html">Special events</a><a class="" href="categories.html">Categories</a><a class="" href="all-events.html">All events</a><a class="" href="flagged.html">Flagged for Review</a><a class="active" href="method.html">Method & sources</a></nav>
+<nav class="nav" aria-label="Primary"><a class="" href="index.html">Dashboard</a><a class="" href="upcoming.html">Upcoming</a><a class="" href="free.html">Free to attend</a><a class="" href="paid.html">Paid / ticketed</a><a class="" href="recurring.html">Regularly occurring</a><a class="" href="special.html">Special events</a><a class="" href="categories.html">Categories</a><a class="" href="all-events.html">All events</a><a class="" href="flagged.html">Flagged for Review</a><a class="active" href="method.html">Method & sources</a></nav>
 
 <section class="section-head"><div><h2>Method, sources, and findings</h2>
 <p>A reproducible snapshot of publicly advertised San Francisco city events.</p></div></section>
@@ -38,12 +38,19 @@ linked official page stated. Nothing is inferred from an event's type.</p>
 <span class="cost cost-paid">Paid / ticketed</span> the source states a price, pass or registration
 <span class="cost cost-unknown">Not stated</span> the source published no price — <strong>never</strong> treated as free
 </div>
-<p>Current split: <strong>44 free</strong>, <strong>17 paid / ticketed</strong>, <strong>12 free or partly ticketed</strong>, <strong>75 not stated</strong>. The rows with an unstated cost are listed, with their source links, on the
-<a href="flagged.html">Flagged for Review</a> page.</p></section>
+<p>Current split: <strong>50 free</strong>, <strong>20 paid / ticketed</strong>, <strong>12 free or partly ticketed</strong>, <strong>72 not stated</strong>. The rows with an unstated cost are listed, with their source links, on the
+<a href="flagged.html">Flagged for Review</a> page.</p>
+<p><strong>Sectioning rule.</strong> The brief asks for free events to lead and for paid events to be
+collected separately rather than dropped. <a href="upcoming.html">Upcoming by date</a> therefore opens
+with a free-to-attend table (filtered to upcoming rows on load), followed by its own
+<em>Ticketed / paid</em> table and a <em>Cost not stated</em> table, and
+<a href="paid.html">Paid / ticketed</a> repeats the ticketed list on its own page. No row is hidden by
+this split: the three tables together still carry all 154 published rows, and
+<a href="all-events.html">All events</a> keeps them in one date-ordered list.</p></section>
 <section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
-<li>The audit has 98 recurring and 50 dated-special verified rows across 9 categories; 54 of the 148 published rows are still upcoming as of 2026-10-18.</li>
+<li>The audit has 98 recurring and 56 dated-special verified rows across 9 categories; 60 of the 154 published rows are still upcoming as of 2026-10-18.</li>
 <li>The recurring list breaks down as <strong>14 weekly</strong>, <strong>3 monthly</strong>, <strong>9 seasonal</strong>, <strong>72 annual</strong>. The classification is based on cadence, not whether an event is free or public.</li>
-<li>The largest audited categories are <strong>Community &amp; culture (38)</strong>, <strong>Music &amp; performing arts (23)</strong>, <strong>Fairs &amp; nightlife (20)</strong>. This describes the verified source set, not all activity in San Francisco.</li>
+<li>The largest audited categories are <strong>Community &amp; culture (39)</strong>, <strong>Food &amp; markets (23)</strong>, <strong>Music &amp; performing arts (23)</strong>. This describes the verified source set, not all activity in San Francisco.</li>
 <li>Most 2026 editions in this snapshot had already taken place by the October 18, 2026 check date, while several rows document confirmed 2027 editions. Rows record the audited edition, not a promise that the same dates repeat.</li>
 <li>The review register makes scope and cancellation decisions visible instead of deleting difficult records or asserting unsupported city-only coverage.</li>
 </ul></section>
@@ -57,7 +64,8 @@ linked official page stated. Nothing is inferred from an event's type.</p>
 <p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
 <section class="panel"><h3>Line-by-line verification</h3><p>Every published and review row is checked against its
 linked official source page, and the current session's pass is logged row by row with quoted source text in
-<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with the earlier full passes in
+<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a> and in this session's pass,
+<a href="research/verification-8c40d1c6.md">research/verification-8c40d1c6.md</a>, with the earlier full passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
 <a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. Values not stated by a source
@@ -165,12 +173,24 @@ for (const table of document.querySelectorAll('[data-filter-table]')) {
       const matchText = !term || row.textContent.toLowerCase().includes(term);
       const matchCategory = !category || row.dataset.category === category;
       const matchCost = !costFilter || row.dataset.cost === costFilter;
-      const matchWhen = !whenFilter || row.dataset.status === whenFilter;
+      // Recomputed against today's date in the browser, so the "Upcoming only"
+      // default stays correct long after the static build date.
+      const rel = row.querySelector('.rel');
+      let status = row.dataset.status;
+      if (rel) {
+        const s = dayDiff(rel.dataset.start), e = dayDiff(rel.dataset.end || rel.dataset.start);
+        status = (s === null && e === null) ? 'undated' : ((e !== null && e < 0) ? 'completed' : 'upcoming');
+      }
+      const matchWhen = !whenFilter || status === whenFilter;
       row.hidden = !(matchText && matchCategory && matchCost && matchWhen);
     }
   };
   input?.addEventListener('input', apply); select?.addEventListener('change', apply);
   cost?.addEventListener('change', apply); when?.addEventListener('change', apply);
+  // The main free-events table opens showing upcoming rows only; every other
+  // table opens with the full date-ordered list.  The control is a normal
+  // dropdown, so a reader can switch back to "All dates" in one tap.
+  if (table.dataset.defaultWhen && when) { when.value = table.dataset.defaultWhen; apply(); }
   if (sorter) {
     const tbody = table.tBodies[0];
     const original = Array.from(tbody.rows);

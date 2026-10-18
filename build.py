@@ -35,6 +35,7 @@ NAV_ITEMS = [
     ("index.html", "Dashboard"),
     ("upcoming.html", "Upcoming"),
     ("free.html", "Free to attend"),
+    ("paid.html", "Paid / ticketed"),
     ("recurring.html", "Regularly occurring"),
     ("special.html", "Special events"),
     ("categories.html", "Categories"),
@@ -451,12 +452,24 @@ for (const table of document.querySelectorAll('[data-filter-table]')) {
       const matchText = !term || row.textContent.toLowerCase().includes(term);
       const matchCategory = !category || row.dataset.category === category;
       const matchCost = !costFilter || row.dataset.cost === costFilter;
-      const matchWhen = !whenFilter || row.dataset.status === whenFilter;
+      // Recomputed against today's date in the browser, so the "Upcoming only"
+      // default stays correct long after the static build date.
+      const rel = row.querySelector('.rel');
+      let status = row.dataset.status;
+      if (rel) {
+        const s = dayDiff(rel.dataset.start), e = dayDiff(rel.dataset.end || rel.dataset.start);
+        status = (s === null && e === null) ? 'undated' : ((e !== null && e < 0) ? 'completed' : 'upcoming');
+      }
+      const matchWhen = !whenFilter || status === whenFilter;
       row.hidden = !(matchText && matchCategory && matchCost && matchWhen);
     }
   };
   input?.addEventListener('input', apply); select?.addEventListener('change', apply);
   cost?.addEventListener('change', apply); when?.addEventListener('change', apply);
+  // The main free-events table opens showing upcoming rows only; every other
+  // table opens with the full date-ordered list.  The control is a normal
+  // dropdown, so a reader can switch back to "All dates" in one tap.
+  if (table.dataset.defaultWhen && when) { when.value = table.dataset.defaultWhen; apply(); }
   if (sorter) {
     const tbody = table.tBodies[0];
     const original = Array.from(tbody.rows);
@@ -562,12 +575,15 @@ def filter_controls(categories: list[str], *, key: str, with_cost: bool = True,
 
 
 def mark_filter_table(markup: str, *, key: str, with_cost: bool = True,
-                      with_when: bool = True, with_sort: bool = True) -> str:
+                      with_when: bool = True, with_sort: bool = True,
+                      default_when: str = "") -> str:
     attributes = f'<table data-filter-table data-search-control="search-{key}" data-category-control="category-{key}"'
     if with_cost:
         attributes += f' data-cost-control="cost-{key}"'
     if with_when:
         attributes += f' data-when-control="when-{key}"'
+    if default_when:
+        attributes += f' data-default-when="{esc(default_when)}"'
     if with_sort:
         attributes += f' data-sort-control="sort-{key}"'
     attributes += ">"
@@ -576,7 +592,8 @@ def mark_filter_table(markup: str, *, key: str, with_cost: bool = True,
 
 def table_with_filter_rows(events: list[dict], *, key: str, as_of: date,
                             include_bucket: bool = False, with_cost: bool = True,
-                            with_when: bool = True, with_sort: bool = True) -> str:
+                            with_when: bool = True, with_sort: bool = True,
+                            default_when: str = "") -> str:
     markup = event_table(events, as_of=as_of, include_bucket=include_bucket)
     for event in events:
         needle = f'<tr><td data-label="Event"><strong>{esc(event["name"])}</strong>'
@@ -591,7 +608,8 @@ def table_with_filter_rows(events: list[dict], *, key: str, as_of: date,
         )
         markup = markup.replace(needle, replacement, 1)
     return mark_filter_table(
-        markup, key=key, with_cost=with_cost, with_when=with_when, with_sort=with_sort
+        markup, key=key, with_cost=with_cost, with_when=with_when, with_sort=with_sort,
+        default_when=default_when,
     )
 
 
@@ -668,10 +686,13 @@ def build() -> None:
         key=lambda event: (event.get("end_date") or "9999-99-99", event.get("name", "").lower()),
     )
     fallback_next_up = upcoming_soon[:10] + upcoming_ongoing[:3]
-    free_rows = [
-        event for event in published
-        if cost_class(event.get("admission", "")) in {"free", "mixed"}
-    ]
+    free_rows = sorted(
+        [
+            event for event in published
+            if cost_class(event.get("admission", "")) in {"free", "mixed"}
+        ],
+        key=lambda event: sort_key(event, as_of),
+    )
 
     cadence_order = ("weekly", "monthly", "seasonal", "annual")
     cadence_summary = ", ".join(
@@ -714,17 +735,34 @@ def build() -> None:
     Regularly occurring events (weekly, monthly, seasonal, annual) are kept separate from dated special events.
     Each row carries its own official source link and the source type. Uncertain, cancelled, multi-city and
     outside-city items are kept on <a href="flagged.html">Flagged for Review</a> instead of being normalised away.</p>
-    <p><a href="upcoming.html"><strong>Browse everything by date →</strong></a> &nbsp;
-       <a href="free.html"><strong>Browse free to attend →</strong></a></p>
+    <p><a href="upcoming.html"><strong>Browse upcoming — free events first →</strong></a> &nbsp;
+       <a href="free.html"><strong>Free to attend →</strong></a> &nbsp;
+       <a href="paid.html"><strong>Paid / ticketed →</strong></a></p>
   </div>
   <aside class="panel snapshot"><strong>{len(published)}</strong><span>published city-only rows</span><br>
   <small>{len(upcoming)} upcoming as of {esc(catalog['as_of'])}; {len(review)} items held for review.</small></aside>
 </section>
 
-<section aria-labelledby="next-up">
-  <div class="section-head"><h2 id="next-up">Executive summary — next up</h2>
-  <p>The ten closest dated events to today, recalculated in your browser from the same source-verified data.</p></div>
+<section aria-labelledby="exec-summary">
+  <div class="section-head"><h2 id="exec-summary">Executive summary — free &amp; upcoming</h2>
+  <p>The free and partly-free events closest to today's date, recalculated in your browser against the
+  same source-verified data. Paid and ticketed events are kept out of this panel — they have their own
+  <a href="paid.html">Paid / ticketed</a> section.</p></div>
   <div class="today-strip" id="today-strip"><span class="today-pill">Loading today’s dates…</span></div>
+  <div class="panel"><ul class="nextup" id="free-upcoming"><li><span class="what">Loading…</span></li></ul></div>
+  <noscript><div class="panel"><p><strong>Free and upcoming as of the {esc(catalog['as_of'])} audit date:</strong></p>
+    <ul class="nextup">{''.join(
+        f'<li><span class="when">{esc(event.get("date_text", ""))}</span><span class="what">'
+        f'<a href="{esc(event["source_url"])}" target="_blank" rel="noopener noreferrer">{esc(event["name"])}</a>'
+        f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))}</span></span></li>'
+        for event in [e for e in upcoming_soon if cost_class(e.get("admission", "")) in {"free", "mixed"}][:12]
+    )}</ul></div></noscript>
+</section>
+
+<section aria-labelledby="next-up-heading">
+  <div class="section-head"><h2 id="next-up-heading">Next up — everything, free and ticketed</h2>
+  <p>The ten closest dated events of any cost to today, each labelled with what it costs to attend.
+  Counts for the next 7, 30 and 90 days are in the strip above.</p></div>
   <div class="panel"><ul class="nextup" id="next-up"><li><span class="what">Loading…</span></li></ul></div>
   <noscript><div class="panel"><p><strong>Next up as of the {esc(catalog['as_of'])} audit date:</strong></p>
     <ul class="nextup">{''.join(
@@ -733,19 +771,6 @@ def build() -> None:
         f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))}</span></span></li>'
         for event in fallback_next_up
     )}</ul></div></noscript>
-</section>
-
-<section aria-labelledby="free-upcoming">
-  <div class="section-head"><h2 id="free-upcoming">Free to attend — coming up</h2>
-  <p>Upcoming events whose official source states the event is free (or partly free). More on the
-  <a href="free.html">free events page</a>.</p></div>
-  <div class="panel"><ul class="nextup" id="free-upcoming"><li><span class="what">Loading…</span></li></ul></div>
-  <noscript><div class="panel"><ul class="nextup">{''.join(
-      f'<li><span class="when">{esc(event.get("date_text", ""))}</span><span class="what">'
-      f'<a href="{esc(event["source_url"])}" target="_blank" rel="noopener noreferrer">{esc(event["name"])}</a>'
-      f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))}</span></span></li>'
-      for event in [e for e in upcoming_soon if cost_class(e.get("admission", "")) in {"free", "mixed"}][:12]
-  )}</ul></div></noscript>
 </section>
 
 <section aria-labelledby="focus-disciplines">
@@ -792,7 +817,8 @@ def build() -> None:
         <li><strong>SF Pride &amp; Chinese New Year Parades</strong>: Free public viewing along historic routes.</li>
         <li><strong>Downtown First Thursdays &amp; Off the Grid</strong>: Free entry street parties and night markets.</li>
       </ul>
-      <p style="margin: 0.8rem 0 0;"><a href="free.html"><strong>Browse all 56 free / partly-free events →</strong></a></p>
+      <p style="margin: 0.8rem 0 0;"><a href="free.html"><strong>Browse all {cost_counts['free'] + cost_counts['mixed']} free / partly-free events →</strong></a> &nbsp;
+      <a href="paid.html"><strong>See the {cost_counts['paid']} paid / ticketed events →</strong></a></p>
     </div>
   </div>
 </section>
@@ -802,6 +828,7 @@ def build() -> None:
   <div class="cards">
     <a class="card" href="upcoming.html"><span class="metric">{len(upcoming)}</span><span class="card-label">Upcoming</span><span class="card-note">Dated events not yet past, nearest first</span></a>
     <a class="card" href="free.html"><span class="metric">{cost_counts['free'] + cost_counts['mixed']}</span><span class="card-label">Free to attend</span><span class="card-note">Source states free or partly free</span></a>
+    <a class="card" href="paid.html"><span class="metric">{cost_counts['paid']}</span><span class="card-label">Paid / ticketed</span><span class="card-note">Kept in a separate section, never in the free list</span></a>
     <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Regularly occurring</span><span class="card-note">Weekly, monthly, seasonal, and annual traditions</span></a>
     <a class="card" href="special.html"><span class="metric">{len(special)}</span><span class="card-label">Special events</span><span class="card-note">Dated programs and one-off conferences</span></a>
     <a class="card" href="categories.html"><span class="metric">{len(categories)}</span><span class="card-label">Categories</span><span class="card-note">Each has its own table page</span></a>
@@ -836,14 +863,51 @@ essential gaps go to <a href="flagged.html">Flagged for Review</a>.</section>
         page("Dashboard", home, "index.html", catalog, data_block=data_block), encoding="utf-8"
     )
 
-    # --- upcoming: everything, ordered by date with upcoming first ---------
+    # --- upcoming: free events lead, paid and unstated kept in their own sections
+    paid_rows = sorted(
+        [event for event in published if cost_class(event.get("admission", "")) == "paid"],
+        key=lambda event: sort_key(event, as_of),
+    )
+    unstated_rows = sorted(
+        [event for event in published if cost_class(event.get("admission", "")) == "not-stated"],
+        key=lambda event: sort_key(event, as_of),
+    )
+    free_upcoming = [
+        event for event in free_rows if event_status(event, as_of) == "upcoming"
+    ]
     upcoming_body = f"""
-<section class="section-head"><div><h2>All events by date</h2>
-<p>Every published city-only row, ordered with upcoming dates first and the nearest date at the top.
-Rows that are already past are pushed to the bottom and labelled <em>Completed</em>.</p></div>
-<p>{len(all_events)} verified rows</p></section>
-{filter_controls(categories, key='upcoming')}
-{table_with_filter_rows(all_events, key='upcoming', as_of=as_of, include_bucket=True)}
+<section class="section-head"><div><h2>Upcoming — free to attend</h2>
+<p>The main list: published San Francisco rows whose official source states the event is free (or
+free for part of the programme), ordered by date with the nearest date at the top. The table opens
+showing <strong>upcoming rows only</strong> — switch the When filter to “All dates” to include
+completed editions, which are pushed to the bottom and labelled <em>Completed</em>. Ticketed events
+are never mixed in here: they are listed in their own section below and on
+<a href="paid.html">Paid / ticketed</a>.</p></div>
+<p>{len(free_upcoming)} of {len(free_rows)} free rows are still upcoming</p></section>
+{filter_controls(categories, key='up-free')}
+{table_with_filter_rows(free_rows, key='up-free', as_of=as_of, include_bucket=True, default_when='upcoming')}
+
+<section class="section-head"><div><h2>Ticketed / paid events</h2>
+<p>A separate section, by request: rows whose official source states a price, pass, registration or
+invitation requirement. Organized by date with upcoming dates first. Nothing here is free by default —
+check the cost column for the figure the source published.</p></div>
+<p>{len(paid_rows)} rows · <a href="paid.html">Open the full paid / ticketed page →</a></p></section>
+{filter_controls(categories, key='up-paid')}
+{table_with_filter_rows(paid_rows, key='up-paid', as_of=as_of, include_bucket=True)}
+
+<section class="section-head"><div><h2>Cost not stated by the source</h2>
+<p>Rows whose linked official page published no price. These are <strong>not</strong> free by
+implication and are never shown in the free section; every one of them is also listed with its source
+link on <a href="flagged.html">Flagged for Review</a>.</p></div>
+<p>{len(unstated_rows)} rows</p></section>
+{filter_controls(categories, key='up-unknown')}
+{table_with_filter_rows(unstated_rows, key='up-unknown', as_of=as_of, include_bucket=True)}
+
+<section class="notice"><strong>How this page is organized.</strong> Every row above is one of the
+{len(all_events)} published city-only rows, so nothing is hidden — the page is simply split by what
+the official source says it costs, with free events first. The same rows are also on
+<a href="all-events.html">All events</a> (one date-ordered table) and on
+<a href="free.html">Free to attend</a> / <a href="paid.html">Paid / ticketed</a>.</section>
 """
     (ROOT / "upcoming.html").write_text(
         page("Upcoming by date", upcoming_body, "upcoming.html", catalog, data_block=data_block),
@@ -853,13 +917,38 @@ Rows that are already past are pushed to the bottom and labelled <em>Completed</
     # --- free -------------------------------------------------------------
     free_body = f"""
 <section class="section-head"><div><h2>Free to attend</h2>
-<p>Published rows whose official source states the event is free, or free for part of the programme.
-Rows where the source published no price are not listed here — a blank cost is never treated as free.
-The full list of rows with an unstated cost is on <a href="flagged.html">Flagged for Review</a>.</p></div>
+<p>Published rows whose official source states the event is free, or free for part of the programme,
+ordered by date with upcoming dates first. Rows where the source published no price are not listed
+here — a blank cost is never treated as free. The full list of rows with an unstated cost is on
+<a href="flagged.html">Flagged for Review</a>. Ticketed events have their own
+<a href="paid.html">Paid / ticketed</a> page.</p></div>
 <p>{len(free_rows)} rows</p></section>
 {filter_controls(categories, key='free')}
 {table_with_filter_rows(free_rows, key='free', as_of=as_of, include_bucket=True)}
 """
+
+    # --- paid / ticketed --------------------------------------------------
+    paid_body = f"""
+<section class="section-head"><div><h2>Paid / ticketed events</h2>
+<p>The separate paid section requested in the brief: every published row whose official source states
+a price, a pass, a registration requirement, or invitation-only entry. Ordered by date with upcoming
+dates first. The cost column quotes what the source published — where a source states only that
+tickets are sold without a figure, the cell says so rather than inventing a price. Free events are on
+<a href="free.html">Free to attend</a>, and rows whose source published no price are listed on
+<a href="flagged.html">Flagged for Review</a>.</p></div>
+<p>{len(paid_rows)} rows</p></section>
+{filter_controls(categories, key='paid')}
+{table_with_filter_rows(paid_rows, key='paid', as_of=as_of, include_bucket=True)}
+<section class="notice"><strong>Reading the cost column.</strong> “Paid / ticketed” means the linked
+official page stated a price, pass, registration or invitation requirement. A figure is shown only
+when the page published one; “registration required” rows with no published price keep that wording
+and are flagged on <a href="flagged.html">Flagged for Review</a>. Nothing on this page is free unless
+the cost badge says so.</section>
+"""
+    (ROOT / "paid.html").write_text(
+        page("Paid / ticketed events", paid_body, "paid.html", catalog, data_block=data_block),
+        encoding="utf-8",
+    )
     (ROOT / "free.html").write_text(
         page("Free to attend", free_body, "free.html", catalog, data_block=data_block), encoding="utf-8"
     )
@@ -989,7 +1078,14 @@ linked official page stated. Nothing is inferred from an event's type.</p>
 <span class="cost cost-unknown">Not stated</span> the source published no price — <strong>never</strong> treated as free
 </div>
 <p>Current split: {cost_summary}. The rows with an unstated cost are listed, with their source links, on the
-<a href="flagged.html">Flagged for Review</a> page.</p></section>
+<a href="flagged.html">Flagged for Review</a> page.</p>
+<p><strong>Sectioning rule.</strong> The brief asks for free events to lead and for paid events to be
+collected separately rather than dropped. <a href="upcoming.html">Upcoming by date</a> therefore opens
+with a free-to-attend table (filtered to upcoming rows on load), followed by its own
+<em>Ticketed / paid</em> table and a <em>Cost not stated</em> table, and
+<a href="paid.html">Paid / ticketed</a> repeats the ticketed list on its own page. No row is hidden by
+this split: the three tables together still carry all {len(published)} published rows, and
+<a href="all-events.html">All events</a> keeps them in one date-ordered list.</p></section>
 <section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
 <li>The audit has {len(recurring)} recurring and {len(special)} dated-special verified rows across {len(categories)} categories; {len(upcoming)} of the {len(published)} published rows are still upcoming as of {esc(catalog['as_of'])}.</li>
 <li>The recurring list breaks down as {cadence_summary}. The classification is based on cadence, not whether an event is free or public.</li>
@@ -1007,7 +1103,8 @@ linked official page stated. Nothing is inferred from an event's type.</p>
 <p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
 <section class="panel"><h3>Line-by-line verification</h3><p>Every published and review row is checked against its
 linked official source page, and the current session's pass is logged row by row with quoted source text in
-<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with the earlier full passes in
+<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a> and in this session's pass,
+<a href="research/verification-8c40d1c6.md">research/verification-8c40d1c6.md</a>, with the earlier full passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
 <a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. Values not stated by a source

@@ -57,6 +57,20 @@ def source_link_count(path: Path) -> int:
 
 
 def check_internal_links(path: Path, text: str) -> None:
+    # Duplicate ids break the browser-side scripts (getElementById silently
+    # targets the first match) and duplicate aria-labelledby references, so both
+    # are treated as build errors rather than cosmetic nits.
+    ids = re.findall(r'\sid="([^"]+)"', text)
+    for identifier, count in Counter(ids).items():
+        if count > 1:
+            error(f"{path.relative_to(ROOT)}: duplicate id {identifier!r} ({count} times)")
+    for reference in re.findall(r'aria-labelledby="([^"]+)"', text):
+        for identifier in reference.split():
+            if identifier not in ids:
+                error(
+                    f"{path.relative_to(ROOT)}: aria-labelledby={identifier!r} "
+                    "points at a missing id"
+                )
     for href in re.findall(r'href="([^"]+)"', text):
         parsed = urlparse(href)
         if parsed.scheme or href.startswith("#") or href.startswith("//"):
@@ -145,14 +159,27 @@ def main() -> int:
     # category created by moving 14 clearly tech/AI/gaming rows out of
     # "Professional & academic". Total: 148 published (98 recurring + 50
     # special), 16 review records, 34 field-level flags, 9 categories.
-    if len(published) != 148:
-        error(f"expected 148 published rows, found {len(published)}")
-    if len(recurring) != 98 or len(special) != 50:
-        error(f"expected 98 recurring / 50 special, found {len(recurring)} / {len(special)}")
+    # 2026-10-18 arena/8c40d1c6-maltaproj7 verification pass (log:
+    # research/verification-8c40d1c6.md, patch: research/patch-8c40d1c6.py):
+    # +6 published special rows added from official organizer/government pages
+    # (Sunday Streets Excelsior 2026, SFIAC and Olympic Club Cornhole Tournament,
+    # and four Foodwise farmers-market cooking demos), cost and note fills on 4
+    # rows, and 6 new field-level flags. Total: 154 published (98 recurring + 56
+    # special), 16 review records, 41 field-level flags, 9 categories.
+    # Irregularity noted by this pass: the ledger entry for arena/e79e0de2 above
+    # lists an "SFIAC & Olympic Club Cornhole Tournament" row that is absent from
+    # data/events.json (verified by searching every record id, name and source
+    # URL on 2026-10-18); the row was added in this pass from the SFMTA source
+    # instead, and the discrepancy is logged in COORDINATION.md and on the
+    # Flagged for Review page.
+    if len(published) != 154:
+        error(f"expected 154 published rows, found {len(published)}")
+    if len(recurring) != 98 or len(special) != 56:
+        error(f"expected 98 recurring / 56 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 34:
-        error(f"expected 34 field-level flags, found {len(flags)}")
+    if len(flags) != 41:
+        error(f"expected 41 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -238,7 +265,7 @@ def main() -> int:
         error("catalog geography statement does not enforce city-only scope")
 
     root_pages = [
-        ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html",
+        ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html", ROOT / "paid.html",
         ROOT / "recurring.html", ROOT / "special.html",
         ROOT / "annual-special.html", ROOT / "categories.html", ROOT / "all-events.html",
         ROOT / "flagged.html", ROOT / "method.html",
@@ -268,6 +295,9 @@ def main() -> int:
     expected_counts = {
         ROOT / "upcoming.html": len(published),
         ROOT / "free.html": len(free_rows),
+        ROOT / "paid.html": len(
+            [e for e in published if cost_class(str(e.get("admission") or "")) == "paid"]
+        ),
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
@@ -328,20 +358,53 @@ def main() -> int:
             if html.escape(event["source_url"], quote=True) not in page_html:
                 error(f"{label} missing source URL for {event['id']}")
     # The upcoming list must lead with upcoming rows and keep them in date order.
-    statuses = re.findall(r'data-status="([a-z\-]+)"', upcoming_html)
-    if not statuses:
-        error("upcoming.html has no filterable rows")
-    else:
+    # Upcoming page is split into free / paid / cost-not-stated tables by the
+    # brief's sectioning rule, so the date-first ordering guarantee is checked
+    # inside each table (and the free table must lead the page).
+    table_blocks = re.findall(r'<table data-filter-table(.*?)</table>', upcoming_html, re.S)
+    if len(table_blocks) < 3:
+        error(
+            "upcoming.html expected 3 cost-split tables (free, paid, not stated), "
+            f"found {len(table_blocks)}"
+        )
+    for index, block in enumerate(table_blocks, start=1):
+        statuses = re.findall(r'data-status="([a-z\-]+)"', block)
+        if not statuses:
+            error(f"upcoming.html table {index} has no filterable rows")
+            continue
         order = {"upcoming": 0, "undated": 1, "completed": 2}
         ranks = [order.get(status, 9) for status in statuses]
         if ranks != sorted(ranks):
-            error("upcoming.html is not ordered with upcoming rows first")
-        if ranks and ranks[0] != 0:
-            error("upcoming.html does not start with an upcoming row")
-    dateranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', upcoming_html)
-    upcoming_ranks = [rank for rank in dateranks if rank.startswith("0-")]
-    if upcoming_ranks != sorted(upcoming_ranks):
-        error("upcoming.html upcoming rows are not in ascending date order")
+            error(f"upcoming.html table {index} is not ordered with upcoming rows first")
+        dateranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', block)
+        upcoming_dates = [
+            rank for rank, status in zip(dateranks, statuses) if status == "upcoming"
+        ]
+        if upcoming_dates != sorted(upcoming_dates):
+            error(f"upcoming.html table {index} upcoming rows are not in ascending date order")
+    first_block = table_blocks[0] if table_blocks else ""
+    first_statuses = re.findall(r'data-status="([a-z\-]+)"', first_block)
+    if first_statuses and first_statuses[0] != "upcoming":
+        error("upcoming.html does not start with an upcoming row")
+    first_costs = re.findall(r'data-cost="([a-z\-]+)"', first_block)
+    if first_costs and any(cost not in {"free", "mixed"} for cost in first_costs):
+        error("upcoming.html main table must contain only free / partly-free rows")
+    if first_block and 'data-default-when="upcoming"' not in first_block:
+        error("upcoming.html main table does not default to upcoming rows only")
+    # paid.html mirrors the ticketed rows and must stay separate from the free list.
+    paid_html = read(ROOT / "paid.html")
+    paid_costs = re.findall(r'data-cost="([a-z\-]+)"', paid_html)
+    paid_rows = [e for e in published if cost_class(e.get("admission", "")) == "paid"]
+    if len(paid_costs) != len(paid_rows):
+        error(f"paid.html: expected {len(paid_rows)} rows, found {len(paid_costs)}")
+    for cost in paid_costs:
+        if cost != "paid":
+            error(f"paid.html contains a {cost!r} row; only ticketed rows belong there")
+    for event in paid_rows:
+        if html.escape(event["name"], quote=True) not in paid_html:
+            error(f"paid.html missing paid row {event['id']}")
+        if html.escape(event["source_url"], quote=True) not in paid_html:
+            error(f"paid.html missing source URL for {event['id']}")
     # free.html must contain only rows the source describes as free or partly free.
     free_costs = re.findall(r'data-cost="([a-z\-]+)"', free_html)
     if len(free_costs) != len(free_rows):
