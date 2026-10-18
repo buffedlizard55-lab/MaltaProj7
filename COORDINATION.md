@@ -7,9 +7,9 @@
 | # | Task | Status | Owner | Files touched |
 |---|------|--------|-------|---------------|
 | 1 | Repo review & coordination setup | in progress | arena/1e3b5ea8-maltaproj7 | COORDINATION.md, README.md |
-| 2 | Research recurring (weekly/monthly) SF events from official sources | unclaimed | — | data/events.json, docs/ |
-| 3 | Research annual / special SF events from official sources | unclaimed | — | data/events.json, docs/ |
-| 4 | Build GitHub Pages site (landing + category subpages, tables, flagged page) | unclaimed | — | index.html, *.html, assets |
+| 2 | Research recurring SF events | in progress | arena/1e3b5ea8 | data/events.json |
+| 3 | Research annual/special SF events | in progress | arena/1e3b5ea8 | data/events.json |
+| 4 | Build GitHub Pages site | in progress | arena/1e3b5ea8 | index.html, recurring.html, annual-special.html, flagged.html, method.html, assets/, build.py |
 | 5 | Line-by-line verification, link check, build check | unclaimed | — | COORDINATION.md |
 | 6 | Final integration, PR to main, merge, confirm Pages deploy | unclaimed | — | — |
 
