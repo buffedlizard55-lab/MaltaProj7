@@ -1,4 +1,40 @@
-# Active coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+# Active coordination — session arena/83fc57b1-maltaproj7 (2026-10-18) — Z5 PUBLISHED
+
+**Session ID:** `arena/83fc57b1-maltaproj7` (platform-fixed branch; per system prompt all work stays on this branch).
+
+## Task board — arena/83fc57b1-maltaproj7 (all **done**)
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| Z1 | Independent official-source re-verification of existing gaming/music/AI free rows against the PR #38/#39/#40 baseline; quoted-source log | **done** | arena/83fc57b1-maltaproj7 | 2026-10-18T16:55Z | `research/reverification-83fc57b1.md` |
+| Z2 | Coverage search: official trusted sources for free upcoming SF gaming and AI events (and free music gaps), SF city-only | **done** | arena/83fc57b1-maltaproj7 | 2026-10-18T16:55Z | `research/reverification-83fc57b1.md` |
+| Z3 | Data additions strictly from official sources; per-row evidence links; flags for anything unconfirmable | **done** | arena/83fc57b1-maltaproj7 | 2026-10-18T17:05Z | `data/events.json`, `data/events.csv`, `research/patch-83fc57b1.py` |
+| Z4 | Rebuild the site, re-run verify.py, local-link crawl, confirm mobile layout intact | **done** | arena/83fc57b1-maltaproj7 | 2026-10-18T17:05Z | `build.py`, `verify.py`, `README.md`, generated HTML |
+| Z5 | Final integration: PR to `main`, merge without waiting, confirm Pages deploy, record links | **done** | arena/83fc57b1-maltaproj7 | 2026-10-18T17:20Z | `COORDINATION.md`, PR #41 |
+
+## Session summary — arena/83fc57b1-maltaproj7
+
+- Z1/Z2 (re-verification + coverage search): Fetched daytona.io/events, voxel51.com/events, opensourceaiweek.com, bhangraandbeats.com, noisebridge.net, eventbrite.com (Yerba Buena Gardens Special Events), ybgfestival.org (reCAPTCHA-blocked — could not confirm October 24/31 YBG shows), dayofthedeadsf.org (still shows 2025 only). Discovery used press releases/aggregators but admission was never populated from them.
+- Z3 (data patch): `python3 research/patch-83fc57b1.py` added 5 published rows (Daytona & Oracle AI Builders Oct 20 free AI; Overmind Arcade Oct 20 AI+gaming cost-unstated; SF Diwali Festival at YBG Nov 8 free; Noisebridge Godot Gamedev Meetup recurring free gaming; Voxel51 × Nebius Physical AI Workshop Oct 28 cost-unstated) and 5 field-level flags (Daytona address hidden, Overmind cost, Voxel51 cost, no confirmed free dated SF gaming Oct–Dec 2026, YBGF November programs TBA).
+- Z4 (rebuild + verify): Updated `verify.py` count guards to 167/103/64/17/56 and `README.md` counts (20 dated free upcoming, 57 confirmed-free, 12 mixed, 16 paid, 82 not-stated). `python3 build.py` → `Built 167 published events: 103 recurring, 64 special, 9 categories; 17 review records; 71 upcoming; 69 free or partly free.` `python3 verify.py` → `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. A programmatic crawl of all 20 HTML pages found 0 broken local hrefs; the `@media (max-width:760px)` stacked-card responsive layout and viewport meta tag remain from prior sessions.
+- Z5 (publish): PR #41 merged without waiting. Pages deploy succeeded. See publication record below.
+
+## Publication record — arena/83fc57b1-maltaproj7 (Z5)
+
+| Item | Value |
+| --- | --- |
+| PR | https://github.com/buffedlizard55-lab/MaltaProj7/pull/41 |
+| Merge commit | `c8abd7e94761cfb3a2dee291b93f7331b7e92eb2` |
+| Merged at | 2026-10-18T17:26:49Z |
+| Deploy workflow run | https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39149621647 (Deploy static site to GitHub Pages — success, 19s) |
+| Pages build/deploy run | https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39149621002 (pages-build-deployment — success, 52s) |
+| Live site | https://buffedlizard55-lab.github.io/MaltaProj7/ |
+| Final catalog snapshot | 167 verified (103 recurring + 64 special), 17 review, 56 flags, 9 categories; 20 dated free upcoming |
+| Verification | `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`; 0 broken local links across 20 HTML pages; mobile-first responsive layout intact |
+
+---
+
+# Historical coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
 
 **Session ID:** `arena/75cf25a7-maltaproj7`. Arena pins this session to the named branch; the requested
 `session-<id>/<task>` branch naming cannot be used here, so all changes stay on the platform-fixed branch.
