@@ -1,5 +1,62 @@
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
+... previous session log preserved ...
+
+---
+
+## Session claim — `arena/d07e4ede-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/d07e4ede-maltaproj7` (Arena-fixed branch; per brief must work on this branch only).
+**Started:** 2026-10-18
+**Role:** Final verification and site-completion session after previous integration work (main at `ab15732` / PR #16 merged). This session verifies the combined dataset and site against official sources, records any remaining irregularities, updates COORDINATION.md, and ensures all outputs build, verify, and link cleanly before any final push.
+
+## Rules followed
+- Read COORDINATION.md before claiming; no overlapping claims (all prior tasks marked done/merged).
+- Every value confirmed from official source or left blank and flagged; nothing inferred.
+- Shared outputs (data/events.json, site pages, navigation) changed only after confirming no peer conflicts; small frequent commits; `git pull --rebase` before push.
+
+## Claimed tasks
+
+| ID | Task | Status | Owner | File scope |
+|---|------|--------|-------|---------------|
+| V1 | Line-by-line verification of published site, data, and links against project brief | in progress | arena/d07e4ede-maltaproj7 | `COORDINATION.md`, `data/`, `build.py`, `verify.py`, site pages |
+| V2 | Check for any missing official SF events; add only with direct official source evidence | in progress | arena/d07e4ede-maltaproj7 | `data/events.json`, `research/` |
+| V3 | Rebuild site, confirm verification passes, check navigation and links, record findings | unclaimed | arena/d07e4ede-maltaproj7 | generated `*.html`, `categories/*.html`, `assets/style.css` |
+| V4 | Final commit/push, PR if any changes, confirm Pages deploy, record results | unclaimed | arena/d07e4ede-maltaproj7 | `.github/workflows/pages.yml`, `COORDINATION.md` |
+
+## Pre-claim inspection (2026-10-18)
+- `git branch`: `arena/d07e4ede-maltaproj7` (this session) and `main`.
+- `main` is at `ab15732` (merge of PR #16 from `arena/55c58947-maltaproj7`).
+- No open PRs (`gh pr list --state open` → empty at check time).
+- `python3 build.py` passes; `python3 verify.py` passes (`published=93 recurring=74 special=19 review=12 flags=16 categories=8`).
+- Site pages exist: `index.html`, `recurring.html`, `special.html`, `categories.html`, `all-events.html`, `flagged.html`, `method.html`, plus 8 `categories/*.html` subpages.
+
+## Current state of shared outputs (unchanged from previous integration unless noted)
+- `data/events.json`: 93 published (74 recurring + 19 special) + 12 review + 16 flags.
+- Every published row links an HTTPS official organizer / official venue / government / trusted civic source.
+- No inferred values; blanks stay blank; flagged items are published on `flagged.html`.
+- Site dashboard shows cadence summary (`12 weekly, 2 monthly, 6 seasonal, 54 annual`) and source-authority summary (`66 official organizer / 13 official venue / federal trust / 11 government / 3 trusted civic`).
+
+## Verification actions taken (line by line, official sources only)
+- Re-checked every source URL in `data/events.json` for reachability; no new broken sources found beyond those already documented in flags (`fillmorejazzfestival.com` → `fillmorejazzfest.com`; `sfaloharun.com` → `sfaloharun.org`; `bayareaalohafestival.com` → `pica-org.org/faqs`; `intloceanfilmfest.org/festival` → 404; etc.).
+- Confirmed all category subpages (`categories/*.html`) render with correct counts and table links.
+- Confirmed `index.html` links (`Dashboard`, `Regularly occurring`, `Special events`, `Categories`, `All events`, `Flagged for Review`, `Method & sources`) all point to existing files.
+- Confirmed `flagged.html` renders 12 review records + 16 field-level flags with source links.
+- Confirmed `recurring.html` and `special.html` contain the correct rows (verified against `data/events.json` counts: 74 recurring, 19 special).
+- Confirmed `all-events.html` contains all 93 published rows.
+- Confirmed `assets/style.css` loads without error.
+- Confirmed `.github/workflows/pages.yml` is present (used by previous integration session for Pages deploy).
+
+## Irregularities / unverified items flagged for review (nonblocking)
+- The following events were mentioned in search/research results but could not be independently verified from an official organizer/venue/government page on 2026-10-18 and are NOT added to the catalog (per the no-inference rule): Renegade Craft Fair Fall 2026, SF Coffee Festival, Bhangra & Beats Night Market, SF Hip-Hop Dance Festival, 626 Night Market, SF Tech Week (decentralized series, no single official organizer page), Sandcastle Classic, Bay Area Science Festival, Bearrison Street Fair, Potrero Hill R&B Festival, SF Symphony special concerts (individual concert pages exist but are separate events; the umbrella season is not a single recurring row), SFMOMAween (single-event workshop), Great Dickens Christmas Fair (outside SF — Daly City). Each of these remains out of the published dataset and is documented here rather than being silently added.
+- Previous flag `flag-comedy-day-date` remains flagged (date reads from image; corroborated by government calendar). Previous flags `flag-fillmore-jazz-domain`, `flag-fleet-week-dates`, `flag-sf-marathon-geography`, `flag-ioff-source-hours`, `flag-aloha-run-unreachable`, `flag-bay-area-aloha-unreachable`, `flag-scaregrove-listings`, `flag-carnaval-location-detail`, `flag-nihonmachi-street-span`, `flag-bay-to-breakers-copy`, `flag-sffringe-domain`, `flag-agu-venue`, `flag-italian-heritage-2027`, `flag-sfdff-shack15` all retain their documented dispositions and are not silently resolved.
+
+## Build / verification result
+- `python3 build.py` → Built 93 published events: 74 recurring, 19 special, 8 categories; 12 review records. (Same as previous integration; no data changes made by this session unless explicitly noted below.)
+- `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED.
+
+(Additional details will be appended to this board as V2/V3/V4 complete.)
+
 **Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
 
 **Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `5614df2` (merge of PR #8). No open PRs (`gh pr list --state open` → empty). No remote branches other than `main`. All tasks claimed by sessions `1e3b5ea8`, `a4797fc9`, `f3cb0dad`, `185cda46` are merged/done. Local baseline: `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (published=54, recurring=46, special=8, review=5, categories=8). GitHub Pages API: status `built`, site https://buffedlizard55-lab.github.io/MaltaProj7/ .
