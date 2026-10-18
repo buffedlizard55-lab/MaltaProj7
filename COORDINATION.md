@@ -18,7 +18,7 @@ free list; this session applied the user's stricter “leave unconfirmed values 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
 | T1 | Conservative admission-evidence reconciliation for Sunday Streets: re-check official wording, blank admission where unstated, update the existing flag/counts, rebuild, verify and document | **done** | arena/75cf25a7-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `research/reverification-75cf25a7.md`, `README.md`, `build.py`, `verify.py`, `data/events.csv`, generated HTML |
-| T2 | Final integration: create a PR from this fixed branch, merge after build/tests pass, confirm GitHub Pages deployment, and record PR/deploy outcome | **in progress** | arena/75cf25a7-maltaproj7 | 2026-10-18T17:09Z | `COORDINATION.md`, PR metadata, GitHub Pages deployment record |
+| T2 | Final integration: create a PR from this fixed branch, merge after build/tests pass, confirm GitHub Pages deployment, and record PR/deploy outcome | **done** | arena/75cf25a7-maltaproj7 | 2026-10-18T17:09Z | `COORDINATION.md`, PR #39, Pages runs 39148412274 / 39148411327 |
 
 ## T1 completion record — source evidence, decision, and checks
 
@@ -27,6 +27,18 @@ free list; this session applied the user's stricter “leave unconfirmed values 
 - **Flagging:** retained and updated `flag-sundaystreets-free-wording` with the source wording, decision, and official links; the issue is nonblocking and visible on the site's Flagged for Review page. No new flag was added.
 - **Derived counts:** 18 dated confirmed-free upcoming rows; 54 free, 12 partly free, 16 paid/ticketed and 80 not stated overall; 67 published rows upcoming overall; 162 published (102 recurring + 60 special), 17 review records, 51 flags, nine categories.
 - **Verification:** `python3 -m unittest discover -s tests -v` — 11 passed; `python3 build.py` — built all 162 rows/pages; `python3 verify.py` — `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. The verifier now guards the source-silent admission wording and requires both Sunday Streets fields to stay blank with the flag rendered. Row-set checks confirm neither appears in the Dashboard/Upcoming/Free tables; local links (including the new research log) resolve. Changes are in commit `d614395` on `arena/75cf25a7-maltaproj7`.
+
+## T2 publication record — arena/75cf25a7-maltaproj7
+
+| Item | Result |
+| --- | --- |
+| Pull request | [#39](https://github.com/buffedlizard55-lab/MaltaProj7/pull/39) — “Correct Sunday Streets admission status in free event listings” — **MERGED** |
+| Merge | `f1149c79009722d85412be4f1ca784782e79df5d`, merged 2026-10-18T17:11:16Z |
+| Build / validation workflow | [39148412274](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39148412274) — **success**; the unit tests, build, and verifier all passed |
+| GitHub Pages build/deploy | [39148411327](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39148411327) — **success**; Pages API status `built` at https://buffedlizard55-lab.github.io/MaltaProj7/ |
+| Live check | Fetched the deployed Dashboard, Free upcoming page, and Flagged for Review page after deployment. Dashboard and Free page show **18 dated free upcoming**; the focus split is Gaming 0 / Music 4 / AI 0 / Everything else 14. Sunday Streets is absent from the free tables, appears as **Not stated** in the cost register, and its updated finding and official source links appear on Flagged for Review. |
+| Nonblocking irregularity | GitHub Actions reported Node.js 20 deprecation/forced Node.js 24 and an `ubuntu-latest` migration notice for Oct 19, 2026. These are runner/action maintenance warnings; both workflows completed successfully and do not affect event data or the deployed pages. |
+| Scope note | The site remains a bounded source-linked snapshot, not an exhaustive enumeration of every public, private, newly announced, or unlisted San Francisco event. |
 
 ---
 
