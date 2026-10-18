@@ -57,7 +57,7 @@ Sunday Streets free-wording flag).
   organizer's site (it was blank because the row was built from an SFMTA travel update). Rejected
   rather than published: *Boo at the Zoo* (no official admission statement) and SFPL branch gaming
   listings (past/cancelled, or no quotable cadence).
-- **G3 — findings.** `research/findings-56415e75.md`: of 158 published rows, 55 are free and 10 partly
+- **G3 — findings.** `research/findings-56415e75.md`: of 158 published rows, 54 are free and 12 partly
   free; **76 rows (48%) have no price published by their official source** and stay labelled *Cost not
   stated*; only 2 of the 17 gaming/AI rows are free — San Francisco's large gaming and AI events are
   commercial, and its free gaming/AI programming is institutional (library, nonprofit showcases).
