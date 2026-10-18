@@ -34,7 +34,8 @@ FREE_ADMISSION = "Free"
 NAV_ITEMS = [
     ("index.html", "Dashboard"),
     ("upcoming.html", "Upcoming"),
-    ("free.html", "Free to attend"),
+    ("free.html", "Free upcoming"),
+    ("paid.html", "Paid & partly free"),
     ("recurring.html", "Regularly occurring"),
     ("special.html", "Special events"),
     ("categories.html", "Categories"),
@@ -111,16 +112,17 @@ def validate(catalog: dict, events: list[dict]) -> None:
 # cost classification — derived from the sourced admission text only
 # --------------------------------------------------------------------------- #
 # Markers taken only from the wording of the sourced admission text.
-FREE_HINTS = ("free", "no-cost", "no cost", "no fundraising minimum", "suggested")
-PAID_HINTS = ("$", "tickets sold", "invitation only", "pass", "registration required", "price")
+FREE_HINTS = ("free", "no-cost", "no cost", "suggested")
+PAID_HINTS = ("$", "tickets sold", "pass", "paid entry")
 # A free statement that also names a ticketed/paid option is "mixed", not "free".
 TICKETED_HINTS = ("ticketed", "tickets sold", "reserved", "seating tickets", "hospitality packages")
 
 
 def cost_class(admission: str) -> str:
-    """Classify a sourced admission string.  Never guesses: blank means not stated."""
+    """Classify sourced admission wording; registration alone is not a price."""
     text = (admission or "").strip().lower()
-    if not text:
+    if not text or "no fundraising minimum" in text:
+        # A waived fundraising minimum is not proof that admission costs $0.
         return "not-stated"
     has_free = any(hint in text for hint in FREE_HINTS)
     if has_free:
@@ -129,7 +131,8 @@ def cost_class(admission: str) -> str:
         return "free"
     if any(hint in text for hint in PAID_HINTS):
         return "paid"
-    return "paid"
+    # Do not turn an unfamiliar non-empty description into an invented price.
+    return "not-stated"
 
 
 COST_LABELS = {
@@ -146,14 +149,14 @@ def cost_cell(event: dict) -> str:
     label = COST_LABELS[kind]
     if kind == "not-stated":
         return (
-            '<span class="cost cost-unknown" title="The linked source did not state a cost for this event">'
-            "Not stated</span>"
+            '<span class="cost cost-unknown" title="Free admission is not confirmed by the linked source">'
+            "Not stated</span>" + (f'<span class="cost-detail">{esc(admission)}</span>' if admission else "")
         )
     text = f'<span class="cost cost-{kind}">{esc(label)}</span>'
-    if admission and kind != "free":
+    if admission:
         text += f'<span class="cost-detail">{esc(admission)}</span>'
-    elif admission:
-        text += f'<span class="cost-detail">{esc(admission)}</span>'
+    if event.get("admission_source_url"):
+        text += f'<a class="evidence-link" href="{esc(event["admission_source_url"])}" target="_blank" rel="noopener noreferrer">Admission evidence ↗</a>'
     return text
 
 
@@ -234,7 +237,7 @@ def event_table(events: list[dict], *, as_of: date, include_bucket: bool = False
         "<table>",
         "<caption>Official-source event catalog, ordered with upcoming dates first. "
         "An em dash means the linked source did not state that optional field in the captured audit; "
-        "“Not stated” in the Cost column means the source did not publish a price (it does not mean free).</caption>",
+        "“Not stated” in the Cost column means admission cost was not established (it does not mean free).</caption>",
         "<thead><tr>" + "".join(f'<th scope="col">{header}</th>' for header in headers) + "</tr></thead>",
         "<tbody>",
     ]
@@ -322,9 +325,9 @@ def cost_not_stated_table(events: list[dict]) -> str:
     output = [
         '<div class="table-wrap">',
         '<table class="review-table">',
-        "<caption>Published rows whose linked official page did not state a cost. The cost cell on these rows "
-        "reads “Not stated”. Blank never means free — check the source link before assuming entry is free.</caption>",
-        '<thead><tr><th scope="col">Event</th><th scope="col">Date</th><th scope="col">Source</th></tr></thead>',
+        "<caption>Published rows whose linked official page did not establish an admission price. The cost cell on these rows "
+        "reads “Not stated”. A fundraising minimum is not an admission price. Check the source before assuming entry is free.</caption>",
+        '<thead><tr><th scope="col">Event</th><th scope="col">Date</th><th scope="col">Available wording</th><th scope="col">Source</th></tr></thead>',
         "<tbody>",
     ]
     for event in rows:
@@ -333,6 +336,7 @@ def cost_not_stated_table(events: list[dict]) -> str:
             f'<td data-label="Event"><strong>{esc(event["name"])}</strong>'
             f'<span class="organizer">{esc(event["organizer"])}</span></td>'
             f'<td data-label="Date">{esc(event.get("date_text", ""))}</td>'
+            f'<td data-label="Available wording">{esc(event.get("admission", "")) or "<span class=empty>—</span>"}</td>'
             f'<td data-label="Source">{source_cell(event)}</td>'
             "</tr>"
         )
@@ -345,9 +349,9 @@ def cost_not_stated_table(events: list[dict]) -> str:
 # --------------------------------------------------------------------------- #
 STYLE = """
 :root{--ink:#17212b;--muted:#526171;--paper:#fff;--mist:#f4f7fa;--line:#d9e2ea;--navy:#103c5b;--blue:#126da6;--teal:#0e766e;--gold:#8f6200;--rose:#9a3131;--shadow:0 8px 24px rgba(19,48,71,.08)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--mist);line-height:1.5}a{color:#075f99}a:hover{color:#064b78}.site-header{color:#fff;background:linear-gradient(120deg,#0d314a,#155d83 55%,#168178);padding:2.4rem 1.25rem 2rem}.shell{max-width:1240px;margin:0 auto;padding:0 1.25rem}.site-header .shell{padding:0;position:relative}.eyebrow{font-size:.77rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b9e9e4;margin:0 0 .4rem}.site-header h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.045em}.lede{max-width:850px;margin:.7rem 0 0;font-size:1.06rem;color:#e7f4f5}.main{padding-top:1.2rem;padding-bottom:2rem}.nav{display:flex;gap:.55rem;flex-wrap:wrap;margin:0 0 1.5rem}.nav a{text-decoration:none;color:var(--navy);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:.48rem .77rem;font-weight:700;font-size:.9rem}.nav a.active,.nav a:hover{background:var(--navy);border-color:var(--navy);color:#fff}.hero{display:grid;gap:1rem;grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);margin-bottom:1.25rem}.panel,.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.panel{padding:1.35rem}.panel h2,.panel h3{margin-top:0}.panel p:last-child{margin-bottom:0}.snapshot{background:#eaf5f4;border-color:#bde0dc}.snapshot strong{display:block;font-size:2rem;color:var(--teal);letter-spacing:-.04em}.snapshot small{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem;margin:1rem 0 1.4rem}.card{padding:1rem;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,48,71,.14)}.metric{font-size:2rem;font-weight:800;letter-spacing:-.06em;color:var(--navy);display:block}.card-label{display:block;font-weight:750}.card-note{display:block;color:var(--muted);font-size:.85rem;margin-top:.25rem}.notice{padding:1rem 1.1rem;background:#fff7dc;border:1px solid #efd58c;border-radius:12px;margin:1rem 0}.notice strong{color:#715200}.notice a{font-weight:700}.section-head{display:flex;gap:1rem;align-items:baseline;justify-content:space-between;flex-wrap:wrap;margin-top:1.75rem}.section-head h2{margin:0}.section-head p{margin:0;color:var(--muted)}.filterbar{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);padding:.8rem;border-radius:12px;margin:.85rem 0}.filterbar label{font-weight:700;font-size:.9rem}.filterbar input,.filterbar select{font:inherit;padding:.55rem .65rem;border:1px solid #aebdc9;border-radius:8px;background:#fff;min-height:2.6rem}.filterbar input{min-width:min(100%,320px);flex:1}.filterbar select{max-width:100%}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}.table-wrap table{width:100%;min-width:940px;border-collapse:collapse;font-size:.88rem}.table-wrap caption{padding:.8rem 1rem;text-align:left;color:var(--muted);background:#f8fafb;border-bottom:1px solid var(--line);font-size:.82rem}.table-wrap th,.table-wrap td{padding:.72rem .72rem;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}.table-wrap th{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:#405262;background:#edf3f7;position:sticky;top:0;z-index:1}.table-wrap tr:last-child td{border-bottom:0}.table-wrap tbody tr:hover{background:#f7fbfd}.organizer,.source-meta,.authority{display:block;font-size:.78rem;color:var(--muted);margin-top:.16rem}.source-link{font-weight:800;white-space:nowrap}.authority{font-size:.72rem}.empty{color:#6d7a87}.rel{display:block;font-size:.76rem;font-weight:700;color:var(--teal);margin-top:.2rem}.badge{display:inline-block;border-radius:999px;padding:.22rem .5rem;font-size:.74rem;font-weight:800;line-height:1.2;margin-top:.3rem}.badge-recurring{color:#075b54;background:#dff5ef}.badge-special{color:#6e4700;background:#fff0c5}.badge-partial_sf_program{color:#634201;background:#fff0c5}.badge-needs_review{color:#80430a;background:#ffe8cf}.badge-cancelled{color:#892d2d;background:#ffe1e1}.badge-outside_city_excluded{color:#5d4a75;background:#eee8f8}.status-upcoming{color:#075b54;background:#dff5ef}.status-completed{color:#5c6672;background:#eceff2}.status-undated{color:#5d4a75;background:#eee8f8}.cost{display:inline-block;border-radius:6px;padding:.16rem .45rem;font-size:.8rem;font-weight:800}.cost-free{color:#075b54;background:#dff5ef}.cost-paid{color:#6e4700;background:#fff0c5}.cost-mixed{color:#2b4c7e;background:#e2ecfa}.cost-unknown{color:#5c6672;background:#eceff2}.cost-detail{display:block;font-size:.78rem;color:var(--muted);margin-top:.22rem}.review-table td:nth-child(5){min-width:280px}.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem}.category-card{padding:1.05rem;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit}.category-card:hover{box-shadow:var(--shadow);border-color:#9fb9cb}.category-card .metric{font-size:1.6rem}.definition{margin:.4rem 0 0;color:var(--muted);font-size:.9rem}.analysis-list{padding-left:1.2rem}.analysis-list li{margin:.5rem 0}.site-footer{border-top:1px solid var(--line);background:#fff;padding:1.5rem 0 2rem;color:var(--muted);font-size:.88rem}.site-footer p{max-width:1000px;margin:.2rem 0}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;padding:.6rem;background:#fff;color:#000;z-index:10}
-.nextup{list-style:none;margin:0;padding:0}.nextup li{display:flex;gap:.85rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--line)}.nextup li:last-child{border-bottom:0}.nextup .when{flex:0 0 8.6rem;font-weight:800;color:var(--navy);font-size:.88rem}.nextup .when small{display:block;font-weight:700;color:var(--teal);font-size:.78rem}.nextup .what{flex:1}.nextup .what a{font-weight:750;text-decoration:none}.nextup .meta{display:block;font-size:.78rem;color:var(--muted);margin-top:.15rem}.today-strip{display:flex;gap:.6rem;flex-wrap:wrap;margin:.6rem 0 1rem}.today-pill{background:#eaf5f4;border:1px solid #bde0dc;border-radius:999px;padding:.4rem .8rem;font-size:.85rem;font-weight:700;color:var(--teal)}.legend{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:.4rem 0 0}.legend .cost{margin-right:.2rem}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.site-header{padding:1.5rem 1rem 1.4rem}.shell{padding:0 1rem}.main{padding-top:.9rem}.nav{gap:.4rem;margin-bottom:1rem}.nav a{font-size:.8rem;padding:.42rem .6rem}.section-head{margin-top:1.3rem}.panel{padding:1rem}.cards{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem}.metric{font-size:1.6rem}.nextup li{flex-direction:column;gap:.2rem}.nextup .when{flex:none}.filterbar{padding:.7rem}.filterbar input,.filterbar select{min-width:0;width:100%;flex:1 1 100%}.table-wrap{border-radius:12px}.table-wrap table{min-width:0;display:block}.table-wrap caption{font-size:.8rem}.table-wrap thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.table-wrap tbody,.table-wrap tr,.table-wrap td{display:block;width:100%}.table-wrap tr{border-bottom:1px solid var(--line);padding:.55rem .8rem}.table-wrap tr:last-child{border-bottom:0}.table-wrap td{border:0;padding:.22rem 0;display:flex;gap:.6rem;align-items:flex-start}.table-wrap td::before{content:attr(data-label);font-weight:800;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#5b6b7a;flex:0 0 6.6em}.table-wrap td[data-label="Event"]{display:block}.table-wrap td[data-label="Event"]::before{display:none}.table-wrap td[data-label="Source"]::before{flex-basis:4.6em}.site-footer{font-size:.85rem}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--mist);line-height:1.5}a{color:#075f99}a:hover{color:#064b78}.site-header{color:#fff;background:linear-gradient(120deg,#0d314a,#155d83 55%,#168178);padding:2.4rem 1.25rem 2rem}.shell{max-width:1240px;margin:0 auto;padding:0 1.25rem}.site-header .shell{padding:0;position:relative}.eyebrow{font-size:.77rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b9e9e4;margin:0 0 .4rem}.site-header h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.045em}.lede{max-width:850px;margin:.7rem 0 0;font-size:1.06rem;color:#e7f4f5}.main{padding-top:1.2rem;padding-bottom:2rem}.nav{display:flex;gap:.55rem;flex-wrap:wrap;margin:0 0 1.5rem}.nav a{text-decoration:none;color:var(--navy);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:.48rem .77rem;font-weight:700;font-size:.9rem}.nav a.active,.nav a:hover{background:var(--navy);border-color:var(--navy);color:#fff}.hero{display:grid;gap:1rem;grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);margin-bottom:1.25rem}.panel,.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.panel{padding:1.35rem}.panel h2,.panel h3{margin-top:0}.panel p:last-child{margin-bottom:0}.snapshot{background:#eaf5f4;border-color:#bde0dc}.snapshot strong{display:block;font-size:2rem;color:var(--teal);letter-spacing:-.04em}.snapshot small{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem;margin:1rem 0 1.4rem}.card{padding:1rem;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,48,71,.14)}.metric{font-size:2rem;font-weight:800;letter-spacing:-.06em;color:var(--navy);display:block}.card-label{display:block;font-weight:750}.card-note{display:block;color:var(--muted);font-size:.85rem;margin-top:.25rem}.notice{padding:1rem 1.1rem;background:#fff7dc;border:1px solid #efd58c;border-radius:12px;margin:1rem 0}.notice strong{color:#715200}.notice a{font-weight:700}.section-head{display:flex;gap:1rem;align-items:baseline;justify-content:space-between;flex-wrap:wrap;margin-top:1.75rem}.section-head h2{margin:0}.section-head p{margin:0;color:var(--muted)}.filterbar{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);padding:.8rem;border-radius:12px;margin:.85rem 0}.filterbar label{font-weight:700;font-size:.9rem}.filterbar input,.filterbar select{font:inherit;padding:.55rem .65rem;border:1px solid #aebdc9;border-radius:8px;background:#fff;min-height:2.6rem}.filterbar input{min-width:min(100%,320px);flex:1}.filterbar select{max-width:100%}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}.table-wrap table{width:100%;min-width:940px;border-collapse:collapse;font-size:.88rem}.table-wrap caption{padding:.8rem 1rem;text-align:left;color:var(--muted);background:#f8fafb;border-bottom:1px solid var(--line);font-size:.82rem}.table-wrap th,.table-wrap td{padding:.72rem .72rem;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}.table-wrap th{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:#405262;background:#edf3f7;position:sticky;top:0;z-index:1}.table-wrap tr:last-child td{border-bottom:0}.table-wrap tbody tr:hover{background:#f7fbfd}.organizer,.source-meta,.authority{display:block;font-size:.78rem;color:var(--muted);margin-top:.16rem}.source-link{font-weight:800;white-space:nowrap}.authority{font-size:.72rem}.empty{color:#6d7a87}.rel{display:block;font-size:.76rem;font-weight:700;color:var(--teal);margin-top:.2rem}.badge{display:inline-block;border-radius:999px;padding:.22rem .5rem;font-size:.74rem;font-weight:800;line-height:1.2;margin-top:.3rem}.badge-recurring{color:#075b54;background:#dff5ef}.badge-special{color:#6e4700;background:#fff0c5}.badge-partial_sf_program{color:#634201;background:#fff0c5}.badge-needs_review{color:#80430a;background:#ffe8cf}.badge-cancelled{color:#892d2d;background:#ffe1e1}.badge-outside_city_excluded{color:#5d4a75;background:#eee8f8}.status-upcoming{color:#075b54;background:#dff5ef}.status-completed{color:#5c6672;background:#eceff2}.status-undated{color:#5d4a75;background:#eee8f8}.cost{display:inline-block;border-radius:6px;padding:.16rem .45rem;font-size:.8rem;font-weight:800}.cost-free{color:#075b54;background:#dff5ef}.cost-paid{color:#6e4700;background:#fff0c5}.cost-mixed{color:#2b4c7e;background:#e2ecfa}.cost-unknown{color:#5c6672;background:#eceff2}.evidence-link{display:block;font-size:.78rem;font-weight:750;margin-top:.2rem}.cost-detail{display:block;font-size:.78rem;color:var(--muted);margin-top:.22rem}.review-table td:nth-child(5){min-width:280px}.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem}.category-card{padding:1.05rem;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit}.category-card:hover{box-shadow:var(--shadow);border-color:#9fb9cb}.category-card .metric{font-size:1.6rem}.definition{margin:.4rem 0 0;color:var(--muted);font-size:.9rem}.analysis-list{padding-left:1.2rem}.analysis-list li{margin:.5rem 0}.site-footer{border-top:1px solid var(--line);background:#fff;padding:1.5rem 0 2rem;color:var(--muted);font-size:.88rem}.site-footer p{max-width:1000px;margin:.2rem 0}[hidden]{display:none!important}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;padding:.6rem;background:#fff;color:#000;z-index:10}
+.focus-links{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}.focus-links a{display:inline-block;border:1px solid #a5ccc7;background:#ecf8f5;border-radius:30px;padding:.4rem .8rem;text-decoration:none;font-weight:750}.focus-links a:hover{background:#d2f0e9}.nextup{list-style:none;margin:0;padding:0}.nextup li{display:flex;gap:.85rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px solid var(--line)}.nextup li:last-child{border-bottom:0}.nextup .when{flex:0 0 8.6rem;font-weight:800;color:var(--navy);font-size:.88rem}.nextup .when small{display:block;font-weight:700;color:var(--teal);font-size:.78rem}.nextup .what{flex:1}.nextup .what a{font-weight:750;text-decoration:none}.nextup .meta{display:block;font-size:.78rem;color:var(--muted);margin-top:.15rem}.today-strip{display:flex;gap:.6rem;flex-wrap:wrap;margin:.6rem 0 1rem}.today-pill{background:#eaf5f4;border:1px solid #bde0dc;border-radius:999px;padding:.4rem .8rem;font-size:.85rem;font-weight:700;color:var(--teal)}.legend{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted);margin:.4rem 0 0}.legend .cost{margin-right:.2rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.site-header{padding:1.5rem 1rem 1.4rem}.shell{padding:0 1rem}.main{padding-top:.9rem}.nav{gap:.4rem;margin-bottom:1rem}.nav{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.25rem}.nav a{white-space:nowrap;font-size:.8rem;padding:.42rem .6rem}.section-head{margin-top:1.3rem}.panel{padding:1rem}.cards{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem}.metric{font-size:1.6rem}.nextup li{flex-direction:column;gap:.2rem}.nextup .when{flex:none}.filterbar{padding:.7rem}.filterbar input,.filterbar select{min-width:0;width:100%;flex:1 1 100%}.table-wrap{border-radius:12px}.table-wrap table{min-width:0;display:block}.table-wrap caption{font-size:.8rem}.table-wrap thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.table-wrap tbody,.table-wrap tr,.table-wrap td{display:block;width:100%}.table-wrap tr{border-bottom:1px solid var(--line);padding:.55rem .8rem}.table-wrap tr:last-child{border-bottom:0}.table-wrap td{border:0;padding:.22rem 0;display:flex;gap:.6rem;align-items:flex-start}.table-wrap td::before{content:attr(data-label);font-weight:800;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#5b6b7a;flex:0 0 6.6em}.table-wrap td[data-label="Event"]{display:block}.table-wrap td[data-label="Event"]::before{display:none}.table-wrap td[data-label="Source"],.table-wrap td[data-label="Cost"]{display:block}.table-wrap td[data-label="Source"]::before,.table-wrap td[data-label="Cost"]::before{display:block;margin-bottom:.2rem}.site-footer{font-size:.85rem}}
 """.strip()
 
 
@@ -356,7 +360,7 @@ STYLE = """
 # --------------------------------------------------------------------------- #
 def nav(active: str, prefix: str = "") -> str:
     return '<nav class="nav" aria-label="Primary">' + "".join(
-        f'<a class="{"active" if href == active else ""}" href="{prefix}{href}">{label}</a>'
+        f'<a class="{"active" if href == active else ""}" {"aria-current=page" if href == active else ""} href="{prefix}{href}">{label}</a>'
         for href, label in NAV_ITEMS
     ) + "</nav>"
 
@@ -366,8 +370,9 @@ const DATA = (() => { try { return JSON.parse(document.getElementById('sf-events
 const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
 const dayDiff = (iso) => { if (!iso) return null; const d = new Date(iso + 'T00:00:00'); return Math.round((d - TODAY) / 86400000); };
 const fmtDay = (iso) => { if (!iso) return ''; const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); };
-const A = (url, text) => '<a href=' + JSON.stringify(url) + ' target=_blank rel=noopener noreferrer>' + text + '</a>';
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }); };
+const H = (text) => String(text || '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const A = (url, text) => '<a href=' + JSON.stringify(H(url)) + ' target=_blank rel="noopener noreferrer">' + H(text) + '</a>';
 const relative = (start, end) => {
   const s = dayDiff(start), e = dayDiff(end || start);
   if (s === null && e === null) return '';
@@ -378,62 +383,48 @@ const relative = (start, end) => {
   if (e !== null) return 'ongoing — ends ' + fmtDay(end);
   return '';
 };
-// 1. Live relative labels + status badges on every table row.
+// Update status and ordering from the visitor's local date, not the build date.
 for (const row of document.querySelectorAll('tbody tr')) {
   const rel = row.querySelector('.rel');
   if (!rel) continue;
   const label = relative(rel.dataset.start, rel.dataset.end);
-  if (label) rel.textContent = label;
+  rel.textContent = label;
+  const status = label === 'past' ? 'completed' : (label === '' ? 'undated' : 'upcoming');
+  row.dataset.status = status;
+  row.dataset.daterank = (status === 'upcoming' ? '0' : status === 'undated' ? '1' : '2') + '-' + (rel.dataset.start || rel.dataset.end || '9999-99-99');
   const badge = row.querySelector('.badge.status-upcoming, .badge.status-completed, .badge.status-undated');
   if (badge) {
-    const isPast = label === 'past';
-    const isOngoing = label.indexOf('ongoing') === 0;
-    badge.textContent = isPast ? 'Completed' : (isOngoing ? 'Ongoing now' : (label === '' ? badge.textContent : 'Upcoming'));
-    badge.className = 'badge ' + (isPast ? 'status-completed' : (label === '' ? 'status-undated' : 'status-upcoming'));
+    badge.textContent = status === 'completed' ? 'Completed' : status === 'undated' ? 'Date not published'
+      : label.startsWith('ongoing') ? 'Ongoing now' : 'Upcoming';
+    badge.className = 'badge status-' + status;
   }
 }
-// 2. Executive summary computed against the visitor's real current date.
-const nextUp = document.getElementById('next-up');
-if (nextUp && DATA.length) {
-  const endOf = (r) => r.end || r.start;
-  const upcoming = DATA.filter((r) => { const e = endOf(r); return e && dayDiff(e) >= 0; });
-  const startsSoon = upcoming.filter((r) => { const s = dayDiff(r.start); return s === null || s >= 0; })
-    .sort((a, b) => (a.start || '9999').localeCompare(b.start || '9999'));
-  const ongoing = upcoming.filter((r) => { const s = dayDiff(r.start); return s !== null && s < 0; })
-    .sort((a, b) => (a.end || '').localeCompare(b.end || ''));
-  const horizons = [7, 30, 90].map((h) => startsSoon.filter((r) => {
-    const s = dayDiff(r.start); return s !== null && s >= 0 && s <= h;
-  }).length);
-  const strip = document.getElementById('today-strip');
-  if (strip) {
-    strip.innerHTML = '<span class="today-pill">Today: ' + TODAY.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + '</span>'
-      + '<span class="today-pill">Starting in 7 days: ' + horizons[0] + '</span>'
-      + '<span class="today-pill">Starting in 30 days: ' + horizons[1] + '</span>'
-      + '<span class="today-pill">Starting in 90 days: ' + horizons[2] + '</span>'
-      + '<span class="today-pill">Running now: ' + ongoing.length + '</span>';
-  }
-  const costBadge = (r) => r.cost_class === 'free' ? '<span class="cost cost-free">Free</span>'
-    : (r.cost_class === 'mixed' ? '<span class="cost cost-mixed">Free or partly free</span>'
-    : (r.cost_class === 'paid' ? '<span class="cost cost-paid">Paid / ticketed</span>'
-    : '<span class="cost cost-unknown">Cost not stated</span>'));
-  const rowHtml = (r) => {
-    const when = r.start ? fmtDay(r.start) : (r.end ? fmtDay(r.end) : '');
-    const rel = relative(r.start, r.end);
-    return '<li><span class="when">' + when + (rel ? '<small>' + rel + '</small>' : '') + '</span>'
-      + '<span class="what">' + A(r.source_url, r.name)
-      + '<span class="meta">' + r.category + ' · ' + r.bucket_label + ' · ' + r.location + '</span>'
-      + '<span class="meta">' + costBadge(r) + '</span></span></li>';
-  };
-  const soon = startsSoon.slice(0, 10).concat(ongoing.slice(0, 3));
-  nextUp.innerHTML = soon.length ? soon.map(rowHtml).join('')
-    : '<li><span class="what">No dated events are currently listed as upcoming on this snapshot.</span></li>';
-  const freeList = document.getElementById('free-upcoming');
-  if (freeList) {
-    const isFree = (r) => r.cost_class === 'free' || r.cost_class === 'mixed';
-    const freeSoon = startsSoon.filter(isFree).slice(0, 12);
-    freeList.innerHTML = freeSoon.length ? freeSoon.map(rowHtml).join('')
-      : '<li><span class="what">No free events are currently listed as upcoming on this snapshot.</span></li>';
-  }
+// The executive summary is strictly free AND upcoming; undated traditions are not future dates.
+const freeDated = DATA.filter((r) => r.cost_class === 'free' && (r.end || r.start) && dayDiff(r.end || r.start) >= 0);
+const startsSoon = freeDated.filter((r) => dayDiff(r.start) >= 0)
+  .sort((a, b) => a.start.localeCompare(b.start) || a.name.localeCompare(b.name));
+const ongoing = freeDated.filter((r) => dayDiff(r.start) < 0)
+  .sort((a, b) => (a.end || '').localeCompare(b.end || '') || a.name.localeCompare(b.name));
+const strip = document.getElementById('today-strip');
+if (strip) {
+  const horizons = [7, 30, 90].map((h) => startsSoon.filter((r) => dayDiff(r.start) <= h).length);
+  strip.innerHTML = '<span class="today-pill">Today: ' + H(TODAY.toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'})) + '</span>'
+    + '<span class="today-pill">Free starts in 7 days: ' + horizons[0] + '</span>'
+    + '<span class="today-pill">In 30 days: ' + horizons[1] + '</span>'
+    + '<span class="today-pill">In 90 days: ' + horizons[2] + '</span>'
+    + '<span class="today-pill">Free programs ongoing: ' + ongoing.length + '</span>';
+}
+const count = document.getElementById('free-count');
+if (count) count.textContent = freeDated.length;
+const nextUp = document.getElementById('next-up-list');
+if (nextUp) {
+  const rowHtml = (r) => '<li><span class="when">' + H(fmtDay(r.start))
+    + '<small>' + H(relative(r.start, r.end)) + '</small></span><span class="what">'
+    + A(r.source_url, r.name) + '<span class="meta">' + H(r.category) + ' · ' + H(r.bucket_label)
+    + ' · ' + H(r.location) + ' · <span class="cost cost-free">Free</span></span></span></li>';
+  const nearest = startsSoon.slice(0, 10).concat(ongoing.slice(0, 3));
+  nextUp.innerHTML = nearest.length ? nearest.map(rowHtml).join('')
+    : '<li>No confirmed free upcoming dates remain in this snapshot. Check the linked recurring catalog for new announcements.</li>';
 }
 // 3. Search / category / cost filters.
 for (const table of document.querySelectorAll('[data-filter-table]')) {
@@ -452,14 +443,29 @@ for (const table of document.querySelectorAll('[data-filter-table]')) {
       const matchCategory = !category || row.dataset.category === category;
       const matchCost = !costFilter || row.dataset.cost === costFilter;
       const matchWhen = !whenFilter || row.dataset.status === whenFilter;
-      row.hidden = !(matchText && matchCategory && matchCost && matchWhen);
+      const liveMatch = !table.hasAttribute('data-live-upcoming') || row.dataset.status === 'upcoming';
+      row.hidden = !(matchText && matchCategory && matchCost && matchWhen && liveMatch);
     }
   };
+  // Date-first ordering must be recomputed even if the visitor never touches Sort.
+  const tbody = table.tBodies[0];
+  if (tbody) Array.from(tbody.rows).sort((a, b) =>
+    (a.dataset.daterank + '|' + (a.dataset.name || '')).localeCompare(b.dataset.daterank + '|' + (b.dataset.name || ''))
+  ).forEach((row) => tbody.appendChild(row));
+  apply();
+  if (table.hasAttribute('data-live-upcoming')) {
+    const note = table.closest('section')?.querySelector('.live-empty') || table.parentElement.nextElementSibling;
+    const visible = Array.from(table.tBodies[0].rows).filter((row) => !row.hidden).length;
+    if (note?.classList.contains('live-empty')) note.hidden = visible > 0;
+    const focusCount = table.closest('.focus-group')?.querySelector('.focus-count');
+    if (focusCount) focusCount.textContent = visible + ' free upcoming on ' + TODAY.toLocaleDateString();
+    const total = document.querySelector('[data-live-total]');
+    if (total) total.textContent = document.querySelectorAll('table[data-live-upcoming] tbody tr:not([hidden])').length + ' dated free upcoming';
+  }
   input?.addEventListener('input', apply); select?.addEventListener('change', apply);
   cost?.addEventListener('change', apply); when?.addEventListener('change', apply);
   if (sorter) {
     const tbody = table.tBodies[0];
-    const original = Array.from(tbody.rows);
     sorter.addEventListener('change', () => {
       const mode = sorter.value;
       const rows = Array.from(tbody.rows);
@@ -495,10 +501,11 @@ def page(title: str, body: str, active: str, catalog: dict, *, prefix: str = "",
 <header class="site-header"><div class="shell">
   <p class="eyebrow">Official-source catalog · {esc(catalog['as_of'])}</p>
   <h1>San Francisco Events</h1>
-  <p class="lede">City and County of San Francisco only. Lists are ordered by date with upcoming events first, every row shows what it costs to attend, and every row links to the official source used for verification.</p>
+  <p class="lede">City and County of San Francisco only. Free upcoming events first. Other admission types, past editions and research records are separated and clearly labeled; every event table row links its source.</p>
 </div></header>
 <main id="content" class="shell main">
 {nav(active, prefix)}
+<noscript><p class="notice">Dates on this no-JavaScript view are a snapshot as of {esc(catalog["as_of"])}. Some may have passed; confirm with the linked organizer before attending.</p></noscript>
 {body}
 </main>
 <footer class="site-footer"><div class="shell">
@@ -619,7 +626,7 @@ def embed_data(published: list[dict]) -> str:
 def write_csv(events: list[dict]) -> None:
     fields = [
         "id", "name", "bucket", "cadence", "category", "date_text", "start_date", "end_date",
-        "time_text", "location", "organizer", "admission", "cost_class", "source_label", "source_url",
+        "time_text", "location", "organizer", "admission", "admission_source_url", "cost_class", "source_label", "source_url",
         "source_authority", "status", "review_reason", "notes",
     ]
     with (ROOT / "data" / "events.csv").open("w", newline="", encoding="utf-8") as handle:
@@ -668,10 +675,46 @@ def build() -> None:
         key=lambda event: (event.get("end_date") or "9999-99-99", event.get("name", "").lower()),
     )
     fallback_next_up = upcoming_soon[:10] + upcoming_ongoing[:3]
-    free_rows = [
-        event for event in published
-        if cost_class(event.get("admission", "")) in {"free", "mixed"}
-    ]
+    # Only dated, still-current, unambiguously $0-admission rows enter the main view.
+    # An undated weekly cadence is not a confirmed occurrence on a particular day.
+    free_upcoming = sorted(
+        (event for event in published if cost_class(event.get("admission", "")) == "free"
+         and event_status(event, as_of) == "upcoming"),
+        key=lambda event: sort_key(event, as_of),
+    )
+    paid_rows = [event for event in all_events if cost_class(event.get("admission", "")) == "paid"]
+    mixed_rows = [event for event in all_events if cost_class(event.get("admission", "")) == "mixed"]
+
+    def focus_group(event: dict) -> str:
+        # Bhangra & Beats is explicitly described as music by its linked organizer.
+        if event["category"] == "Music & performing arts" or event["id"] == "bhangra-beats-night-market-2026":
+            return "Music"
+        if event["category"] == "Technology, AI & gaming":
+            name = event["name"].lower()
+            if "game" in name or "devs" in name:
+                return "Gaming"
+            if "ai" in name or "artificial intelligence" in name:
+                return "AI"
+        return "Everything else"
+
+    def focus_tables(events: list[dict], *, key_prefix: str) -> str:
+        blocks = []
+        for key, heading in (("Gaming", "Gaming"), ("Music", "Music"),
+                             ("AI", "AI"), ("Everything else", "Everything else")):
+            group = [event for event in events if focus_group(event) == key]
+            slug = slugify(key)
+            table = table_with_filter_rows(group, key=key_prefix + slug, as_of=as_of,
+                                           include_bucket=True, with_cost=False,
+                                           with_when=False, with_sort=False)
+            table = table.replace('<table data-filter-table', '<table data-live-upcoming data-filter-table', 1)
+            blocks.append(f'<section class="focus-group" aria-labelledby="{key_prefix}{slug}">'
+                          f'<div class="section-head"><h3 id="{key_prefix}{slug}">{heading}</h3>'
+                          f'<p class="focus-count">{len(group)} confirmed free upcoming as of {esc(catalog["as_of"])}</p></div>'
+                          + (table + '<p class="notice live-empty" hidden>No confirmed free upcoming dates remain in this snapshot.</p>' if group else '<p class="notice">No dated, free upcoming event in this focus area is confirmed in this snapshot. '
+                             'Paid or cost-unknown events are not presented as free.</p>')
+                          + '</section>')
+        return "\n".join(blocks)
+
 
     cadence_order = ("weekly", "monthly", "seasonal", "annual")
     cadence_summary = ", ".join(
@@ -705,163 +748,103 @@ def build() -> None:
         for category in categories
     )
 
+    fallback_free = sorted(
+        free_upcoming, key=lambda event: (event.get("start_date") < catalog["as_of"],
+                                         event.get("start_date") if event.get("start_date") >= catalog["as_of"]
+                                         else event.get("end_date"), event["name"])
+    )[:10]
     home = f"""
 <section class="hero">
   <div class="panel">
-    <p class="eyebrow" style="color:#0e766e">Snapshot, not an exhaustive calendar</p>
-    <h2>A source-audited city events catalog</h2>
-    <p>Every list is ordered by date with upcoming events first, and every row shows what it costs to attend.
-    Regularly occurring events (weekly, monthly, seasonal, annual) are kept separate from dated special events.
-    Each row carries its own official source link and the source type. Uncertain, cancelled, multi-city and
-    outside-city items are kept on <a href="flagged.html">Flagged for Review</a> instead of being normalised away.</p>
-    <p><a href="upcoming.html"><strong>Browse everything by date →</strong></a> &nbsp;
-       <a href="free.html"><strong>Browse free to attend →</strong></a></p>
+    <p class="eyebrow" style="color:#0e766e">SF only · source-audited snapshot · {esc(catalog['as_of'])}</p>
+    <h2>Find your next free event</h2>
+    <p>Only events with a source-confirmed <strong>free admission</strong> and a confirmed date that has not passed appear below. Dates, locations and costs are linked to the publisher for your own check. No price, partly free, or paid? Those are <em>not</em> in this main list.</p>
+    <p><a href="free.html"><strong>Browse free upcoming by focus →</strong></a> &nbsp;·&nbsp;
+       <a href="paid.html">Paid &amp; partly free →</a> &nbsp;·&nbsp;
+       <a href="flagged.html">Unverified costs →</a></p>
   </div>
-  <aside class="panel snapshot"><strong>{len(published)}</strong><span>published city-only rows</span><br>
-  <small>{len(upcoming)} upcoming as of {esc(catalog['as_of'])}; {len(review)} items held for review.</small></aside>
+  <aside class="panel snapshot"><strong id="free-count">{len(free_upcoming)}</strong><span>dated free upcoming events</span><br>
+  <small>As of {esc(catalog['as_of'])}; refreshed in your browser. Not an exhaustive city calendar.</small></aside>
 </section>
-
-<section aria-labelledby="next-up">
-  <div class="section-head"><h2 id="next-up">Executive summary — next up</h2>
-  <p>The ten closest dated events to today, recalculated in your browser from the same source-verified data.</p></div>
-  <div class="today-strip" id="today-strip"><span class="today-pill">Loading today’s dates…</span></div>
-  <div class="panel"><ul class="nextup" id="next-up"><li><span class="what">Loading…</span></li></ul></div>
-  <noscript><div class="panel"><p><strong>Next up as of the {esc(catalog['as_of'])} audit date:</strong></p>
-    <ul class="nextup">{''.join(
-        f'<li><span class="when">{esc(event.get("date_text", ""))}</span><span class="what">'
-        f'<a href="{esc(event["source_url"])}" target="_blank" rel="noopener noreferrer">{esc(event["name"])}</a>'
-        f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))}</span></span></li>'
-        for event in fallback_next_up
-    )}</ul></div></noscript>
-</section>
-
-<section aria-labelledby="free-upcoming">
-  <div class="section-head"><h2 id="free-upcoming">Free to attend — coming up</h2>
-  <p>Upcoming events whose official source states the event is free (or partly free). More on the
-  <a href="free.html">free events page</a>.</p></div>
-  <div class="panel"><ul class="nextup" id="free-upcoming"><li><span class="what">Loading…</span></li></ul></div>
-  <noscript><div class="panel"><ul class="nextup">{''.join(
+<section aria-labelledby="summary-title">
+  <div class="section-head"><h2 id="summary-title">Executive summary · free events near today</h2>
+  <p>Nearest confirmed free dates first; ongoing programs follow. All entries have publisher links.</p></div>
+  <div class="today-strip" id="today-strip"><span class="today-pill">Snapshot: {esc(catalog['as_of'])}</span></div>
+  <div class="panel"><ul class="nextup" id="next-up-list">{''.join(
       f'<li><span class="when">{esc(event.get("date_text", ""))}</span><span class="what">'
       f'<a href="{esc(event["source_url"])}" target="_blank" rel="noopener noreferrer">{esc(event["name"])}</a>'
-      f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))}</span></span></li>'
-      for event in [e for e in upcoming_soon if cost_class(e.get("admission", "")) in {"free", "mixed"}][:12]
-  )}</ul></div></noscript>
+      f'<span class="meta">{esc(event["category"])} · {esc(event.get("location", ""))} · Free</span></span></li>'
+      for event in fallback_free
+  ) or '<li>No confirmed free upcoming dates in this snapshot.</li>'}</ul></div>
 </section>
-
-<section aria-labelledby="focus-disciplines">
-  <div class="section-head"><h2 id="focus-disciplines">Focus: Free events for Gaming, Music, AI &amp; beyond</h2>
-  <p>Prioritized public access opportunities across the requested focus disciplines in San Francisco.</p></div>
-  <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
-    <div class="card" style="cursor: default;">
-      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🎮 Gaming Focus</span>
-      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">San Francisco hosts premier video game industry and indie developer activations:</p>
-      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
-        <li><strong>Day of the Devs SF Edition</strong>: Free admission celebration of indie games at The Midway.</li>
-        <li><strong>GDC Festival of Gaming</strong>: Global game development conference and industry summit at Moscone Center (March 1–5, 2027).</li>
-      </ul>
-      <p style="margin: 0.8rem 0 0;"><a href="categories/technology-ai-and-gaming.html"><strong>Open Technology, AI &amp; gaming category →</strong></a></p>
-    </div>
-    <div class="card" style="cursor: default;">
-      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🎵 Free Music Focus</span>
-      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">12 verified 100% free music and performing arts traditions across the city:</p>
-      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
-        <li><strong>Hardly Strictly Bluegrass</strong>: Golden Gate Park (100% free, no tickets needed).</li>
-        <li><strong>Stern Grove Festival</strong>: Sigmund Stern Grove (free Sunday concerts by lottery).</li>
-        <li><strong>Fillmore Jazz Festival</strong>: 12-block free live jazz festival over July 4th weekend.</li>
-        <li><strong>Golden Gate Park Band</strong>: 25 free Sunday concerts at the Bandshell.</li>
-        <li><strong>YBG Festival</strong>: 6-month free outdoor performing arts series in Yerba Buena Gardens.</li>
-      </ul>
-      <p style="margin: 0.8rem 0 0;"><a href="categories/music-and-performing-arts.html"><strong>Open Music &amp; performing arts category →</strong></a></p>
-    </div>
-    <div class="card" style="cursor: default;">
-      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🤖 AI &amp; Cutting-Edge Tech</span>
-      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">Major artificial intelligence and developer summits headquartered in San Francisco:</p>
-      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
-        <li><strong>Microsoft Ignite</strong>: Enterprise AI and Copilot flagship at Moscone Center.</li>
-        <li><strong>AI Engineer Code Summit &amp; World's Fair</strong>: LLM and AI engineering conferences.</li>
-        <li><strong>Cloudflare Connect &amp; Current SF</strong>: Workers AI and real-time streaming data.</li>
-        <li><strong>TechCrunch Disrupt 2026</strong>: Premier AI startup conference and Battlefield.</li>
-      </ul>
-      <p style="margin: 0.8rem 0 0;"><a href="categories/technology-ai-and-gaming.html"><strong>View all AI &amp; tech events →</strong></a></p>
-    </div>
-    <div class="card" style="cursor: default;">
-      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🌟 Everything Else After</span>
-      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">Free civic traditions, parades, night markets, and museum days:</p>
-      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
-        <li><strong>de Young &amp; Legion of Honor</strong>: Free Saturdays for Bay Area residents &amp; Free First Tuesdays.</li>
-        <li><strong>SF Pride &amp; Chinese New Year Parades</strong>: Free public viewing along historic routes.</li>
-        <li><strong>Downtown First Thursdays &amp; Off the Grid</strong>: Free entry street parties and night markets.</li>
-      </ul>
-      <p style="margin: 0.8rem 0 0;"><a href="free.html"><strong>Browse all 56 free / partly-free events →</strong></a></p>
-    </div>
-  </div>
+<section aria-labelledby="free-table-title">
+  <div class="section-head"><h2 id="free-table-title">Free upcoming · by focus</h2>
+  <p>Gaming, music and AI first; everything else after. Each table row links its official source.</p></div>
+  <nav class="focus-links" aria-label="Jump to free event focus">
+    <a href="#home-gaming">Gaming</a><a href="#home-music">Music</a>
+    <a href="#home-ai">AI</a><a href="#home-everything-else">Everything else</a>
+  </nav>
+  {focus_tables(free_upcoming, key_prefix='home-')}
 </section>
-
-<section aria-labelledby="at-a-glance">
-  <div class="section-head"><h2 id="at-a-glance">At a glance</h2><p>Counts are derived directly from the verified dataset.</p></div>
+<section aria-labelledby="explore-title">
+  <div class="section-head"><h2 id="explore-title">Explore the audited catalog</h2>
+  <p>These secondary views include older editions and non-free admission; they are not free-event recommendations.</p></div>
   <div class="cards">
-    <a class="card" href="upcoming.html"><span class="metric">{len(upcoming)}</span><span class="card-label">Upcoming</span><span class="card-note">Dated events not yet past, nearest first</span></a>
-    <a class="card" href="free.html"><span class="metric">{cost_counts['free'] + cost_counts['mixed']}</span><span class="card-label">Free to attend</span><span class="card-note">Source states free or partly free</span></a>
-    <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Regularly occurring</span><span class="card-note">Weekly, monthly, seasonal, and annual traditions</span></a>
-    <a class="card" href="special.html"><span class="metric">{len(special)}</span><span class="card-label">Special events</span><span class="card-note">Dated programs and one-off conferences</span></a>
-    <a class="card" href="categories.html"><span class="metric">{len(categories)}</span><span class="card-label">Categories</span><span class="card-note">Each has its own table page</span></a>
-    <a class="card" href="flagged.html"><span class="metric">{len(review)}</span><span class="card-label">Flagged for review</span><span class="card-note">Never mixed into city-only results</span></a>
+    <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Recurring</span><span class="card-note">Weekly, monthly, seasonal, annual</span></a>
+    <a class="card" href="special.html"><span class="metric">{len(special)}</span><span class="card-label">Special</span><span class="card-note">Dated one-offs and programs</span></a>
+    <a class="card" href="categories.html"><span class="metric">{len(categories)}</span><span class="card-label">Categories</span><span class="card-note">Audited rows by subject</span></a>
+    <a class="card" href="all-events.html"><span class="metric">{len(published)}</span><span class="card-label">All source-linked rows</span><span class="card-note">Including past and non-free</span></a>
+    <a class="card" href="flagged.html"><span class="metric">{len(review)}</span><span class="card-label">Flagged for Review</span><span class="card-note">Plus costs not confirmed</span></a>
   </div>
 </section>
-
-<section aria-labelledby="category-summary">
-  <div class="section-head"><h2 id="category-summary">Browse by category</h2><p>Each card opens a source-linked category table.</p></div>
-  <div class="cards">{category_cards}</div>
-</section>
-
-<section class="panel" aria-labelledby="findings">
-  <h2 id="findings">What this catalog supports</h2>
-  <ul class="analysis-list">
-    <li><strong>{len(upcoming)}</strong> of the <strong>{len(published)}</strong> published rows are still upcoming as of
-        {esc(catalog['as_of'])}; the rest are completed editions kept because the brief asks for the full list.</li>
-    <li>Cost labelling: {cost_summary}. “Not stated” means the linked official page published no price —
-        it never means free.</li>
-    <li>{cadence_summary} entries make up the regularly occurring list; it is not limited to weekly events.</li>
-    <li>{top_categories} are the largest documented categories in this audit snapshot (computed from the dataset, listed largest first).</li>
-    <li>The published rows link to {authority_summary} sources. This is an audit of stated sources, not an assertion
-        that it finds every event in the city.</li>
-  </ul>
-</section>
-
-<section class="notice"><strong>Planning note.</strong> Dates and operational details change. Use the source link in the row as
-the final check before attending. An em dash means the linked source did not state that optional field in the captured audit;
-essential gaps go to <a href="flagged.html">Flagged for Review</a>.</section>
+<section class="panel" aria-labelledby="findings"><h2 id="findings">What the evidence shows</h2>
+<p>Among {len(published)} audited city-only rows, {len(free_upcoming)} have confirmed free admission and a dated occurrence still current as of {esc(catalog['as_of'])}. Other admission classifications: {cost_summary}. A free fundraising minimum does not establish free entry; any unknown price is treated as unverified.</p>
+<p>Recurring records: {cadence_summary}. Largest audited categories: {top_categories}. Source types: {authority_summary}.</p>
+<p>This is a limited snapshot, <strong>not every San Francisco event</strong>. Check the linked publisher immediately before visiting. Weekly programs without a dated occurrence remain in the <a href="recurring.html">recurring catalog</a>, not the upcoming list.</p></section>
 """
     (ROOT / "index.html").write_text(
         page("Dashboard", home, "index.html", catalog, data_block=data_block), encoding="utf-8"
     )
 
-    # --- upcoming: everything, ordered by date with upcoming first ---------
+    # --- free dated upcoming is the primary view; paid is isolated --------
     upcoming_body = f"""
-<section class="section-head"><div><h2>All events by date</h2>
-<p>Every published city-only row, ordered with upcoming dates first and the nearest date at the top.
-Rows that are already past are pushed to the bottom and labelled <em>Completed</em>.</p></div>
-<p>{len(all_events)} verified rows</p></section>
-{filter_controls(categories, key='upcoming')}
-{table_with_filter_rows(all_events, key='upcoming', as_of=as_of, include_bucket=True)}
+<section class="section-head"><div><h2>Upcoming free events · chronological</h2>
+<p>Only confirmed free admission and confirmed, not-yet-past dates as of {esc(catalog['as_of'])}.
+No paid, partly free, unstated cost, undated tradition or past edition appears here. This snapshot
+is rechecked against your local date in the browser; consult sources before travelling.</p></div>
+<p data-live-total>{len(free_upcoming)} dated rows as of {esc(catalog["as_of"])}</p></section>
+{table_with_filter_rows(free_upcoming, key='upcoming', as_of=as_of, include_bucket=True, with_cost=False, with_when=False, with_sort=False).replace('<table data-filter-table', '<table data-live-upcoming data-filter-table', 1)}
+<p class="notice live-empty" hidden>No confirmed free upcoming dates remain in this snapshot.</p>
 """
     (ROOT / "upcoming.html").write_text(
-        page("Upcoming by date", upcoming_body, "upcoming.html", catalog, data_block=data_block),
-        encoding="utf-8",
+        page("Upcoming free by date", upcoming_body, "upcoming.html", catalog, data_block=data_block), encoding="utf-8"
     )
-
-    # --- free -------------------------------------------------------------
     free_body = f"""
-<section class="section-head"><div><h2>Free to attend</h2>
-<p>Published rows whose official source states the event is free, or free for part of the programme.
-Rows where the source published no price are not listed here — a blank cost is never treated as free.
-The full list of rows with an unstated cost is on <a href="flagged.html">Flagged for Review</a>.</p></div>
-<p>{len(free_rows)} rows</p></section>
-{filter_controls(categories, key='free')}
-{table_with_filter_rows(free_rows, key='free', as_of=as_of, include_bucket=True)}
+<section class="section-head"><div><h2>Free upcoming · by focus</h2>
+<p>Only dated events still current and <strong>confirmed free</strong> by the linked publisher. Gaming,
+music and AI appear first, then everything else. No confirmed free upcoming gaming or AI date? We say so
+rather than treat a paid conference as free. Other free traditions without a confirmed dated occurrence
+are listed in <a href="recurring.html">recurring events</a>.</p></div><p data-live-total>{len(free_upcoming)} dated rows as of {esc(catalog["as_of"])}</p></section>
+<nav class="focus-links" aria-label="Jump to free event focus"><a href="#free-gaming">Gaming</a>
+<a href="#free-music">Music</a><a href="#free-ai">AI</a><a href="#free-everything-else">Everything else</a></nav>
+{focus_tables(free_upcoming, key_prefix='free-')}
 """
     (ROOT / "free.html").write_text(
-        page("Free to attend", free_body, "free.html", catalog, data_block=data_block), encoding="utf-8"
+        page("Free upcoming by focus", free_body, "free.html", catalog, data_block=data_block), encoding="utf-8"
+    )
+    paid_body = f"""
+<section class="section-head"><div><h2>Paid &amp; partly free · separate catalog</h2>
+<p>These rows are <strong>not</strong> in the free upcoming lists. A ticket, price,
+or a free portion alongside paid options is labeled in its source-stated wording. Completed editions
+remain for historical reference. For unknown prices see <a href="flagged.html">Flagged for Review</a>.</p></div>
+<p>{len(paid_rows)} paid · {len(mixed_rows)} partly free</p></section>
+<section class="section-head"><h3>Paid / ticketed</h3></section>
+{table_with_filter_rows(paid_rows, key='paid', as_of=as_of, include_bucket=True, with_cost=False, with_when=False)}
+<section class="section-head"><h3>Partly free / conditional / suggested contribution</h3></section>
+{table_with_filter_rows(mixed_rows, key='mixed', as_of=as_of, include_bucket=True, with_cost=False, with_when=False)}
+"""
+    (ROOT / "paid.html").write_text(
+        page("Paid & partly free", paid_body, "paid.html", catalog, data_block=data_block), encoding="utf-8"
     )
 
     recurring_body = f"""
@@ -955,9 +938,9 @@ blank when not confirmed; nothing below is silently promoted into the catalog.</
 <p>Corrections applied to published rows, source-availability problems, and residual discrepancies that merit manual
 review. Each finding links the sources used.</p></div><p>{len(flags)} findings</p></section>
 {flags_table(flags)}
-<section class="section-head"><div><h2>Cost not stated in the linked source</h2>
-<p>The brief asks that every row state what it costs to attend. Where the official page published no price, the cost
-cell reads “Not stated” rather than being filled with an assumption. Every such row is listed here with its source
+<section class="section-head"><div><h2>Admission cost not established by the linked source</h2>
+<p>The brief asks that every row state what it costs to attend. Where the official page did not establish a price, the cost
+cell reads “Not stated” rather than being filled with an assumption. A waived fundraising minimum is not proof of free entry. Every such row is listed here with its source
 link so it can be checked by hand. Blank never means free.</p></div>
 <p>{sum(1 for event in published if cost_class(event.get('admission', '')) == 'not-stated')} rows</p></section>
 {cost_not_stated_table(published)}
@@ -972,23 +955,23 @@ link so it can be checked by hand. Blank never means free.</p></div>
 <section class="panel"><h3>Publish rule</h3><ol>
 <li>Each active row needs a title, source-stated date/cadence, San Francisco city location, organizer, and HTTPS source link.</li>
 <li>Accepted sources are official organizers, official venues, government sources, and clearly labeled trusted civic sources. The source type is visible in every row.</li>
-<li>Optional time and admission fields are not inferred. An em dash means the captured source did not state that optional value; “Not stated” in the Cost column means no price was published.</li>
+<li>Optional time and admission fields are not inferred. An em dash means the captured source did not state that optional value; “Not stated” in the Cost column means admission cost is not confirmed.</li>
 <li>Multi-city programs, cancelled events, outside-city events, and records missing essential evidence are not added to public tables. They stay on <a href="flagged.html">Flagged for Review</a> with a source and explanation.</li>
 </ol></section>
 <section class="panel"><h3>How date ordering and the executive summary work</h3><ul class="analysis-list">
-<li>Every list is generated with upcoming rows first, ordered by start date, with completed editions pushed to the bottom and labelled <em>Completed</em>.</li>
+<li>Primary dashboard, Upcoming and Free pages contain only dated confirmed-free rows still current as of the audit. Secondary research views include completed and non-free rows; those tables place upcoming first and completed editions last.</li>
 <li>A small script re-computes each row's status against the visitor's actual current date, so the "Upcoming" / "Completed" badge and the "in N days" label stay correct after the static build date.</li>
-<li>The dashboard's “Next up” panel is computed from the same embedded dataset in the browser: it shows the ten dated events closest to today, plus how many events fall in the next 7, 30 and 90 days. A build-time list is included for readers without JavaScript.</li>
+<li>The dashboard shows only confirmed-free dated events not yet past. Its nearest-events panel and 7/30/90-day counts use the visitor's local date; paid, mixed, unknown cost and undated rows stay out. The no-JavaScript view is explicitly dated to the audit snapshot.</li>
 </ul></section>
 <section class="panel"><h3>How cost is labelled</h3><p>Cost classes are derived only from the admission text that the
-linked official page stated. Nothing is inferred from an event's type.</p>
+linked official page stated. Nothing is inferred from an event's type. A waived fundraising minimum by itself does not establish free entry.</p>
 <div class="legend">
 <span class="cost cost-free">Free</span> the source states no charge
 <span class="cost cost-mixed">Free or partly free</span> some programmes free, others ticketed
-<span class="cost cost-paid">Paid / ticketed</span> the source states a price, pass or registration
-<span class="cost cost-unknown">Not stated</span> the source published no price — <strong>never</strong> treated as free
+<span class="cost cost-paid">Paid / ticketed</span> the source states a charge, ticket sale or paid pass
+<span class="cost cost-unknown">Not stated</span> a free or paid admission price was not confirmed — <strong>never</strong> treated as free
 </div>
-<p>Current split: {cost_summary}. The rows with an unstated cost are listed, with their source links, on the
+<p>Current split: {cost_summary}. The rows without a confirmed cost are listed, with their source links, on the
 <a href="flagged.html">Flagged for Review</a> page.</p></section>
 <section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
 <li>The audit has {len(recurring)} recurring and {len(special)} dated-special verified rows across {len(categories)} categories; {len(upcoming)} of the {len(published)} published rows are still upcoming as of {esc(catalog['as_of'])}.</li>
@@ -1005,13 +988,13 @@ linked official page stated. Nothing is inferred from an event's type.</p>
 <li><a href="https://sfrecpark.org/Calendar.aspx">SF Recreation and Park calendar</a>: park programs and seasonal city events; individual dated listings (for example Scaregrove) become special-event rows.</li>
 </ul>
 <p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
-<section class="panel"><h3>Line-by-line verification</h3><p>Every published and review row is checked against its
-linked official source page, and the current session's pass is logged row by row with quoted source text in
-<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with the earlier full passes in
+<section class="panel"><h3>Line-by-line verification</h3><p>The eight primary free-upcoming rows were rechecked for this session with field-level source evidence in
+<a href="research/review-f65449c5.md">research/review-f65449c5.md</a>. Prior catalog-wide auditing is recorded in
+<a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with earlier passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
 <a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. Values not stated by a source
-were blanked and flagged rather than inferred; dead or moved official links were re-pointed to live pages.</p></section>
+were blanked and flagged rather than inferred. Static link checks do not live-fetch external sites; consult the organizer for changes.</p></section>
 <section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in
 <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is
 <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing

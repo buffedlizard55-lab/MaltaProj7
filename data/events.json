@@ -1044,6 +1044,7 @@
    "location": "Japantown, San Francisco",
    "organizer": "Northern California Cherry Blossom Festival",
    "admission": "Free",
+   "admission_source_url": "https://sfcherryblossom.org/about/",
    "source_url": "https://sfcherryblossom.org/",
    "source_label": "Cherry Blossom Festival official site",
    "source_authority": "Official organizer",
@@ -1484,6 +1485,7 @@
    "location": "Yerba Buena Gardens, San Francisco",
    "organizer": "YBG Festival",
    "admission": "Free",
+   "admission_source_url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf",
    "source_url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals",
    "source_label": "SF Travel press release — 2026 live music lineup (June 11, 2026)",
    "source_authority": "Trusted civic source",
@@ -1824,8 +1826,8 @@
    "location": "Sigmund Stern Grove (19th Avenue & Sloat Boulevard), San Francisco",
    "organizer": "San Francisco Recreation and Park Department",
    "admission": "Free",
-   "source_url": "https://sfrecpark.org/Calendar.aspx",
-   "source_label": "SF Recreation and Park calendar",
+   "source_url": "https://sfrecpark.org/Calendar.aspx?EID=10822",
+   "source_label": "SF Recreation & Parks — Scaregrove 2026 event details",
    "source_authority": "Government source",
    "status": "verified",
    "review_reason": "",
@@ -3854,6 +3856,27 @@
     }
    ],
    "disposition": "Cost structure published; individual prices left blank. Flagged for review, nonblocking."
+  },
+  {
+   "id": "flag-ybg-2026-source-availability",
+   "event_id": "ybg-festival-2026",
+   "event": "Yerba Buena Gardens Festival (2026 season)",
+   "issue": "The linked SF Travel page (the city's official destination-marketing organization) reports a free festival season May 9–November 13, 2026. The organizer's homepage returned only a reCAPTCHA response during this review, so the individual remaining performance schedule could not be independently checked against the organizer. The city Arts Commission describes its programs as admission-free, but does not enumerate specific 2026 show dates. A season end date is not a promise of a performance today.",
+   "sources": [
+    {
+     "label": "SF Travel — 2026 live music release (date window and free admission)",
+     "url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals"
+    },
+    {
+     "label": "SF Arts Commission FY26 funding recommendations (free programming)",
+     "url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf"
+    },
+    {
+     "label": "Yerba Buena Gardens Festival — official organizer (schedule inaccessible during review)",
+     "url": "https://ybgfestival.org/"
+    }
+   ],
+   "disposition": "Season-level row retained with trusted civic source and flagged. Re-check individual performances against organizer before visiting; no unsourced individual dates added."
   }
  ]
 }
