@@ -1044,6 +1044,7 @@
    "location": "Japantown, San Francisco",
    "organizer": "Northern California Cherry Blossom Festival",
    "admission": "Free",
+   "admission_source_url": "https://sfcherryblossom.org/about/",
    "source_url": "https://sfcherryblossom.org/",
    "source_label": "Cherry Blossom Festival official site",
    "source_authority": "Official organizer",
@@ -1409,7 +1410,8 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The source confirms four 2026 city-neighborhood events; times and routes vary by neighborhood. The organizer's About page states the programme runs on “car-free spaces for all to enjoy” with “fun, free activities provided by local nonprofits, community groups and small businesses” (basis for the Free cost label — see flag-sunday-streets-free-wording). The October 18 Excelsior finale, 11 a.m.–4 p.m., is also listed by the San Francisco Recreation and Park Department calendar (sfrecpark.org/Calendar.aspx, fetched 2026-10-18) as “Mobile Rec at Sunday Streets … on Mission Street between Avalon Avenue and Geneva Avenue” — see flag-sunday-streets-route-conflict."
+   "notes": "The source confirms four 2026 city-neighborhood events; times and routes vary by neighborhood. The organizer's About page states the programme runs on “car-free spaces for all to enjoy” with “fun, free activities provided by local nonprofits, community groups and small businesses” (basis for the Free cost label — see flag-sunday-streets-free-wording). The October 18 Excelsior finale, 11 a.m.–4 p.m., is also listed by the San Francisco Recreation and Park Department calendar (sfrecpark.org/Calendar.aspx, fetched 2026-10-18) as “Mobile Rec at Sunday Streets … on Mission Street between Avalon Avenue and Geneva Avenue” — see flag-sunday-streets-route-conflict.",
+   "admission_source_url": "https://sundaystreetssf.com/about/"
   },
   {
    "id": "up-your-alley-2026",
@@ -1484,12 +1486,13 @@
    "location": "Yerba Buena Gardens, San Francisco",
    "organizer": "YBG Festival",
    "admission": "Free",
+   "admission_source_url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf",
    "source_url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals",
    "source_label": "SF Travel press release — 2026 live music lineup (June 11, 2026)",
    "source_authority": "Trusted civic source",
    "status": "verified",
    "review_reason": "",
-   "notes": "The festival's own homepage was behind a reCAPTCHA at the 2026-10-18 re-check; SF Travel, the City and County's official destination marketing organization, lists the free 2026 season at Yerba Buena Gardens and is the source of the November 13 season end date (see flag-ybgf-season-end-source). The organizer's own 2026 season press release (https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf) independently confirms the 26th season of “free outdoor music, theater, circus, dance, poetry and children’s programs” opening Saturday, May 9 at 2:00pm with “Over 100+ Free Performances from May to November”. Individual program times are on the festival site."
+   "notes": "The festival's own homepage was behind a reCAPTCHA at the 2026-10-18 re-check; SF Travel, the City and County's official destination marketing organization, lists the free 2026 season at Yerba Buena Gardens and is the source of the November 13 season end date; see flag-ybg-2026-source-availability. The organizer's own 2026 season press release (https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf) independently confirms the 26th season of “free outdoor music, theater, circus, dance, poetry and children’s programs” opening Saturday, May 9 at 2:00pm with “Over 100+ Free Performances from May to November”. Individual program times are on the festival site."
   },
   {
    "id": "agu-annual-meeting-2026",
@@ -1824,8 +1827,8 @@
    "location": "Sigmund Stern Grove (19th Avenue & Sloat Boulevard), San Francisco",
    "organizer": "San Francisco Recreation and Park Department",
    "admission": "Free",
-   "source_url": "https://sfrecpark.org/Calendar.aspx",
-   "source_label": "SF Recreation and Park calendar",
+   "source_url": "https://sfrecpark.org/Calendar.aspx?EID=10822",
+   "source_label": "SF Recreation & Parks — Scaregrove 2026 event details",
    "source_authority": "Government source",
    "status": "verified",
    "review_reason": "",
@@ -3304,6 +3307,7 @@
    "location": "Mission Street between Geneva Avenue and Theresa Street, Excelsior, San Francisco",
    "organizer": "Sunday Streets SF (Livable City) with SFMTA and the City and County of San Francisco",
    "admission": "Free",
+   "admission_source_url": "https://sundaystreetssf.com/about/",
    "source_url": "https://sundaystreetssf.com/sunday-streets-excelsior-2026/",
    "source_label": "Sunday Streets Excelsior 2026 official event page",
    "source_authority": "Official organizer",
@@ -3936,6 +3940,27 @@
    "disposition": "Cost structure published; individual prices left blank. Flagged for review, nonblocking."
   },
   {
+   "id": "flag-ybg-2026-source-availability",
+   "event_id": "ybg-festival-2026",
+   "event": "Yerba Buena Gardens Festival (2026 season)",
+   "issue": "The linked SF Travel page (the city's official destination-marketing organization) reports a free festival season May 9–November 13, 2026. The organizer's homepage returned only a reCAPTCHA response during this review, so the individual remaining performance schedule could not be independently checked against the organizer. The city Arts Commission describes its programs as admission-free, but does not enumerate specific 2026 show dates. A season end date is not a promise of a performance today.",
+   "sources": [
+    {
+     "label": "SF Travel — 2026 live music release (date window and free admission)",
+     "url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals"
+    },
+    {
+     "label": "SF Arts Commission FY26 funding recommendations (free programming)",
+     "url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf"
+    },
+    {
+     "label": "Yerba Buena Gardens Festival — official organizer (schedule inaccessible during review)",
+     "url": "https://ybgfestival.org/"
+    }
+   ],
+   "disposition": "Season-level row retained with trusted civic source and flagged. Re-check individual performances against organizer before visiting; no unsourced individual dates added."
+  },
+  {
    "id": "flag-litcrawl-suggested-donation",
    "event_id": "lit-crawl-sf-2026",
    "event": "Lit Crawl SF",
@@ -3989,23 +4014,6 @@
     }
    ],
    "disposition": "Free label retained with its exact source wording recorded. Nonblocking."
-  },
-  {
-   "id": "flag-ybgf-season-end-source",
-   "event_id": "ybg-festival-2026",
-   "event": "YBG Festival (Yerba Buena Gardens Festival)",
-   "issue": "The published season end date of November 13, 2026 comes from the SF Travel release used as the row's source; the organizer's own 2026 season press release says only that the free season runs “from May to November” and that “NOVEMBER programs to be announced”. The end date is therefore less firmly sourced than the rest of the row.",
-   "sources": [
-    {
-     "label": "SF Travel press release — 2026 live music lineup",
-     "url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals"
-    },
-    {
-     "label": "Yerba Buena Gardens Festival 2026 season press release",
-     "url": "https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf"
-    }
-   ],
-   "disposition": "End date retained with its weaker sourcing documented. Nonblocking."
   }
  ]
 }

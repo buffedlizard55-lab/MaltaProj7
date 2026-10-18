@@ -1,55 +1,91 @@
 # Active coordination — session arena/56415e75-maltaproj7 (2026-10-18)
 
-**Branch constraint:** Arena pins this session to `arena/56415e75-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used (same documented deviation as every prior session in this ledger). All work stays on this branch.
+**Branch constraint:** Arena pins this session to `arena/56415e75-maltaproj7`, so the brief's
+`session-<id>/<task>` branch naming cannot be used (same documented deviation as every prior session
+in this ledger). All work stays on this branch.
 
-**Pre-claim inspection (2026-10-18T10:58Z):** `origin/main` at `68a0516` (merge of PR #26). `gh pr list --state open` → none. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+**Pre-claim inspection (2026-10-18T10:58Z):** `origin/main` at `68a0516` (merge of PR #26), no open
+PRs. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50
+special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG,
+SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
 
-**Live peer detected:** branch `arena/f65449c5-maltaproj7` (commit `9e1b0e3`, 2026-10-18T10:56Z) has claimed **F1** (`build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md`) and **F2** (`research/review-f65449c5.md`). **This session does not touch any file in F1/F2 scope** and will not create `research/review-f65449c5.md`.
+**Concurrent sessions observed and respected:**
+- `arena/f65449c5-maltaproj7` claimed F1 (`build.py`, `assets/style.css`, generated `*.html`,
+  `verify.py`, `README.md`) and later F2 (`data/events.json`, `data/events.csv`,
+  `research/official-source-audit.md`). This session did not touch any file in that scope; that work
+  merged as PRs #27/#28 and was pulled into this branch by merge, not overwritten.
+- `arena/8c40d1c6-maltaproj7` claimed (2026-10-18T~11:00Z) F1 `data/events.json` +
+  `research/verification-8c40d1c6.md`, F2 `build.py`/CSS/pages, F3 `verify.py`, F4 `README.md` +
+  integration. Their claim post-dates this session's pushed claim (10:58Z) and overlaps G1/G2 on
+  `data/events.json`; to keep scopes non-overlapping this session **stops at the data commit**,
+  releases integration (G4) to them, and hands over the row list it already verified so their pass is
+  not duplicated.
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| G1 | Line-by-line official-source verification pass over the published catalog (free gaming / music / AI rows first, then every upcoming row), correcting or blanking any value not confirmable from the linked official publisher | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
-| G2 | Coverage pass: add newly verified **free** SF events (gaming, music, AI first) with official-publisher links; demote/flag anything that cannot be confirmed | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
-| G3 | Analysis & findings register (counts by cost/date/category, irregularities with source links) for the site's findings sections | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `research/findings-56415e75.md` |
-| G4 | Integration (F3): merge peer work, rebuild, re-verify line by line, PR to `main`, merge, confirm Pages deploy, record links | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `COORDINATION.md`, `verify.py` (count guards only), generated `*.html`, `data/events.csv` |
+| G1 | Line-by-line official-source verification of the focus categories (free gaming / music / AI) and every row dated on or after 2026-10-18, plus the 2027 rows most at risk of being projections | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `data/events.json`, `research/verification-56415e75.md` |
+| G2 | Coverage pass: add newly verified **free** SF events with official-publisher links; reject anything not confirmable | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `data/events.json`, `research/patch-56415e75.py` |
+| G3 | Analysis & findings register (cost / date / category counts, irregularities with source links) | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `research/findings-56415e75.md` |
+| G4 | Final integration | **released** — claimed by `arena/8c40d1c6-maltaproj7` (F4) | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `README.md`, `verify.py`, `build.py`, `COORDINATION.md` |
 
 ## Session record — arena/56415e75-maltaproj7 (G1–G3)
 
-- **G1 — Official-source verification (live page reads, 2026-10-18):** re-verified 14 rows against the
-  live official publisher pages — Hardly Strictly Bluegrass, Fillmore Jazz Festival (2026 and 2027
-  editions), Lit Crawl SF, Scaregrove, GDC Festival of Gaming 2027, Day of the Devs SF Edition 2026,
-  SF Pride 2027, Chinese New Year Parade 2027, Italian Heritage Parade 2027, Bay to Breakers 2027,
-  Cherry Blossom Festival 2027, Sunday Streets 2026, YBG Festival 2026. Row-by-row results, the exact
-  official URLs read, and the two corrections applied (Lit Crawl hours/cost wording; GDC pass-rate
-  window whose super-early deadline had already passed) are in `research/verification-56415e75.md`.
-- **G2 — Free-event coverage:** +4 verified rows, all free, all city-only, all with an official
-  publisher link — Sunday Streets Excelsior finale (Oct 18), Afro-Filipino Jazz Project at YBG
-  (Oct 24), Halloween Hoopla at YBG (Oct 31), SF Tech Week SFPL programs (May 9–16). Two candidates
-  were rejected rather than published (Boo at the Zoo — no official admission statement; SFPL branch
-  gaming listings — past/cancelled or no quotable cadence). Reproducible patch:
-  `research/patch-56415e75.py`.
-- **G3 — Findings register:** `research/findings-56415e75.md`. Headline: 51 free + 10 partly free of
-  152 published rows; **74 rows (49%) have no price published by their official source** and are
-  labelled *Cost not stated*, never free; only 2 of the 17 gaming/AI rows are free.
-- **Flags:** +4 (`flag-litcrawl-suggested-donation`, `flag-sunday-streets-route-conflict`,
-  `flag-sunday-streets-free-wording`, `flag-ybgf-season-end-source`) → 38 total. All nonblocking.
+- **G1 — live official-source re-verification (14 rows).** Row-by-row results and the exact URLs read
+  are in `research/verification-56415e75.md`: Hardly Strictly Bluegrass
+  ([FAQ](https://hardlystrictlybluegrass.com/info-faq-2026/)), Fillmore Jazz 2026 + 2027
+  ([organizer](https://www.fillmorejazzfest.com/)), Lit Crawl SF
+  ([litquake.org](https://www.litquake.org/litcrawl) +
+  [official schedule](https://litcrawlsf2026.sched.com/)), Scaregrove
+  ([SF Rec & Park calendar](https://sfrecpark.org/Calendar.aspx)), GDC Festival of Gaming 2027
+  ([passes & pricing](https://gdconf.com/passes-pricing/)), Day of the Devs SF 2026
+  ([organizer](https://www.dayofthedevs.org/events/day-of-the-devs-san-francisco-edition-2026)),
+  SF Pride 2027 ([sfpride.org](https://sfpride.org/)), CNY Parade 2027
+  ([chineseparade.com FAQ](https://chineseparade.com/faq/)), Italian Heritage Parade 2027
+  ([sfitalianheritage.org](https://sfitalianheritage.org/)), Bay to Breakers 2027
+  ([baytobreakers.com](https://www.baytobreakers.com/)), Cherry Blossom 2027
+  ([sfcherryblossom.org](https://sfcherryblossom.org/)), Sunday Streets 2026 + Excelsior finale
+  ([organizer](https://sundaystreetssf.com/sunday-streets-excelsior-2026/)), YBG Festival 2026
+  ([organizer press release PDF](https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf)).
+  Two corrections applied: Lit Crawl hours/cost wording, and the GDC 2027 pass-rate window (the
+  quoted Super Early deadline, Oct 9 2026, had already passed on the audit date).
+- **G2 — coverage.** +4 rows, all free, all city-only, all with an official publisher link: Sunday
+  Streets Excelsior finale (Oct 18), Afro-Filipino Jazz Project at YBG (Oct 24), Halloween Hoopla at
+  YBG (Oct 31), SF Tech Week SFPL programs (May 9–16). Rejected rather than published: *Boo at the
+  Zoo* (no official admission statement) and SFPL branch gaming listings (past/cancelled, or no
+  quotable cadence). Reproducible: `python3 research/patch-56415e75.py`.
+- **G3 — findings.** `research/findings-56415e75.md`: 51 free + 10 partly free of 152 published rows;
+  **74 rows (49%) have no price published by their official source** and stay labelled *Cost not
+  stated*; only 2 of the 17 gaming/AI rows are free.
+- **Flags.** +3 (`flag-litcrawl-suggested-donation`, `flag-sunday-streets-route-conflict`,
+  `flag-sunday-streets-free-wording`). This session dropped its own draft YBG end-date flag because
+  `flag-ybg-2026-source-availability` (merged from `arena/f65449c5-maltaproj7`) already covers YBG
+  sourcing. Register total after merge: **38**.
+- **Merge resolution (this branch).** `data/events.json`: took `origin/main` (peer's
+  `admission_source_url` fields, Scaregrove detail URL and YBG flag all preserved) and re-applied
+  `research/patch-56415e75.py` on top → 168 records, 152 published (100 recurring / 52 special),
+  16 review, 38 flags, no duplicate ids. `COORDINATION.md`: both sessions' sections kept.
 
-### Cross-session request (file required because the files are in F1 scope)
+## Handoff to `arena/8c40d1c6-maltaproj7` (F1–F4)
 
-G1–G3 change `data/events.json` only. `verify.py` and `build.py` are inside the scope claimed by
-`arena/f65449c5-maltaproj7` (F1), so this session did **not** edit them and did **not** commit
-regenerated `*.html` or `data/events.csv` (they were restored to `HEAD` after the local test build).
-The integration step (G4/F3) must therefore:
-
-1. `python3 research/patch-56415e75.py` is already applied in this branch — no need to re-run.
-2. Update the three stale count guards in `verify.py`: published `148 → 152`,
-   recurring/special `98 / 50 → 100 / 52`, flags `34 → 38`.
-3. Run `python3 build.py && python3 verify.py` so generated pages and the CSV match the merged data.
-
-Verified locally on 2026-10-18: with the data patched, `python3 build.py` succeeds
-(`Built 152 published events: 100 recurring, 52 special, 9 categories; 16 review records; 57 upcoming;
-61 free or partly free.`) and `python3 verify.py` fails **only** on those three count guards — all
-source-link, page-count, date-ordering, cost-label and navigation checks pass.
+1. **Do not re-verify the 14 rows listed above** — they were read live on 2026-10-18 and are logged.
+   The remaining published rows (Moscone convention listings, SFMTA travel updates, Presidio Trust
+   programmes, Foodwise markets, PCFMA farmers markets, earlier-2026 street fairs) are the open part
+   of F1.
+2. **Correction to a merged flag:** `flag-ybg-2026-source-availability` records that
+   `ybgfestival.org` returned only a reCAPTCHA. The organizer's own 2026 season press release is
+   directly readable at
+   <https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf> and states "Over 100+ Free
+   Performances from May to November", the May 9, 2:00pm season opener, and the October programmes
+   (Oct 10 Follow the Music, Oct 11 Dance Day, Oct 12 Indigenous Peoples Day, Oct 17 Joe Bataan,
+   Oct 24 Afro-Filipino Jazz Project, Oct 31 Halloween Hoopla). The flag can be narrowed accordingly.
+3. **`verify.py` count guards (F3 scope, this session did not edit them):** published `148 → 152`,
+   recurring/special `98 / 50 → 100 / 52`, flags `35 → 38`.
+4. **Rebuild required (F2/F3 scope):** generated `*.html`, `categories/*.html` and `data/events.csv`
+   on this branch are still the merged `origin/main` copies; run `python3 build.py && python3
+   verify.py` before publishing so pages and CSV match the 152-row dataset. Local result on
+   2026-10-18 with the merged data: `build.py` succeeds (`Built 152 published events: 100 recurring,
+   52 special, 9 categories; 16 review records; 57 upcoming; 61 free or partly free.`) and
+   `verify.py` fails **only** on the three stale count guards above.
 
 ---
 
@@ -59,9 +95,22 @@ source-link, page-count, date-ordering, cost-label and navigation checks pass.
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
-| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `research/review-f65449c5.md`, `COORDINATION.md` |
-| F3 | Final integration PR / merge / Pages deploy verification | **unclaimed** | — | — | `COORDINATION.md` |
+| F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
+| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `data/events.json`, `data/events.csv`, `research/official-source-audit.md`, `research/review-f65449c5.md`, `COORDINATION.md` |
+| F3 | Final integration PR / merge / Pages deploy verification | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+
+## F3 publication record (2026-10-18 UTC)
+
+- Integration pull request [#27](https://github.com/buffedlizard55-lab/MaltaProj7/pull/27) **merged** 2026-10-18T11:04:12Z. Merge commit [`7ea557a`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/7ea557aa1c83287d32b7977733f8a839b62bb1ea).
+- [Pages workflow run 39121748743](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39121748743) completed **successfully** at that merge commit: the `python3 build.py && python3 verify.py` step and deployment both passed. Pages API returned `status: built`; live [Dashboard](https://buffedlizard55-lab.github.io/MaltaProj7/) fetched successfully with the free-only summary and direct source links. No PR checks were configured; local verification and the post-merge deployment workflow passed.
+- Publication irregularities remain nonblocking on [Flagged for Review](https://buffedlizard55-lab.github.io/MaltaProj7/flagged.html), especially the YBG organizer schedule access issue and 80 unconfirmed admission costs. Source evidence and limitations are documented in [research/review-f65449c5.md](research/review-f65449c5.md).
+
+## F1/F2 completion, source verification and review exceptions
+
+- Primary dashboard, chronological Upcoming, and focus-group Free views now contain **only 8 dated upcoming/ongoing confirmed-free rows** as of the 2026-10-18 audit. Browser-side filtering removes expired rows on later dates, recalculates summary counts, and re-sorts archival tables. A distinct Paid & partly free page holds 13 evidence-backed paid and 12 conditional/mixed rows; 80 cost-uncertain records have their source wording on Flagged for Review. Secondary research pages retain the complete 148-row city-only catalog (98 recurring, 50 special) and 16 excluded/review records. 35 field flags in total; no invented next recurrence dates. Local site is phone-friendly and every table row links a publisher.
+- **Sources:** Eight main-row field-by-field checks (dates, city-only locations, admission) with direct organizer/government links are logged in [research/review-f65449c5.md](research/review-f65449c5.md). Highlights: [Litquake](https://www.litquake.org/litcrawl), [SF Rec & Parks event detail](https://sfrecpark.org/Calendar.aspx?EID=10822), [Bhangra & Beats](https://www.bhangraandbeats.com/), [Foodwise](https://foodwise.org/events/pop-ups-on-the-plaza-black-holiday-market/), [Cherry Blossom dates](https://sfcherryblossom.org/) + [admission](https://sfcherryblossom.org/about/), [Fillmore Jazz](https://fillmorejazzfest.com/), [Italian Heritage parade](https://sfitalianheritage.org/parade/). [YBG dates and free season](https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals) (trusted civic destination marketer) and [SF Arts Commission funding evidence](https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf) (government). [AIDS Walk FAQ](https://sf.aidswalk.net/FAQ) clarified that a waived fundraising minimum is **not** evidence of free entry; registration/invitation wording likewise does not prove a price.
+- **Irregularities for review, nonblocking:** Organizer [YBG festival schedule](https://ybgfestival.org/) returned reCAPTCHA, so the dated free *season* is retained with civic/government evidence but no individual show dates asserted; published as `flag-ybg-2026-source-availability` on Flagged for Review. Cost remains unconfirmed for 80 rows including registration-only entries; these are not in the free or paid lists. Previous flags remain visible. The catalog is a bounded snapshot, never a guarantee of every SF event.
+- **Verification:** `python3 build.py && python3 verify.py` passed; `git diff --check` passed. Verifier compares actual table-row source URL multisets/cost classes/status to the exact data sets, checks no duplicate IDs and all local links. Node `--check` passed. Browser-DOM runtime check across all generated pages with simulated dates Oct 18/Nov 1 2026, Jan 1 2027, Jan 1 2028 verified visible free row counts 8/6/3/0, no paid primary rows and working empty states. Local HTTP served index and paid pages with HTTP 200. External links were *not* machine-crawled en masse this session; prior audit logs remain in `research/` and the focused row check is documented.
 
 ---
 

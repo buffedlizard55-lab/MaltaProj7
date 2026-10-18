@@ -22,22 +22,7 @@ DATA_PATH = ROOT / "data" / "events.json"
 ERRORS: list[str] = []
 
 sys.path.insert(0, str(ROOT))
-try:  # the cost classifier lives with the generator so both agree on the policy
-    from build import cost_class
-except Exception:  # pragma: no cover - standalone fallback
-    def cost_class(admission: str) -> str:
-        text = (admission or "").strip().lower()
-        if not text:
-            return "not-stated"
-        has_free = any(h in text for h in ("free", "no-cost", "no cost",
-                                           "no fundraising minimum", "suggested"))
-        if has_free:
-            if "$" in text or any(h in text for h in ("ticketed", "tickets sold",
-                                                       "reserved", "seating tickets",
-                                                       "hospitality packages")):
-                return "mixed"
-            return "free"
-        return "paid"
+from build import cost_class, event_status
 
 
 def error(message: str) -> None:
@@ -97,6 +82,8 @@ def main() -> int:
         ids.add(event_id)
         if not str(event.get("source_url", "")).startswith("https://"):
             error(f"{event_id}: source_url must be HTTPS")
+        if event.get("admission_source_url") and not str(event["admission_source_url"]).startswith("https://"):
+            error(f"{event_id}: admission_source_url must be HTTPS")
         if event.get("status") == "verified":
             missing = sorted(field for field in required_published if not event.get(field))
             if missing:
@@ -144,15 +131,15 @@ def main() -> int:
     # Street Fair, Potrero Hill Festival). New "Technology, AI & gaming"
     # category created by moving 14 clearly tech/AI/gaming rows out of
     # "Professional & academic". Total: 148 published (98 recurring + 50
-    # special), 16 review records, 34 field-level flags, 9 categories.
+    # special), 16 review records, 35 field-level flags, 9 categories.
     if len(published) != 148:
         error(f"expected 148 published rows, found {len(published)}")
     if len(recurring) != 98 or len(special) != 50:
         error(f"expected 98 recurring / 50 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 34:
-        error(f"expected 34 field-level flags, found {len(flags)}")
+    if len(flags) != 35:
+        error(f"expected 35 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -238,7 +225,7 @@ def main() -> int:
         error("catalog geography statement does not enforce city-only scope")
 
     root_pages = [
-        ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html",
+        ROOT / "index.html", ROOT / "upcoming.html", ROOT / "free.html", ROOT / "paid.html",
         ROOT / "recurring.html", ROOT / "special.html",
         ROOT / "annual-special.html", ROOT / "categories.html", ROOT / "all-events.html",
         ROOT / "flagged.html", ROOT / "method.html",
@@ -260,14 +247,17 @@ def main() -> int:
     # Each generated public/review table has exactly one source link for each row.
     # flagged.html also carries one link per field-level flag source.
     flag_source_links = sum(len(flag.get("sources", [])) for flag in flags)
-    cost_not_stated = [event for event in published if not str(event.get("admission") or "").strip()]
-    free_rows = [
-        event for event in published
-        if cost_class(str(event.get("admission") or "")) in {"free", "mixed"}
-    ]
+    cost_not_stated = [event for event in published if cost_class(event.get("admission", "")) == "not-stated"]
+    as_of = date.fromisoformat(catalog["as_of"])
+    free_rows = [event for event in published if cost_class(event.get("admission", "")) == "free"
+                 and event_status(event, as_of) == "upcoming"]
+    paid_rows = [event for event in published if cost_class(event.get("admission", "")) == "paid"]
+    mixed_rows = [event for event in published if cost_class(event.get("admission", "")) == "mixed"]
     expected_counts = {
-        ROOT / "upcoming.html": len(published),
+        ROOT / "index.html": len(free_rows),
+        ROOT / "upcoming.html": len(free_rows),
         ROOT / "free.html": len(free_rows),
+        ROOT / "paid.html": len(paid_rows) + len(mixed_rows),
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
@@ -286,6 +276,9 @@ def main() -> int:
             error(f"all-events.html missing source URL for {event['id']}")
         if html.escape(event["name"], quote=True) not in all_html:
             error(f"all-events.html missing row name for {event['id']}")
+    for event in published:
+        if event.get("admission_source_url") and html.escape(event["admission_source_url"], quote=True) not in all_html:
+            error(f"all-events.html missing admission evidence for {event['id']}")
     for event in review:
         if html.escape(event["source_url"], quote=True) not in flagged_html:
             error(f"flagged.html missing source URL for {event['id']}")
@@ -321,45 +314,51 @@ def main() -> int:
     upcoming_html = read(ROOT / "upcoming.html")
     free_html = read(ROOT / "free.html")
     method_html = read(ROOT / "method.html")
-    for event in published:
-        for label, page_html in (("upcoming.html", upcoming_html), ("all-events.html", all_html)):
-            if html.escape(event["name"], quote=True) not in page_html:
-                error(f"{label} missing row name for {event['id']}")
-            if html.escape(event["source_url"], quote=True) not in page_html:
-                error(f"{label} missing source URL for {event['id']}")
-    # The upcoming list must lead with upcoming rows and keep them in date order.
-    statuses = re.findall(r'data-status="([a-z\-]+)"', upcoming_html)
-    if not statuses:
-        error("upcoming.html has no filterable rows")
-    else:
-        order = {"upcoming": 0, "undated": 1, "completed": 2}
-        ranks = [order.get(status, 9) for status in statuses]
-        if ranks != sorted(ranks):
-            error("upcoming.html is not ordered with upcoming rows first")
-        if ranks and ranks[0] != 0:
-            error("upcoming.html does not start with an upcoming row")
+    # Exact rows, costs, status and source links, not just raw HTML occurrences:
+    # the embedded JSON contains all rows but must not leak paid rows into tables.
+    for label, page_html, expected, costs in (
+        ("index.html", index_html, free_rows, {"free"}),
+        ("upcoming.html", upcoming_html, free_rows, {"free"}),
+        ("free.html", free_html, free_rows, {"free"}),
+        ("paid.html", read(ROOT / "paid.html"), paid_rows + mixed_rows, {"paid", "mixed"}),
+    ):
+        rows = re.findall(r'<tr data-category="[^>]+>.*?</tr>', page_html, re.S)
+        actual_urls = Counter(re.search(r'class="source-link" href="([^"]+)"', row).group(1)
+                              for row in rows if re.search(r'class="source-link" href="([^"]+)"', row))
+        expected_urls = Counter(html.escape(e["source_url"], quote=True) for e in expected)
+        if actual_urls != expected_urls or len(rows) != len(expected):
+            error(f"{label}: row/source set differs from the expected {len(expected)} records")
+        for row in rows:
+            cost = re.search(r'data-cost="([a-z\-]+)"', row)
+            status = re.search(r'data-status="([a-z\-]+)"', row)
+            if not cost or cost.group(1) not in costs:
+                error(f"{label}: leaked non-eligible cost class")
+            if label != "paid.html" and (not status or status.group(1) != "upcoming"):
+                error(f"{label}: non-upcoming event in the primary table")
+            if 'data-label="Cost"' not in row or 'data-label="Source"' not in row:
+                error(f"{label}: missing cost or source cell")
+    # The primary chronological list is truly sorted, not merely grouped.
     dateranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', upcoming_html)
-    upcoming_ranks = [rank for rank in dateranks if rank.startswith("0-")]
-    if upcoming_ranks != sorted(upcoming_ranks):
-        error("upcoming.html upcoming rows are not in ascending date order")
-    # free.html must contain only rows the source describes as free or partly free.
-    free_costs = re.findall(r'data-cost="([a-z\-]+)"', free_html)
-    if len(free_costs) != len(free_rows):
-        error(f"free.html: expected {len(free_rows)} rows, found {len(free_costs)}")
-    for cost in free_costs:
-        if cost not in {"free", "mixed"}:
-            error(f"free.html contains a {cost!r} row; only source-stated free rows belong there")
-    for event in free_rows:
-        if html.escape(event["name"], quote=True) not in free_html:
-            error(f"free.html missing free row {event['id']}")
-    # Rows whose source published no price are disclosed on the Flagged page.
+    if dateranks != sorted(dateranks):
+        error("upcoming.html is not date-first")
+    # A label stating 'Free' cannot be derived from a waived fundraising goal.
+    if cost_class("No fundraising minimum required") != "not-stated":
+        error("fundraising minimum misclassified as free admission")
+    if cost_class("Registration required") != "not-stated":
+        error("registration alone misclassified as a paid ticket")
+    # Duplicate DOM IDs break the live executive summary or the focus jump links.
+    for path in [*root_pages, *category_pages]:
+        ids = re.findall(r'<[a-z][^>]*\sid="([^"]+)"', read(path), re.I)
+        if len(ids) != len(set(ids)):
+            error(f"{path.relative_to(ROOT)}: duplicate HTML ids")
+    # Rows whose source did not establish a price are disclosed on Flagged.
     for event in cost_not_stated:
         if html.escape(event["name"], quote=True) not in flagged_html:
             error(f"flagged.html missing cost-not-stated row {event['id']}")
     if "Not stated" not in flagged_html:
         error("flagged.html does not disclose rows whose cost was not stated")
     # Dashboard must expose the executive summary and the free-focus view.
-    for needle in ("next-up", "free-upcoming", "Executive summary", "Free to attend"):
+    for needle in ("next-up-list", "free-table-title", "Executive summary", "Free upcoming"):
         if needle not in index_html:
             error(f"dashboard missing {needle!r} section")
     if "Not stated" not in index_html:
