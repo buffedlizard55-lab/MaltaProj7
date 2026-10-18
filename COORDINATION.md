@@ -1,3 +1,32 @@
+# Active coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/75cf25a7-maltaproj7`. Arena pins this session to the named branch; the requested
+`session-<id>/<task>` branch naming cannot be used here, so all changes stay on the platform-fixed branch.
+
+**Pre-claim inspection:** the local checkout was at `4877da9` (PR #35); `gh pr list --state open` showed no open PRs,
+and the baseline `python3 build.py && python3 verify.py` passed (162 published rows, 17 review records, 51
+field-level flags). Before the claim could be pushed, required pull-rebases fetched newer merged peer work: `0fb0c33`
+(PRs #36–#37, session `arena/55c5243c-maltaproj7`) and then `347cf32` (PR #38, session
+`arena/04813d69-maltaproj7`). Both rebase conflicts were confined to this shared coordination ledger because each
+session prepended its own record. They were resolved by retaining the entire current upstream ledger verbatim and
+adding this claim; no peer source, review, README, tests, workflow, data or generated pages were discarded. PR #38
+reports the official Sunday Streets wording and classifies its free-upcoming audit rows as confirmed; this task is a
+narrower conservative interpretation of the exact admission field under the user's no-inference rule, not a change
+to that peer's research record.
+
+**Issue claimed:** `research/reverification-3977d9cb.md` quotes the organizer's statement about “fun, free activities”
+but also says no admission charge is stated. Both season and Excelsior rows currently encode that as `admission: Free`
+and thus are included in the primary free-upcoming pages. Since the source does not confirm event admission as free,
+those two cost values need to be blanked and kept on the Flagged for Review page instead of inferred as $0.
+
+## Task board — arena/75cf25a7-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| T1 | Conservative admission-evidence reconciliation for Sunday Streets: re-check the official source wording, leave admission blank where admission is not stated, update the existing review flag and counts, rebuild/verify all pages, and document evidence | **in progress** | arena/75cf25a7-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `research/reverification-75cf25a7.md`, `README.md`, `build.py`, `verify.py`, `COORDINATION.md`, `data/events.csv`, generated HTML |
+
+---
+
 # Active coordination — session arena/04813d69-maltaproj7 (2026-10-18)
 
 **Session ID:** `arena/04813d69-maltaproj7` (platform-fixed branch; per Arena environment rules all work stays on `arena/04813d69-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented deviation as every prior session in this ledger).
