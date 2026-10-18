@@ -1,3 +1,15 @@
+# FINAL INTEGRATION CLAIM — `arena/1bde1cd1-maltaproj7` (2026-10-18T02:57Z)
+
+| Task | Status | Owner | File scope |
+| --- | --- | --- | --- |
+| Final integration: apply the `a4797fc9` independent-audit findings to data/site; fresh line-by-line re-verification of every published/review row against its official source; reconcile previously collected but dropped events (publish only with direct official evidence, otherwise review register); harden `build.py`/`verify.py` against the audit mutation tests; rebuild site; PR to `main`, merge without waiting (brief), confirm Pages deploy | **done** (see completion log at end of file) | `arena/1bde1cd1-maltaproj7` | `data/events.json`, `data/events.csv` (generated), `research/official-source-audit.md`, `build.py`, `verify.py`, generated `*.html`, `categories/*.html`, `assets/style.css`, `README.md`, `COORDINATION.md` |
+
+- Handoff basis: prior owners `f3cb0dad` (catalog, PRs #5/#6) and `a4797fc9` (read-only audit, PRs #7/#8) both record their scopes **done** below and explicitly hand the unapplied audit findings to a final integration owner ("not yet applied to the event data or the five-record website review register"). `arena/185cda46-maltaproj7` has only its 2026-10-18T01:22:29Z claim commit (`47ab45b`), no further commits and no PR for >60 minutes; under the brief's stale-claim rule this session takes over, logged here. No peer work is discarded; all history below is preserved verbatim.
+- Rules for this integration: every published row keeps an HTTPS official-organizer / official-venue / government (or explicitly labeled trusted-civic) source link; unconfirmed optional values stay blank (placeholder strings such as "See organizer schedule" / "Program-specific times" are not values and will be blanked); essential gaps, multi-city umbrellas, cancellations, and outside-city items stay on Flagged for Review and do not block merge. "All events" is published as an explicitly bounded, dated snapshot — never as an exhaustive claim.
+- Branch note: this Arena session is fixed to `arena/1bde1cd1-maltaproj7`; work, commits, pushes, and the PR all use that branch (same deviation from `session-<id>/<task>` naming already recorded by prior sessions).
+
+---
+
 # Active coordination — concurrent-session collision resolved without discarding work
 
 ## Current arbitration log (2026-10-18T01:27Z)
@@ -377,3 +389,10 @@ All events verified against official sources on 2026-10-18. Key official sources
 3. SF Opera in the Park cancelled (Sep 13, 2026) due to strike — retained as review-only
 4. SFFILM Festival and SFJFF are multi-city — retained as review-only
 5. SF Fringe Festival source (sffringe.org) redirects to unrelated domain — retained as review-only
+
+### Addendum — reconciliation with PR #9 (`arena/08676041-maltaproj7`)
+
+- While final integration was underway, peer session `arena/08676041-maltaproj7` merged PR #9 (16 added events + fixes; its work commit landed ~4 minutes after this session's claim, i.e., genuinely concurrent). `origin/main` was merged into this branch and reconciled **without discarding peer work**: overlaps deduplicated (NightLife, Portola, YBG, Fort Mason market, Fillmore Jazz → single rows linked to the page actually used as evidence); peer-verified improvements adopted (NightLife address, Muni Heritage details, jerryday.org organizer source); peer-only additions each re-fetched 2026-10-18 — People in Plazas and Merola Summer Festival kept (trimmed to fetched text), Golden Gate Park Bandshell Concerts / SFJAZZ Summer Sessions / Third Thursdays On Ellis / SF Opera Summer Season moved to Flagged for Review because their linked homepages do not retain the stated programs in readable text (reasons on flagged.html and in the audit). Peer's illuminatesf.org link proved to redirect to an unrelated crowdfunding page; the SF Travel-sourced Illuminate row stands.
+- **Reconciled totals: 85 records — 69 published (58 recurring + 11 special), 16 flagged.** The completion log above (67/56/11/12) describes the pre-reconciliation snapshot and is preserved as history; this addendum supersedes its counts. `verify.py` stable counts, README, dashboard, and `research/official-source-audit.md` (new "Peer reconciliation" section) updated to match; build+verify pass.
+
+- **Pull request:** [#10](https://github.com/buffedlizard55-lab/MaltaProj7/pull/10) — final integration + PR #9 reconciliation, opened from `arena/1bde1cd1-maltaproj7` to `main` (2026-10-18). Merge + Pages deploy confirmation to be appended after merge, per brief.
