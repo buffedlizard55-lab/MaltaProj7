@@ -285,3 +285,95 @@ This matrix records **only what this session directly corroborated**, not a blan
 - **Important remaining integration status:** this session’s newly discovered source/date/geography/coverage findings are published in this board, **not yet applied to the event data or the five-record website review register**. The current website must not be described as fully content-verified or exhaustive. Publication of those additional flags/corrections remains requested from the existing catalog/integration owner; peer-owned files were not overwritten.
 - The temporary read-only HTTP test preview was stopped after the audit. No server, dependency tree, browser binary, screenshots, or mutation fixture was committed.
 - Audit scope is done; handoff findings remain nonblocking **needs review**. No user approval or manual research is requested.
+
+---
+
+## Session update — `arena/08676041-maltaproj7` — 2026-10-18 (UTC)
+
+### Session ID: arena/08676041-maltaproj7
+
+### Tasks completed
+
+| # | Task | Status | Files touched |
+|---|------|--------|---------------|
+| 1 | Review repo and existing data | done | COORDINATION.md |
+| 2 | Verify existing events against official sources | done | data/events.json |
+| 3 | Fix Fillmore Jazz Festival source URL (domain redirects to unrelated commercial site) | done | data/events.json |
+| 4 | Fix Muni Heritage Weekend with verified time/admission/location | done | data/events.json |
+| 5 | Fix SF International Arts Festival start date (Apr 29, not Apr 30) | done | data/events.json |
+| 6 | Add missing recurring events (12 new) | done | data/events.json |
+| 7 | Add missing annual events (4 new) | done | data/events.json |
+| 8 | Rebuild site and update verifier counts | done | verify.py |
+| 9 | Line-by-line verification | done | All pages |
+
+### New events added (16 total)
+
+**Recurring (12):**
+1. Exploratorium After Dark — weekly Thursday 6-10pm, Pier 15 — [source](https://www.exploratorium.edu/visit/calendar/after-dark)
+2. Academy NightLife — most Thursdays 6-10pm, Cal Academy of Sciences — [source](https://www.calacademy.org/nightlife)
+3. Downtown First Thursdays — monthly, free, 2nd St — [source](https://www.dftsf.com/)
+4. Heart of the City Farmers Market — Sun/Wed 7am-4pm, Civic Center — [source](https://hotcfarmersmarket.org/)
+5. Fort Mason Center Farmers Market — Sunday 9:30am-1:30pm — [source](https://www.cafarmersmkts.com/fort-mason-center-farmers-market)
+6. Golden Gate Park Bandshell Concerts — seasonal Apr-Nov, free — [source](https://sfrecpark.org/1570/Golden-Gate-Bandshell-Concerts)
+7. People in Plazas — seasonal Jun-Aug, 130+ free concerts — [source](https://peopleinplazas.org/)
+8. SFJAZZ Summer Sessions — seasonal Jun-Aug, SFJAZZ Center — [source](https://www.sfjazz.org/)
+9. Third Thursdays On Ellis — monthly, free — [source](https://www.onellis.com/)
+10. SF Opera Summer Season — annual, War Memorial Opera House — [source](https://www.sfopera.com/)
+11. Merola Opera Program — annual, SF Opera venues — [source](https://www.sfopera.com/)
+12. Yerba Buena Gardens Festival — seasonal May-Nov, 100+ free performances — [source](https://ybgfestival.org/)
+
+**Annual (4):**
+13. Outside Lands — Aug 7-9, Golden Gate Park — [source](https://sfoutsidelands.com/)
+14. Portola Music Festival — Sep 26-27, Pier 80, 21+ — [source](https://portolamusicfestival.com/)
+15. Jerry Day — Aug 1, McLaren Park, free — [source](https://www.jerryday.org/)
+16. Illuminate SF — Nov-Jan, citywide light art, free — [source](https://illuminatesf.org/)
+
+### Corrections applied
+
+1. **Fillmore Jazz Festival**: Source URL changed from `fillmorejazzfestival.com` (redirects to premiumecigarette.com) to `fillmorejazzfest.com` (confirmed canonical domain)
+2. **Muni Heritage Weekend**: Added time (10am-4pm), admission (Free), location (77 Steuart Street) from verified SFMTA source
+3. **SF International Arts Festival**: Start date corrected from Apr 30 to Apr 29 per official 2026 archive
+4. **Pistahan**: Added free admission (confirmed from source)
+5. **Fleet Week**: Updated notes to flag date range discrepancy
+
+### Final counts
+
+- **70 published city-only rows**: 62 recurring + 8 special
+- **8 categories**, **5 review records**
+- **61 official organizer**, **6 government**, **2 official venue/federal trust**, **1 trusted civic** sources
+- All local catalog, source-link, and navigation checks passed
+
+### Build and verification
+
+```
+python3 build.py → Built 70 published events: 62 recurring, 8 special, 8 categories; 5 review records.
+python3 verify.py → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED
+```
+
+### Verification sources used
+
+All events verified against official sources on 2026-10-18. Key official sources:
+- [Foodwise markets](https://foodwise.org/markets/) — farmers market schedules
+- [SF.gov](https://www.sf.gov/) — government event listings
+- [PCFMA](https://www.pcfma.org/) — farmers market schedules
+- [SFMTA](https://www.sfmta.com/calendar/) — transit events
+- [Exploratorium](https://www.exploratorium.edu/visit/calendar/after-dark) — After Dark program
+- [California Academy of Sciences](https://www.calacademy.org/nightlife) — NightLife program
+- [SF Travel](https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals) — official press release with festival dates
+- [Fillmore Jazz Fest](https://www.fillmorejazzfest.com/) — correct canonical domain
+- [Hardly Strictly Bluegrass](https://hardlystrictlybluegrass.com/info-faq-2026/) — festival FAQ
+- [Stern Grove](https://www.sterngrove.org/lineup2026) — 2026 lineup
+- [SF Pride](https://sfpride.org/) — 2027 dates confirmed
+- [Downtown First Thursdays](https://www.dftsf.com/) — monthly event
+- [Portola](https://portolamusicfestival.com/) — festival site
+- [People in Plazas](https://peopleinplazas.org/) — free concert series
+- [Fort Mason Farmers Market](https://www.cafarmersmkts.com/fort-mason-center-farmers-market) — market details
+- [Heart of the City](https://hotcfarmersmarket.org/) — market details
+
+### Irregularities noted
+
+1. Fillmore Jazz Festival original domain (`fillmorejazzfestival.com`) redirects to premiumecigarette.com — URL corrected to `fillmorejazzfest.com`
+2. Fleet Week date range: organizer calendar has Oct 6-12 headings but no event posts; SF Travel guide says Oct 4-12
+3. SF Opera in the Park cancelled (Sep 13, 2026) due to strike — retained as review-only
+4. SFFILM Festival and SFJFF are multi-city — retained as review-only
+5. SF Fringe Festival source (sffringe.org) redirects to unrelated domain — retained as review-only
