@@ -103,10 +103,15 @@ def main() -> int:
     # reconciliation incl. arena/55c58947-maltaproj7: 93 = 74 + 19, 12 review,
     # 16 field-level flags; sf-aloha-run restored to verified via live .org source,
     # IOFF-2027 and Italian-Heritage-2027 rows added).
-    if len(published) != 93:
-        error(f"expected 93 published rows, found {len(published)}")
-    if len(recurring) != 74 or len(special) != 19:
-        error(f"expected 74 recurring / 19 special, found {len(recurring)} / {len(special)}")
+    # Stable audit counts updated 2026-10-18 by session arena/d07e4ede-maltaproj7:
+    # +3 verified events added from official sources (Bhangra & Beats Night
+    # Market — recurring/seasonal; SF International Hip Hop DanceFest —
+    # recurring/annual; Renegade Craft Fair — special/single-event). Final
+    # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
+    if len(published) != 96:
+        error(f"expected 96 published rows, found {len(published)}")
+    if len(recurring) != 76 or len(special) != 20:
+        error(f"expected 76 recurring / 20 special, found {len(recurring)} / {len(special)}")
     if len(review) != 12:
         error(f"expected 12 review records, found {len(review)}")
 
