@@ -33,14 +33,17 @@ def pretty(value: str) -> str:
     return (value or "").replace("-", " ").replace("_", " ").title()
 
 
-def read_data() -> tuple[dict, list[dict]]:
+def read_data() -> tuple[dict, list[dict], list[dict]]:
     document = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     if not isinstance(document, dict) or not isinstance(document.get("catalog"), dict):
         raise ValueError("data/events.json must contain a catalog object")
     events = document.get("events")
     if not isinstance(events, list):
         raise ValueError("data/events.json must contain an events array")
-    return document["catalog"], events
+    flags = document.get("flags", [])
+    if not isinstance(flags, list):
+        raise ValueError("data/events.json flags must be an array")
+    return document["catalog"], events, flags
 
 
 def validate(catalog: dict, events: list[dict]) -> None:
@@ -174,6 +177,33 @@ def review_table(events: list[dict]) -> str:
     return "\n".join(output)
 
 
+def flags_table(flags: list[dict]) -> str:
+    if not flags:
+        return ""
+    output = [
+        '<div class="table-wrap">',
+        '<table class="review-table">',
+        '<caption>Field-level flags on published and excluded rows: corrections applied, source problems, and residual discrepancies. Sources are linked so every flag can be checked manually.</caption>',
+        '<thead><tr><th scope="col">Event</th><th scope="col">Finding</th><th scope="col">Sources to check</th><th scope="col">Disposition</th></tr></thead>',
+        "<tbody>",
+    ]
+    for flag in flags:
+        sources = "".join(
+            f'<a class="source-link" href="{html.escape(source["url"], quote=True)}" target="_blank" rel="noopener">{esc(source["label"])}</a>'
+            for source in flag.get("sources", [])
+        )
+        output.append(
+            "<tr>"
+            f'<td><strong>{esc(flag["event"])}</strong></td>'
+            f'<td>{esc(flag["issue"])}</td>'
+            f"<td>{sources}</td>"
+            f'<td>{esc(flag["disposition"])}</td>'
+            "</tr>"
+        )
+    output.extend(["</tbody>", "</table>", "</div>"])
+    return "\n".join(output)
+
+
 STYLE = """
 :root{--ink:#17212b;--muted:#526171;--paper:#fff;--mist:#f4f7fa;--line:#d9e2ea;--navy:#103c5b;--blue:#126da6;--teal:#0e766e;--gold:#8f6200;--rose:#9a3131;--shadow:0 8px 24px rgba(19,48,71,.08)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--mist);line-height:1.5}a{color:#075f99}a:hover{color:#064b78}.site-header{color:#fff;background:linear-gradient(120deg,#0d314a,#155d83 55%,#168178);padding:2.4rem 1.25rem 2rem}.shell{max-width:1240px;margin:0 auto;padding:0 1.25rem}.site-header .shell{padding:0;position:relative}.eyebrow{font-size:.77rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#b9e9e4;margin:0 0 .4rem}.site-header h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.045em}.lede{max-width:850px;margin:.7rem 0 0;font-size:1.06rem;color:#e7f4f5}.main{padding-top:1.2rem;padding-bottom:2rem}.nav{display:flex;gap:.55rem;flex-wrap:wrap;margin:0 0 1.5rem}.nav a{text-decoration:none;color:var(--navy);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:.48rem .77rem;font-weight:700;font-size:.9rem}.nav a.active,.nav a:hover{background:var(--navy);border-color:var(--navy);color:#fff}.hero{display:grid;gap:1rem;grid-template-columns:minmax(0,1.65fr) minmax(260px,.85fr);margin-bottom:1.25rem}.panel,.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.panel{padding:1.35rem}.panel h2,.panel h3{margin-top:0}.panel p:last-child{margin-bottom:0}.snapshot{background:#eaf5f4;border-color:#bde0dc}.snapshot strong{display:block;font-size:2rem;color:var(--teal);letter-spacing:-.04em}.snapshot small{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.85rem;margin:1rem 0 1.4rem}.card{padding:1rem;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease}.card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(19,48,71,.14)}.metric{font-size:2rem;font-weight:800;letter-spacing:-.06em;color:var(--navy);display:block}.card-label{display:block;font-weight:750}.card-note{display:block;color:var(--muted);font-size:.85rem;margin-top:.25rem}.notice{padding:1rem 1.1rem;background:#fff7dc;border:1px solid #efd58c;border-radius:12px;margin:1rem 0}.notice strong{color:#715200}.notice a{font-weight:700}.section-head{display:flex;gap:1rem;align-items:baseline;justify-content:space-between;flex-wrap:wrap;margin-top:1.75rem}.section-head h2{margin:0}.section-head p{margin:0;color:var(--muted)}.filterbar{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);padding:.8rem;border-radius:12px;margin:.85rem 0}.filterbar label{font-weight:700;font-size:.9rem}.filterbar input,.filterbar select{font:inherit;padding:.55rem .65rem;border:1px solid #aebdc9;border-radius:8px;background:#fff}.filterbar input{min-width:min(100%,360px);flex:1}.filterbar select{max-width:100%}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}.table-wrap table{width:100%;min-width:960px;border-collapse:collapse;font-size:.88rem}.table-wrap caption{padding:.8rem 1rem;text-align:left;color:var(--muted);background:#f8fafb;border-bottom:1px solid var(--line);font-size:.82rem}.table-wrap th,.table-wrap td{padding:.72rem .72rem;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}.table-wrap th{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:#405262;background:#edf3f7;position:sticky;top:0;z-index:1}.table-wrap tr:last-child td{border-bottom:0}.table-wrap tbody tr:hover{background:#f7fbfd}.organizer,.source-meta,.authority{display:block;font-size:.78rem;color:var(--muted);margin-top:.16rem}.source-link{font-weight:800;white-space:nowrap}.authority{font-size:.72rem}.empty{color:#6d7a87}.badge{display:inline-block;border-radius:999px;padding:.22rem .5rem;font-size:.74rem;font-weight:800;line-height:1.2}.badge-recurring{color:#075b54;background:#dff5ef}.badge-special{color:#6e4700;background:#fff0c5}.badge-partial_sf_program{color:#634201;background:#fff0c5}.badge-needs_review{color:#80430a;background:#ffe8cf}.badge-cancelled{color:#892d2d;background:#ffe1e1}.badge-outside_city_excluded{color:#5d4a75;background:#eee8f8}.review-table td:nth-child(5){min-width:280px}.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem}.category-card{padding:1.05rem;background:#fff;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit}.category-card:hover{box-shadow:var(--shadow);border-color:#9fb9cb}.category-card .metric{font-size:1.6rem}.definition{margin:.4rem 0 0;color:var(--muted);font-size:.9rem}.analysis-list{padding-left:1.2rem}.analysis-list li{margin:.5rem 0}.site-footer{border-top:1px solid var(--line);background:#fff;padding:1.5rem 0 2rem;color:var(--muted);font-size:.88rem}.site-footer p{max-width:1000px;margin:.2rem 0}.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;padding:.6rem;background:#fff;color:#000;z-index:10}@media(max-width:720px){.hero{grid-template-columns:1fr}.site-header{padding-top:1.7rem}.shell{padding:0 1rem}.table-wrap table{font-size:.84rem}.nav{gap:.4rem}.nav a{font-size:.82rem;padding:.42rem .62rem}}
@@ -280,7 +310,7 @@ def write_csv(events: list[dict]) -> None:
 
 
 def build() -> None:
-    catalog, events = read_data()
+    catalog, events, flags = read_data()
     validate(catalog, events)
     published = [event for event in events if event["status"] == "verified"]
     recurring = sorted([event for event in published if event["bucket"] == "recurring"], key=sort_regular)
@@ -369,9 +399,11 @@ def build() -> None:
         )
 
     flagged_body = f"""
-<section class="section-head"><div><h2>Flagged for Review</h2><p>These records are intentionally excluded from the city-only recurring and special tables.</p></div><p>{len(review)} records</p></section>
+<section class="section-head"><div><h2>Flagged for Review</h2><p>These records are intentionally excluded from the city-only recurring and special tables.</p></div><p>{len(review)} review records · {len(flags)} field-level flags</p></section>
 <section class="notice"><strong>What a flag means:</strong> a source may be official and still be unsuitable for a city-only row — for example, a multi-city program, an official cancellation, or an unresolved schedule. Fields stay blank when not confirmed; nothing below is silently promoted into the catalog.</section>
 {review_table(review)}
+<section class="section-head"><div><h2>Field-level flags and source findings</h2><p>Corrections applied to published rows, source-availability problems, and residual discrepancies that merit manual review. Each finding links the sources used.</p></div><p>{len(flags)} findings</p></section>
+{flags_table(flags)}
 """
     (ROOT / "flagged.html").write_text(page("Flagged for Review", flagged_body, "flagged.html", catalog), encoding="utf-8")
 

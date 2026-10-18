@@ -56,9 +56,13 @@ def main() -> int:
     document = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     catalog = document.get("catalog")
     events = document.get("events")
+    flags = document.get("flags", [])
     if not isinstance(catalog, dict) or not isinstance(events, list):
         error("data/events.json must be a catalog object with an events list")
         events = []
+    if not isinstance(flags, list):
+        error("data/events.json flags must be an array")
+        flags = []
 
     ids: set[str] = set()
     published: list[dict] = []
@@ -93,10 +97,10 @@ def main() -> int:
     categories = sorted({event["category"] for event in published})
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
-    if len(published) != 54:
-        error(f"expected 54 published rows, found {len(published)}")
-    if len(recurring) != 46 or len(special) != 8:
-        error(f"expected 46 recurring / 8 special, found {len(recurring)} / {len(special)}")
+    if len(published) != 72:
+        error(f"expected 72 published rows, found {len(published)}")
+    if len(recurring) != 55 or len(special) != 17:
+        error(f"expected 55 recurring / 17 special, found {len(recurring)} / {len(special)}")
     if len(review) != 5:
         error(f"expected 5 review records, found {len(review)}")
     if catalog.get("geography") != "City and County of San Francisco only":
@@ -122,12 +126,13 @@ def main() -> int:
         check_internal_links(path, text)
 
     # Each generated public/review table has exactly one source link for each row.
+    flag_source_links = sum(len(flag.get("sources", [])) for flag in flags)
     expected_counts = {
         ROOT / "recurring.html": len(recurring),
         ROOT / "special.html": len(special),
         ROOT / "annual-special.html": len(special),
         ROOT / "all-events.html": len(published),
-        ROOT / "flagged.html": len(review),
+        ROOT / "flagged.html": len(review) + flag_source_links,
     }
     for path, expected in expected_counts.items():
         actual = source_link_count(path)
