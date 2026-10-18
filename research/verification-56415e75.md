@@ -49,6 +49,7 @@ confirmation below is a page-read result, not a raw HTTP check.
 | Northern California Cherry Blossom Festival 2027 | April 10–11 and 17–18, 2027; Grand Parade April 18 | <https://sfcherryblossom.org/> | Confirmed verbatim on the organizer homepage ("60th Anniversary Celebration! April 10-11 and 17-18, 2027 / Grand Parade (April 18)"). Row unchanged. |
 | Sunday Streets SF — 2026 season | Excelsior finale Oct 18, 2026 | <https://sundaystreetssf.com/sunday-streets-excelsior-2026/> and <https://sfrecpark.org/Calendar.aspx> | Confirmed by organizer and by the city calendar. **Cost label set to Free** on the stated wording basis; two flags filed (free wording, route discrepancy). |
 | YBG Festival (Yerba Buena Gardens Festival) 2026 | Free season, May opening, October programmes | <https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf> | Organizer's own press release confirms the 26th free season ("Over 100+ Free Performances from May to November") and the May 9 opener. **Notes updated** to cite the organizer directly; the November 13 end date remains sourced only from SF Travel and is now flagged. |
+| SF Sketchfest 2027 | January 14–31, 2027 | <https://sfsketchfest.com/> | Confirmed — organizer homepage: "returns to celebrate our 24th year January 14 - 31, 2027!". Row unchanged. |
 
 ## 3. Rows added this session (all free, all city-only, all officially sourced)
 
