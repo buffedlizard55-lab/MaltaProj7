@@ -1,4 +1,21 @@
-# Active coordination — session arena/2088b727-maltaproj7 (2026-10-18)
+# Active coordination — session arena/813e597d-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/813e597d-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/813e597d-maltaproj7`).
+
+**Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `23f584e` (merge of PR #24). No open PRs. No remote branches other than `main` and our tracking branch. Baseline: `python3 build.py && python3 verify.py` passes (published=140, recurring=95, special=45, review=16, flags=29, categories=8). All prior session boards below are historical/done.
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| B1 | Line-by-line verification review: audit dataset against brief requirements (city-only SF, verified official sources, date accuracy around 2026-10-18, free vs paid costs, focus on gaming, music, AI); log findings in research | in progress | arena/813e597d-maltaproj7 | 2026-10-18 | `research/**`, `data/events.json` |
+| B2 | Mobile-friendly UI & Dashboard enhancement: executive summary of upcoming events close to 2026-10-18; upcoming dates highlighted first; clear cost labeling; dedicated focus & filter for free gaming, music, AI events; responsive mobile UX | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
+| B3 | Build & verify: validate all pages, local links, source links, semantic guards; run verify.py | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `verify.py` |
+| B4 | Final integration: PR to `main` with summary of changes, sources, and flagged irregularities; merge without waiting; confirm GitHub Pages deployment; record links | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+
+---
+
+# Historical coordination — session arena/2088b727-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/2088b727-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation every prior session logged).
 
