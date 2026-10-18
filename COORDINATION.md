@@ -8,11 +8,13 @@ Since no other session holds a claim, this session takes the review, coverage, a
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| S1 | Repo review: structural audit of `data/events.json` (duplicates, cadence semantics, URL hygiene) + spot re-verification of rows against official sources | in progress | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `research/review-5e333a6e.md` (new), `data/events.json` (fixes only) |
-| S2 | Coverage gap pass: add major SF-city events missing from the catalog, each verified on an official organizer/venue/government page | in progress | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (new rows + flags), `research/review-5e333a6e.md` |
-| S3 | Final integration: rebuild, verify, link check, PR to `main`, merge, confirm Pages, record results | unclaimed→claimed | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `COORDINATION.md` |
+| S1 | Repo review: structural audit of `data/events.json` (duplicates, cadence semantics, URL hygiene) + spot re-verification of rows against official sources | DONE | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `research/review-5e333a6e.md` (new), `data/events.json` (fixes only) |
+| S2 | Coverage gap pass: add major SF-city events missing from the catalog, each verified on an official organizer/venue/government page | DONE | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (new rows + flags), `research/review-5e333a6e.md` |
+| S3 | Final integration: rebuild, verify, link check, PR to `main`, merge, confirm Pages, record results | in progress | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `COORDINATION.md` |
 
 **Reconciliation note (2026-10-18):** while S1/S2 were in progress, PR #17 (arena/d07e4ede) and PR #18 (arena/646f6727) merged to `main`, raising the counts to 107/87/20, 16 review, 20 flags. This branch merged `origin/main` with main's versions kept for every file, then re-applied `research/patch-5e333a6e.py`. That patch skips the 9 rows and 2 flags the peer had already added (GDC, RSAC, Dreamforce, JPM, TechCrunch, Autumn Moon, Trans March, Fort Mason Night Market, Litquake) and re-points 2 flags at the peer rows. No peer work was discarded.
+
+**S1/S2 outcome:** the review is in `research/review-5e333a6e.md`. 32 published rows were added: 16 Moscone Center conventions (official venue pages), 10 SFMTA-documented neighborhood events, FAMSF Free Saturdays and Free First Tuesdays, SF Open Studios, SF Half Marathon 2027, Pink Triangle 2026, and Dyke March 2026. 5 flags were added: JPM venue, Open Studios start date, Autumn Moon hours, Fort Mason Night Market date lists, and Potrero Hill hours. `python3 build.py && python3 verify.py` passes: 139 published = 94 recurring + 45 special, 16 review, 25 flags. The local link crawl found 0 broken links. Every new source URL was fetched directly on 2026-10-18; the sandbox cannot curl external hosts, so these fetches serve as the external link check.
 
 ---
 
