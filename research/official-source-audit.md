@@ -302,3 +302,24 @@ Count-guard change in `verify.py`: **107 → 139 published (87 → 94 recurring,
 Flags added (5): J.P. Morgan 2027 venue not stated; SF Open Studios studio-weekend start date not stated; Autumn Moon hours conflict (organizer 11–5 vs SFMTA 11–6); Fort Mason Night Market date lists disagree (venue page vs Off the Grid); Potrero Hill Festival hours conflict between two SFMTA pages.
 
 Classification rule applied: a row is *recurring* only where the linked source says "annual", "every", "monthly", or similar. Single-date SFMTA notices that state no recurrence, and conferences, are *special*. Sunday Streets Excelsior (Oct 18) is already covered by `sunday-streets-2026`.
+
+
+## Date-first rebuild, cost labelling, and coverage pass — `arena/e79e0de2-maltaproj7` — 2026-10-18
+
+Stable counts in `verify.py` changed **140 → 148 published (95 → 98 recurring, 45 → 50 special); review unchanged at 16; flags 29 → 34; categories 8 → 9.**
+
+| Group | Rows | Official source type |
+|---|---|---|
+| New rows published this pass | AI Engineer Code Summit 2026, Day of the Devs — San Francisco Edition (2026), Union Square Plaza — Free Park Programs, Hayes Valley Farmers Market & Shared Spaces (2026 extended hours), SFIAC & Olympic Club Cornhole Tournament, Foodwise Sunday Supper, Día de los Muertos and Halloween at Mission Community Market, Foodwise Fall Fruit Celebration, Mission Community Market — Last Day of the 2026 Season, Foodwise Fall Holiday Farmers Market (10) | Official organizer / government source |
+| Rows re-sourced to the organiser's own page | Bearrison Street Fair (`bearrison.org`), Potrero Hill Festival (`potrerofestival.com`) (2) | Official organizer |
+| Category split | 14 clearly technical rows moved out of "Professional & academic" into the new "Technology, AI & gaming" category — GDC, RSAC, Dreamforce, Cloudflare Connect, Microsoft Ignite, TechCrunch Disrupt, AI Engineer World's Fair, AMD Advancing AI, CoreWeave Fully Connected, Current SF, SEMICON West, SPIE Photonics West, TDX, Atlassian Team '27 | n/a (metadata only) |
+
+Cost labelling introduced in this pass. The sourced admission text is classified as **Free (44)**, **Free or partly free (12)**, **Paid / ticketed (17)**, or **Not stated (75)**. Classification is derived only from the wording the linked official page used; no price is inferred from an event's type, and "Not stated" is never treated as free. Every "Not stated" row is listed with its source link in the "Cost not stated in the linked source" table on the Flagged for Review page.
+
+Cost and time values filled from official copy this pass: GDC 2027 (early-rate pass prices and their deadlines), Cloudflare Connect 2026 (group, University and non-profit/government/military/education pricing, plus day-one hours), SF Dance Film Festival 2026 (masterclass free, festival/streaming/per-program tickets), SF Transgender Film Festival 2026 (six-program rotation, per-program tickets), SF Open Studios 2026 (preview hours), Lower Polk Live, From the E Night Market, Noe Valley Night Market, Diplo's 5K, Bearrison Street Fair, Potrero Hill Festival.
+
+Flags added (5): Hayes Valley shared-spaces hours vs the PCFMA market page; Day of the Devs 2027 edition not announced; AI Engineer Code 2027 edition not announced; GDC 2027 early-rate deadlines; SFDFF individual screening prices not printed. Flag updated (1): Potrero Hill Festival hours — the organiser site was fetched this pass and now supplies the published 10 a.m.–5 p.m., with both SFMTA variants (4:30 p.m. and 4 p.m.) recorded.
+
+Scope decisions: the SFMTA advisory for Oct 15–21, 2026 also covers the **Top of the Hill Festival in Daly City**; it is excluded and not published. Site rebuild: every list is now ordered with upcoming dates first, completed editions are badged and pushed to the bottom, running multi-week programs are badged *Ongoing now*, each row shows a live "in N days" label, the dashboard has a live executive summary (next-up list, 7/30/90-day starting counts, running-now count) plus a free-events panel, a new `upcoming.html` and `free.html` page were added, and table rows become labelled cards under 760 px for phone use.
+
+Row-level evidence: `research/verification-e79e0de2.md`. Reproducible patch: `research/patch-e79e0de2.py`.
