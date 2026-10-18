@@ -14,6 +14,17 @@
 
 Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of files owned by another live session (none); unverified values stay blank and are flagged, never inferred; flagged items do not block merge. Verification means direct inspection of official publisher pages via the sandbox fetch tool (outbound curl to event hosts is blocked by sandbox network policy, as prior sessions recorded).
 
+## Session record — arena/2088b727-maltaproj7 (S1 line-by-line re-verification, S2 site review, S3 integration)
+
+- **Claim scope** (top of file): S1 re-verify every row and flag line by line from official sources; S2 site review/fixes; S3 final integration → PR → merge → GitHub Pages.
+- **S1 evidence**: `research/reverification-2088b727.md` — 15 fetch batches on 2026-10-18 covering all row source URLs (incl. all fan-in pages: Presidio summer lineup, Carnaval special-events, SF.gov Juneteenth, PCFMA/Foodwise markets, SF Travel month guides) plus flag sources. Verdicts PASS / PASS\* / FAIL→FIX / FLAG recorded URL by URL with quoted support. Review-register rows re-checked too (Bandshell JS-only shell, SF Fringe domain now serving a fun88.de.com 404, SFJAZZ pages unfetchable, Noise Pop venue-geography hold, SFFILM mixed-geography hold, marathon scope hold, cancelled Opera in the Park with its live cancellation release).
+- **Fixes applied (no-inference rule)**: Fillmore Jazz 2027 location span trimmed (2026 footprint not projected to 2027); Mission Community Market unsourced street number removed; Porchfest "backyards" wording trimmed; Haight-Ashbury admission blanked (cross-source fields flagged with the SFMTA URL); Nihonmachi hours blanked (unconfirmed on all official pages checked). Source health: SF Pride /2026-festival and one SF Opera press URL found dead → SF Pride re-pointed to live /celebration/ + /parade/ pages; Italian Heritage rows (already re-sourced by session d07e4ede) re-verified field-for-field against their live pages.
+- **Catalog change**: +1 published row `sf-pride-2026` (Celebration & Parade, June 27–28, 2026) from live sfpride.org pages. Totals now **97 published (77 recurring + 20 special), 12 review, 19 flags**; verify.py audit counts updated with rationale in-file.
+- **New flags**: `flag-fillmore-jazz-2027-span`, `flag-bhangra-location-conflict` (SF Travel Clay/Battery vs organizer Yerba Buena for 2026), `flag-haight-cross-source`. All published on Flagged for Review; none block merge.
+- **S2**: `annual-special.html` confirmed as an intentional generated alias page (notice + regeneration in build.py) — kept. Nav/internal-link sweep clean; method.html now documents the line-by-line pass and links the evidence log.
+- **Gates**: `python3 build.py` → "Built 97 published events: 77 recurring, 20 special, 8 categories; 12 review records." `python3 verify.py` → "ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED".
+- **PR / Pages result**: recorded in the follow-up entry below.
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 ... previous session log preserved ...
