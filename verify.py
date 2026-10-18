@@ -103,15 +103,20 @@ def main() -> int:
     # reconciliation incl. arena/55c58947-maltaproj7: 93 = 74 + 19, 12 review,
     # 16 field-level flags; sf-aloha-run restored to verified via live .org source,
     # IOFF-2027 and Italian-Heritage-2027 rows added).
+    # Stable audit counts updated 2026-10-18 by session arena/d07e4ede-maltaproj7:
+    # +3 verified events added from official sources (Bhangra & Beats Night
+    # Market — recurring/seasonal; SF International Hip Hop DanceFest —
+    # recurring/annual; Renegade Craft Fair — special/single-event). Final
+    # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
     # 2026-10-18 arena/5e333a6e-maltaproj7 coverage-gap pass (audit entry
-    # "Coverage-gap pass"): +40 published (+10 recurring, +30 special) and
-    # +1 review (Litquake, mixed geography) -> 133 = 84 + 49, 13 review, 23 flags.
-    if len(published) != 133:
-        error(f"expected 133 published rows, found {len(published)}")
-    if len(recurring) != 84 or len(special) != 49:
-        error(f"expected 84 recurring / 49 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 13:
-        error(f"expected 13 review records, found {len(review)}")
+    # "Coverage-gap pass — arena/5e333a6e"): +32 published (+7 recurring,
+    # +25 special), review unchanged -> 139 = 94 + 45, 16 review, 25 flags.
+    if len(published) != 139:
+        error(f"expected 139 published rows, found {len(published)}")
+    if len(recurring) != 94 or len(special) != 45:
+        error(f"expected 94 recurring / 45 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 16:
+        error(f"expected 16 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated

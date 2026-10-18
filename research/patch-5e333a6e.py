@@ -352,7 +352,8 @@ NEW_ROWS: list[dict] = [
         source_url="https://www.sfmta.com/project-updates/dyke-march",
         source_label="SFMTA project update: SF Pride Dyke March, June 27, 2026", source_authority=GOV,
         notes="Added 2026-10-18 (arena/5e333a6e). SFMTA calls it the annual Dyke March and states the march begins at "
-              "5pm after a rally at Dolores Park. SF Pride's events page lists the same date."),
+              "5pm after a rally at Dolores Park. SF Pride's events page lists the same date. The 2027 edition is "
+              "held separately in the review register (sf-dyke-march-2027) because its location is not yet stated."),
 
     # ---------------- Review register ----------------
     row(id="litquake-2026", name="Litquake 2026 (mixed-geography program)",
@@ -383,8 +384,11 @@ NEW_FLAGS: list[dict] = [
     {
         "id": "flag-fort-mason-night-market-season", "event_id": "fort-mason-night-market-2026",
         "event": "Fort Mason Night Market (2026)",
-        "issue": "The venue's series page lists September 18, October 16, and \"monthly on select Fridays\" without listing the remaining dates. An Off the Grid listing (a vendor partner, not used as a source) says the season has wrapped.",
-        "sources": [{"label": "Fort Mason Night Market 2026 series page", "url": "https://fortmason.org/series/fort-mason-night-market-2026/"}],
+        "issue": "Date lists disagree. The Fort Mason venue series page lists September 18, October 16, and \"monthly on select Fridays\" in 2026. The Off the Grid event page lists May 22, Jun 19, Jul 24, Aug 21, Sep 18, and Nov 6 with other dates to be announced, and omits October 16. A search snippet of an Off the Grid listing also said the season had wrapped.",
+        "sources": [
+            {"label": "Fort Mason Night Market 2026 series page", "url": "https://fortmason.org/series/fort-mason-night-market-2026/"},
+            {"label": "Off the Grid Fort Mason Center event page", "url": "https://offthegrid.com/event/fort-mason-center/"},
+        ],
         "disposition": "Published as monthly per the venue page; confirm whether any dates after October 16 remain.",
     },
     {
@@ -422,11 +426,36 @@ NEW_FLAGS: list[dict] = [
 ]
 
 
+# Rows/flags already contributed by peer session arena/646f6727-maltaproj7 (PR #18),
+# merged to main while this pass was in progress.  Their versions are kept; the
+# equivalent rows prepared here are skipped to avoid duplicates.
+SUPERSEDED_BY_PEER = {
+    "gdc-festival-of-gaming-2027",        # peer row, same id
+    "rsac-conference-2027",               # peer: rsa-conference-2027
+    "dreamforce-2027",                    # peer row, same id
+    "jpm-healthcare-conference-2027",     # peer row, same id
+    "techcrunch-disrupt-2026",            # peer row, same id
+    "autumn-moon-festival-2026",          # peer: chinatown-autumn-moon-festival-2026
+    "trans-march-2026",                   # peer row, same id (sourced from transmarch.org)
+    "fort-mason-night-market-2026",       # peer: off-the-grid-fort-mason-night-market-2026
+    "litquake-2026",                      # peer review row, same id
+    "flag-dreamforce-2027-venue",         # peer flag, same id
+    "flag-litquake-2026-dates",           # peer review row already records the mixed geography
+}
+# Flags prepared against the superseded rows are re-pointed at the peer rows.
+RETARGET = {
+    "flag-autumn-moon-hours": ("chinatown-autumn-moon-festival-2026", "Organizer hours (11am–5pm) retained on the peer row; SFMTA's 11am–6pm is recorded here for review."),
+    "flag-fort-mason-night-market-season": ("off-the-grid-fort-mason-night-market-2026", "Peer row (Off the Grid source) retained; the Fort Mason venue page adds October 16, which the Off the Grid date list omits. Confirm remaining dates."),
+}
+
+
 def main() -> None:
     doc = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     ids = {e["id"] for e in doc["events"]}
     added = 0
     for r in NEW_ROWS:
+        if r["id"] in SUPERSEDED_BY_PEER:
+            continue
         if r["id"] not in ids:
             doc["events"].append(r)
             ids.add(r["id"])
@@ -434,6 +463,13 @@ def main() -> None:
     flag_ids = {f["id"] for f in doc["flags"]}
     flags_added = 0
     for f in NEW_FLAGS:
+        if f["id"] in SUPERSEDED_BY_PEER:
+            continue
+        if f["id"] in RETARGET:
+            f = dict(f)
+            f["event_id"], f["disposition"] = RETARGET[f["id"]]
+            if f["event_id"] not in ids:
+                continue
         if f["id"] not in flag_ids:
             doc["flags"].append(f)
             flags_added += 1
