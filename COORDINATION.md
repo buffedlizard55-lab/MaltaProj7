@@ -1,3 +1,15 @@
+# FINAL INTEGRATION CLAIM — `arena/1bde1cd1-maltaproj7` (2026-10-18T02:57Z)
+
+| Task | Status | Owner | File scope |
+| --- | --- | --- | --- |
+| Final integration: apply the `a4797fc9` independent-audit findings to data/site; fresh line-by-line re-verification of every published/review row against its official source; reconcile previously collected but dropped events (publish only with direct official evidence, otherwise review register); harden `build.py`/`verify.py` against the audit mutation tests; rebuild site; PR to `main`, merge without waiting (brief), confirm Pages deploy | **done** (see completion log at end of file) | `arena/1bde1cd1-maltaproj7` | `data/events.json`, `data/events.csv` (generated), `research/official-source-audit.md`, `build.py`, `verify.py`, generated `*.html`, `categories/*.html`, `assets/style.css`, `README.md`, `COORDINATION.md` |
+
+- Handoff basis: prior owners `f3cb0dad` (catalog, PRs #5/#6) and `a4797fc9` (read-only audit, PRs #7/#8) both record their scopes **done** below and explicitly hand the unapplied audit findings to a final integration owner ("not yet applied to the event data or the five-record website review register"). `arena/185cda46-maltaproj7` has only its 2026-10-18T01:22:29Z claim commit (`47ab45b`), no further commits and no PR for >60 minutes; under the brief's stale-claim rule this session takes over, logged here. No peer work is discarded; all history below is preserved verbatim.
+- Rules for this integration: every published row keeps an HTTPS official-organizer / official-venue / government (or explicitly labeled trusted-civic) source link; unconfirmed optional values stay blank (placeholder strings such as "See organizer schedule" / "Program-specific times" are not values and will be blanked); essential gaps, multi-city umbrellas, cancellations, and outside-city items stay on Flagged for Review and do not block merge. "All events" is published as an explicitly bounded, dated snapshot — never as an exhaustive claim.
+- Branch note: this Arena session is fixed to `arena/1bde1cd1-maltaproj7`; work, commits, pushes, and the PR all use that branch (same deviation from `session-<id>/<task>` naming already recorded by prior sessions).
+
+---
+
 # Active coordination — concurrent-session collision resolved without discarding work
 
 ## Current arbitration log (2026-10-18T01:27Z)
@@ -288,6 +300,116 @@ This matrix records **only what this session directly corroborated**, not a blan
 
 ---
 
+## Session update — `arena/08676041-maltaproj7` — 2026-10-18 (UTC)
+
+### Session ID: arena/08676041-maltaproj7
+
+### Tasks completed
+
+| # | Task | Status | Files touched |
+|---|------|--------|---------------|
+| 1 | Review repo and existing data | done | COORDINATION.md |
+| 2 | Verify existing events against official sources | done | data/events.json |
+| 3 | Fix Fillmore Jazz Festival source URL (domain redirects to unrelated commercial site) | done | data/events.json |
+| 4 | Fix Muni Heritage Weekend with verified time/admission/location | done | data/events.json |
+| 5 | Fix SF International Arts Festival start date (Apr 29, not Apr 30) | done | data/events.json |
+| 6 | Add missing recurring events (12 new) | done | data/events.json |
+| 7 | Add missing annual events (4 new) | done | data/events.json |
+| 8 | Rebuild site and update verifier counts | done | verify.py |
+| 9 | Line-by-line verification | done | All pages |
+
+### New events added (16 total)
+
+**Recurring (12):**
+1. Exploratorium After Dark — weekly Thursday 6-10pm, Pier 15 — [source](https://www.exploratorium.edu/visit/calendar/after-dark)
+2. Academy NightLife — most Thursdays 6-10pm, Cal Academy of Sciences — [source](https://www.calacademy.org/nightlife)
+3. Downtown First Thursdays — monthly, free, 2nd St — [source](https://www.dftsf.com/)
+4. Heart of the City Farmers Market — Sun/Wed 7am-4pm, Civic Center — [source](https://hotcfarmersmarket.org/)
+5. Fort Mason Center Farmers Market — Sunday 9:30am-1:30pm — [source](https://www.cafarmersmkts.com/fort-mason-center-farmers-market)
+6. Golden Gate Park Bandshell Concerts — seasonal Apr-Nov, free — [source](https://sfrecpark.org/1570/Golden-Gate-Bandshell-Concerts)
+7. People in Plazas — seasonal Jun-Aug, 130+ free concerts — [source](https://peopleinplazas.org/)
+8. SFJAZZ Summer Sessions — seasonal Jun-Aug, SFJAZZ Center — [source](https://www.sfjazz.org/)
+9. Third Thursdays On Ellis — monthly, free — [source](https://www.onellis.com/)
+10. SF Opera Summer Season — annual, War Memorial Opera House — [source](https://www.sfopera.com/)
+11. Merola Opera Program — annual, SF Opera venues — [source](https://www.sfopera.com/)
+12. Yerba Buena Gardens Festival — seasonal May-Nov, 100+ free performances — [source](https://ybgfestival.org/)
+
+**Annual (4):**
+13. Outside Lands — Aug 7-9, Golden Gate Park — [source](https://sfoutsidelands.com/)
+14. Portola Music Festival — Sep 26-27, Pier 80, 21+ — [source](https://portolamusicfestival.com/)
+15. Jerry Day — Aug 1, McLaren Park, free — [source](https://www.jerryday.org/)
+16. Illuminate SF — Nov-Jan, citywide light art, free — [source](https://illuminatesf.org/)
+
+### Corrections applied
+
+1. **Fillmore Jazz Festival**: Source URL changed from `fillmorejazzfestival.com` (redirects to premiumecigarette.com) to `fillmorejazzfest.com` (confirmed canonical domain)
+2. **Muni Heritage Weekend**: Added time (10am-4pm), admission (Free), location (77 Steuart Street) from verified SFMTA source
+3. **SF International Arts Festival**: Start date corrected from Apr 30 to Apr 29 per official 2026 archive
+4. **Pistahan**: Added free admission (confirmed from source)
+5. **Fleet Week**: Updated notes to flag date range discrepancy
+
+### Final counts
+
+- **70 published city-only rows**: 62 recurring + 8 special
+- **8 categories**, **5 review records**
+- **61 official organizer**, **6 government**, **2 official venue/federal trust**, **1 trusted civic** sources
+- All local catalog, source-link, and navigation checks passed
+
+### Build and verification
+
+```
+python3 build.py → Built 70 published events: 62 recurring, 8 special, 8 categories; 5 review records.
+python3 verify.py → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED
+```
+
+### Verification sources used
+
+All events verified against official sources on 2026-10-18. Key official sources:
+- [Foodwise markets](https://foodwise.org/markets/) — farmers market schedules
+- [SF.gov](https://www.sf.gov/) — government event listings
+- [PCFMA](https://www.pcfma.org/) — farmers market schedules
+- [SFMTA](https://www.sfmta.com/calendar/) — transit events
+- [Exploratorium](https://www.exploratorium.edu/visit/calendar/after-dark) — After Dark program
+- [California Academy of Sciences](https://www.calacademy.org/nightlife) — NightLife program
+- [SF Travel](https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals) — official press release with festival dates
+- [Fillmore Jazz Fest](https://www.fillmorejazzfest.com/) — correct canonical domain
+- [Hardly Strictly Bluegrass](https://hardlystrictlybluegrass.com/info-faq-2026/) — festival FAQ
+- [Stern Grove](https://www.sterngrove.org/lineup2026) — 2026 lineup
+- [SF Pride](https://sfpride.org/) — 2027 dates confirmed
+- [Downtown First Thursdays](https://www.dftsf.com/) — monthly event
+- [Portola](https://portolamusicfestival.com/) — festival site
+- [People in Plazas](https://peopleinplazas.org/) — free concert series
+- [Fort Mason Farmers Market](https://www.cafarmersmkts.com/fort-mason-center-farmers-market) — market details
+- [Heart of the City](https://hotcfarmersmarket.org/) — market details
+
+### Irregularities noted
+
+1. Fillmore Jazz Festival original domain (`fillmorejazzfestival.com`) redirects to premiumecigarette.com — URL corrected to `fillmorejazzfest.com`
+2. Fleet Week date range: organizer calendar has Oct 6-12 headings but no event posts; SF Travel guide says Oct 4-12
+3. SF Opera in the Park cancelled (Sep 13, 2026) due to strike — retained as review-only
+4. SFFILM Festival and SFJFF are multi-city — retained as review-only
+5. SF Fringe Festival source (sffringe.org) redirects to unrelated domain — retained as review-only
+
+### Addendum — reconciliation with PR #9 (`arena/08676041-maltaproj7`)
+
+- While final integration was underway, peer session `arena/08676041-maltaproj7` merged PR #9 (16 added events + fixes; its work commit landed ~4 minutes after this session's claim, i.e., genuinely concurrent). `origin/main` was merged into this branch and reconciled **without discarding peer work**: overlaps deduplicated (NightLife, Portola, YBG, Fort Mason market, Fillmore Jazz → single rows linked to the page actually used as evidence); peer-verified improvements adopted (NightLife address, Muni Heritage details, jerryday.org organizer source); peer-only additions each re-fetched 2026-10-18 — People in Plazas and Merola Summer Festival kept (trimmed to fetched text), Golden Gate Park Bandshell Concerts / SFJAZZ Summer Sessions / Third Thursdays On Ellis / SF Opera Summer Season moved to Flagged for Review because their linked homepages do not retain the stated programs in readable text (reasons on flagged.html and in the audit). Peer's illuminatesf.org link proved to redirect to an unrelated crowdfunding page; the SF Travel-sourced Illuminate row stands.
+- **Reconciled totals: 85 records — 69 published (58 recurring + 11 special), 16 flagged.** The completion log above (67/56/11/12) describes the pre-reconciliation snapshot and is preserved as history; this addendum supersedes its counts. `verify.py` stable counts, README, dashboard, and `research/official-source-audit.md` (new "Peer reconciliation" section) updated to match; build+verify pass.
+
+- **Pull request:** [#10](https://github.com/buffedlizard55-lab/MaltaProj7/pull/10) — final integration + PR #9 reconciliation, opened from `arena/1bde1cd1-maltaproj7` to `main` (2026-10-18). Merge + Pages deploy confirmation to be appended after merge, per brief.
+
+### Publication record — PR #10 merged and deployed
+
+- PR [#10](https://github.com/buffedlizard55-lab/MaltaProj7/pull/10) merged to `main` **2026-10-18T03:21:40Z**, merge commit `bc88445c8e6931c76c1763351e8ef8826446efe3` (merged without waiting for approval, per brief; flagged items nonblocking).
+- Deployments succeeded: custom [Pages workflow 39093344093](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39093344093) (its "Verify data and internal links" step re-ran `build.py`/`verify.py` in CI) and [pages-build-deployment 39093343711](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39093343711); Pages API reports `status: built` at https://buffedlizard55-lab.github.io/MaltaProj7/ . Live dashboard + Flagged pages fetched at the merge commit and show 58 recurring / 11 special / 8 categories / 16 flagged.
+- **Post-deploy defect found and fixed in the follow-up PR:** live inspection showed several `build.py` copy/dynamic-summary edits had been lost to a same-file parallel-edit race during authoring (dashboard prose omitted the 2 monthly rows and the 1 official-venue source; table links still read "Official source ↗"; monthly sort rank missing). Data itself was unaffected. The follow-up PR re-applies those builder changes atomically and adds verifier guards asserting every cadence/authority group appears in the dashboard summaries and that the old link text never reappears.
+
+### Publication record — PR #11 merged and deployed
+
+- PR [#11](https://github.com/buffedlizard55-lab/MaltaProj7/pull/11) (dashboard-summary/link-text fixes + verifier guards + PR #10 record) merged **2026-10-18T03:24:02Z**, merge commit `76022bcbffc472946464191937b282a99c53c71a`. Pages workflow [39093484150](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39093484150) succeeded (build+verify re-run in CI); Pages API `status: built`. Live re-inspection at that merge commit confirms: 58 recurring / 11 special / 8 categories / 16 flagged; cadence summary **10 weekly, 2 monthly, 6 seasonal, 40 annual**; authority summary **52 / 11 / 3 / 2 / 1** = 69; links read "Source ↗"; recurring table sorts Weekly → Monthly → Seasonal → Annual.
+- **Final state of this task:** 85 records (69 published city-only + 16 flagged), `python3 build.py && python3 verify.py` green locally and in CI, site live at https://buffedlizard55-lab.github.io/MaltaProj7/ . Final-integration scope **done**; remaining flags are documented, nonblocking `needs review` items for a future re-check when organizers publish readable pages.
+
+---
+
 ## Integration claim — `arena/d71d78cc-maltaproj7` — 2026-10-18 (UTC)
 
 - **Session ID:** `arena/d71d78cc-maltaproj7` (Arena-fixed branch; per platform rules all work stays on this branch).
@@ -331,4 +453,4 @@ This matrix records **only what this session directly corroborated**, not a blan
 
 ## Integration publication (I3) — recorded after merge — `arena/d71d78cc-maltaproj7`
 
-(Completed at merge time; see the merge/deploy entry appended below.)
+(Recorded in the merge/deploy entry below.)

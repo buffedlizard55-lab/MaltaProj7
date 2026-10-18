@@ -80,7 +80,7 @@ def validate(catalog: dict, events: list[dict]) -> None:
 
 
 def sort_regular(event: dict) -> tuple:
-    ranks = {"weekly": 0, "seasonal": 1, "annual": 2}
+    ranks = {"weekly": 0, "monthly": 1, "seasonal": 2, "annual": 3}
     return (ranks.get(event.get("cadence"), 9), event["category"], event["name"])
 
 
@@ -103,7 +103,7 @@ def value_cell(value: str) -> str:
 def source_cell(event: dict) -> str:
     return (
         f'<a class="source-link" href="{esc(event["source_url"])}" target="_blank" '
-        f'rel="noopener noreferrer">Official source ↗</a>'
+        f'rel="noopener noreferrer">Source ↗</a>'
         f'<span class="source-meta">{esc(event["source_label"])}</span>'
         f'<span class="authority">{esc(event["source_authority"])}</span>'
     )
@@ -126,7 +126,7 @@ def bucket_badge(bucket: str) -> str:
 
 
 def event_table(events: list[dict], *, include_bucket: bool = False) -> str:
-    headers = ["Event", "Cadence", "Category", "Date / cadence", "Time", "SF location", "Admission", "Official source"]
+    headers = ["Event", "Cadence", "Category", "Date / cadence", "Time", "SF location", "Admission", "Source"]
     if include_bucket:
         headers.insert(1, "List")
     output = [
@@ -159,7 +159,7 @@ def review_table(events: list[dict]) -> str:
         '<div class="table-wrap">',
         '<table class="review-table">',
         '<caption>Items intentionally excluded from the city-only event tables until the noted issue is resolved.</caption>',
-        '<thead><tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Captured date</th><th scope="col">Captured location</th><th scope="col">Why it is flagged</th><th scope="col">Official source</th></tr></thead>',
+        '<thead><tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Captured date</th><th scope="col">Captured location</th><th scope="col">Why it is flagged</th><th scope="col">Source</th></tr></thead>',
         "<tbody>",
     ]
     for event in events:
@@ -322,6 +322,20 @@ def build() -> None:
     cadence_counts = Counter(event["cadence"] for event in recurring)
     authority_counts = Counter(event["source_authority"] for event in published)
 
+    cadence_order = ("weekly", "monthly", "seasonal", "annual")
+    cadence_summary = ", ".join(
+        f"<strong>{cadence_counts[cadence]} {cadence}</strong>"
+        for cadence in cadence_order if cadence_counts.get(cadence)
+    )
+    top_categories = ", ".join(
+        f"<strong>{esc(category)} ({count})</strong>"
+        for category, count in category_counts.most_common(3)
+    )
+    authority_summary = ", ".join(
+        f"<strong>{count} {esc(authority.lower())}</strong>"
+        for authority, count in sorted(authority_counts.items(), key=lambda item: (-item[1], item[0]))
+    )
+
     (ROOT / "assets").mkdir(exist_ok=True)
     (ROOT / "assets" / "style.css").write_text(STYLE + "\n", encoding="utf-8")
     (ROOT / "categories").mkdir(exist_ok=True)
@@ -335,14 +349,14 @@ def build() -> None:
   <div class="panel">
     <p class="eyebrow" style="color:#0e766e">Snapshot, not an exhaustive calendar</p>
     <h2>A source-audited city events catalog</h2>
-    <p>Use the two primary lists to distinguish events that recur weekly, seasonally, or annually from dated special events. Every active row has its own official source link. A separate review register preserves uncertain, cancelled, multi-city, and outside-city items instead of silently normalizing them.</p>
+    <p>Use the two primary lists to distinguish events that recur weekly, monthly, seasonally, or annually from dated special events. Every active row has its own source link, with the source type shown. A separate review register preserves uncertain, cancelled, multi-city, and outside-city items instead of silently normalizing them.</p>
     <p><a href="recurring.html"><strong>Browse regularly occurring events →</strong></a> &nbsp; <a href="special.html"><strong>Browse special events →</strong></a></p>
   </div>
   <aside class="panel snapshot"><strong>{len(published)}</strong><span>published city-only rows</span><br><small>Checked {esc(catalog['as_of'])}; {len(review)} items are explicitly held for review.</small></aside>
 </section>
 <section aria-labelledby="at-a-glance"><div class="section-head"><h2 id="at-a-glance">At a glance</h2><p>Counts are derived directly from the verified dataset.</p></div>
 <div class="cards">
-  <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Regularly occurring</span><span class="card-note">Weekly, seasonal, and annual traditions</span></a>
+  <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Regularly occurring</span><span class="card-note">Weekly, monthly, seasonal, and annual traditions</span></a>
   <a class="card" href="special.html"><span class="metric">{len(special)}</span><span class="card-label">Special events</span><span class="card-note">Dated programs and one-off conferences</span></a>
   <a class="card" href="categories.html"><span class="metric">{len(categories)}</span><span class="card-label">Categories</span><span class="card-note">Each has its own table page</span></a>
   <a class="card" href="flagged.html"><span class="metric">{len(review)}</span><span class="card-label">Flagged for review</span><span class="card-note">Never mixed into city-only results</span></a>
@@ -350,19 +364,19 @@ def build() -> None:
 <section aria-labelledby="category-summary"><div class="section-head"><h2 id="category-summary">Browse by category</h2><p>Each card opens a source-linked category table.</p></div><div class="cards">{category_cards}</div></section>
 <section class="panel" aria-labelledby="findings"><h2 id="findings">What this catalog supports</h2>
 <ul class="analysis-list">
-  <li><strong>{cadence_counts['weekly']} weekly</strong>, <strong>{cadence_counts['seasonal']} seasonal</strong>, and <strong>{cadence_counts['annual']} annual</strong> entries make up the regularly occurring list; it is not limited to weekly events.</li>
-  <li><strong>Community &amp; culture ({category_counts['Community & culture']})</strong>, <strong>Food &amp; markets ({category_counts['Food & markets']})</strong>, and <strong>Music &amp; performing arts ({category_counts['Music & performing arts']})</strong> are the largest documented categories in this audit snapshot.</li>
-  <li>The rows link to <strong>{authority_counts['Official organizer']} official organizer</strong>, <strong>{authority_counts['Government source']} government</strong>, <strong>{authority_counts['Official venue / federal trust']} official-venue/federal-trust</strong>, and <strong>{authority_counts['Trusted civic source']} trusted civic</strong> sources. This is an audit of stated sources, not an assertion that it finds every event in the city.</li>
+  <li>{cadence_summary} entries make up the regularly occurring list; it is not limited to weekly events.</li>
+  <li>{top_categories} are the largest documented categories in this audit snapshot (computed from the dataset, listed largest first).</li>
+  <li>The published rows link to {authority_summary} sources. This is an audit of stated sources, not an assertion that it finds every event in the city.</li>
 </ul></section>
 <section class="notice"><strong>Planning note.</strong> Dates and operational details change. Use the source link in the row as the final check before attending. An em dash means the linked source did not state that optional field in the captured audit; essential gaps go to <a href="flagged.html">Flagged for Review</a>.</section>
 """
     (ROOT / "index.html").write_text(page("Dashboard", home, "index.html", catalog), encoding="utf-8")
 
     recurring_body = f"""
-<section class="section-head"><div><h2>Regularly occurring events</h2><p>Weekly, seasonal, and annual programs with a recurring cadence stated by the source.</p></div><p>{len(recurring)} verified rows</p></section>
+<section class="section-head"><div><h2>Regularly occurring events</h2><p>Weekly, monthly, seasonal, and annual programs with a recurring cadence stated by the source.</p></div><p>{len(recurring)} verified rows</p></section>
 {filter_controls(categories, key='recurring')}
 {table_with_filter_rows(recurring, key='recurring')}
-<section class="notice"><strong>Why annual events are here:</strong> the task separates regular patterns from dated special events. A tradition is listed here only when the source supports an annual/weekly/seasonal cadence; the exact audited date remains in the row.</section>
+<section class="notice"><strong>Why annual events are here:</strong> the task separates regular patterns from dated special events. A tradition is listed here only when the source supports an weekly/monthly/seasonal/annual cadence; the exact audited date remains in the row.</section>
 """
     (ROOT / "recurring.html").write_text(page("Regularly occurring events", recurring_body, "recurring.html", catalog), encoding="utf-8")
 
@@ -373,7 +387,10 @@ def build() -> None:
 """
     special_markup = page("Special events", special_body, "special.html", catalog)
     (ROOT / "special.html").write_text(special_markup, encoding="utf-8")
-    (ROOT / "annual-special.html").write_text(page("Annual / Special events", special_body, "special.html", catalog), encoding="utf-8")
+    alias_body = f"""
+<section class="notice"><strong>Alias page.</strong> This is the same list as <a href="special.html">Special events</a>, kept at the <code>annual-special.html</code> address for older links. Annual traditions are not listed here; they are on <a href="recurring.html">Regularly occurring events</a>.</section>
+{special_body}"""
+    (ROOT / "annual-special.html").write_text(page("Special events (alias)", alias_body, "special.html", catalog), encoding="utf-8")
 
     all_body = f"""
 <section class="section-head"><div><h2>All published city-only events</h2><p>Search across the {len(all_events)} records or narrow by category.</p></div><p>Every row has a source link.</p></section>
@@ -391,7 +408,7 @@ def build() -> None:
     for category in categories:
         category_events = sorted([event for event in all_events if event["category"] == category], key=lambda event: event["name"])
         category_body = f"""
-<section class="section-head"><div><p><a href="../categories.html">← All categories</a></p><h2>{esc(category)}</h2><p>{len(category_events)} verified city-only event rows, each with its own official source link.</p></div></section>
+<section class="section-head"><div><p><a href="../categories.html">← All categories</a></p><h2>{esc(category)}</h2><p>{len(category_events)} verified city-only event rows, each with its own source link.</p></div></section>
 {event_table(category_events, include_bucket=True)}
 """
         (ROOT / "categories" / f"{slugify(category)}.html").write_text(
@@ -417,10 +434,19 @@ def build() -> None:
 </ol></section>
 <section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
 <li>The audit has {len(recurring)} recurring and {len(special)} dated-special verified rows across {len(categories)} categories.</li>
-<li>{cadence_counts['annual']} recurring rows are annual traditions, alongside {cadence_counts['weekly']} weekly and {cadence_counts['seasonal']} seasonal programs. The classification is based on cadence, not whether an event is free or public.</li>
-<li>The catalog has the most audited rows in Community &amp; culture, Food &amp; markets, and Music &amp; performing arts. This describes the verified source set, not all activity in San Francisco.</li>
+<li>The recurring list breaks down as {cadence_summary}. The classification is based on cadence, not whether an event is free or public.</li>
+<li>The largest audited categories are {top_categories}. This describes the verified source set, not all activity in San Francisco.</li>
+<li>Most 2026 editions in this snapshot had already taken place by the October 18, 2026 check date, while several rows document confirmed 2027 editions. Rows record the audited edition, not a promise that the same dates repeat.</li>
 <li>The review register makes scope and cancellation decisions visible instead of deleting difficult records or asserting unsupported city-only coverage.</li>
 </ul></section>
+<section class="panel"><h3>Directories and coverage boundaries</h3>
+<p>Some San Francisco programming is published as a running calendar rather than a single event with a fixed cadence. Those are linked here as directories instead of forcing them into event rows:</p>
+<ul class="analysis-list">
+<li><a href="https://sfpl.org/events">San Francisco Public Library — Upcoming Events</a>: branch programs and talks across the city system.</li>
+<li><a href="https://sfcityguides.org/">San Francisco City Guides</a>: free volunteer-led walking tours (70+ tours, a program of SFPL); individual tours run on varying schedules via their tour finder.</li>
+<li><a href="https://sfrecpark.org/Calendar.aspx">SF Recreation and Park calendar</a>: park programs and seasonal city events; individual dated listings (for example Scaregrove) become special-event rows.</li>
+</ul>
+<p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles — for example the Bhangra &amp; Beats Night Market, the San Francisco Hip-Hop Dance Festival, and Renegade Craft Fair mentioned on SF Travel month pages — are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County. One candidate, the Bayview Juneteenth festival, was resolved during final integration via the city's official Juneteenth 2026 page, which states its June 21 date and Gilman Park location; the event's own homepage states no textual 2026 date or location.</p></section>
 <section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing a row, re-check the official source and update the review reason when evidence is incomplete or conflicting.</p><p>This site is intentionally not an exhaustive claim: private, newly announced, or unlisted events can exist outside this dated source audit.</p></section>
 """
     (ROOT / "method.html").write_text(page("Method & sources", method_body, "method.html", catalog), encoding="utf-8")
