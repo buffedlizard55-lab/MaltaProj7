@@ -1,3 +1,33 @@
+# Active coordination — session arena/e79e0de2-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/e79e0de2-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same documented deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T09:41Z):** `origin/main` at `23f584e` (merge of PR #24). `gh pr list --state all` → PRs #1–#24 all **MERGED**; no open PRs. `git branch -a` → only `main` and this session's `arena/e79e0de2-maltaproj7` (no other remote branches, no other live session). Every board below is historical (all tasks done/merged), so no peer claim is outstanding and this session takes the remaining brief-driven work plus the final integration role the brief assigns to the last session.
+
+**Local baseline:** `python3 build.py && python3 verify.py` → `Built 140 published events: 95 recurring, 45 special, 8 categories; 16 review records.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED` (published=140 recurring=95 special=45 review=16 flags=29 categories=8).
+
+**Brief gaps this session closes (each is an explicit, still-open item):**
+1. *"organized by date with upcoming dates highlighted first"* — not implemented: `recurring.html` sorts by cadence, `special.html` sorts by date ascending (so **past 2026 editions sort first**), `all-events.html` sorts by bucket/category/name, and **no page labels a row upcoming vs. completed** (92 of 140 published rows are past-dated as of the audit date).
+2. *"executive summary highlighting upcoming events close to today's current date"* — the dashboard has counts but no "next up" summary.
+3. *"clearly label how much it costs to go to the event"* / *"focusing on free events"* — the Admission column exists but **74 of 140 published rows have a blank admission cell**; there is no cost filter, no free-event view, and no free/paid labelling.
+4. *"gaming, music, AI"* focus — audio/visual coverage is present (GDC, RSA, Dreamforce, Confluent Current, Cloudflare Connect, Ignite) but there is no AI/ML-specific row and no explicit gaming/AI focus surface.
+5. Mobile friendliness — viewport meta and one media query exist, but wide 8-column tables only scroll horizontally on phones; no stacked card layout.
+6. `README.md` counts are stale (says 139 published / 25 flags; the dataset is 140 / 29).
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| E1 | Date-first organization: new `upcoming.html` (upcoming-first, date-sorted), per-row `Upcoming`/`Completed` status badges (build-time + live refresh), client-side date/name/category/cost sorting on every table | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `*.html` + `categories/*.html` + `assets/style.css` |
+| E2 | Cost clarity + free-event focus: cost column with explicit `Free`/paid/not-stated labelling, cost filter, new `free.html` view, dashboard "Free to attend" metric | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `*.html` + `assets/style.css` |
+| E3 | Executive summary: dashboard "Next up" panel driven by the live current date (nearest upcoming events), plus 7/30/90-day counts | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `index.html` |
+| E4 | Mobile-first tables: stacked card layout under 720px using `data-label` attributes; tap-target/typography pass | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), `assets/style.css` |
+| E5 | Coverage + cost verification: fill `admission` only where the official source states it; add gaming / music / AI rows (and other missing major SF programs) only from an official organizer/venue/government page fetched and quoted in `research/` | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `data/events.json`, `research/verification-e79e0de2.md` (new) |
+| E6 | Docs + guards: refresh `README.md` counts, extend `method.html` with the new analysis/findings, update `verify.py` count guards and add checks for the new pages/fields | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `README.md`, `verify.py`, `research/official-source-audit.md`, `build.py` (method page) |
+| E7 | Final integration: rebuild, verify, local link crawl, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links here | unclaimed | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `COORDINATION.md`, `.github/**` |
+
+Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of files owned by another live session (none exist); unverified values stay blank and are flagged, never inferred; flagged items do not block merge. Verification = direct fetch of the official publisher page via the sandbox fetch tool (confirmed working this session); no search-snippet or memory-based values are used.
+
 # Active coordination — session arena/2088b727-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/2088b727-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation every prior session logged).
@@ -776,3 +806,74 @@ All events verified against official sources on 2026-10-18. Key official sources
 
 ### Reconciliation note — `arena/646f6727-maltaproj7` (2026-10-18)
 While G1–G3 were in progress, `main` advanced via PR #17 (`arena/d07e4ede-maltaproj7`, +3 verified rows: Bhangra & Beats, SF Hip Hop DanceFest, Renegade Craft). `git merge origin/main` conflicted only in `data/events.json`, `verify.py` and generated HTML/CSV. Resolution: took `main`'s `data/events.json` and `verify.py`, re-ran the idempotent `research/coverage-patch-646f6727.py` on top (all 3 PR #17 rows retained), regenerated every page with `build.py`, and set the guards to the union: **107 published (87 recurring / 20 special), 16 review, 20 flags**. `verify.py` → PASS. No peer work discarded.
+
+---
+
+## Session `arena/e79e0de2-maltaproj7` — progress record (E1–E6 done, E7 in progress)
+
+**Branch:** `arena/e79e0de2-maltaproj7` (pinned by the Arena platform; see the deviation note at the top of this board).
+**Audit date:** 2026-10-18. **Catalog `as_of`:** 2026-10-18.
+
+### E1 — Date-first organization (DONE)
+Every list is now generated with **upcoming rows first**, ordered by start date; completed editions are pushed
+to the bottom and badged *Completed*; multi-week programs that are still running are badged *Ongoing now*.
+An inline script recomputes each row's status and "in N days" label against the visitor's real current date, so
+the static build never goes stale. New root page `upcoming.html` ("All events by date") added; `recurring.html`,
+`special.html`, `all-events.html` and all nine category pages use the same ordering.
+
+### E2 — Cost clarity and free-first focus (DONE)
+New **Cost** column on every row. The sourced admission text is classified as
+**Free (44)**, **Free or partly free (12)**, **Paid / ticketed (17)**, or **Not stated (75)** — derived only from
+the wording the linked official page used. "Not stated" is never treated as free; all 75 such rows are listed with
+their source links in a new "Cost not stated in the linked source" table on the Flagged for Review page.
+New root page `free.html` ("Free to attend") lists every row the source describes as free or partly free, and the
+dashboard has a "Free to attend — coming up" panel.
+
+### E3 — Executive summary (DONE)
+The dashboard now has a live **Executive summary — next up** panel: the ten dated events closest to today (plus up
+to three programs running right now), each with a relative date, category, list, location, cost badge and source
+link, next to a strip showing today's date and the number of events **starting in 7 / 30 / 90 days** and **running
+now**. A build-time list is included under `<noscript>` for readers without JavaScript.
+
+### E4 — Mobile card layout (DONE)
+Under 760 px each table row becomes a labelled card using `data-label` attributes on every cell, so every field
+stays readable on a phone instead of scrolling a 960 px grid sideways. Nav, filter bar, hero and next-up list all
+reflow to one column. `assets/style.css` regenerated from `build.py`'s `STYLE` block.
+
+### E5 — Coverage and cost verification (DONE)
+41 published rows plus all new candidates were re-fetched from their live official pages this session; every URL
+resolved (HTTP 200) and no dead link was found. Ten new rows were added from official sources, two rows were
+re-sourced to the organiser's own page, eleven cost/time fields were filled from official copy, and 14 clearly
+technical rows were recategorised into a new **Technology, AI & gaming** category. Full row-by-row log with quoted
+source text: `research/verification-e79e0de2.md`; reproducible data patch: `research/patch-e79e0de2.py`; audit
+appendix: `research/official-source-audit.md`.
+
+**Final counts:** 164 records = **148 published city-only rows (98 recurring + 50 special)** + 16 review-register
+records; **34 field-level flags**; **9 categories**. `python3 build.py` → "Built 148 published events: 98 recurring,
+50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free." `python3 verify.py` →
+"ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED".
+
+**Irregularities recorded (nonblocking, all on the Flagged for Review page with source links):**
+- Potrero Hill Festival hours — organiser says 10 a.m.–5 p.m., SFMTA says 4:30 p.m. and 4 p.m. (flag updated).
+- Hayes Valley shared-spaces hours (Fri 4–10 p.m., Sat 7 a.m.–10 p.m.) vs the PCFMA market page (Sat 10 a.m.–2 p.m.).
+- Day of the Devs and AI Engineer Code: 2027 editions not announced, so no 2027 date is published.
+- GDC 2027 prices are early rates with published deadlines (Oct 9, Dec 11, 2026, …).
+- SF Dance Film Festival: only the masterclass is stated free; individual screening prices are not printed.
+- Pre-existing flags retained: Bhangra & Beats location conflict, Bay to Breakers "May 18" copy, Dreamforce 2027
+  and J.P. Morgan 2027 venues not named, TechCrunch Disrupt event page behind a Cloudflare challenge, SFDFF SHACK15
+  screening outside the city, Day of the Dead date resting on SF Travel alone.
+- **Out-of-city item excluded:** the SFMTA advisory for Oct 15–21, 2026 also covers the *Top of the Hill Festival*
+  in **Daly City** — deliberately not published.
+- Dead/moved pages noted: `moscone.com/events/current-san-francisco` (the year suffix is required; the dataset
+  already cites the correct URL) and `intloceanfilmfest.org/tickets` (the About page is the working 2027 source).
+
+### E6 — Documentation and guards (DONE)
+`README.md` rewritten to describe the date-first ordering, the cost-label policy, the new pages and the current
+counts. `method.html` documents the publish rule, the ordering/executive-summary behaviour, the four cost classes
+with a legend, the bounded findings, and the directory/coverage boundaries. `verify.py` gained new guards:
+date-first ordering (upcoming rows first, ascending dates, first row upcoming), free-page membership
+(free/partly-free rows only, exact count), cost-not-stated disclosure on the Flagged page, dashboard section and
+embedded-dataset coverage, the new category and its page, and updated stable counts with an audit-entry comment.
+
+### E7 — Final integration (IN PROGRESS)
+Push → pull request to `main` → merge → confirm the GitHub Pages deploy → record the PR and merge result here.
