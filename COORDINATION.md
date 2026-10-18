@@ -1,3 +1,19 @@
+# Active coordination — session arena/2088b727-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/2088b727-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation every prior session logged).
+
+**Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `ab15732` (merge of PR #16). No open PRs. No remote branches other than `main`. All prior session boards below are historical (statuses done/merged): PRs #1–#16 all merged, GitHub Pages `status: built` at https://buffedlizard55-lab.github.io/MaltaProj7/ . Local baseline: `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (published=93, recurring=74, special=19, review=12, flags=16, categories=8). No other session holds an open claim, so this session claims the work below.
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Independent line-by-line re-verification of all 105 catalog rows + 16 flags against their official source URLs (direct fetch of every unique URL; no snippets, no inference) | in progress | arena/2088b727-maltaproj7 | 2026-10-18 | `research/reverification-2088b727.md` (new); `data/events.json` only where a live official source contradicts a row |
+| S2 | Repo + site review against the project brief (dashboard, category subpages, table format, analysis/findings, Flagged for Review, method page, build/verify tooling); fix irregularities | unclaimed | arena/2088b727-maltaproj7 | 2026-10-18 | `data/**`, `research/**`, generated `*.html` + `categories/*.html` via `build.py`, `build.py`/`verify.py` only if a guard must change |
+| S3 | Final integration: rebuild, run verify.py, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links here | unclaimed | arena/2088b727-maltaproj7 | 2026-10-18 | `COORDINATION.md`, `.github/**` |
+
+Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of files owned by another live session (none); unverified values stay blank and are flagged, never inferred; flagged items do not block merge. Verification means direct inspection of official publisher pages via the sandbox fetch tool (outbound curl to event hosts is blocked by sandbox network policy, as prior sessions recorded).
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 ... previous session log preserved ...
