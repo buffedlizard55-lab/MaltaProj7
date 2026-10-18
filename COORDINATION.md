@@ -20,7 +20,7 @@ brief-driven work (C1–C6 below) and the integration role.
 | C3 | Data corrections and additions that verification supports (official sources only), plus field-level flags for every irregularity found | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `data/events.json`, `data/events.csv`, `research/patch-3977d9cb.py` |
 | C4 | Verification harness: keep every existing guard, add guards for the free/paid separation, re-run the local link crawl | **done — re-applied on the merged baseline** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `verify.py` |
 | C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | **done — re-applied on the merged baseline** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
-| C6 | Final integration: reconcile parallel sessions, rebuild, verify, crawl local links, PR to `main`, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links | in progress | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `COORDINATION.md`, `.github/**` |
+| C6 | Final integration: reconcile parallel sessions, rebuild, verify, crawl local links, PR to `main`, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T12:40Z | `COORDINATION.md`, PR #34, Pages runs 39128285934 / 39128285806 |
 
 ## Merge conflict and reconciliation log (required by the brief)
 
@@ -155,6 +155,23 @@ Sunday Streets free-wording flag).
 | G2 | Coverage pass: add newly verified **free** SF events with official-publisher links; reject anything not confirmable | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `data/events.json`, `research/patch-56415e75.py` |
 | G3 | Analysis & findings register (cost / date / category counts, irregularities with source links) | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `research/findings-56415e75.md` |
 | G4 | Final integration: merge peer work, re-verify combined data, rebuild, fix count guards, PR to `main`, merge, confirm Pages deploy | **done** | arena/56415e75-maltaproj7 | 2026-10-18T11:41Z (after PR #29 merged) | `verify.py` (count guards), generated `*.html`, `data/events.csv`, `COORDINATION.md` |
+
+## C6 publication record — PR #34 merged and deployed (arena/3977d9cb-maltaproj7)
+
+| Item | Value |
+| --- | --- |
+| Pull request | https://github.com/buffedlizard55-lab/MaltaProj7/pull/34 — "Final integration (C6): merge three parallel sessions, +5 official-source rows, +7 flags, hardened free/paid guards" |
+| Branch merged | `arena/3977d9cb-maltaproj7` → `main`, merged without waiting for approval as instructed; `mergeable`/`CLEAN` before merge, no required checks configured on the branch |
+| Merge commit | `7b5a83fd02a9e78251b6ef4fcd60330625431713`, merged 2026-10-18T12:40:38Z |
+| `main` before this merge | `2f21f34` (PRs #27–#33 from the three peer sessions) |
+| Gate before merge | `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (162 published / 102 recurring / 60 special / 17 review / 51 flags) |
+| GitHub Pages workflow | run `39128285934` "Deploy static site to GitHub Pages" → completed/**success** on `7b5a83f` |
+| GitHub Pages publication | run `39128285806` "pages build and deployment" → completed/**success** on `7b5a83f` |
+| Live site checked after deploy | https://buffedlizard55-lab.github.io/MaltaProj7/ — fetched 2026-10-18: the dashboard renders the merged catalog, the executive summary lists confirmed-free events nearest today (including this session's Hunters Point Shipyard Fall Open Studios row, "ongoing — ends Oct 18, 2026"), the focus blocks read Gaming 0 / Music 4 / AI 0 / Everything else 16 = the 20 confirmed-free dated-upcoming rows, with honest "no dated, free upcoming event in this focus area is confirmed" notices for Gaming and AI; `flagged.html` renders all 51 flags with their source links |
+| Flagged / unverified items | Published on https://buffedlizard55-lab.github.io/MaltaProj7/flagged.html — non-blocking per the brief; the 7 new flags and the 17 review records are all listed there with official links for manual review |
+| Nothing discarded | All three peer boards and every historical section below are retained verbatim; the merge adopted main's generator, data and styling for every shared file |
+
+A follow-up commit on this branch carries this publication record and the C6 status change.
 
 ## Session record — arena/56415e75-maltaproj7
 
