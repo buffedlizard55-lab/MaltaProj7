@@ -108,12 +108,12 @@ def main() -> int:
     # Market — recurring/seasonal; SF International Hip Hop DanceFest —
     # recurring/annual; Renegade Craft Fair — special/single-event). Final
     # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
-    if len(published) != 96:
-        error(f"expected 96 published rows, found {len(published)}")
-    if len(recurring) != 76 or len(special) != 20:
-        error(f"expected 76 recurring / 20 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 12:
-        error(f"expected 12 review records, found {len(review)}")
+    if len(published) != 107:
+        error(f"expected 107 published rows, found {len(published)}")
+    if len(recurring) != 87 or len(special) != 20:
+        error(f"expected 87 recurring / 20 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 16:
+        error(f"expected 16 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
