@@ -1,0 +1,31 @@
+<h2>Flagged for Review</h2>
+<p>These items do <b>not</b> block the site. They are published here, with source links, for manual review after the site is live. No value below was filled in by inference.</p>
+
+<div class="note flag"><h3>1. “Full list” cannot be proven exhaustive</h3>
+<p>There is no single official City registry of <i>every</i> event in San Francisco. This site lists events that could be verified from an official city, organiser, venue, or SF Travel (the city’s official destination organisation) source on 18 Oct 2026. Private, one-off, ticketed, or newly announced events will be missing. <b>Review action:</b> tell us which organisers/feeds to add; we will add them only with an official source link.</p></div>
+
+<div class="note flag"><h3>2. Excluded — outside San Francisco city limits (verified, therefore not in the tables)</h3>
+<ul>
+<li><b>Super Bowl LX &amp; 2026 FIFA World Cup matches</b> — held at Levi’s Stadium, Santa Clara, not San Francisco. SF Travel notes the game is at Levi’s Stadium while SF hosts related week events. Source: <a href="https://www.sftravel.com/media/press-release/what%E2%80%99s-new-san-francisco-winter-2025">SF Travel — What’s New in San Francisco for Winter 2025</a>. Only SF-city watch/related events would qualify, and they need their own official SF source.</li>
+<li><b>Mill Valley Film Festival</b> — listed on an SF Travel October round-up but held in Mill Valley. Source: <a href="https://www.sftravel.com/article/san-francisco-festivals-events-october">SF Travel — October</a>. Excluded on location.</li>
+<li><b>CAAMFest</b> — included, but SF Travel states it presents work in “San Francisco, Berkeley, and Oakland.” Only its San Francisco venues are in scope; per-venue SF-only dates were not confirmed from the organiser, so Location is left blank in the data. Source: <a href="https://www.sftravel.com/article/san-francisco-festivals-events-may">SF Travel — May</a>.</li>
+<li><b>San Francisco Bay Area regional events generally</b> — any event whose official source gives a non-SF venue was excluded, even if “San Francisco” is in its name.</li>
+</ul></div>
+
+<div class="note flag"><h3>3. Unverified fields (left blank in <code>data/events.json</code>)</h3>
+<ul>
+<li><b>Cost</b> is blank for most rows: official pages checked did not state a price, so none was inferred. Where a source states “Free”, it is shown. In the HTML tables, blank cost/location/when is rendered as “unverified — blank in data” so the gap is visible, never hidden.</li>
+<li><b>Location</b> is blank for SF Sketchfest, Noise Pop, SFFILM, Frameline, and Escape from Alcatraz: sources confirmed the event is in San Francisco but did not give a single venue address we could quote.</li>
+<li><b>Exact hours</b> for Heart of the City Farmers Market differ between older official snippets (7am–5pm / 7am–4pm); the table therefore says “hours on official site” rather than picking one. Source: <a href="https://hotcfarmersmarket.org/">hotcfarmersmarket.org</a>.</li>
+</ul></div>
+
+<div class="note flag"><h3>4. Irregularities found while verifying</h3>
+<ul>
+<li><b>SF Rec &amp; Park “Golden Gate Park Impact Events” list</b> gives “October 2–5 Hardly Strictly Bluegrass Festival” while SF Travel gives October 2–4, 2026. The table uses SF Travel’s 2–4 Oct; flagged here as a date-range discrepancy between two official sources. Sources: <a href="https://sfrecpark.org/1310/Tentative-Calendars-of-Special-Events">SF Rec &amp; Park</a> · <a href="https://www.sftravel.com/article/san-francisco-festivals-events-october">SF Travel — October</a>.</li>
+<li><b>Chinese New Year Parade timing:</b> SF Travel states the 2026 parade was Saturday, March 7; the organiser’s current homepage/FAQ now lists the next parade as Feb 20, 2027. Both are shown in the row so the rollover is transparent. Sources: <a href="https://chineseparade.com/">chineseparade.com</a> · <a href="https://www.sftravel.com/article/san-francisco-festivals-events-march">SF Travel — March</a>.</li>
+<li><b>Carnaval year mix on sf.gov:</b> the City’s Carnaval page found in search describes “May 25 &amp; 26” without a matching 2026 date, so the table uses SF Travel’s 2026 guide (May 23–24, 2026) instead. Sources: <a href="https://www.sf.gov/carnaval-san-francisco">sf.gov — Carnaval</a> · <a href="https://www.sftravel.com/article/guide-to-san-franciscos-carnaval-celebration">SF Travel Carnaval guide</a>.</li>
+<li><b>Sandbox link-check limitation:</b> direct outbound HTTP from the build sandbox is restricted to GitHub/npm/PyPI hosts, so external source URLs could not be re-fetched by <code>curl</code> here (all returned 000). They were verified through indexed official pages and direct page fetches via the research tools (e.g. Foodwise Alemany and SFPL Events pages were fetched in full). A post-deploy external link check from a normal network is recommended.</li>
+<li><b>Repository irregularity:</b> the repo began as a single commit containing only <code>README.md</code> (“# MaltaProj7”) — no licence, no <code>.gitignore</code>, no site framework. Noted in COORDINATION.md; a plain static site was chosen so GitHub Pages needs no build dependencies.</li>
+</ul></div>
+
+<div class="note"><h3>How to request a fix</h3><p>Open an issue or a change note in <code>COORDINATION.md</code> with the event name and an official source URL. Rows are only added/changed with an official link; unverifiable values stay blank.</p></div>

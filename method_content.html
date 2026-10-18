@@ -1,0 +1,19 @@
+<h2>Method &amp; Sources</h2>
+<h3>Rules followed, line by line</h3>
+<ol>
+<li><b>San Francisco only.</b> An event is included only if its official source places it inside the City &amp; County of San Francisco. Regional events with non-SF venues were excluded and logged on the Flagged page.</li>
+<li><b>Two types only.</b> <i>Recurring</i> = repeats weekly, monthly, or as a seasonal series within the year. <i>Annual / Special</i> = once-a-year festival, parade, race, or special edition. Seasonal series that are also annual traditions (e.g. Stern Grove) are classed Recurring because they repeat weekly within their season — the season is stated in the row.</li>
+<li><b>Official sources only.</b> Priority: (1) City &amp; County of San Francisco (<code>sf.gov</code>, <code>sfrecpark.org</code>, <code>sfenvironment.org</code>, <code>sfpl.org</code>); (2) the event’s own organiser/venue (e.g. Foodwise, SF Pride, SFFILM, Exploratorium, California Academy of Sciences); (3) SF Travel, San Francisco’s official destination organisation, for round-ups where the organiser page was not the source checked. Every table row links to the exact page used.</li>
+<li><b>No inference.</b> If a source did not state cost, exact venue, or hours, the field is blank in <code>data/events.json</code> / <code>data/events.csv</code> and rendered as “unverified” on the site. See Flagged page.</li>
+<li><b>Dates.</b> 2026 dates are shown only as stated by the linked source at check date (18 Oct 2026). Where two official sources disagree, the discrepancy is flagged, not silently resolved.</li>
+</ol>
+<h3>Analysis (only what the verified data supports)</h3>
+<ul>
+<li>The verified list is heaviest in <b>Music</b> and <b>Food &amp; Markets / Community</b> recurring programming, and in summer–autumn annual festivals (June–October), reflecting the official sources checked — this is a property of those sources, not a claim about all SF activity.</li>
+<li>Recurring anchors are weekly farmers markets, Thursday museum late-nights (Exploratorium / Cal Academy), library &amp; City Guides programming, and seasonal free concert series (Stern Grove, Yerba Buena Gardens Festival, Sunday Streets).</li>
+<li>Several flagship annual events are free to attend per their official sources (Pride, Stern Grove, Yerba Buena Gardens Festival, Sunday Streets, Hardly Strictly Bluegrass); most others did not state cost on the page checked, so cost is blank — not assumed ticketed.</li>
+</ul>
+<h3>Source publishers used</h3>
+<p>City &amp; County of San Francisco (sf.gov, SF Recreation &amp; Parks, SF Environment, SF Public Library) · SF Travel · Foodwise · Heart of the City Farmers Market · Exploratorium · California Academy of Sciences · SF City Guides · Stern Grove Festival Association · Yerba Buena Gardens Festival · Sunday Streets SF / Livable City · San Francisco Pride · Chinese New Year Festival &amp; Parade · SFFILM. Full URL per row in the tables and in <code>data/events.json</code>.</p>
+<h3>Rebuild &amp; verify</h3>
+<p><code>python3 build.py</code> regenerates all pages from <code>data/events.json</code> (and rewrites <code>data/events.csv</code>). <code>python3 verify.py</code> checks: every row has an official source URL, no blank names/types/categories, SF-only exclusions are not present, internal links resolve to files, and counts match the generated pages.</p>
