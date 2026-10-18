@@ -1,3 +1,24 @@
+# Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
+
+**Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `5614df2` (merge of PR #8). No open PRs (`gh pr list --state open` → empty). No remote branches other than `main`. All tasks claimed by sessions `1e3b5ea8`, `a4797fc9`, `f3cb0dad`, `185cda46` are merged/done. Local baseline: `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (published=54, recurring=46, special=8, review=5, categories=8). GitHub Pages API: status `built`, site https://buffedlizard55-lab.github.io/MaltaProj7/ .
+
+Because every prior task is done and merged, this session acts as the **final integration session** permitted by the rules to touch shared outputs (data, index, navigation).
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| R1 | Repo review: line-by-line audit of data, build, verify, site pages against the project brief | in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | read-only review; findings into `COORDINATION.md`, `research/**` |
+| R2 | Independent re-verification of all 54 published rows + 5 review records against their official source URLs (direct fetch, no snippets) | in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `research/reverification-55c58947.md` (new), `data/events.json` only where a source contradicts a row |
+| R3 | Fix irregularities found in R1/R2; rebuild site; run verify.py | unclaimed→in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `data/**`, `research/**`, generated HTML via `build.py`, `build.py`/`verify.py` if a check itself is wrong |
+| R4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `COORDINATION.md`, PR metadata |
+
+Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of another session's claimed scope (none are active); unverified values stay blank and are flagged, never inferred; flagged items do not block merge.
+
+---
+
 # Active coordination — concurrent-session collision resolved without discarding work
 
 ## Current arbitration log (2026-10-18T01:27Z)
