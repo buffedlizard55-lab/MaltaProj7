@@ -53,7 +53,9 @@
 ### Publication record
 
 - **Pull request [#29](https://github.com/buffedlizard55-lab/MaltaProj7/pull/29)** — *Free-first SF events catalog: verified 41 rows, 6 new free events, separate paid section*, branch `arena/8c40d1c6-maltaproj7` → `main`. It integrates the parallel session `arena/f65449c5-maltaproj7` (PRs #27–#28): the branch was merged with `git merge origin/main` rather than rebased, and the conflicts were resolved file by file as described in the parallel-session note above. The PR body lists the sources used and the five review items above.
-- **Merge commit and Pages workflow run:** recorded in the follow-up PR opened after the merge (the merge commit sha only exists once GitHub merges), because the publication record has to travel through a PR like any other change. See the entry appended under this heading.
+- **Merged** 2026-10-18T11:40:21Z; merge commit [`37a7016`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/37a7016cb2e27111741bf46da961ddf0a02d5a03).
+- [Pages workflow run 39124184001](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39124184001) ran on that merge commit and completed **successfully** at 2026-10-18T11:40:23Z: the `python3 build.py && python3 verify.py` step and the deployment both passed, as did the earlier runs [39121815011](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39121815011) (`a9f96b6`) and [39121748743](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39121748743) (`7ea557a`). No PR checks are configured on the repository, so the local verification plus the post-merge deployment workflow are the gate.
+- **Live site** https://buffedlizard55-lab.github.io/MaltaProj7/ — dashboard, [Upcoming](https://buffedlizard55-lab.github.io/MaltaProj7/upcoming.html), [Free](https://buffedlizard55-lab.github.io/MaltaProj7/free.html), [Paid & partly free](https://buffedlizard55-lab.github.io/MaltaProj7/paid.html) and [Flagged for Review](https://buffedlizard55-lab.github.io/MaltaProj7/flagged.html).
 
 ---
 
