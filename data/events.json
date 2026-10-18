@@ -7,8 +7,8 @@
   "row_standard": "Every published row carries an organizer, venue, or government source link. Dates, hours, locations, and admissions are shown only when stated in the linked source captured for this audit.",
   "field_policy": "An em dash means the linked source did not state that optional field in the captured record. Rows needing a decision, scope correction, or an essential missing value are separated on the Flagged for Review page.",
   "sources_policy": "Official organizer, official venue, or government sources. A small number of records use SF Travel, the City and County's official destination marketing organization, or a municipal arts calendar; those are labeled trusted civic sources.",
-  "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7 + arena/55c58947-maltaproj7 final integration (independent 59-row re-verification, merged) + arena/646f6727-maltaproj7 coverage-gap additions (2026-10-18); arena/5e333a6e-maltaproj7 coverage-gap pass (Moscone, SFMTA, FAMSF, organizer sources); arena/56415e75-maltaproj7 official-source re-check and free-event coverage pass (2026-10-18); arena/3977d9cb-maltaproj7 free-first restructure + verification pass (2026-10-18)",
-  "last_reverification": "2026-10-18 — arena/3977d9cb-maltaproj7 re-fetched the official pages behind the near-term upcoming rows (SFMTA travel updates for Lower Polk Live and the From the E Excelsior Night Market, Foodwise event pages, Sunday Streets SF season and Excelsior pages, Hardly Strictly Bluegrass, Day of the Devs) and added three rows plus one review record from official organizer pages (Shipyard Trust for the Arts Fall Open Studios, Open Source AI Week Debate Night and Awards Night). Log: research/reverification-3977d9cb.md. 2026-10-18 — every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md. A third parallel re-verification (arena/55c58947-maltaproj7, log: research/reverification-55c58947.md) independently fetched all 59 rows of the pre-expansion catalog and was reconciled into this dataset on 2026-10-18."
+  "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7 + arena/55c58947-maltaproj7 final integration (independent 59-row re-verification, merged) + arena/646f6727-maltaproj7 coverage-gap additions (2026-10-18); arena/5e333a6e-maltaproj7 coverage-gap pass (Moscone, SFMTA, FAMSF, organizer sources); arena/56415e75-maltaproj7 official-source re-check and free-event coverage pass (2026-10-18); arena/3977d9cb-maltaproj7 free-first restructure + verification pass (2026-10-18); arena/75cf25a7-maltaproj7 targeted admission evidence reconciliation (2026-10-18)",
+  "last_reverification": "2026-10-18 — arena/3977d9cb-maltaproj7 re-fetched the official pages behind the near-term upcoming rows (SFMTA travel updates for Lower Polk Live and the From the E Excelsior Night Market, Foodwise event pages, Sunday Streets SF season and Excelsior pages, Hardly Strictly Bluegrass, Day of the Devs) and added three rows plus one review record from official organizer pages (Shipyard Trust for the Arts Fall Open Studios, Open Source AI Week Debate Night and Awards Night). Log: research/reverification-3977d9cb.md. 2026-10-18 — every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md. A third parallel re-verification (arena/55c58947-maltaproj7, log: research/reverification-55c58947.md) independently fetched all 59 rows of the pre-expansion catalog and was reconciled into this dataset on 2026-10-18. 2026-10-18 — arena/75cf25a7-maltaproj7 re-fetched the Sunday Streets SF official season, About, and Excelsior pages; it left both Sunday Streets admission fields blank because the pages state that activities are free but do not state an event admission price. Log: research/reverification-75cf25a7.md."
  },
  "events": [
   {
@@ -1485,13 +1485,13 @@
    "time_text": "",
    "location": "Tenderloin, Mission, Bayview, and Excelsior, San Francisco",
    "organizer": "Sunday Streets SF",
-   "admission": "Free (open-streets program: the organizer states Sunday Streets events feature \"fun, free activities provided by local nonprofits, community groups and small businesses\"; no admission charge is stated anywhere on the site)",
+   "admission": "",
    "source_url": "https://sundaystreetssf.com/",
    "source_label": "Sunday Streets SF 2026 season page",
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The source confirms four 2026 city-neighborhood events: Tenderloin Jun 14, Mission Jul 19, Bayview Aug 23, Excelsior Oct 18; times and routes vary by neighborhood. Re-verified 2026-10-18 (arena/8c40d1c6): the organizer's About page states Sunday Streets is 'a program of the nonprofit Livable City presented in partnership with the SFMTA, San Francisco Department of Public Health, and the City and County of San Francisco' and that events offer 'fun, free activities provided by local nonprofits, community groups and small businesses'. No admission charge is stated anywhere on the site; the free label rests on that organizer statement - see flag-sundaystreets-free-wording. The Excelsior edition is also published as its own dated row (sunday-streets-excelsior-2026)."
+   "notes": "The source confirms four 2026 city-neighborhood events: Tenderloin Jun 14, Mission Jul 19, Bayview Aug 23, Excelsior Oct 18; times and routes vary by neighborhood. Re-verified 2026-10-18 (arena/8c40d1c6): the organizer's About page states Sunday Streets is 'a program of the nonprofit Livable City presented in partnership with the SFMTA, San Francisco Department of Public Health, and the City and County of San Francisco' and that events offer 'fun, free activities provided by local nonprofits, community groups and small businesses'. The About page describes routes with “fun, free activities” but does not state the event admission cost. Under the no-inference policy, admission is blank; see flag-sundaystreets-free-wording and research/reverification-75cf25a7.md. The Excelsior edition is also published as its own dated row (sunday-streets-excelsior-2026)."
   },
   {
    "id": "up-your-alley-2026",
@@ -3407,13 +3407,13 @@
    "time_text": "11 a.m.–4 p.m.",
    "location": "Mission Street between Geneva Avenue and Theresa Street, with Ocean Avenue between Persia Avenue and Mission Street also closed, Excelsior, San Francisco",
    "organizer": "Livable City / Sunday Streets SF (in partnership with the SFMTA)",
-   "admission": "Free (open-streets program: the organizer states Sunday Streets events feature “fun, free activities provided by local nonprofits, community groups and small businesses”; no admission charge is stated anywhere on the site)",
+   "admission": "",
    "source_url": "https://sundaystreetssf.com/sunday-streets-excelsior-2026/",
    "source_label": "Sunday Streets SF — Excelsior 2026 event page",
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "Added 2026-10-18 (arena/8c40d1c6). Organizer event page: “Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 on Mission Street between Geneva Avenue and Theresa Street from 11am to 4pm”, with a Lucha Libre showcase, Salvi Soul Encuentro zone, Kultura Crawl food tasting, Polynesian dance performances, a family hub and a community clothing swap. SFMTA's weekly advisory independently confirms the same date and 11 a.m.–4 p.m. window. The free label rests on the organizer's About page (“fun, free activities provided by local nonprofits, community groups and small businesses”); the site states no separate admission charge — see flag-sundaystreets-free-wording. The season row (sunday-streets-2026) covers the full 2026 programme."
+   "notes": "Added 2026-10-18 (arena/8c40d1c6). Organizer event page: “Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 on Mission Street between Geneva Avenue and Theresa Street from 11am to 4pm”, with a Lucha Libre showcase, Salvi Soul Encuentro zone, Kultura Crawl food tasting, Polynesian dance performances, a family hub and a community clothing swap. SFMTA's weekly advisory independently confirms the same date and 11 a.m.–4 p.m. window. The About page describes “fun, free activities” but does not state event admission cost. The event page separately links to Excelsior 5k Walktober registration, without stating its price. Under the no-inference policy, admission is blank; see flag-sundaystreets-free-wording and research/reverification-75cf25a7.md. The season row (sunday-streets-2026) covers the full 2026 programme."
   },
   {
    "id": "sfiac-olympic-club-cornhole-2026-10-23",
@@ -4227,7 +4227,7 @@
    "id": "flag-sundaystreets-free-wording",
    "event_id": "sunday-streets-2026",
    "event": "Sunday Streets SF (2026 season) and the Excelsior edition",
-   "issue": "Wording nuance: no Sunday Streets page uses the phrase “free admission”. The free label rests on the organizer's About-page statement that the events feature “fun, free activities provided by local nonprofits, community groups and small businesses”, combined with the absence of any stated admission charge and the programme's description as an open-streets programme run with the SFMTA. Exhibitor fees ($35, free for organisations on the route) and sponsorships are how the programme is funded, which is a separate matter from attendee admission.",
+   "issue": "The organizer’s About page says the routes feature “fun, free activities” but does not state an event admission price. The October 18 Excelsior event page also links to a separate Excelsior 5k Walktober registration; its price is not stated there. Earlier records treated the free-activities wording plus the absence of a stated admission charge as proof of free event admission. That exceeded the no-inference policy.",
    "sources": [
     {
      "label": "Sunday Streets SF — About",
@@ -4242,7 +4242,7 @@
      "url": "https://www.sfmta.com/press-releases/sfmta-transit-and-traffic-advisory-week-thursday-october-15-through-wednesday-october-21-2026"
     }
    ],
-   "disposition": "Both rows are labelled Free with the supporting quote copied into the notes; human reviewer can downgrade to “not stated” if a stricter reading is preferred."
+   "disposition": "Conservative resolution after re-fetching the organizer pages on 2026-10-18: admission is blank for both the 2026 season and the Excelsior edition. They render as “Not stated” and are excluded from the confirmed-free upcoming lists; this does not assert that an entry fee is charged. The separate 5k registration price remains unverified. Source text and decision: research/reverification-75cf25a7.md."
   },
   {
    "id": "flag-cornhole-cost-unstated",
