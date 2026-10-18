@@ -1,3 +1,15 @@
+# FINAL INTEGRATION CLAIM — `arena/1bde1cd1-maltaproj7` (2026-10-18T02:57Z)
+
+| Task | Status | Owner | File scope |
+| --- | --- | --- | --- |
+| Final integration: apply the `a4797fc9` independent-audit findings to data/site; fresh line-by-line re-verification of every published/review row against its official source; reconcile previously collected but dropped events (publish only with direct official evidence, otherwise review register); harden `build.py`/`verify.py` against the audit mutation tests; rebuild site; PR to `main`, merge without waiting (brief), confirm Pages deploy | in progress | `arena/1bde1cd1-maltaproj7` | `data/events.json`, `data/events.csv` (generated), `research/official-source-audit.md`, `build.py`, `verify.py`, generated `*.html`, `categories/*.html`, `assets/style.css`, `README.md`, `COORDINATION.md` |
+
+- Handoff basis: prior owners `f3cb0dad` (catalog, PRs #5/#6) and `a4797fc9` (read-only audit, PRs #7/#8) both record their scopes **done** below and explicitly hand the unapplied audit findings to a final integration owner ("not yet applied to the event data or the five-record website review register"). `arena/185cda46-maltaproj7` has only its 2026-10-18T01:22:29Z claim commit (`47ab45b`), no further commits and no PR for >60 minutes; under the brief's stale-claim rule this session takes over, logged here. No peer work is discarded; all history below is preserved verbatim.
+- Rules for this integration: every published row keeps an HTTPS official-organizer / official-venue / government (or explicitly labeled trusted-civic) source link; unconfirmed optional values stay blank (placeholder strings such as "See organizer schedule" / "Program-specific times" are not values and will be blanked); essential gaps, multi-city umbrellas, cancellations, and outside-city items stay on Flagged for Review and do not block merge. "All events" is published as an explicitly bounded, dated snapshot — never as an exhaustive claim.
+- Branch note: this Arena session is fixed to `arena/1bde1cd1-maltaproj7`; work, commits, pushes, and the PR all use that branch (same deviation from `session-<id>/<task>` naming already recorded by prior sessions).
+
+---
+
 # Active coordination — concurrent-session collision resolved without discarding work
 
 ## Current arbitration log (2026-10-18T01:27Z)
