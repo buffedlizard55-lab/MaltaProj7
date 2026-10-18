@@ -1,49 +1,26 @@
-# San Francisco Events — official-source catalog
+# San Francisco Events · source-linked snapshot
 
-A static GitHub Pages catalog of **publicly advertised events in the City and County of San Francisco**. It separates **regularly occurring** events (weekly, monthly, seasonal, and annual traditions) from **dated special events**, orders every list **by date with upcoming events first**, labels **what each event costs to attend**, and makes the audit boundary visible rather than presenting an unsupported “all events” claim.
+**Live site:** https://buffedlizard55-lab.github.io/MaltaProj7/
 
-Live site: <https://buffedlizard55-lab.github.io/MaltaProj7/>
+A mobile-friendly static dashboard for publicly advertised events **within the City and County of San Francisco**. The **landing page, Upcoming and Free pages contain only dated, source-confirmed free events that have not yet passed**. Admission is displayed in every row. Paid and partly free events have their own [Paid & partly free](paid.html) page; records with an unconfirmed admission cost appear on [Flagged for Review](flagged.html). The secondary recurring, special, category and all-events research catalogs retain past and other admission types, clearly labeled.
 
-## What is included
+## What is actually covered
 
-- **148 publishable city-only rows:** 98 regularly occurring and 50 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (the current session's pass is logged in `research/verification-e79e0de2.md`; earlier full passes are in `research/reverification-2088b727.md`, `research/verification-e969f4df.md` and `research/reverification-55c58947.md`).
-- **A source link on every published row.** Sources are labeled as official organizer, official venue, government source, official venue/federal trust, or trusted civic source.
-- **A clearly labeled cost on every row.** The sourced admission text is classified as *Free*, *Free or partly free*, *Paid / ticketed*, or *Not stated*. “Not stated” means the linked official page published no price — it is never treated as free, and every such row is listed with its source link on the Flagged for Review page.
-- **Nine category pages** — including a dedicated **Technology, AI & gaming** category — alongside a dashboard with a live executive summary, an **Upcoming by date** page, a **Free to attend** page, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
-- **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
-- **Thirty-four field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
+As of **October 18, 2026**: **148 published rows** (98 recurring, 50 special), **16 excluded/review records**, **35 field-level flags** and nine categories. Of the 148 published rows, **8 have both confirmed free admission and a dated upcoming/ongoing occurrence**, **43 have confirmed free admission across all dates**, **12 are partly free/conditional**, **13 have evidence of paid entry**, and **80 have no confirmed admission cost**. Registration alone or a waived fundraising minimum is **not** evidence of free or paid admission. The client recalculates upcoming status and the executive summary against the visitor’s local date; a no-JavaScript view is explicitly a snapshot as of October 18. An undated weekly/monthly tradition is **not** assigned an invented next occurrence.
 
-The catalog is a reproducible snapshot of official-source evidence, **not** a claim to list every private, unlisted, or newly announced event in San Francisco. Dates and operational details can change; check the linked source before attending.
+Gaming and AI have no dated free upcoming entry verified in this snapshot; the dashboard says so instead of promoting ticketed conferences. Music and other free upcoming events appear with event-level publisher links. The [separate paid section](paid.html) includes paid and partly free events with their original source-stated admission wording. The [Flagged page](flagged.html) exposes unresolved source issues and every unconfirmed cost for manual review.
 
-## Date-first ordering and the executive summary
+**Not exhaustive.** This is a reproducible, bounded collection of official-organizer, venue and government sources plus three explicitly labeled trusted civic sources. It cannot guarantee a complete list of all public, private, newly announced or unlisted events. The [method page](method.html), [source audit](research/official-source-audit.md), [this session’s focused recheck](research/review-f65449c5.md), and earlier independent audits in `research/` document source decisions and unresolved issues. Always check the linked publisher for date, tickets and location before going. In particular, the YBG season end date is not an individual performance date and its organizer schedule was not independently accessible during this pass; see the flagged record.
 
-- Every list is generated with **upcoming rows first**, ordered by start date; completed editions are pushed to the bottom and badged *Completed*, and multi-week programs that are still running are badged *Ongoing now*.
-- A small inline script re-computes each row's status and “in N days” label against the **visitor's real current date**, so the page stays correct after the static build date. The same script powers the dashboard's **Next up** panel, the *starting in 7 / 30 / 90 days* counters, and the **Free to attend — coming up** panel. A build-time list is included for readers without JavaScript.
-- Tables are readable on a phone: under 760 px each row becomes a labelled card (`data-label`) instead of a wide scrolling grid.
+## Rebuild and verify
 
-## Data and audit trail
+No package installation is needed for the published site or its standard checks:
 
-- `data/events.json` — source of truth; includes catalog metadata, publishable records, source authority, review statuses, and the field-level `flags` register.
-- `data/events.csv` — generated export of every data record, including review-only rows.
-- `research/verification-e79e0de2.md` — this session's row-by-row official-source log, including the values filled, the rows added, the irregularities found, and the scope decisions taken.
-- `research/patch-e79e0de2.py` — reproducible patch script that applies this session's data changes (new rows, cost/time fills, the category split, the new flags).
-- `research/official-source-audit.md` — row-level source matrix, review register, and material scope decisions.
-- `research/reverification-2088b727.md`, `research/verification-e969f4df.md`, `research/reverification-55c58947.md` — earlier full re-verification passes.
-- `COORDINATION.md` — work ledger, handoff notes, and deployment/verification record.
-
-For a published row, `name`, cadence/date, San Francisco location, organizer, and source URL are required. Optional time and admission fields stay blank when the source did not state them. A record with an essential gap is never promoted to the normal tables; it is documented on **Flagged for Review**.
-
-## Build and validate
-
-No package installation is required.
-
-```bash
+```sh
 python3 build.py
 python3 verify.py
 ```
 
-`build.py` regenerates the site pages, category pages, stylesheet, and CSV export from `data/events.json`. `verify.py` checks the data shape, source-link coverage, row separation, generated page counts, category pages, date-first ordering, cost-label coverage, and local navigation — and, after mutation testing, also rejects example/local source hosts, locations without a San Francisco indicator, unknown status/cadence/authority values, malformed or inverted ISO dates, date-text years that disagree with ISO dates, duplicate name+date records, and placeholder time/admission text. It deliberately does not live-crawl external organizer sites from the sandbox; those source links remain the final authority. The stable row counts in `verify.py` must only change together with an entry in `research/official-source-audit.md` and `research/verification-e79e0de2.md`.
+`data/events.json` is the source of truth. The build regenerates all root/category HTML pages, `assets/style.css` and `data/events.csv`. The verifier checks row sets and official source links on the free, paid and review pages; date and cost separation; duplicate IDs; local links; and data shape. It **does not live-fetch all external URLs**; evidence from the earlier audits and the targeted current recheck is documented in `research/`. A local browser-DOM smoke test of the live client-side date logic is recorded in `research/review-f65449c5.md`.
 
-## Scope
-
-City and County of San Francisco only. Look-alike events outside the city — the Great Dickens Christmas Fair at the Cow Palace (Daly City), SFO airport programs (San Mateo County), and the Top of the Hill Festival (Daly City) — are excluded and are not published in the city-only tables.
+GitHub Pages is deployed by `.github/workflows/pages.yml` from `main`. Coordination, PRs, source review and deployment status are recorded in [COORDINATION.md](COORDINATION.md).
