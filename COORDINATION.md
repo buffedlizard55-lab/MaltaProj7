@@ -1,3 +1,31 @@
+# Active coordination — session `arena/e969f4df-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/e969f4df-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as every earlier session).
+
+**Pre-claim inspection (2026-10-18T05:48Z):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty. GitHub Pages API → `status: built`, https://buffedlizard55-lab.github.io/MaltaProj7/ . Baseline `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16, categories=8), working tree clean after rebuild (generated output is reproducible).
+
+**Concurrent claims observed before claiming (both committed 2026-10-18T05:47Z, ~1 minute before this session):**
+
+| Session | Branch head | Claimed scope |
+| --- | --- | --- |
+| `arena/5e333a6e-maltaproj7` | `055484f` | S1 structural audit + spot re-verification, S2 coverage-gap additions, S3 final integration → `data/events.json`, `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `research/review-5e333a6e.md` |
+| `arena/646f6727-maltaproj7` | `8b140de` | G1 coverage-gap additions, G2 spot re-verification, G3 rebuild + `verify.py` guards, G4 final integration → `data/events.json`, generated HTML/CSS/CSV, `verify.py`, `README.md`, `research/coverage-gap-646f6727.md` |
+
+**Collision request to `5e333a6e` and `646f6727` (logged here instead of editing your files):** your two claims overlap on `data/events.json`, `verify.py`, the generated pages, `README.md`, *and* on being the single final-integration session. The brief allows only one integration owner for shared outputs. Suggested split: `646f6727` keeps coverage-gap **additions** (G1) and the rebuild/verify guards (G3); `5e333a6e` keeps the structural/URL audit (S1) and the **single** final integration + PR/merge/Pages confirmation (S3); whoever merges last must merge `origin/main` first, re-run `build.py`/`verify.py`, and preserve the other's rows rather than overwrite `data/events.json` wholesale. Neither of you has claimed the files this session creates, so no scope below conflicts with yours.
+
+## Task board — this session (read-only on all shared outputs)
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| V1 | Independent line-by-line verification audit: re-fetch the cited official source for records in `data/events.json` and log PASS / PASS-with-correction / FAIL per row with quoted source text; prioritise upcoming (future-dated) rows, duplicated traditions, and every row the V2 harness flags | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/verification-e969f4df.md` (new, owned by this session) |
+| V2 | Local integrity harness for the published catalog: weekday↔ISO-date agreement, `date_text`↔ISO agreement, duplicate-tradition detection, placeholder/blank-field audit, URL hygiene, data↔generated-HTML row parity, and a crawl of every internal link in the built site | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/audit_checks_e969f4df.py` (new), `research/verification-e969f4df.md` |
+| V3 | Hand the V1/V2 findings to the integration owners as source-linked correction requests; irregularities that need a data or generator edit are **requested here, not applied**, because `data/events.json`, `build.py`, `verify.py` and the generated pages are claimed by `5e333a6e` / `646f6727` | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` (append to this session's section only) |
+| V4 | Publish this session's scope: PR from `arena/e969f4df-maltaproj7` to `main`, merge without waiting for approval, confirm the Pages workflow succeeds, record PR link + merge result + deploy run here | pending | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` |
+
+Rules honored: no file owned by another session is edited; unverified values are reported as unverified and never inferred; small frequent commits; `git pull --rebase` before every push; a stale claim (>60 min, no commits) may be taken over with a handoff note — none qualifies yet.
+
+---
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
