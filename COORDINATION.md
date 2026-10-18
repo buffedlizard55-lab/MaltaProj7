@@ -1,4 +1,52 @@
-# Active coordination — session arena/813e597d-maltaproj7 (2026-10-18)
+# Active coordination — session arena/3977d9cb-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/3977d9cb-maltaproj7` (platform-fixed branch; per this environment's rules all work stays on
+`arena/3977d9cb-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented
+deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18, UTC):** `git fetch origin --prune` → `origin/main` at `68a0516` ("COORDINATION:
+record PR #26 merge and successful Pages deployment"). `gh pr list --state all` → PRs #1–#26 all **MERGED**, no open
+PRs. `git branch -a` → only `main`, `origin/main` and this session's branch; **no other live session branch and no
+outstanding peer claim**. Every board below is historical (all tasks done/merged), so this session claims the
+remaining brief-driven work and also acts as the final integration session the brief assigns to the last session.
+
+**Local baseline (2026-10-18):** `python3 build.py && python3 verify.py` →
+`Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.`
+/ `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`
+(published=148 recurring=98 special=50 review=16 flags=34 categories=9).
+
+**Gap this session targets (from the brief, re-read against the live site):**
+1. *Free-only main section.* The brief says the main section must contain **only free upcoming events** and that paid
+   events may be collected but must live in a **separate section**. Today `upcoming.html`, `recurring.html`,
+   `special.html`, `all-events.html` and the category pages all mix free, paid and cost-not-stated rows, and there is
+   no dedicated paid section page.
+2. *Executive summary must focus on free and upcoming.* The dashboard "Next up" panel currently lists the ten nearest
+   events regardless of cost.
+3. *Focus ordering.* Gaming, music and AI free events must come first, everything else after. The dashboard focus
+   cards are hard-coded prose (including paid conferences such as Microsoft Ignite / TechCrunch Disrupt / GDC under a
+   heading that says "Free events"), which is both a hallucination risk and a free/paid mixing problem. They must be
+   generated from the verified dataset instead.
+4. *Cost coverage.* 75 of 148 published rows carry no sourced admission text, and only 11 of the 54 upcoming rows are
+   confirmed free/partly free. Blank is correct policy where the source is silent, but every official page that *does*
+   state a cost should be captured, so the free section is as complete as the evidence allows.
+
+## Task board — arena/3977d9cb-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| C1 | Repo review line-by-line + independent official-source re-verification, prioritised on upcoming rows, free rows and the gaming/music/AI focus set; fill `admission` only where the linked official page states it; log every check with quoted source text | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `research/reverification-3977d9cb.md` (new), `research/review-3977d9cb.md` (new) |
+| C2 | Free-first information architecture: main sections show free upcoming events only; new separate **Paid & ticketed** section page for paid rows and cost-not-stated rows; executive summary rebuilt around free + upcoming; hard-coded focus cards replaced with dataset-generated Gaming / Music / AI focus lists (free first, everything else after) | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `build.py`, generated `*.html`, `categories/*.html`, `assets/style.css` |
+| C3 | Data corrections and additions that verification supports (official sources only), plus new field-level flags for every irregularity found | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `data/events.json`, `data/events.csv`, `research/patch-3977d9cb.py` (new) |
+| C4 | Verification harness: extend `verify.py` for the new free/paid separation and pages, keep every existing guard, re-run local link crawl | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `verify.py` |
+| C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
+| C6 | Final integration: rebuild, verify, crawl local links, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links here | claimed | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `COORDINATION.md`, `.github/**` |
+
+**Scope boundaries honoured:** no other session has an open claim, so no shared file is contested. This session edits
+only the files listed above. `.github/workflows/pages.yml` is inspected, not rewritten, unless the deploy fails.
+
+---
+
+# Historical coordination — session arena/813e597d-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/813e597d-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/813e597d-maltaproj7`).
 
