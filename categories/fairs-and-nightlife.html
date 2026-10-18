@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Official-source San Francisco city events catalog, separated into regularly occurring and special events.">
+  <title>Fairs &amp; nightlife · San Francisco Events</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><div class="shell">
+  <p class="eyebrow">Official-source catalog · 2026-10-18</p>
+  <h1>San Francisco Events</h1>
+  <p class="lede">City and County of San Francisco only. Regularly occurring events are separated from one-off or dated special events; every listed row links to the source used for verification.</p>
+</div></header>
+<main id="content" class="shell main">
+<nav class="nav" aria-label="Primary"><a class="" href="../index.html">Dashboard</a><a class="" href="../recurring.html">Regularly occurring</a><a class="" href="../special.html">Special events</a><a class="active" href="../categories.html">Categories</a><a class="" href="../all-events.html">All events</a><a class="" href="../flagged.html">Flagged for Review</a><a class="" href="../method.html">Method & sources</a></nav>
+
+<section class="section-head"><div><p><a href="../categories.html">← All categories</a></p><h2>Fairs &amp; nightlife</h2><p>5 verified city-only event rows, each with its own official source link.</p></div></section>
+<div class="table-wrap">
+<table>
+<caption>Official-source event catalog. Optional values show an em dash when not stated in the linked source.</caption>
+<thead><tr><th scope="col">Event</th><th scope="col">List</th><th scope="col">Cadence</th><th scope="col">Category</th><th scope="col">Date / cadence</th><th scope="col">Time</th><th scope="col">SF location</th><th scope="col">Admission</th><th scope="col">Official source</th></tr></thead>
+<tbody>
+<tr><td><strong>Castro Street Fair</strong><span class="organizer">Castro Street Fair</span></td><td><span class="badge badge-recurring">Regularly occurring</span></td><td>Annual</td><td>Fairs &amp; nightlife</td><td>Sunday, October 4, 2026</td><td>11am–6pm</td><td>Castro and Market Streets and surrounding Castro District streets, San Francisco</td><td>Suggested donation $10–$20</td><td><a class="source-link" href="https://castrostreetfair.org/fair/" target="_blank" rel="noopener noreferrer">Official source ↗</a><span class="source-meta">Castro Street Fair information page</span><span class="authority">Official organizer</span></td></tr>
+<tr><td><strong>Folsom Street Fair</strong><span class="organizer">Folsom Street</span></td><td><span class="badge badge-recurring">Regularly occurring</span></td><td>Annual</td><td>Fairs &amp; nightlife</td><td>Sunday, September 27, 2026</td><td>11am–6pm</td><td>Folsom Street between 7th and 13th and connected SoMa streets, San Francisco</td><td><span class="empty" title="Not stated in the linked source">—</span></td><td><a class="source-link" href="https://www.folsomstreet.org/folsom-street-fair" target="_blank" rel="noopener noreferrer">Official source ↗</a><span class="source-meta">Folsom Street Fair official page</span><span class="authority">Official organizer</span></td></tr>
+<tr><td><strong>Haight-Ashbury Street Fair</strong><span class="organizer">Haight-Ashbury Street Fair</span></td><td><span class="badge badge-recurring">Regularly occurring</span></td><td>Annual</td><td>Fairs &amp; nightlife</td><td>September 20, 2026</td><td>See organizer schedule</td><td>Haight Street, San Francisco</td><td><span class="empty" title="Not stated in the linked source">—</span></td><td><a class="source-link" href="https://haightashburystreetfair.org/" target="_blank" rel="noopener noreferrer">Official source ↗</a><span class="source-meta">Haight-Ashbury Street Fair official site</span><span class="authority">Official organizer</span></td></tr>
+<tr><td><strong>North Beach Festival</strong><span class="organizer">North Beach Business Association</span></td><td><span class="badge badge-recurring">Regularly occurring</span></td><td>Annual</td><td>Fairs &amp; nightlife</td><td>June 20–21, 2026</td><td>See organizer schedule</td><td>North Beach, San Francisco</td><td><span class="empty" title="Not stated in the linked source">—</span></td><td><a class="source-link" href="https://northbeachfestival.org/" target="_blank" rel="noopener noreferrer">Official source ↗</a><span class="source-meta">North Beach Festival official site</span><span class="authority">Official organizer</span></td></tr>
+<tr><td><strong>Up Your Alley</strong><span class="organizer">Folsom Street</span></td><td><span class="badge badge-recurring">Regularly occurring</span></td><td>Annual</td><td>Fairs &amp; nightlife</td><td>Sunday, July 26, 2026</td><td>11am–6pm</td><td>Folsom Street between 8th and 11th; connected SoMa streets, San Francisco</td><td><span class="empty" title="Not stated in the linked source">—</span></td><td><a class="source-link" href="https://www.folsomstreet.org/faq" target="_blank" rel="noopener noreferrer">Official source ↗</a><span class="source-meta">Folsom Street FAQ</span><span class="authority">Official organizer</span></td></tr>
+</tbody>
+</table>
+</div>
+
+</main>
+<footer class="site-footer"><div class="shell">
+  <p><strong>Scope:</strong> Publicly advertised events and recurring public programs located within the City and County of San Francisco. This is a dated, reproducible catalog; it does not claim to enumerate every private, newly announced, or unlisted event.</p>
+  <p>An em dash means the linked source did not state that optional field in the captured record. Rows needing a decision, scope correction, or an essential missing value are separated on the Flagged for Review page. Read the <a href="../method.html">method and findings</a> or the row-level <a href="../research/official-source-audit.md">source audit</a>.</p>
+</div></footer>
+<script>
+for (const table of document.querySelectorAll('[data-filter-table]')) {
+  const input = document.querySelector(`#${table.dataset.search}`);
+  const select = document.querySelector(`#${table.dataset.category}`);
+  const filter = () => {
+    const term = (input?.value || '').toLowerCase();
+    const category = select?.value || '';
+    for (const row of table.tBodies[0].rows) {
+      const matchText = !term || row.textContent.toLowerCase().includes(term);
+      const matchCategory = !category || row.dataset.category === category;
+      row.hidden = !(matchText && matchCategory);
+    }
+  };
+  input?.addEventListener('input', filter); select?.addEventListener('change', filter);
+}
+</script>
+</body>
+</html>
