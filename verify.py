@@ -159,14 +159,27 @@ def main() -> int:
     # URL on 2026-10-18); the row was added in this pass from the SFMTA source
     # instead, and the discrepancy is logged in COORDINATION.md and published as
     # flag-ledger-missing-cornhole-row on the Flagged for Review page.
-    if len(published) != 154:
-        error(f"expected 154 published rows, found {len(published)}")
-    if len(recurring) != 98 or len(special) != 56:
-        error(f"expected 98 recurring / 56 special, found {len(recurring)} / {len(special)}")
+    # 2026-10-18 arena/56415e75-maltaproj7 integration pass (log:
+    # research/verification-56415e75.md, patch: research/patch-56415e75.py):
+    # +4 published rows added from official organizer/government pages (Afro-Filipino
+    # Jazz Project and Halloween Hoopla from the Yerba Buena Gardens Festival's own
+    # 2026 season press release, SF Tech Week from the SFPL program page and
+    # release, From the E: Harvest Night Market from the organizer's site), a cost
+    # fill on 1 row (From the E Excelsior Night Market, October 23 - the organizer's
+    # site states "free community fun"), field corrections on 3 rows (Lit Crawl SF
+    # hours and no-RSVP wording, GDC 2027 pass-rate window, Day of the Devs time)
+    # and 3 new field-level flags. This session's duplicate Sunday Streets Excelsior
+    # row and duplicate Sunday Streets free-wording flag were dropped in favour of
+    # arena/8c40d1c6's rows. Total: 158 published (101 recurring + 57 special),
+    # 16 review records, 44 field-level flags, 9 categories.
+    if len(published) != 158:
+        error(f"expected 158 published rows, found {len(published)}")
+    if len(recurring) != 101 or len(special) != 57:
+        error(f"expected 101 recurring / 57 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 41:
-        error(f"expected 41 field-level flags, found {len(flags)}")
+    if len(flags) != 44:
+        error(f"expected 44 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated

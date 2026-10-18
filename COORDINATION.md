@@ -1,3 +1,86 @@
+# Active coordination — session arena/56415e75-maltaproj7 (2026-10-18)
+
+**Branch constraint:** Arena pins this session to `arena/56415e75-maltaproj7`, so the brief's
+`session-<id>/<task>` branch naming cannot be used (same documented deviation as every prior session
+in this ledger). All work stays on this branch.
+
+**Pre-claim inspection (2026-10-18T10:58Z):** `origin/main` at `68a0516` (merge of PR #26), no open
+PRs. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50
+special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG,
+SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+
+**Concurrent sessions observed and respected.** `arena/f65449c5-maltaproj7` held F1/F2 (`build.py`,
+`assets/style.css`, generated pages, `verify.py`, `README.md`, `data/events.json`) and merged PRs
+#27/#28; `arena/8c40d1c6-maltaproj7` claimed `data/events.json` + `verify.py` + `build.py` + pages at
+~10:59Z and merged PR #29 at 11:40:21Z. This session did not edit any file inside those live claims
+while they were open: `verify.py`, `build.py`, the generated pages and `README.md` were left alone
+until PR #29 merged, and the data work was written as an **idempotent, merge-aware patch**
+(`research/patch-56415e75.py`) that skips any row or flag a peer already published. Two duplicates
+this session had prepared were dropped in favour of `arena/8c40d1c6`'s rows (Sunday Streets Excelsior,
+Sunday Streets free-wording flag).
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| G1 | Line-by-line official-source verification of the focus categories (free gaming / music / AI), every row dated on or after 2026-10-18, and the 2027 rows most at risk of being projections | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `data/events.json`, `research/verification-56415e75.md` |
+| G2 | Coverage pass: add newly verified **free** SF events with official-publisher links; reject anything not confirmable | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `data/events.json`, `research/patch-56415e75.py` |
+| G3 | Analysis & findings register (cost / date / category counts, irregularities with source links) | **done** | arena/56415e75-maltaproj7 | 2026-10-18T10:58Z | `research/findings-56415e75.md` |
+| G4 | Final integration: merge peer work, re-verify combined data, rebuild, fix count guards, PR to `main`, merge, confirm Pages deploy | **done** | arena/56415e75-maltaproj7 | 2026-10-18T11:41Z (after PR #29 merged) | `verify.py` (count guards), generated `*.html`, `data/events.csv`, `COORDINATION.md` |
+
+## Session record — arena/56415e75-maltaproj7
+
+- **G1 — live official-source re-verification (15 rows).** Row-by-row results and the exact URLs read
+  are in `research/verification-56415e75.md`: Hardly Strictly Bluegrass
+  ([FAQ](https://hardlystrictlybluegrass.com/info-faq-2026/)), Fillmore Jazz 2026 + 2027
+  ([organizer](https://www.fillmorejazzfest.com/)), Lit Crawl SF
+  ([litquake.org](https://www.litquake.org/litcrawl) +
+  [official schedule](https://litcrawlsf2026.sched.com/)), Scaregrove
+  ([SF Rec & Park](https://sfrecpark.org/Calendar.aspx)), GDC Festival of Gaming 2027
+  ([passes & pricing](https://gdconf.com/passes-pricing/)), Day of the Devs SF 2026
+  ([organizer](https://www.dayofthedevs.org/events/day-of-the-devs-san-francisco-edition-2026)),
+  SF Pride 2027 ([sfpride.org](https://sfpride.org/)), CNY Parade 2027
+  ([chineseparade.com FAQ](https://chineseparade.com/faq/)), Italian Heritage Parade 2027
+  ([sfitalianheritage.org](https://sfitalianheritage.org/)), Bay to Breakers 2027
+  ([baytobreakers.com](https://www.baytobreakers.com/)), Cherry Blossom 2027
+  ([sfcherryblossom.org](https://sfcherryblossom.org/)), SF Sketchfest 2027
+  ([sfsketchfest.com](https://sfsketchfest.com/)), Sunday Streets 2026
+  ([organizer](https://sundaystreetssf.com/sunday-streets-excelsior-2026/)), YBG Festival 2026
+  ([organizer press release PDF](https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf)),
+  From the E Excelsior Night Market ([fromtheesf.com](https://www.fromtheesf.com/)).
+  Corrections applied where the official page was more current than the row: Lit Crawl hours
+  (5:00–9:00 p.m. crawl window alongside the 6:30–7:30 p.m. per-program slot) and no-RSVP wording;
+  GDC 2027 pass rates (the previously quoted Super Early deadline, Oct 9 2026, had already passed on
+  the audit date); Day of the Devs time filled from the organizer's listing.
+- **G2 — coverage.** +4 rows, all free, all city-only, all with an official publisher link:
+  Afro-Filipino Jazz Project at YBG (Oct 24), Halloween Hoopla at YBG (Oct 31), SF Tech Week SFPL
+  programs (May 9–16), From the E: Harvest Night Market (Nov 20). One cost fill: the From the E
+  October 23 night market now carries `admission: Free` with `admission_source_url` pointing at the
+  organizer's site (it was blank because the row was built from an SFMTA travel update). Rejected
+  rather than published: *Boo at the Zoo* (no official admission statement) and SFPL branch gaming
+  listings (past/cancelled, or no quotable cadence).
+- **G3 — findings.** `research/findings-56415e75.md`: of 158 published rows, 55 are free and 10 partly
+  free; **76 rows (48%) have no price published by their official source** and stay labelled *Cost not
+  stated*; only 2 of the 17 gaming/AI rows are free — San Francisco's large gaming and AI events are
+  commercial, and its free gaming/AI programming is institutional (library, nonprofit showcases).
+- **Flags.** +3 (`flag-litcrawl-suggested-donation`, `flag-sunday-streets-route-conflict`,
+  `flag-from-the-e-general-hours-mismatch`); 1 dropped as a duplicate of a peer flag. Register total
+  after merge: **44**.
+
+## G4 integration record
+
+- **Merge:** `origin/main` (`81425ee`, merge of PR #29) merged into this branch. `data/events.json`
+  conflict resolved by taking the merged main dataset and re-applying
+  `research/patch-56415e75.py`, which printed the skips (`flag-sunday-streets-free-wording` superseded
+  by `flag-sundaystreets-free-wording`) and the additions. `COORDINATION.md` conflict resolved by
+  keeping both sessions' sections. No peer work discarded.
+- **Counts after merge:** 174 records = **158 published (101 recurring + 57 special)**, 16 review,
+  **44 flags**, 9 categories.
+- **Count guards:** `verify.py` updated 154 → 158 published, 98/56 → 101/57 recurring/special,
+  41 → 44 flags, with a comment recording this pass (the guards had been left stale deliberately while
+  `verify.py` was inside `arena/8c40d1c6`'s F3 claim).
+- **Rebuild:** `python3 build.py && python3 verify.py` — see the PR description for the exact output.
+
+---
+
 # Active coordination — session arena/8c40d1c6-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/8c40d1c6-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/8c40d1c6-maltaproj7`, so the brief's `session-<id>/<task>` worktree naming cannot be used — same documented deviation as every prior session in this ledger).
