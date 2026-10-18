@@ -95,13 +95,14 @@ def main() -> int:
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
     # Update these constants only with a corresponding audit entry in
-    # research/official-source-audit.md (2026-10-18 snapshot: 67 = 56 + 11, 12 review).
-    if len(published) != 67:
-        error(f"expected 67 published rows, found {len(published)}")
-    if len(recurring) != 56 or len(special) != 11:
-        error(f"expected 56 recurring / 11 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 12:
-        error(f"expected 12 review records, found {len(review)}")
+    # research/official-source-audit.md (2026-10-18 snapshot after PR #9
+    # reconciliation: 69 = 58 + 11, 16 review).
+    if len(published) != 69:
+        error(f"expected 69 published rows, found {len(published)}")
+    if len(recurring) != 58 or len(special) != 11:
+        error(f"expected 58 recurring / 11 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 16:
+        error(f"expected 16 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
