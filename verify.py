@@ -198,16 +198,16 @@ def main() -> int:
     # survive as R3 and R11 in research/review-3977d9cb.md. This session also re-verified
     # peer rows against their official sources (From the E editions, Sunday Streets
     # Excelsior, Foodwise demos) - see research/reverification-3977d9cb.md.
-    # Total: 162 published (102 recurring + 60 special), 17 review records,
-    # 51 field-level flags, 9 categories.
-    if len(published) != 162:
-        error(f"expected 162 published rows, found {len(published)}")
-    if len(recurring) != 102 or len(special) != 60:
-        error(f"expected 102 recurring / 60 special, found {len(recurring)} / {len(special)}")
+    # Total: 167 published (103 recurring + 64 special), 17 review records,
+    # 56 field-level flags, 9 categories (arena/83fc57b1 added 5 events + 5 flags).
+    if len(published) != 167:
+        error(f"expected 167 published rows, found {len(published)}")
+    if len(recurring) != 103 or len(special) != 64:
+        error(f"expected 103 recurring / 64 special, found {len(recurring)} / {len(special)}")
     if len(review) != 17:
         error(f"expected 17 review records, found {len(review)}")
-    if len(flags) != 51:
-        error(f"expected 51 field-level flags, found {len(flags)}")
+    if len(flags) != 56:
+        error(f"expected 56 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
