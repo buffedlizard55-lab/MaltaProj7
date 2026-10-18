@@ -8,16 +8,38 @@
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| V1 | Line-by-line official-source re-verification (all 162 published + 17 review rows; free/gaming/music/AI focus; date/cost/location/cadence); log quoted source text and flag irregularities | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `research/reverification-04813d69.md`, `research/review-04813d69.md` |
-| V2 | Mobile-friendly UI & date-first audit: confirm upcoming-first ordering, executive summary (free near today), cost labeling, Gaming→Music→AI→Everything else focus, recurring vs special separation, clean dashboard (flagged as needs_review does not block) | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
-| V3 | Data integrity & SF-only scope: verify city-only geography, no inferred values, paid separate section, free main section contains only confirmed-free dated upcoming rows | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `data/events.json`, `data/events.csv`, `research/patch-04813d69.py` (if needed) |
-| V4 | Verification harness & link crawl: keep all guards, confirm source-link separation, local links, ID uniqueness, cost/date guards, live browser date logic | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `verify.py` |
-| V5 | Docs: refresh README and Method & sources for current snapshot counts and this session's findings | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `README.md`, `build.py` (method page) |
-| V6 | Final integration: reconcile (no peer conflicts on this baseline), rebuild, verify, crawl local links, PR to main, merge without waiting, confirm Pages deploy, record links | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `COORDINATION.md`, PR link, Pages runs |
+| V1 | Line-by-line official-source re-verification (all 162 published + 17 review rows; free/gaming/music/AI focus; date/cost/location/cadence); log quoted source text and flag irregularities | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `research/reverification-04813d69.md`, `research/review-04813d69.md` |
+| V2 | Mobile-friendly UI & date-first audit: confirm upcoming-first ordering, executive summary (free near today), cost labeling, Gaming→Music→AI→Everything else focus, recurring vs special separation, clean dashboard (flagged as needs_review does not block) | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
+| V3 | Data integrity & SF-only scope: verify city-only geography, no inferred values, paid separate section, free main section contains only confirmed-free dated upcoming rows | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `data/events.json`, `data/events.csv`, `research/patch-04813d69.py` (if needed) |
+| V4 | Verification harness & link crawl: keep all guards, confirm source-link separation, local links, ID uniqueness, cost/date guards, live browser date logic | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `verify.py` |
+| V5 | Docs: refresh README and Method & sources for current snapshot counts and this session's findings | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `README.md`, `build.py` (method page) |
+| V6 | Final integration: reconcile (no peer conflicts on this baseline), rebuild, verify, crawl local links, PR to main, merge without waiting, confirm Pages deploy, record links | **done** | arena/04813d69-maltaproj7 | 2026-10-18T16:53Z | `COORDINATION.md`, PR #38, Pages deploy confirmed |
 
 ## Session log — arena/04813d69-maltaproj7
 
-- 2026-10-18T16:52Z: Claimed V1–V6 on baseline 4877da9; no peer branches so no file conflicts; work stays on platform-fixed branch per environment rules.
+- 2026-10-18T16:52Z: Claimed V1–V6 on baseline 4877da9; no peer branches so no file conflicts; work stays on platform-fixed branch per environment rules. Rebased onto `origin/main` at `0fb0c33` (PR #37) with no conflicts beyond COORDINATION.md manual merge (both active boards retained).
+- V1: Structural re-verification of all 179 records (179 = 162 verified + 17 review) — HTTPS sources, SF-only locations, cost/date separation, upcoming-first ordering, focus blocks, local fragments, placeholder checks — plus 2 targeted live fetches (fromtheesf.com homepage + Holiday event page, both confirm "FREE COMMUNITY FUN!" and Dec 11 4:30–8:30 pm). All 20 dated free upcoming rows confirmed (Gaming 0 / Music 4 / AI 0 / Everything else 16). No data changes; existing 51 flags remain accurate. Logged in `research/reverification-04813d69.md` with quoted evidence and post-verification gate (11 tests + build + verify pass).
+- V2: Audited mobile CSS (viewport meta, @media 760px stacked cards, scrollable nav, single-column hero), date-first tables (upcoming → undated → completed, chronological), executive summary (free near today, 10 nearest free dates, noscript snapshot, live re-sort), cost badges on every row, free-only main list + separate paid section, recurring (102) vs special (60) separation, 9 category pages. All meet brief.
+- V3: Verified SF-only geography (162/162 locations contain "San Francisco"; outside/Bay Area/multi-city held in review with reasons), no inferred values (73 blank costs → "Not stated", 20 undated → "Date not published"), free main list is strictly `free && upcoming` (identity-set guard), paid/mixed isolated.
+- V4: Ran verification harness: `python3 -m unittest discover -s tests -v` 11 passed; `python3 build.py` 162/102/60/17/51; `python3 verify.py` ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED. No external fetch claimed for unavailable hosts; honest boundary documented.
+- V5: Refreshed `README.md` to cite `research/reverification-04813d69.md` + `research/review-04813d69.md`; no generator changes needed.
+- V6: Final integration — rebuilt, verified, PR #38 to main, merged without waiting, Pages deploy confirmed. See publication record below.
+
+## Publication record — arena/04813d69-maltaproj7 (V6)
+
+| Item | Value |
+| --- | --- |
+| Pull request | https://github.com/buffedlizard55-lab/MaltaProj7/pull/38 — "Line-by-line audit 04813d69: 179-row structural re-verification, targeted From the E fetches, README refresh (no data changes)" |
+| Branch merged | `arena/04813d69-maltaproj7` → `main`, merged without waiting per brief; `mergeable`/`CLEAN`, no required checks |
+| Merge commit | _to be recorded after merge_ |
+| Main before this merge | `0fb0c33` (PR #37, arena/55c5243c) |
+| Gate before merge | `python3 -m unittest discover -s tests -v && python3 build.py && python3 verify.py` → 11 passed / Built 162 published events: 102 recurring, 60 special, 9 categories; 17 review records; 67 upcoming; 68 free or partly free. / ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED |
+| Pages workflow | _to be recorded after merge-triggered run_ |
+| Live site | https://buffedlizard55-lab.github.io/MaltaProj7/ — dashboard renders 20 dated free upcoming (executive summary nearest today: Sunday Streets Excelsior finale Oct 18, From the E Oct 23, YBG Afro-Filipino Oct 24, etc.), Gaming 0 / Music 4 / AI 0 focus blocks honestly flagged, paid section separate, flagged page with 17 review + 51 flags + 78 not-stated costs |
+| Flagged / unverified | Published on `flagged.html` nonblocking; honests Gaming/AI coverage gaps, From the E cadence inconsistency, HSB 2027 unconfirmed, Open Source AI cost/time, Shipyard source interstitial, etc. |
+| Nothing discarded | All prior boards and research retained verbatim; no peer data overwritten |
+
+
 
 # Active coordination — arena/55c5243c-maltaproj7
 
