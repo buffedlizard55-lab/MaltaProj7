@@ -135,3 +135,12 @@ Research evidence, exact supporting excerpts, retrieval dates, and official URLs
 - 2026-10-18 — Rebuilt the static Pages site from the reconciled source-audited model: 54 published city-only rows (46 regularly occurring / 8 special), eight category pages, a source-audit method page, and a five-record review register. Every published table row now renders an official source link.
 - 2026-10-18 — Local commands passed: `python3 build.py`, `python3 verify.py`, `python3 -m py_compile build.py verify.py`, source/review scope smoke checks, generated-page HTTP 200 checks, and `git diff --check`. The verifier explicitly checks local data shape, source-link coverage, review separation, category counts, and local navigation; it does not claim to live-crawl external sources.
 - 2026-10-18 — CAAMFest is now titled and scoped as **CAAMFest — San Francisco program**, limited to named San Francisco venues in the official 2026 schedule; it no longer represents the umbrella festival as city-exclusive. Deployment/PR outcomes will be appended after this final data adjustment.
+
+---
+
+## Publication result — `arena/f3cb0dad-maltaproj7`
+
+- 2026-10-18 — Pull request [#5](https://github.com/buffedlizard55-lab/MaltaProj7/pull/5), **Reconcile Pages catalog with official-source audit**, merged at `2026-10-18T01:32:34Z` (merge commit `0d9277703b889b443315ea093f6b8e499ee66c57`).
+- 2026-10-18 — GitHub Actions deployment [run 39086874764](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39086874764) succeeded. Its `Verify data and internal links`, artifact upload, and Pages deployment steps all completed successfully.
+- 2026-10-18 — GitHub Pages reports `built` for the merge commit. Live verification at [the Pages URL](https://buffedlizard55-lab.github.io/MaltaProj7/?v=0d9277703b889b443315ea093f6b8e499ee66c57) confirmed the 46 / 8 / 8 / 5 dashboard counts; recurring, special, flagged, and Film & media category pages rendered with row-level sources. A cache-busting query was used because an unversioned fetch initially returned a stale CDN response from the prior deployment.
+- Completion: all catalog, UI, review, PR, merge, and deployment tasks owned by this session are complete. Future updates should recheck the linked organizer source before changing a row.
