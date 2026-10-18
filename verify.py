@@ -13,6 +13,7 @@ import json
 import re
 import sys
 from collections import Counter
+from datetime import date
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
@@ -93,12 +94,95 @@ def main() -> int:
     categories = sorted({event["category"] for event in published})
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
-    if len(published) != 54:
-        error(f"expected 54 published rows, found {len(published)}")
-    if len(recurring) != 46 or len(special) != 8:
-        error(f"expected 46 recurring / 8 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 5:
-        error(f"expected 5 review records, found {len(review)}")
+    # Update these constants only with a corresponding audit entry in
+    # research/official-source-audit.md (2026-10-18 snapshot: 67 = 56 + 11, 12 review).
+    if len(published) != 67:
+        error(f"expected 67 published rows, found {len(published)}")
+    if len(recurring) != 56 or len(special) != 11:
+        error(f"expected 56 recurring / 11 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 12:
+        error(f"expected 12 review records, found {len(review)}")
+
+    # --- hardened semantic checks (added after mutation testing showed the shape
+    # checks alone accepted example.com sources, out-of-city venues, fabricated
+    # cadences, duplicates under new ids, and end < start) ---
+    allowed_statuses = {"verified", "partial_sf_program", "needs_review", "cancelled", "outside_city_excluded"}
+    allowed_cadences = {
+        "recurring": {"weekly", "monthly", "seasonal", "annual"},
+        "special": {"single-date", "single-event", "dated-program"},
+    }
+    allowed_authorities = {
+        "Official organizer", "Official venue", "Official venue / federal trust",
+        "Government source", "Trusted civic source",
+    }
+    banned_hosts = {"example.com", "example.org", "example.net", "localhost", "127.0.0.1"}
+    placeholder_fragments = (
+        "see organizer", "see schedule", "program-specific", "see race", "see neighborhood",
+        "see performance", "see sfmta", "see city", "see presidio", "not stated in captured",
+        "see official", "see event page", "varies; see", "tba", "tbd",
+    )
+    sf_markers = (
+        "san francisco", "golden gate park", "presidio", "fort mason", "moscone",
+        "japantown", "civic center", "mission district", "ferry building", "pier 80",
+        "mclaren park", "yerba buena gardens", "stern grove", "golden gate bridge",
+        "alcatraz island", "city hall", "marina green", "roxie theater",
+    )
+    seen_name_start: set[tuple[str, str]] = set()
+    try:
+        as_of = date.fromisoformat(str(catalog.get("as_of", "")))
+    except ValueError:
+        error("catalog as_of is not an ISO date")
+        as_of = None
+    for event in events:
+        event_id = event.get("id", "<missing id>")
+        if event.get("status") not in allowed_statuses:
+            error(f"{event_id}: unknown status {event.get('status')!r}")
+        host = urlparse(str(event.get("source_url", ""))).netloc.lower().removeprefix("www.")
+        if host in banned_hosts:
+            error(f"{event_id}: source_url uses a banned example/local host")
+        dup_key = (str(event.get("name", "")).strip().lower(), str(event.get("start_date", "")))
+        if dup_key[0] and dup_key in seen_name_start:
+            error(f"{event_id}: duplicate name+start_date {dup_key}")
+        seen_name_start.add(dup_key)
+        start = end = None
+        for field in ("start_date", "end_date"):
+            value = str(event.get(field, "") or "")
+            if value:
+                try:
+                    parsed = date.fromisoformat(value)
+                except ValueError:
+                    error(f"{event_id}: {field} is not an ISO date: {value!r}")
+                    continue
+                if field == "start_date":
+                    start = parsed
+                else:
+                    end = parsed
+                if as_of and not (as_of.year - 1 <= parsed.year <= as_of.year + 1):
+                    error(f"{event_id}: {field} year {parsed.year} implausible for as_of {as_of}")
+        if start and end and end < start:
+            error(f"{event_id}: end_date {end} is before start_date {start}")
+        if start:
+            years = {int(y) for y in re.findall(r"\b(20\d{2})\b", str(event.get("date_text", "")))}
+            allowed_years = {start.year} | ({end.year} if end else set())
+            stray = years - allowed_years
+            if stray:
+                error(f"{event_id}: date_text year(s) {sorted(stray)} disagree with ISO dates")
+        for field in ("time_text", "admission"):
+            value = str(event.get(field, "") or "").lower()
+            hit = next((frag for frag in placeholder_fragments if frag in value), None)
+            if hit:
+                error(f"{event_id}: {field} contains placeholder fragment {hit!r}; blank it instead")
+        if event.get("status") == "verified":
+            bucket = event.get("bucket")
+            if event.get("cadence") not in allowed_cadences.get(bucket, set()):
+                error(f"{event_id}: cadence {event.get('cadence')!r} not allowed for bucket {bucket!r}")
+            if event.get("source_authority") not in allowed_authorities:
+                error(f"{event_id}: unknown published source_authority {event.get('source_authority')!r}")
+            location = str(event.get("location", "")).lower()
+            if not any(marker in location for marker in sf_markers):
+                error(f"{event_id}: published location has no San Francisco indicator: {event.get('location')!r}")
+        elif event.get("source_authority") not in allowed_authorities | {"Unverified legacy URL"}:
+            error(f"{event_id}: unknown review source_authority {event.get('source_authority')!r}")
     if catalog.get("geography") != "City and County of San Francisco only":
         error("catalog geography statement does not enforce city-only scope")
 

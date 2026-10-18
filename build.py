@@ -123,7 +123,7 @@ def bucket_badge(bucket: str) -> str:
 
 
 def event_table(events: list[dict], *, include_bucket: bool = False) -> str:
-    headers = ["Event", "Cadence", "Category", "Date / cadence", "Time", "SF location", "Admission", "Official source"]
+    headers = ["Event", "Cadence", "Category", "Date / cadence", "Time", "SF location", "Admission", "Source"]
     if include_bucket:
         headers.insert(1, "List")
     output = [
@@ -292,6 +292,20 @@ def build() -> None:
     cadence_counts = Counter(event["cadence"] for event in recurring)
     authority_counts = Counter(event["source_authority"] for event in published)
 
+    cadence_order = ("weekly", "monthly", "seasonal", "annual")
+    cadence_summary = ", ".join(
+        f"<strong>{cadence_counts[cadence]} {cadence}</strong>"
+        for cadence in cadence_order if cadence_counts.get(cadence)
+    )
+    top_categories = ", ".join(
+        f"<strong>{esc(category)} ({count})</strong>"
+        for category, count in category_counts.most_common(3)
+    )
+    authority_summary = ", ".join(
+        f"<strong>{count} {esc(authority.lower())}</strong>"
+        for authority, count in sorted(authority_counts.items(), key=lambda item: (-item[1], item[0]))
+    )
+
     (ROOT / "assets").mkdir(exist_ok=True)
     (ROOT / "assets" / "style.css").write_text(STYLE + "\n", encoding="utf-8")
     (ROOT / "categories").mkdir(exist_ok=True)
@@ -343,7 +357,10 @@ def build() -> None:
 """
     special_markup = page("Special events", special_body, "special.html", catalog)
     (ROOT / "special.html").write_text(special_markup, encoding="utf-8")
-    (ROOT / "annual-special.html").write_text(page("Annual / Special events", special_body, "special.html", catalog), encoding="utf-8")
+    alias_body = f"""
+<section class="notice"><strong>Alias page.</strong> This is the same list as <a href="special.html">Special events</a>, kept at the <code>annual-special.html</code> address for older links. Annual traditions are not listed here; they are on <a href="recurring.html">Regularly occurring events</a>.</section>
+{special_body}"""
+    (ROOT / "annual-special.html").write_text(page("Special events (alias)", alias_body, "special.html", catalog), encoding="utf-8")
 
     all_body = f"""
 <section class="section-head"><div><h2>All published city-only events</h2><p>Search across the {len(all_events)} records or narrow by category.</p></div><p>Every row has a source link.</p></section>
@@ -389,6 +406,14 @@ def build() -> None:
 <li>The catalog has the most audited rows in Community &amp; culture, Food &amp; markets, and Music &amp; performing arts. This describes the verified source set, not all activity in San Francisco.</li>
 <li>The review register makes scope and cancellation decisions visible instead of deleting difficult records or asserting unsupported city-only coverage.</li>
 </ul></section>
+<section class="panel"><h3>Directories and coverage boundaries</h3>
+<p>Some San Francisco programming is published as a running calendar rather than a single event with a fixed cadence. Those are linked here as directories instead of forcing them into event rows:</p>
+<ul class="analysis-list">
+<li><a href="https://sfpl.org/events">San Francisco Public Library — Upcoming Events</a>: branch programs and talks across the city system.</li>
+<li><a href="https://sfcityguides.org/">San Francisco City Guides</a>: free volunteer-led walking tours (70+ tours, a program of SFPL); individual tours run on varying schedules via their tour finder.</li>
+<li><a href="https://sfrecpark.org/Calendar.aspx">SF Recreation and Park calendar</a>: park programs and seasonal city events; individual dated listings (for example Scaregrove) become special-event rows.</li>
+</ul>
+<p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles — for example the Bhangra &amp; Beats Night Market, the San Francisco Hip-Hop Dance Festival, and Renegade Craft Fair mentioned on SF Travel month pages — are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County. One candidate, the Bayview Juneteenth festival, remains unresolved because its official homepage states no textual 2026 date or location.</p></section>
 <section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing a row, re-check the official source and update the review reason when evidence is incomplete or conflicting.</p><p>This site is intentionally not an exhaustive claim: private, newly announced, or unlisted events can exist outside this dated source audit.</p></section>
 """
     (ROOT / "method.html").write_text(page("Method & sources", method_body, "method.html", catalog), encoding="utf-8")
