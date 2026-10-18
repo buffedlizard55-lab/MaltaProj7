@@ -24,18 +24,51 @@
 </div></footer>
 <script>
 for (const table of document.querySelectorAll('[data-filter-table]')) {
+  const key = table.dataset.table || '';
   const input = document.querySelector(`#${table.dataset.search}`);
   const select = document.querySelector(`#${table.dataset.category}`);
+  const statusEl = document.querySelector(`#status-${key}`);
+  const countEl = statusEl ? statusEl.querySelector('.count-visible') : null;
+  const pills = document.querySelectorAll(`.filter-pill[data-table="${key}"]`);
+  let activeFilter = 'all';
+
   const filter = () => {
-    const term = (input?.value || '').toLowerCase();
+    const term = (input?.value || '').toLowerCase().trim();
     const category = select?.value || '';
-    for (const row of table.tBodies[0].rows) {
+    let visibleCount = 0;
+    const rows = table.tBodies[0].rows;
+    for (const row of rows) {
       const matchText = !term || row.textContent.toLowerCase().includes(term);
       const matchCategory = !category || row.dataset.category === category;
-      row.hidden = !(matchText && matchCategory);
+      let matchPill = true;
+      if (activeFilter === 'upcoming') {
+        matchPill = row.dataset.upcoming === 'true';
+      } else if (activeFilter === 'free') {
+        matchPill = row.dataset.cost === 'free';
+      } else if (activeFilter === 'free-music') {
+        matchPill = row.dataset.cost === 'free' && (row.dataset.category === 'Music & performing arts' || row.dataset.music === 'true');
+      } else if (activeFilter === 'ai-tech') {
+        matchPill = row.dataset.ai === 'true';
+      } else if (activeFilter === 'gaming') {
+        matchPill = row.dataset.gaming === 'true';
+      }
+      const show = matchText && matchCategory && matchPill;
+      row.hidden = !show;
+      if (show) visibleCount++;
     }
+    if (countEl) countEl.textContent = visibleCount;
   };
-  input?.addEventListener('input', filter); select?.addEventListener('change', filter);
+
+  input?.addEventListener('input', filter);
+  select?.addEventListener('change', filter);
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      filter();
+    });
+  });
 }
 </script>
 </body>

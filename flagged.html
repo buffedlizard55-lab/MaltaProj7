@@ -19,6 +19,7 @@
 
 <section class="section-head"><div><h2>Flagged for Review</h2><p>These records are intentionally excluded from the city-only recurring and special tables.</p></div><p>16 review records · 29 field-level flags</p></section>
 <section class="notice"><strong>What a flag means:</strong> a source may be official and still be unsuitable for a city-only row — for example, a multi-city program, an official cancellation, or an unresolved schedule. Fields stay blank when not confirmed; nothing below is silently promoted into the catalog.</section>
+<div class="mobile-table-hint" aria-hidden="true"><span class="hint-icon">↔</span> Swipe table horizontally to see all columns</div>
 <div class="table-wrap">
 <table class="review-table">
 <caption>Items intentionally excluded from the city-only event tables until the noted issue is resolved.</caption>
@@ -44,6 +45,7 @@
 </table>
 </div>
 <section class="section-head"><div><h2>Field-level flags and source findings</h2><p>Corrections applied to published rows, source-availability problems, and residual discrepancies that merit manual review. Each finding links the sources used.</p></div><p>29 findings</p></section>
+<div class="mobile-table-hint" aria-hidden="true"><span class="hint-icon">↔</span> Swipe table horizontally to see all columns</div>
 <div class="table-wrap">
 <table class="review-table">
 <caption>Field-level flags on published and excluded rows: corrections applied, source problems, and residual discrepancies. Sources are linked so every flag can be checked manually.</caption>
@@ -89,18 +91,51 @@
 </div></footer>
 <script>
 for (const table of document.querySelectorAll('[data-filter-table]')) {
+  const key = table.dataset.table || '';
   const input = document.querySelector(`#${table.dataset.search}`);
   const select = document.querySelector(`#${table.dataset.category}`);
+  const statusEl = document.querySelector(`#status-${key}`);
+  const countEl = statusEl ? statusEl.querySelector('.count-visible') : null;
+  const pills = document.querySelectorAll(`.filter-pill[data-table="${key}"]`);
+  let activeFilter = 'all';
+
   const filter = () => {
-    const term = (input?.value || '').toLowerCase();
+    const term = (input?.value || '').toLowerCase().trim();
     const category = select?.value || '';
-    for (const row of table.tBodies[0].rows) {
+    let visibleCount = 0;
+    const rows = table.tBodies[0].rows;
+    for (const row of rows) {
       const matchText = !term || row.textContent.toLowerCase().includes(term);
       const matchCategory = !category || row.dataset.category === category;
-      row.hidden = !(matchText && matchCategory);
+      let matchPill = true;
+      if (activeFilter === 'upcoming') {
+        matchPill = row.dataset.upcoming === 'true';
+      } else if (activeFilter === 'free') {
+        matchPill = row.dataset.cost === 'free';
+      } else if (activeFilter === 'free-music') {
+        matchPill = row.dataset.cost === 'free' && (row.dataset.category === 'Music & performing arts' || row.dataset.music === 'true');
+      } else if (activeFilter === 'ai-tech') {
+        matchPill = row.dataset.ai === 'true';
+      } else if (activeFilter === 'gaming') {
+        matchPill = row.dataset.gaming === 'true';
+      }
+      const show = matchText && matchCategory && matchPill;
+      row.hidden = !show;
+      if (show) visibleCount++;
     }
+    if (countEl) countEl.textContent = visibleCount;
   };
-  input?.addEventListener('input', filter); select?.addEventListener('change', filter);
+
+  input?.addEventListener('input', filter);
+  select?.addEventListener('change', filter);
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.dataset.filter;
+      filter();
+    });
+  });
 }
 </script>
 </body>

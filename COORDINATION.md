@@ -8,10 +8,32 @@
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| B1 | Line-by-line verification review: audit dataset against brief requirements (city-only SF, verified official sources, date accuracy around 2026-10-18, free vs paid costs, focus on gaming, music, AI); log findings in research | in progress | arena/813e597d-maltaproj7 | 2026-10-18 | `research/**`, `data/events.json` |
-| B2 | Mobile-friendly UI & Dashboard enhancement: executive summary of upcoming events close to 2026-10-18; upcoming dates highlighted first; clear cost labeling; dedicated focus & filter for free gaming, music, AI events; responsive mobile UX | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
-| B3 | Build & verify: validate all pages, local links, source links, semantic guards; run verify.py | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `verify.py` |
-| B4 | Final integration: PR to `main` with summary of changes, sources, and flagged irregularities; merge without waiting; confirm GitHub Pages deployment; record links | unclaimed | arena/813e597d-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+| B1 | Line-by-line verification review: audit dataset against brief requirements (city-only SF, verified official sources, date accuracy around 2026-10-18, free vs paid costs, focus on gaming, music, AI); log findings in research | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `research/review-813e597d.md` |
+| B2 | Mobile-friendly UI & Dashboard enhancement: executive summary of upcoming events close to 2026-10-18; upcoming dates highlighted first; clear cost labeling; dedicated focus & filter for free gaming, music, AI events; responsive mobile UX | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
+| B3 | Build & verify: validate all pages, local links, source links, semantic guards; run verify.py | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `verify.py` |
+| B4 | Final integration: PR to `main` with summary of changes, sources, and flagged irregularities; merge without waiting; confirm GitHub Pages deployment; record links | in progress | arena/813e597d-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+
+## Session record — arena/813e597d-maltaproj7 (B1-B4)
+
+- **B1 (Verification & Analysis Review):**
+  - Completed comprehensive independent review of the 140 published city-only events, 16 review records, and 29 field-level flags against official sources.
+  - Classified all events relative to today's date (**October 18, 2026**): 1 happening today (`Diplo's Run Club SF 5K`), 4 active seasons/ongoing series (`YBG Festival`, `Castro Farmers Market`, `Sunday Streets SF finale`, `SF Open Studios`), 43 confirmed upcoming events scheduled through late 2026 and 2027, 19 year-round recurring events, and 73 past 2026 editions.
+  - Audited admission costs: 44 confirmed free events (31.4%), 22 confirmed paid/ticketed events (15.7%), and 74 unstated fields preserved without inference or hallucination.
+  - Documented findings in `research/review-813e597d.md`.
+- **B2 (Mobile-Friendly UI & Dashboard Enhancements):**
+  - **Executive Summary:** Added prominent executive briefing on Dashboard (`index.html`) highlighting upcoming events close to today's date (Oct 18, 2026), 4 executive metrics, and a curated table of 20 immediate-window events (Oct 18 – Nov 20, 2026) with official source links.
+  - **Organized by Date with Upcoming Dates First:** Enhanced all catalog tables (`all-events.html`, `special.html`, `recurring.html`, and `categories/*.html`) so that active seasons and upcoming dates are prioritized at the top in chronological order, accented with distinctive status badges (`Happening Today`, `Active Season`, `Upcoming`, `Year-round`, `Past edition`) and visual row highlighting (`row-upcoming`, `row-today`).
+  - **Clear Cost Labeling:** Renamed table column to "Cost / Admission" and implemented high-visibility badges: vibrant green `Free` badges for free admission, amber `Paid` badges with exact ticket/pass prices, and clear `— (Unstated)` labels when sources do not state cost.
+  - **Focus on Free Events (Gaming, Music, AI & Beyond):**
+    - Added dedicated Focus Spotlight section on the Dashboard featuring Gaming (GDC Festival of Gaming at Moscone Center), Free Music (12 verified 100% free music traditions including Hardly Strictly Bluegrass, Stern Grove, Fillmore Jazz, Golden Gate Park Band, YBG Festival), AI & Cutting-Edge Tech (10 enterprise AI/tech summits including Microsoft Ignite, Cloudflare Connect, Current SF, AI Engineer World's Fair, TechCrunch Disrupt, TDX), and free cultural celebrations/museum days.
+    - Added interactive quick-filter pills to tables (`All`, `Upcoming First`, `Free Events`, `Free Music`, `AI & Tech`, `Gaming`), allowing instant client-side filtering without page reloads.
+  - **Mobile-Friendliness:** Responsive typography with clamp scaling, touch-friendly navigation pills, horizontal touch-scrolling table containers with mobile swipe hints (`↔ Swipe table horizontally to see all columns`), sticky headers, and responsive stacked filter controls.
+- **B3 (Build & Verification):**
+  - `python3 build.py && python3 verify.py` pass completely (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`).
+  - All 16 HTML pages verified with zero broken internal links.
+  - Built-in preview server running and tested on port 8000.
+- **B4 (Pull Request, Merge & Deploy):**
+  - Opening pull request from `arena/813e597d-maltaproj7` to `main`, merging without waiting for review, confirming Pages deployment, and recording below.
 
 ---
 

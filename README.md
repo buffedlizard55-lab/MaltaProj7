@@ -4,11 +4,16 @@ A static GitHub Pages catalog of **publicly advertised events in the City and Co
 
 ## What is included
 
-- **139 publishable city-only rows:** 94 regularly occurring and 45 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of three parallel integration contributions, PRs #9–#14, plus the 2026-10-18 coverage-gap passes logged in `research/coverage-gap-646f6727.md` and `research/review-5e333a6e.md`).
-- **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
+- **140 publishable city-only rows:** 95 regularly occurring and 45 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of parallel integration contributions and coverage-gap passes).
+- **A source link on every published row.** Sources are labeled as official organizer, government source, official venue, official venue / federal trust, or trusted civic source.
+- **Executive Summary:** A dedicated dashboard executive briefing highlighting upcoming events close to today's date (**October 18, 2026**), with 48 upcoming/active events, 20 immediate-window events (next 30 days), and 44 verified free events.
+- **Organization by Date with Upcoming Dates First:** All tables sort active seasons and upcoming dates first, chronologically, accented with status badges (`Happening Today`, `Active Season`, `Upcoming`, `Year-round`, `Past edition`).
+- **Clear Cost Labeling:** Every row clearly indicates admission cost with prominent badges (`Free`, `Paid / Ticketed`, `— (Unstated)`).
+- **Specialized Focus on Free Events:** Dedicated spotlight and quick-filter pills for **Gaming** (GDC Festival of Gaming), **Free Music** (12 free music traditions including Hardly Strictly Bluegrass, Stern Grove, Fillmore Jazz, Golden Gate Park Band, YBG Festival), **AI & Cutting-Edge Tech** (10 enterprise AI/tech summits), and civic culture/markets.
+- **Mobile-Friendly UI:** Fully responsive dashboard, fluid typography, touch-friendly navigation, mobile scroll hints for table columns, and interactive quick-filter pills.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
-- **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
-- **25 field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
+- **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source.
+- **29 field-level flags** (published on Flagged for Review with source links) recording applied date/source corrections, dead or hijacked organizer domains, conflicting official date windows, and values that could not be re-confirmed.
 
 The catalog is a reproducible snapshot of official-source evidence, **not** a claim to list every private, unlisted, or newly announced event in San Francisco. Dates and operational details can change; check the linked source before attending.
 
