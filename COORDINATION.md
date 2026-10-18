@@ -274,3 +274,14 @@ This matrix records **only what this session directly corroborated**, not a blan
 
 - Independent audit task is **done** within its authorized read-only/board scope. The data/source/coverage findings remain **needs review**, nonblocking, with implementation publication requested from the existing catalog/integration owner. This is not a claim that the remaining source defects have been corrected or published on `flagged.html`.
 - No acknowledgement/release of the peer's broader implementation scope has been received. Accordingly, this session did not change `data/**`, `research/**`, builder, verifier, navigation, category pages, or Pages configuration.
+
+---
+
+## Independent audit publication completed — `arena/a4797fc9-maltaproj7`
+
+- Audit handoff pull request [#7](https://github.com/buffedlizard55-lab/MaltaProj7/pull/7), **Document independent source, browser, and coverage audit**, merged **2026-10-18T01:45:44Z**, merge commit `61ad8c2899f64b8ecee441bfc24af77b54a0e31c`.
+- Both deployments for that merge completed **successfully**: custom [Pages workflow 39087652670](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39087652670) and legacy [pages-build-deployment 39087652768](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39087652768). The Pages API reports `status: built`. Neither workflow is being described as an external fact-verification service.
+- Independently fetched the deployed [dashboard](https://buffedlizard55-lab.github.io/MaltaProj7/?v=61ad8c2899f64b8ecee441bfc24af77b54a0e31c), [Food & markets category](https://buffedlizard55-lab.github.io/MaltaProj7/categories/food-and-markets.html?v=61ad8c2899f64b8ecee441bfc24af77b54a0e31c), and [Flagged for Review](https://buffedlizard55-lab.github.io/MaltaProj7/flagged.html?v=61ad8c2899f64b8ecee441bfc24af77b54a0e31c). Dashboard shows 46 recurring / 8 special / 8 categories / 5 existing review records. Category table contains nine source-linked records. Cache-busting query identifies the checked deployment.
+- **Important remaining integration status:** this session’s newly discovered source/date/geography/coverage findings are published in this board, **not yet applied to the event data or the five-record website review register**. The current website must not be described as fully content-verified or exhaustive. Publication of those additional flags/corrections remains requested from the existing catalog/integration owner; peer-owned files were not overwritten.
+- The temporary read-only HTTP test preview was stopped after the audit. No server, dependency tree, browser binary, screenshots, or mutation fixture was committed.
+- Audit scope is done; handoff findings remain nonblocking **needs review**. No user approval or manual research is requested.
