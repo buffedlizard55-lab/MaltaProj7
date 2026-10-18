@@ -1,4 +1,25 @@
-# Active coordination — session arena/813e597d-maltaproj7 (2026-10-18)
+# Active coordination — session arena/8c40d1c6-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/8c40d1c6-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/8c40d1c6-maltaproj7`, so the brief's `session-<id>/<task>` worktree naming cannot be used — same documented deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T~11:00Z):** `origin/main` at `68a0516` (merge of PR #26). `gh pr list --state all` → PRs #1–#26 all **MERGED**; no open PRs. `git branch -a` → only `main` and this session's branch (no other remote branches, no other live session), and every board below is historical/done, so no peer claim is outstanding and this session takes the remaining brief-driven work plus final integration.
+
+**Local baseline:** `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `published=148 recurring=98 special=50 review=16 flags=34 categories=9` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+
+**Gap this session closes (from the brief):** (a) 75 of 148 published rows carried no stated cost, including most near-term upcoming rows; (b) the brief asks for **paid/ticketed events to live in a separate section** with the main section holding free upcoming events — no dedicated paid page existed; (c) the free gaming / music / AI focus needed re-checking against live official sources.
+
+## Task board — arena/8c40d1c6-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| F1 | Line-by-line re-verification of the 74 upcoming/ongoing rows against live official sources (dates, cost, status); fill `admission` **only** where the official page states it; add new flags for dead links, changed dates, and unverifiable values | **in progress** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-8c40d1c6.md` (new), `research/patch-8c40d1c6.py` (new) |
+| F2 | Separate **Ticketed / paid** section (`paid.html`) and make the main upcoming view lead with free events; keep free gaming, music and AI focus panels; mobile-first layout preserved | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html` + `categories/*.html` |
+| F3 | Build & verify: extend `verify.py` guards for the new page/section, rebuild, crawl local links | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `verify.py`, `build.py` |
+| F4 | Docs + final integration: refresh `README.md`/method counts, PR to `main` with sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `README.md`, `build.py` (method page), `COORDINATION.md` |
+
+---
+
+# Historical coordination — session arena/813e597d-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/813e597d-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/813e597d-maltaproj7`).
 
