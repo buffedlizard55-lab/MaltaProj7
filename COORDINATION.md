@@ -77,7 +77,27 @@ Sunday Streets free-wording flag).
 - **Count guards:** `verify.py` updated 154 → 158 published, 98/56 → 101/57 recurring/special,
   41 → 44 flags, with a comment recording this pass (the guards had been left stale deliberately while
   `verify.py` was inside `arena/8c40d1c6`'s F3 claim).
-- **Rebuild:** `python3 build.py && python3 verify.py` — see the PR description for the exact output.
+- **Rebuild:** `python3 build.py` → `Built 158 published events: 101 recurring, 57 special, 9
+  categories; 16 review records; 63 upcoming; 66 free or partly free.`; `python3 verify.py` →
+  `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. README counts refreshed to match.
+- **Pull request:** [#31](https://github.com/buffedlizard55-lab/MaltaProj7/pull/31) "Integration:
+  verified free-event additions (+4 free rows), official-source corrections, 158-row rebuild" —
+  **MERGED** 2026-10-18, merge commit
+  [`3c3cb2e`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/3c3cb2e).
+- **Deploy:** Pages workflow run
+  [39124541471](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39124541471) and
+  pages-build-deployment run
+  [39124541022](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39124541022) both
+  completed **successfully**; Pages API returned `status: built`.
+- **Live check:** <https://buffedlizard55-lab.github.io/MaltaProj7/free.html> fetched after deploy and
+  serves the merged data — "18 dated free upcoming", including the four new free rows (Afro-Filipino
+  Jazz Project "in 6 days", Halloween Hoopla "in 13 days", From the E: Harvest Night Market "in 33
+  days"), the From the E cost fill with its `Admission evidence ↗` link to
+  <https://www.fromtheesf.com/>, and Lit Crawl's corrected "5:00–9:00 p.m.; individual Lit Crawl
+  programs 6:30–7:30 p.m." with "Free; no RSVP required". The Gaming and AI focus panels state plainly
+  that no dated free upcoming event is confirmed in this snapshot rather than promoting a ticketed
+  conference. (The sandbox cannot `curl` github.io hosts; the live check was made through the hosted
+  page reader.)
 
 ---
 
