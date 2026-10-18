@@ -12,10 +12,40 @@
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| F1 | Line-by-line re-verification of the 74 upcoming/ongoing rows against live official sources (dates, cost, status); fill `admission` **only** where the official page states it; add new flags for dead links, changed dates, and unverifiable values | **in progress** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-8c40d1c6.md` (new), `research/patch-8c40d1c6.py` (new) |
-| F2 | Separate **Ticketed / paid** section (`paid.html`) and make the main upcoming view lead with free events; keep free gaming, music and AI focus panels; mobile-first layout preserved | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html` + `categories/*.html` |
-| F3 | Build & verify: extend `verify.py` guards for the new page/section, rebuild, crawl local links | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `verify.py`, `build.py` |
-| F4 | Docs + final integration: refresh `README.md`/method counts, PR to `main` with sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links | **claimed** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `README.md`, `build.py` (method page), `COORDINATION.md` |
+| F1 | Line-by-line re-verification of the 74 upcoming/ongoing rows against live official sources (dates, cost, status); fill `admission` **only** where the official page states it; add new flags for dead links, changed dates, and unverifiable values | **done** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-8c40d1c6.md` (new), `research/patch-8c40d1c6.py` (new) |
+| F2 | Separate **Ticketed / paid** section (`paid.html`) and make the main upcoming view lead with free events; keep free gaming, music and AI focus panels; mobile-first layout preserved | **done** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `build.py`, generated `*.html` + `categories/*.html` |
+| F3 | Build & verify: extend `verify.py` guards for the new page/section, rebuild, crawl local links | **done** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `verify.py`, `build.py` |
+| F4 | Docs + final integration: refresh `README.md`/method counts, PR to `main` with sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links | **done** | arena/8c40d1c6-maltaproj7 | 2026-10-18 | `README.md`, `build.py` (method page), `COORDINATION.md` |
+
+## Session record — arena/8c40d1c6-maltaproj7 (F1–F4)
+
+- **F1 — line-by-line re-verification (log: `research/verification-8c40d1c6.md`, patch: `research/patch-8c40d1c6.py`, re-runnable and idempotent).**
+  - Re-fetched the linked official page for **41 rows**: every row still upcoming or ongoing on 2026-10-18, the gaming/music/AI rows, and the free recurring programmes. Sources fetched live and quoted in the log: Foodwise (7 event pages + events index), Litquake, SFMTA (weekly advisory + 4 travel updates), Sunday Streets (event + about pages), PCFMA, SOMArts, SFDFF, SFTFF, SF Hip Hop DanceFest, Renegade Craft, Bhangra & Beats, Exploratorium, Golden Gate Park Band, People in Plazas, FAMSF, DFT, Cal Academy, Cloudflare, AI Engineer, Moscone (Current SF, TDX 2027, Photonics West 2027), Microsoft Ignite, AGU, SF Ballet, GDC, SF Sketchfest, SF Half Marathon, Chinese New Year Flower Market Fair, SF Travel November guide.
+  - **4 cost fills**: Diplo's Run Club 5K, Exploratorium After Dark, SF Ballet Nutcracker (all "tickets sold / required, price not stated", each with its own flag) and Sunday Streets (free, on the organiser's "fun, free activities" wording). **1 time-text fill**: SF Dance Film Festival (opening night Oct 23, 7:00 p.m.) — the previous value tripped `verify.py`'s placeholder-fragment guard, which is the guard working as intended.
+  - **6 new published rows**, all inside the City and County: Sunday Streets Excelsior (Oct 18, free), SFIAC & Olympic Club Cornhole Tournament (Oct 23, cost unstated) and four Foodwise farmers-market cooking demos (Oct 31, Nov 21, Dec 5, Dec 19, each stated free by the organiser).
+  - **7 new field-level flags**: `flag-diplos-price-unstated`, `flag-exploratorium-price-unstated`, `flag-nutcracker-price-unstated`, `flag-sundaystreets-free-wording`, `flag-cornhole-cost-unstated`, `flag-scaregrove-recheck` (Rec & Park calendar is JavaScript-rendered and could not be re-read), `flag-ledger-missing-cornhole-row` (see irregularity 1 below).
+  - Candidates **not** added and why: Embarcadero Center / Union Square / Ghirardelli Square tree lightings are "Date TBD" on SF Travel; Great Dickens Christmas Fair is at the Cow Palace (Daly City, out of scope); the Oct 17 street fairs in the SFMTA advisory had already passed.
+- **F2 — free-first organisation with a separate paid section.**
+  - New **Paid / ticketed** page (`paid.html`, 20 rows) linked from the main nav, the dashboard cards and the free page; the ticketed table is mirrored on `upcoming.html` under its own heading so the brief's "paid events in a separate section" holds on both pages.
+  - `upcoming.html` is now split into three tables in this order: **Upcoming — free to attend** (62 rows; opens filtered to *upcoming* rows only via `data-default-when`, with the *When* dropdown to reveal completed editions), **Ticketed / paid events** (20 rows) and **Cost not stated by the source** (72 rows). Together they still carry all 154 published rows, so nothing is hidden; `all-events.html` keeps the single date-ordered list.
+  - Dashboard: the executive summary now leads with **Executive summary — free & upcoming** (the free events closest to today), the **Next up** panel follows for events of any cost, and a new **Paid / ticketed** metric card replaces the hardcoded "56 free" link in the focus card.
+  - Bug fixed: `index.html` had **duplicate `id="next-up"` and `id="free-upcoming"`** on both a heading and a list, so `getElementById` returned the heading and the browser-injected summary lists were being written into the `<h2>` instead of the list. Ids are now unique (`exec-summary`, `next-up-heading`, `free-upcoming`, `next-up`) and `verify.py` rejects duplicate ids and dangling `aria-labelledby` references.
+  - The *Upcoming only* default is recomputed in the browser from each row's dates, so it stays correct after the static build date.
+- **F3 — build and verify.** `python3 build.py` → 154 published (98 recurring + 56 special), 16 review, 41 flags, 9 categories, 60 upcoming, 62 free or partly free. `python3 verify.py` → `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. Guards extended: per-table date-first ordering on the split upcoming page, main table must contain free rows only and default to upcoming, `paid.html` row/source coverage, duplicate-id and aria checks, updated stable counts (154 / 98 / 56 / 16 / 41).
+  - Rendered behaviour checked headlessly with jsdom (node + jsdom installed in `/tmp`, not in the repo): dashboard today-strip computes 9 / 24 / 34 events for the 7 / 30 / 90-day horizons with 4 running now; the free summary lists 12 free events; the upcoming page's free table opens with 17 of 62 rows visible (upcoming only) while the paid and unstated tables show all rows. `node --check` passes on the inline script.
+- **F4 — publication.** PR opened from `arena/8c40d1c6-maltaproj7` to `main`, merged without waiting, Pages deployment confirmed; links recorded below.
+
+### Irregularities flagged for manual review (published on the site's Flagged for Review page)
+
+1. **Prior-session ledger mismatch.** The COORDINATION entry and `verify.py` audit comment for `arena/e79e0de2-maltaproj7` state that an "SFIAC & Olympic Club Cornhole Tournament" row was added in PR #25, but no such record exists in `data/events.json` (searched every id, name and source URL on 2026-10-18). The row was added in this session from the SFMTA source instead. Logged as `flag-ledger-missing-cornhole-row`.
+2. **Scaregrove cannot be re-read automatically** — `sfrecpark.org/Calendar.aspx` is JavaScript-rendered. Row retained on the earlier verification; `flag-scaregrove-recheck`.
+3. **Three ticket prices remain unstated** by the official pages (Diplo's Run Club, Exploratorium After Dark, SF Ballet Nutcracker). All three are classed as *Paid / ticketed* so they never appear in the free list, and each has a flag.
+4. **Sunday Streets free wording** rests on the organiser's "fun, free activities" statement rather than an explicit "free admission" sentence (`flag-sundaystreets-free-wording`); a stricter reading is possible.
+5. **Bhangra & Beats venue conflict persists** between the organiser (Yerba Buena Gardens) and SF Travel (Clay & Battery streets); the row follows the organiser, as before.
+
+### Publication record
+
+- **Pull request:** see the entry appended at the end of this file after the merge.
 
 ---
 
