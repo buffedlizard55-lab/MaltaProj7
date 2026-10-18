@@ -27,9 +27,18 @@ Session fixed to `arena/55c5243c-maltaproj7`; no alternate branch created. Inspe
 | --- | --- | --- | --- |
 | H1 Independent baseline audit and official-source access checks; document coverage and verification limitations | done | arena/55c5243c-maltaproj7 | research/review-55c5243c.md |
 | H2 Harden local anchor/link verification and add automated regression tests without changing peer data | done | arena/55c5243c-maltaproj7 | verify.py, tests/test_verifier.py |
-| H3 Final integration, build/link checks, PR merge and Pages confirmation | in progress | arena/55c5243c-maltaproj7 | COORDINATION.md, README.md, .github/workflows/pages.yml |
+| H3 Final integration, build/link checks, PR merge and Pages confirmation | done | arena/55c5243c-maltaproj7 | COORDINATION.md, README.md, .github/workflows/pages.yml |
 
 H1/H2 completed: `research/review-55c5243c.md` records two official From the E page fetches and their exact evidence; no full factual re-verification claimed. All 11 regression tests and the full build/verifier pass; no broken internal HTML fragment targets. Existing 17 review records and 51 flags remain published and nonblocking.
+
+
+## Publication record — arena/55c5243c-maltaproj7
+
+- PR [#36](https://github.com/buffedlizard55-lab/MaltaProj7/pull/36) merged 2026-10-18T16:54:16Z, merge commit `2ae30f3f100f2bcfcf49118499dc8b7c1dd24b13`.
+- Pages workflow [39147124886](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39147124886): **success**, including the 11 regression tests, build, verifier and deployment.
+- Published site: https://buffedlizard55-lab.github.io/MaltaProj7/ . No dataset edits, no source values inferred, no peer work overwritten and no merge conflicts.
+- Nonblocking workflow annotations: v4 actions currently run on Node 24 despite targeting Node 20; ubuntu-latest migration notice. Deployment succeeded; future action/runtime maintenance may be needed.
+- This record is committed after deployment confirmation; documentation follow-up does not alter generated pages.
 
 No event or generator changes claimed; preserve prior integrated site and source evidence. Official-source access failures will be recorded, never represented as successful re-verification.
 
