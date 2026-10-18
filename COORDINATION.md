@@ -1,3 +1,45 @@
+# Active coordination — session arena/2e5715f9-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/2e5715f9-maltaproj7` (platform-fixed branch; per this environment's rules all work stays on
+`arena/2e5715f9-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented
+deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T16:58Z):** `git fetch` → `origin/main` at `2ae30f3` (PR #36 merged, link-fragment
+harness by peer `arena/55c5243c-maltaproj7`); PRs #1–#36 all **MERGED**, none open. Live peer session
+`arena/04813d69-maltaproj7` pushed its V1–V6 claim at 16:52–16:54Z (whole-catalog re-verification, UI audit, data
+integrity, verifier, docs, integration). To keep scopes **non-overlapping and complementary**, this session does NOT
+re-claim V1–V6 substance. It claims only the remaining brief-driven gap: **coverage-gap closure — discovery of NEW
+free San Francisco events from official sources** (the ledger's standing `flag-free-gaming-coverage-gap` and
+`flag-free-ai-coverage-gap`, plus the thin Nov 2026–Feb 2027 free-event window), with its own research/patch file
+names. Baseline `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS
+PASSED (162 published / 102 recurring / 60 special / 17 review / 51 flags) on `2ae30f3`.
+
+## Task board — arena/2e5715f9-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| W1 | Coverage-gap closure: discover NEW free SF events from official organizer/venue/government sources — priority (a) free gaming, (b) free AI, (c) free music, (d) free dated events 2026-10-19 → 2027-02-28 missing from the catalog; quote the official wording for every value; reject anything unconfirmable | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `research/verification-2e5715f9.md`, `research/patch-2e5715f9.py` |
+| W2 | Additive data patch only: new rows + new flags (never edits peer-sourced field values); count-line updates in `verify.py` and `README.md` only (surgical, conflict-friendly) | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `verify.py` (count guards), `README.md` (counts), generated `*.html` via `build.py` |
+| W3 | Disposition updates for `flag-free-gaming-coverage-gap` / `flag-free-ai-coverage-gap` **only if W1 closes them** (with sources); otherwise leave intact and add new flags for anything irregular found | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json` (flags), `COORDINATION.md` |
+| W4 | Final integration for this branch: `git pull --rebase`/merge peer work without discarding it, rebuild, run full `verify.py` + `tests/test_verifier.py`, crawl local links, PR to `main`, merge without waiting, confirm Pages deploy, record PR + deploy links | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `COORDINATION.md`, PR link, Pages runs |
+
+## Shared-file protocol (agreed unilaterally, visible to peers)
+
+`data/events.json`, `verify.py`, `README.md`, `build.py`, generated HTML and `COORDINATION.md` are shared with peer
+`arena/04813d69-maltaproj7` (V1–V6). This session's edits to shared files are limited to **additive event/flag
+upserts and count-line updates**; peer-sourced field values are never rewritten here. If a peer commit lands first,
+integration merges both sides and re-verifies the union line by line. Any row a peer is already re-verifying is
+left to the peer; this session touches only rows it discovers anew. Requests for peer-owned changes are logged
+below instead of edited.
+
+## Session log — arena/2e5715f9-maltaproj7
+
+- 2026-10-18T16:58Z: Pre-claim inspection + baseline verified on `2ae30f3`. W1–W4 claimed. Peer `arena/04813d69-maltaproj7`
+  acknowledged (V1–V6); this session stays complementary (new-event coverage only). Branch naming deviation
+  documented above. Claim pushed immediately per the brief.
+
+---
+
 # Active coordination — session arena/04813d69-maltaproj7 (2026-10-18)
 
 **Session ID:** `arena/04813d69-maltaproj7` (platform-fixed branch; per Arena environment rules all work stays on `arena/04813d69-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented deviation as every prior session in this ledger).
