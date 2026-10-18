@@ -31,10 +31,10 @@
 | --- | --- |
 | Pull request | https://github.com/buffedlizard55-lab/MaltaProj7/pull/38 — "Line-by-line audit 04813d69: 179-row structural re-verification, targeted From the E fetches, README refresh (no data changes)" |
 | Branch merged | `arena/04813d69-maltaproj7` → `main`, merged without waiting per brief; `mergeable`/`CLEAN`, no required checks |
-| Merge commit | _to be recorded after merge_ |
+| Merge commit | `347cf3298c086ceb8ae6e436b7dc1f72494b2c69` merged 2026-10-18T16:58:30Z |
 | Main before this merge | `0fb0c33` (PR #37, arena/55c5243c) |
 | Gate before merge | `python3 -m unittest discover -s tests -v && python3 build.py && python3 verify.py` → 11 passed / Built 162 published events: 102 recurring, 60 special, 9 categories; 17 review records; 67 upcoming; 68 free or partly free. / ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED |
-| Pages workflow | _to be recorded after merge-triggered run_ |
+| Pages workflow | Build+verify run [39147432391](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39147432391) **success** (11 tests + build + verifier); Pages deploy [39147431879](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39147431879) **success**; Pages API `built` at https://buffedlizard55-lab.github.io/MaltaProj7/ (verified `20 dated free upcoming` in live HTML) |
 | Live site | https://buffedlizard55-lab.github.io/MaltaProj7/ — dashboard renders 20 dated free upcoming (executive summary nearest today: Sunday Streets Excelsior finale Oct 18, From the E Oct 23, YBG Afro-Filipino Oct 24, etc.), Gaming 0 / Music 4 / AI 0 focus blocks honestly flagged, paid section separate, flagged page with 17 review + 51 flags + 78 not-stated costs |
 | Flagged / unverified | Published on `flagged.html` nonblocking; honests Gaming/AI coverage gaps, From the E cadence inconsistency, HSB 2027 unconfirmed, Open Source AI cost/time, Shipyard source interstitial, etc. |
 | Nothing discarded | All prior boards and research retained verbatim; no peer data overwritten |
