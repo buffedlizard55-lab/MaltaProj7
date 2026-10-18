@@ -25,6 +25,121 @@ Rules honored: small frequent commits; `git pull --rebase` before every push; no
 - **Gates**: `python3 build.py` → "Built 97 published events: 77 recurring, 20 special, 8 categories; 12 review records." `python3 verify.py` → "ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED".
 - **PR / Pages result**: recorded in the follow-up entry below.
 
+---
+
+# Active coordination — session `arena/e969f4df-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/e969f4df-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as every earlier session).
+
+**Pre-claim inspection (2026-10-18T05:48Z):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty. GitHub Pages API → `status: built`, https://buffedlizard55-lab.github.io/MaltaProj7/ . Baseline `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16, categories=8), working tree clean after rebuild (generated output is reproducible).
+
+**Concurrent claims observed before claiming (both committed 2026-10-18T05:47Z, ~1 minute before this session):**
+
+| Session | Branch head | Claimed scope |
+| --- | --- | --- |
+| `arena/5e333a6e-maltaproj7` | `055484f` | S1 structural audit + spot re-verification, S2 coverage-gap additions, S3 final integration → `data/events.json`, `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `research/review-5e333a6e.md` |
+| `arena/646f6727-maltaproj7` | `8b140de` | G1 coverage-gap additions, G2 spot re-verification, G3 rebuild + `verify.py` guards, G4 final integration → `data/events.json`, generated HTML/CSS/CSV, `verify.py`, `README.md`, `research/coverage-gap-646f6727.md` |
+
+**Collision request to `5e333a6e` and `646f6727` (logged here instead of editing your files):** your two claims overlap on `data/events.json`, `verify.py`, the generated pages, `README.md`, *and* on being the single final-integration session. The brief allows only one integration owner for shared outputs. Suggested split: `646f6727` keeps coverage-gap **additions** (G1) and the rebuild/verify guards (G3); `5e333a6e` keeps the structural/URL audit (S1) and the **single** final integration + PR/merge/Pages confirmation (S3); whoever merges last must merge `origin/main` first, re-run `build.py`/`verify.py`, and preserve the other's rows rather than overwrite `data/events.json` wholesale. Neither of you has claimed the files this session creates, so no scope below conflicts with yours.
+
+## Task board — this session (read-only on all shared outputs)
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| V1 | Independent line-by-line verification audit: re-fetch the cited official source for records in `data/events.json` and log PASS / PASS-with-correction / FAIL per row with quoted source text; prioritise upcoming (future-dated) rows, duplicated traditions, and every row the V2 harness flags | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/verification-e969f4df.md` (new, owned by this session) |
+| V2 | Local integrity harness for the published catalog: weekday↔ISO-date agreement, `date_text`↔ISO agreement, duplicate-tradition detection, placeholder/blank-field audit, URL hygiene, data↔generated-HTML row parity, and a crawl of every internal link in the built site | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/audit_checks_e969f4df.py` (new), `research/verification-e969f4df.md` |
+| V3 | Hand the V1/V2 findings to the integration owners as source-linked correction requests; irregularities that need a data or generator edit are **requested here, not applied**, because `data/events.json`, `build.py`, `verify.py` and the generated pages are claimed by `5e333a6e` / `646f6727` | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` (append to this session's section only) |
+| V4 | Publish this session's scope: PR from `arena/e969f4df-maltaproj7` to `main`, merge without waiting for approval, confirm the Pages workflow succeeds, record PR link + merge result + deploy run here | pending | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` |
+
+Rules honored: no file owned by another session is edited; unverified values are reported as unverified and never inferred; small frequent commits; `git pull --rebase` before every push; a stale claim (>60 min, no commits) may be taken over with a handoff note — none qualifies yet.
+
+## V1–V3 results and correction requests (2026-10-18, session `arena/e969f4df-maltaproj7`)
+
+**Delivered (this session's scope only):**
+- `research/verification-e969f4df.md` — line-by-line verification log. **30 records re-verified against live official sources** (all 22 then-upcoming rows, the 3 doubled-tradition partners, 8 undated recurring programs): **26 PASS, 4 PASS·GAP, 2 FAIL, 1 FAIL-on-one-field ×2, 1 PASS·FLAG**. Every verdict quotes the fetched official page. Coverage limits are stated in Part 4 of the log — nothing is marked verified without an inspected source.
+- `research/audit_checks_e969f4df.py` — read-only integrity harness. After merging PRs #17–#21 (catalog now 155 records: 139 published = 94 recurring + 45 special, 16 review, 25 flags): **0 errors, 3 warnings, 105 notes**; 197 internal references all resolved; CSV parity 155 rows; weekday↔ISO, year, geography, vocabulary, duplicate and parity checks all pass. `python3 build.py && python3 verify.py` also PASS on the merged tree (generated output regenerated identically).
+
+**Status:** V1 DONE · V2 DONE · V3 DONE (requests below) · V4 in progress (PR to `main`, merge, Pages confirmation, links recorded here).
+
+**Correction requests to the data owners (`5e333a6e` / `646f6727`, scopes now done — apply in a follow-up or hand to the next integration owner). None were applied by this session, because `data/events.json`, `build.py`, `verify.py` and the generated pages were never in this session's scope. Each item links the official source inspected in `research/verification-e969f4df.md`:**
+1. `fillmore-jazz-festival-2026` — published “July 4–5, 2026” is no longer stated by the cited https://www.fillmorejazzfest.com/ (live page announces “Saturday & Sunday, July 3 & 4, 2027” only). Cite an edition-specific official page or demote to Flagged for Review; canonicalise the two host spellings (`www.` vs bare domain).
+2. `merola-summer-festival` — `date_text` “Summer 2026” is not a sourced date; https://merola.org/summerfestival/ states no calendar dates and the 2026 season has ended. Demote to Flagged for Review or republish with sourced performance dates/venues.
+3. `ybg-festival-2026` — end date “November 13, 2026” is not stated on https://ybgfestival.org/ (organizer says “May–Oct”, latest posted event Oct 31). Cite an organizer page for Nov 13, restate to the sourced span, or blank + flag; switch `source_url` to the organizer's own 2026 press release.
+4. `international-ocean-film-festival-2026` — `time_text` “Sat 10:00 a.m.–11:00 a.m. (as posted)” is contradicted by the cited Fort Mason listing; keep only sourced times (e.g. Friday Opening Night Party 9:00 p.m.) or blank + flag.
+5. Pointer text published as values: `lit-crawl-sf-2026` `time_text` “…; see full schedule” (official wording: “all programs from 6:30—7:30 PM”, https://www.litquake.org/litcrawl) and `bay-to-breakers-2027` `location` “…; official route information is published by the organizer” (organizer publishes Howard & Fremont start, 1000 Great Highway finish, 8:00–8:45am waves, https://www.baytobreakers.com/15k). Add a substring guard for pointer phrases to `verify.py`.
+6. Sourced values currently blank (safe to fill, sources in the log): Cloudflare Connect agenda times (https://www.cloudflare.com/connect/), Mission Community Market ISO dates 2026-03-19 → 2026-11-12 (foodwise.org), People in Plazas season through Oct 28, 2026 + 12:00–1:00pm concerts (peopleinplazas.org), SF Hip Hop DanceFest 7pm / 12pm / 5pm (sfhiphopdancefest.com), Cherry Blossom “60th Anniversary” (sfcherryblossom.org), Sketchfest “24th year” (sfsketchfest.com), Microsoft Ignite pass prices (ignite.microsoft.com).
+7. `day-of-the-dead-procession-2026` — add a field-level flag: the organizer https://www.dayofthedeadsf.org/ still shows “November 2nd, 2025” and no 2026 edition; the Nov 2, 2026 date rests on SF Travel alone. Keep time/admission blank.
+8. Presentation: 74 of 139 published rows are past-dated (end date before 2026-10-18) and no generated page labels them as completed; three traditions (Fillmore Jazz, IOFF, Italian Heritage Parade) publish both their 2026 and 2027 editions while Pride/Chinese New Year/Bay to Breakers/Sketchfest were rolled forward only — pick one edition policy, and add an upcoming/completed indicator (ISO dates already support it).
+9. Authority taxonomy: `Official venue` (19 rows) vs `Official venue / federal trust` (13 rows) — define the split or unify the label.
+10. `heart-of-the-city-farmers-market` — no change requested: record that the organizer homepage still prints pre-2023 hours (Sun 5:00pm / Wed 5:30pm) and “United Nations Plaza”; the row's 7am–4pm Fulton Plaza values follow the organizer's current /about and /find-us pages. Do not “correct” from the stale homepage text.
+
+**Merge-conflict log:** merging `origin/main` (PRs #17–#21) into this branch conflicted add/add in `COORDINATION.md` only. Resolved by concatenating both boards verbatim — no peer text discarded; generated HTML/CSV conflicts did not occur because peers' generated output was accepted wholesale and regenerated identically by `build.py`.
+
+# Active coordination — session `arena/5e333a6e-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/5e333a6e-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as earlier sessions).
+
+**Pre-claim inspection (UTC):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty; no remote branches besides `main`. Every task on every earlier board is DONE/merged; no active claims exist. Baseline `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16, categories=8).
+
+Since no other session holds a claim, this session takes the review, coverage, and final-integration tasks below. That includes the shared outputs (data, index, navigation), which the brief allows for a final integration session.
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| S1 | Repo review: structural audit of `data/events.json` (duplicates, cadence semantics, URL hygiene) + spot re-verification of rows against official sources | DONE | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `research/review-5e333a6e.md` (new), `data/events.json` (fixes only) |
+| S2 | Coverage gap pass: add major SF-city events missing from the catalog, each verified on an official organizer/venue/government page | DONE | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (new rows + flags), `research/review-5e333a6e.md` |
+| S3 | Final integration: rebuild, verify, link check, PR to `main`, merge, confirm Pages, record results | DONE | arena/5e333a6e-maltaproj7 | 2026-10-18T06:00Z | `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `COORDINATION.md` |
+
+**Reconciliation note (2026-10-18):** while S1/S2 were in progress, PR #17 (arena/d07e4ede) and PR #18 (arena/646f6727) merged to `main`, raising the counts to 107/87/20, 16 review, 20 flags. This branch merged `origin/main` with main's versions kept for every file, then re-applied `research/patch-5e333a6e.py`. That patch skips the 9 rows and 2 flags the peer had already added (GDC, RSAC, Dreamforce, JPM, TechCrunch, Autumn Moon, Trans March, Fort Mason Night Market, Litquake) and re-points 2 flags at the peer rows. No peer work was discarded.
+
+**S1/S2 outcome:** the review is in `research/review-5e333a6e.md`. 32 published rows were added: 16 Moscone Center conventions (official venue pages), 10 SFMTA-documented neighborhood events, FAMSF Free Saturdays and Free First Tuesdays, SF Open Studios, SF Half Marathon 2027, Pink Triangle 2026, and Dyke March 2026. 5 flags were added: JPM venue, Open Studios start date, Autumn Moon hours, Fort Mason Night Market date lists, and Potrero Hill hours. `python3 build.py && python3 verify.py` passes: 139 published = 94 recurring + 45 special, 16 review, 25 flags. The local link crawl found 0 broken links. Every new source URL was fetched directly on 2026-10-18; the sandbox cannot curl external hosts, so these fetches serve as the external link check.
+
+**S3 outcome:** PR https://github.com/buffedlizard55-lab/MaltaProj7/pull/20 was **merged** at 2026-10-18T05:57:14Z as merge commit `14ea37b`, without approval as the brief allows. The 'Deploy static site to GitHub Pages' run 39102316642 succeeded, and the Pages build status is `built` at `14ea37b`. The live dashboard https://buffedlizard55-lab.github.io/MaltaProj7/ shows 94 recurring, 45 special, 16 flagged for review, 8 categories. Protocol note: this branch contains merge commits from reconciling with PRs #17–#19, so later syncs use `git pull --no-rebase`. Running `git pull --rebase` would replay the already-merged claim commit and create spurious conflicts. No peer work was discarded.
+
+---
+
+# Active coordination — session arena/646f6727-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/646f6727-maltaproj7 (platform-fixed branch; `session-<id>/<task>` naming cannot be used — same deviation earlier sessions logged).
+
+**Pre-claim inspection (2026-10-18T06:00Z):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty. No remote branches other than `main`. Every task on the boards below is DONE and merged. Local baseline: `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16). Because no other claim is active, this session acts as the **final integration session** for its own scope and is permitted to touch shared outputs.
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| G1 | Coverage-gap review: identify major recurring/special SF events absent from `data/events.json`; add only rows confirmable from an official organizer/venue/government page (direct fetch) | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json`, `research/coverage-gap-646f6727.md` (new) |
+| G2 | Spot re-verification of existing rows with time-sensitive sources + review register; correct/flag drift | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (flags), `research/coverage-gap-646f6727.md` |
+| G3 | Rebuild site, update `verify.py` count guards with audit entry, confirm no broken local links | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | generated HTML/CSS/CSV via `build.py`, `verify.py`, `research/official-source-audit.md`, `README.md` |
+| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
+
+Rules honored: `git pull --rebase` before every push; small commits; unverified values stay blank and are flagged; nothing marked verified without an inspected official source link.
+
+## G1–G3 outcome (2026-10-18, commits 6d76c25 → 826bc63)
+
+**Sources & verification:** every new value was read by direct fetch of the official page on 2026-10-18; quoted evidence per row is in `research/coverage-gap-646f6727.md`; reproducible patch `research/coverage-patch-646f6727.py`.
+
+**Added (11 published rows, all official organizer sources):** GDC Festival of Gaming Mar 1–5 2027 (gdconf.com); RSA Conference Apr 5–8 2027 (RSAC closing press release); Dreamforce Sep 21–23 2027 (Salesforce save-the-date); J.P. Morgan Healthcare Conference Jan 11–14 2027, invitation-only (jpmorgan.com); TechCrunch Disrupt Oct 13–15 2026 (techcrunch.com/events); Chinatown Autumn Moon Festival Sep 19–20 2026, 11am–5pm, Grant Ave, free (moonfestival.org); Chinese New Year Flower Market Fair Jan 30–31 2027 (chineseparade.com); Trans March Jun 26 2026, Dolores Park 3–6pm (transmarch.org); Golden Gate Park Band Apr–Sep 2026 Sunday season, free (goldengateparkband.org); SF Ballet Nutcracker Dec 4–27 2026, War Memorial Opera House (sfballet.org); Off the Grid Fort Mason Night Market, select Fridays May–Dec 2026, 5–10pm, free (offthegrid.com).
+
+**Review records (4, published on Flagged for Review, nonblocking):** How Weird Street Faire — organizer states the faire ended after 2024 (`cancelled`); Union Street Festival — both domains hijacked, no official source (`needs_review`, blank); SF Dyke March Jun 26 2027 — location not stated on official page (`needs_review`); Litquake 2026 — multi-city schedule (`partial_sf_program`).
+
+**Irregularities flagged (4 new field flags, 20 total):** `unionstreetfestival.com` serves casino spam and `sresproductions.com` redirects off-domain; Dreamforce 2027 venue not named; TechCrunch Disrupt event page blocked (Cloudflare) / 404; Bay to Breakers homepage mixes "May 16, 2027" headline with "before May 18" sidebar copy.
+
+**Not added (no readable official source):** SF Dragon Boat Festival (domain expired), Union Square holiday events (JS-only page), SF Symphony season (loading shell), Kaiser SF Half (fetch failed).
+
+**Spot re-verification (G2):** Downtown First Thursdays, SF Sketchfest 2027, Cloudflare Connect 2026, Bay to Breakers 2027 re-fetched — all PASS (B2B with the copy irregularity above).
+
+**Build/verify:** `python3 build.py` → Built 104 published events: 85 recurring, 19 special, 8 categories; 16 review records. `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED. Local link crawl of all generated HTML: 0 broken links. `verify.py` guards 93/74/19/12 → 104/85/19/16 with entry in `research/official-source-audit.md`.
+
+## Publication record — G4 complete — `arena/646f6727-maltaproj7` — 2026-10-18 (UTC)
+
+- **Pull request:** [#18](https://github.com/buffedlizard55-lab/MaltaProj7/pull/18) "Coverage-gap pass: 11 official-source SF events, 4 review records, 4 flags" — **MERGED** 2026-10-18T05:53:58Z (merge commit [`7859a1f`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/7859a1fd265dcd6585b6a40ee61b2c4f0ab7fcc4)); `mergeable: MERGEABLE / CLEAN` at merge time; merged without waiting for approval per the brief.
+- **Deploy:** [Deploy static site to GitHub Pages run 39102137662](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39102137662) → success (workflow runs `build.py && verify.py` before upload); [pages build and deployment 39102137123](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39102137123) → success. Pages API: `status: built`, https://buffedlizard55-lab.github.io/MaltaProj7/ .
+- **Live spot-check** (cache-busted `?v=7859a1f`): dashboard shows 87 regularly occurring / 20 special / 8 categories / 16 flagged for review; Professional & academic now 10 rows; Flagged for Review carries the 16 review records plus 20 field flags with source links.
+- **Open items for the user (nonblocking, all on Flagged for Review):** Union Street Festival organizer page to be identified by a human; SF Dyke March 2027 location; Dreamforce/Disrupt venues; Bay to Breakers page-copy discrepancy.
+- No open claims remain for this session.
+
+---
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 ... previous session log preserved ...
@@ -649,3 +764,6 @@ All events verified against official sources on 2026-10-18. Key official sources
 - **Final dataset:** 103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows + 13 field-level flags. `python3 build.py && python3 verify.py` pass (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`), including the hardened semantic guards.
 - **I1–I3 are complete.** No open claims remain in this session. Remaining review-register items and field flags are published, source-linked, and explicitly nonblocking, exactly as the brief requires.
 
+
+### Reconciliation note — `arena/646f6727-maltaproj7` (2026-10-18)
+While G1–G3 were in progress, `main` advanced via PR #17 (`arena/d07e4ede-maltaproj7`, +3 verified rows: Bhangra & Beats, SF Hip Hop DanceFest, Renegade Craft). `git merge origin/main` conflicted only in `data/events.json`, `verify.py` and generated HTML/CSV. Resolution: took `main`'s `data/events.json` and `verify.py`, re-ran the idempotent `research/coverage-patch-646f6727.py` on top (all 3 PR #17 rows retained), regenerated every page with `build.py`, and set the guards to the union: **107 published (87 recurring / 20 special), 16 review, 20 flags**. `verify.py` → PASS. No peer work discarded.

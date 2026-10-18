@@ -108,18 +108,19 @@ def main() -> int:
     # Market — recurring/seasonal; SF International Hip Hop DanceFest —
     # recurring/annual; Renegade Craft Fair — special/single-event). Final
     # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
-    # Stable audit counts updated 2026-10-18 by session arena/2088b727-maltaproj7:
-    # +1 verified recurring row added from live official pages (San Francisco
-    # Pride Celebration & Parade 2026, sfpride.org/celebration/ + /parade/),
-    # and 3 new field-level flags (fillmore-jazz-2027-span,
-    # bhangra-location-conflict, haight-cross-source) -> 19 flags total.
-    # Final total: 97 published (77 recurring + 20 special), 12 review, 19 flags.
-    if len(published) != 97:
-        error(f"expected 97 published rows, found {len(published)}")
-    if len(recurring) != 77 or len(special) != 20:
-        error(f"expected 77 recurring / 20 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 12:
-        error(f"expected 12 review records, found {len(review)}")
+    # 2026-10-18 arena/5e333a6e-maltaproj7 coverage-gap pass (audit entry
+    # "Coverage-gap pass — arena/5e333a6e"): +32 published (+7 recurring,
+    # +25 special), review unchanged -> 139 = 94 + 45, 16 review, 25 flags.
+    # Audit counts updated 2026-10-18 by session arena/2088b727-maltaproj7 during
+    # three-way integration with PRs #18-#22: +1 verified recurring row
+    # (San Francisco Pride Celebration & Parade 2026) and 3 new field-level flags
+    # (fillmore-jazz-2027-span, bhangra-location-conflict, haight-cross-source).
+    if len(published) != 140:
+        error(f"expected 140 published rows, found {len(published)}")
+    if len(recurring) != 95 or len(special) != 45:
+        error(f"expected 95 recurring / 45 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 16:
+        error(f"expected 16 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
