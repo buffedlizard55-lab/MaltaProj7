@@ -99,14 +99,16 @@ def main() -> int:
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
     # Update these constants only with a corresponding audit entry in
-    # research/official-source-audit.md (2026-10-18 final integration
-    # reconciliation: 90 = 71 + 19, 13 review, 13 field-level flags).
-    if len(published) != 90:
-        error(f"expected 90 published rows, found {len(published)}")
-    if len(recurring) != 71 or len(special) != 19:
-        error(f"expected 71 recurring / 19 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 13:
-        error(f"expected 13 review records, found {len(review)}")
+    # research/official-source-audit.md (2026-10-18 three-way integration
+    # reconciliation incl. arena/55c58947-maltaproj7: 93 = 74 + 19, 12 review,
+    # 16 field-level flags; sf-aloha-run restored to verified via live .org source,
+    # IOFF-2027 and Italian-Heritage-2027 rows added).
+    if len(published) != 93:
+        error(f"expected 93 published rows, found {len(published)}")
+    if len(recurring) != 74 or len(special) != 19:
+        error(f"expected 74 recurring / 19 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 12:
+        error(f"expected 12 review records, found {len(review)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated

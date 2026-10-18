@@ -1,3 +1,66 @@
+# Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
+
+**Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `5614df2` (merge of PR #8). No open PRs (`gh pr list --state open` → empty). No remote branches other than `main`. All tasks claimed by sessions `1e3b5ea8`, `a4797fc9`, `f3cb0dad`, `185cda46` are merged/done. Local baseline: `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (published=54, recurring=46, special=8, review=5, categories=8). GitHub Pages API: status `built`, site https://buffedlizard55-lab.github.io/MaltaProj7/ .
+
+Because every prior task is done and merged, this session acts as the **final integration session** permitted by the rules to touch shared outputs (data, index, navigation).
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| R1 | Repo review: line-by-line audit of data, build, verify, site pages against the project brief | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | read-only review; findings into `COORDINATION.md`, `research/**` |
+| R2 | Independent re-verification of all 54 published rows + 5 review records against their official source URLs (direct fetch, no snippets) | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `research/reverification-55c58947.md` (new, all 59 rows logged), `data/events.json` where a source contradicted a row |
+| R3 | Fix irregularities found in R1/R2; rebuild site; run verify.py | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `data/**`, `research/**`, generated HTML via `build.py`; verify.py assertions unchanged (counts stable) |
+| R4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `COORDINATION.md`, PR metadata |
+
+Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of another session's claimed scope (none are active); unverified values stay blank and are flagged, never inferred; flagged items do not block merge.
+
+## R1–R3 outcome (2026-10-18, commits c39911a → 77d19f1)
+
+**Re-verification:** all 59 rows (54 published + 5 review) re-checked line by line by direct `fetch_page` against official organizer / venue / government sources; every row's evidence is logged in `research/reverification-55c58947.md` (PASS / PASS* / FAIL→FIXED per row, with quoted source text). No row was marked verified without an inspected official source link.
+
+**Data errors found and corrected (published rows):**
+- Comedy Day 2026 date was wrong: Sept 13 → **Sept 20, 2026** (Sept 13 was Opera in the Park's date; corrected per SF Rec & Park Tentative Calendars of Special Events + comedyday.org schedule).
+- SF International Arts Festival start was off by one day: Apr 30 → **Apr 29–May 10, 2026** (official 2026 page header).
+- Hardly Strictly Bluegrass time text replaced with the official FAQ's wording (entrances 11am Fri / 9am Sat–Sun; performances end 7pm).
+- SF Pride 2027 time blanked (2027 parade time not yet published); Flower Piano admission corrected to the source's "Free – $18" and unverified daily hours blanked; Carnaval location narrowed to the sourced Harrison Street corridor; Fleet Week "Marina Green" dropped (not named on captured organizer pages); Nihonmachi hours blanked (third-party only); SFTFF venue name withheld (linked listing prints address only).
+- Rows rolled forward to the editions their live official sources now announce: **IOFF → 2027** (Apr 16–18, Fort Mason; old /festival page 404), **Fillmore Jazz Festival → 2027** (Jul 3–4), **Italian Heritage Parade → 2027** (Sun Oct 10, 12:30pm, free).
+- Haight-Ashbury Street Fair source switched to the SFMTA travel update (Sun Sep 20, 2026, 11am–5:30pm, Haight between Masonic & Stanyan; organizer site lacked an explicit date).
+- Admission/time/location filled ONLY where the linked official source states them (Juneteenth rows "Free" per sf.gov no-cost calendar; Muni Heritage Weekend free 10am–4pm; Scaregrove free; Sundown Cinema free 7pm Civil War Parade Ground; Aloha Run entry fees; etc.).
+
+**Dead / hijacked sources (irregularity register — all resolved without dropping rows):**
+- `fillmorejazzfestival.com` — **hijacked**: serves a parked spam site (premiumecigarette.com, Cloudflare 522). Replaced with the real official `fillmorejazzfest.com`; 2026 edition details corroborated by SFMTA advisory.
+- `sffringe.org` — **dead/hijacked**: resolves to an unrelated LiteSpeed 404 host. Row was already `needs_review` with blank fields; stays flagged with updated reason (nothing published).
+- `sfaloharun.com` — unreachable; live official domain is `sfaloharun.org` (source switched).
+- `bayareaalohafestival.com` — HTTP 500; source switched to organizer PICA's live FAQ (`pica-org.org/faqs`), which confirms the San Mateo venue → `outside_city_excluded` stands.
+- `intloceanfilmfest.org/festival` and `/awards` — 404; rolled to live `/about` (2027 announcement).
+- `presidio.gov/explore/events/world-arts-west-dance-festival-2026` — 404 (listing removed post-event); switched to the live official Presidio Trust press release.
+- `fleetweeksf.org/calendar-of-events/` — listings cleared post-festival; dates stand on homepage + air-show schedule page (URL added to notes).
+- `jfi.org/sfjff-2026` — redirects to the festival archive; canonical archive URL now cited.
+
+**Build/verify:** `python3 build.py` → "Built 54 published events: 46 recurring, 8 special, 8 categories; 5 review records."; `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED. verify.py's stable counts were unaffected (no status/bucket changes).
+
+R4 (PR → merge → Pages confirmation → record links) follows immediately below once the PR is merged.
+
+## Three-way reconciliation after upstream movement (2026-10-18)
+
+While PR #14 was being opened, `main` advanced from `5614df2` to `160b1f2` via the concurrent integration sequence PRs #9–#13. A direct merge correctly reported conflicts in shared generated/data files. This session did **not** discard either side:
+
+- Kept `main`’s 103-row reconciled catalog (90 published / 13 review, 13 field-level flags) and all its build, verifier, accessibility, category, research, and Pages changes.
+- Applied this session’s independently fetched official-source corrections on top: restored **SF Aloha Run** to verified using the live organizer domain `sfaloharun.org` (the old `.com` was down); switched the Bay Area Aloha exclusion to organizer PICA’s live FAQ (`pica-org.org/faqs`); restored AGU’s Moscone venue using AGU’s own newsroom release; restored the Nihonmachi street span using the organizer’s How-to-get-here page; recorded 2026 Fillmore Jazz hours/admission from SFMTA; clarified the out-of-city SHACK15 listing in the SFDFF schedule; and retained all row-level evidence in `research/reverification-55c58947.md`.
+- Added two separately sourced upcoming rows rather than replacing historical rows: **International Ocean Film Festival 2027** (Apr 16–18, Fort Mason, organizer About page) and **San Francisco Italian Heritage Parade 2027** (Oct 10, 12:30pm, free, organizer parade page). The completed 2026 rows remain in place with their own source evidence.
+- Expanded the data-level Flagged for Review register from 13 to **16** flags. Every flag has source links and a `disposition` required by the generator. The published result is **105 total rows: 93 verified city-only rows (74 recurring, 19 special), 12 review records, 16 field-level flags**, all generated successfully.
+- Rebuilt from the reconciled `data/events.json`: `python3 build.py` → `Built 93 published events: 74 recurring, 19 special, 8 categories; 12 review records.` Then `python3 verify.py` → `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. `verify.py` count guards were updated with this reconciliation rationale.
+
+**Conflict-resolution method:** generated HTML and CSV were discarded as merge artifacts and freshly regenerated by `build.py`; source data was reconciled record-by-record; historical boards and peer completion entries below are retained verbatim. No user action is requested.
+
+**Post-merge push handoff:** immediately before pushing the multi-parent reconciliation merge, `git pull --rebase origin arena/55c58947-maltaproj7` was attempted as required. Git attempted to flatten the merge and conflicted in `data/events.json` and generated `data/events.csv` while replaying upstream integration commit `db83e21`; the rebase was aborted rather than discard or re-resolve already-preserved peer work. The resolved merge commit remains intact, its source data and generated outputs already pass `build.py`, `verify.py`, and whitespace checks, and it is pushed as a merge commit rather than rewritten.
+
+
+---
+
 # FINAL INTEGRATION CLAIM — `arena/1bde1cd1-maltaproj7` (2026-10-18T02:57Z)
 
 | Task | Status | Owner | File scope |

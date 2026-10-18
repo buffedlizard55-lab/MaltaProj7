@@ -1,14 +1,14 @@
 {
   "catalog": {
-    "title": "San Francisco city events \u2014 official-source catalog",
+    "title": "San Francisco city events — official-source catalog",
     "coverage": "Publicly advertised events and recurring public programs located within the City and County of San Francisco. This is a dated, reproducible catalog; it does not claim to enumerate every private, newly announced, or unlisted event.",
     "as_of": "2026-10-18",
     "geography": "City and County of San Francisco only",
     "row_standard": "Every published row carries an organizer, venue, or government source link. Dates, hours, locations, and admissions are shown only when stated in the linked source captured for this audit.",
     "field_policy": "An em dash means the linked source did not state that optional field in the captured record. Rows needing a decision, scope correction, or an essential missing value are separated on the Flagged for Review page.",
     "sources_policy": "Official organizer, official venue, or government sources. A small number of records use SF Travel, the City and County's official destination marketing organization, or a municipal arts calendar; those are labeled trusted civic sources.",
-    "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7",
-    "last_reverification": "2026-10-18 \u2014 every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md."
+    "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7 + arena/55c58947-maltaproj7 final integration (independent 59-row re-verification, merged)",
+    "last_reverification": "2026-10-18 — every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md. A third parallel re-verification (arena/55c58947-maltaproj7, log: research/reverification-55c58947.md) independently fetched all 59 rows of the pre-expansion catalog and was reconciled into this dataset on 2026-10-18."
   },
   "events": [
     {
@@ -17,7 +17,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "October 9\u201311, 2026",
+      "date_text": "October 9–11, 2026",
       "start_date": "2026-10-09",
       "end_date": "2026-10-11",
       "time_text": "",
@@ -40,12 +40,12 @@
       "date_text": "Sunday, July 19, 2026",
       "start_date": "2026-07-19",
       "end_date": "2026-07-19",
-      "time_text": "Check-in 8am; walk 10:30am; picnic 12pm\u20133pm",
+      "time_text": "Check-in 8am; walk 10:30am; picnic 12pm–3pm",
       "location": "Robin Williams Meadow, Golden Gate Park, San Francisco",
       "organizer": "AIDS Walk San Francisco",
       "admission": "No fundraising minimum required",
       "source_url": "https://sf.aidswalk.net/FAQ",
-      "source_label": "AIDS Walk San Francisco \u2014 FAQ",
+      "source_label": "AIDS Walk San Francisco — FAQ",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -60,7 +60,7 @@
       "date_text": "Saturday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "7am\u20132pm",
+      "time_text": "7am–2pm",
       "location": "100 Alemany Boulevard, San Francisco, CA 94110",
       "organizer": "Foodwise / City and County of San Francisco",
       "admission": "",
@@ -80,7 +80,7 @@
       "date_text": "Sunday, August 16, 2026 (14th annual)",
       "start_date": "2026-08-16",
       "end_date": "2026-08-16",
-      "time_text": "12:00\u20134:00pm",
+      "time_text": "12:00–4:00pm",
       "location": "Presidio Tunnel Tops, East Meadow, San Francisco",
       "organizer": "Urban Jazz Dance Company",
       "admission": "Free",
@@ -113,11 +113,11 @@
     },
     {
       "id": "caamfest-2026",
-      "name": "CAAMFest \u2014 San Francisco program",
+      "name": "CAAMFest — San Francisco program",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "May 7\u201310, 2026 (San Francisco program)",
+      "date_text": "May 7–10, 2026 (San Francisco program)",
       "start_date": "2026-05-07",
       "end_date": "2026-05-10",
       "time_text": "",
@@ -137,10 +137,10 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "May 23\u201324, 2026 (48th anniversary)",
+      "date_text": "May 23–24, 2026 (48th anniversary)",
       "start_date": "2026-05-23",
       "end_date": "2026-05-24",
-      "time_text": "Festival 11:00am\u20136:00pm (Sat & Sun); Grand Parade 10:00am\u20132:00pm (Sun)",
+      "time_text": "Festival 11:00am–6:00pm (Sat & Sun); Grand Parade 10:00am–2:00pm (Sun)",
       "location": "Mission District (17 blocks); Grand Parade from 24th & Bryant along Mission Street to 15th Street, San Francisco",
       "organizer": "Carnaval San Francisco",
       "admission": "Festival free; grandstand seating tickets sold",
@@ -149,20 +149,20 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Location text corrected 2026-10-18 to the description on the organizer's own pages ('17 blocks in the Mission District'; parade starts at 24th & Bryant, travels Mission Street to 15th). The previously published 'Harrison Street (16th\u201324th)' detail is not in the current official source \u2014 see Flagged. Organizer materials describe the 2026 celebration as the 48th annual event."
+      "notes": "Location text corrected 2026-10-18 to the description on the organizer's own pages ('17 blocks in the Mission District'; parade starts at 24th & Bryant, travels Mission Street to 15th). The previously published 'Harrison Street (16th–24th)' detail is not in the current official source — see Flagged. Organizer materials describe the 2026 celebration as the 48th annual event."
     },
     {
       "id": "castro-farmers-market-2026",
-      "name": "Castro Farmers\u2019 Market",
+      "name": "Castro Farmers’ Market",
       "bucket": "recurring",
       "cadence": "seasonal",
       "category": "Food & markets",
-      "date_text": "Wednesday, April 1\u2013November 18, 2026",
+      "date_text": "Wednesday, April 1–November 18, 2026",
       "start_date": "2026-04-01",
       "end_date": "2026-11-18",
-      "time_text": "3pm\u20137pm",
+      "time_text": "3pm–7pm",
       "location": "270 Noe St., San Francisco",
-      "organizer": "Pacific Coast Farmers\u2019 Market Association",
+      "organizer": "Pacific Coast Farmers’ Market Association",
       "admission": "",
       "source_url": "https://www.pcfma.org/market/castro-farmers-market",
       "source_label": "PCFMA market page",
@@ -180,10 +180,10 @@
       "date_text": "Sunday, October 4, 2026 (52nd annual)",
       "start_date": "2026-10-04",
       "end_date": "2026-10-04",
-      "time_text": "11:00am\u20136:00pm",
+      "time_text": "11:00am–6:00pm",
       "location": "Castro & Market Streets and surrounding Castro District streets, San Francisco",
       "organizer": "Castro Street Fair",
-      "admission": "Suggested donation $10\u201320",
+      "admission": "Suggested donation $10–20",
       "source_url": "https://castrostreetfair.org/fair/",
       "source_label": "Castro Street Fair information page",
       "source_authority": "Official organizer",
@@ -200,7 +200,7 @@
       "date_text": "Sunday, September 20, 2026",
       "start_date": "2026-09-20",
       "end_date": "2026-09-20",
-      "time_text": "12:00pm\u20135:00pm",
+      "time_text": "12:00pm–5:00pm",
       "location": "Robin Williams Meadow (formerly Sharon Meadow), Golden Gate Park, San Francisco",
       "organizer": "Comedy Day / San Francisco Recreation and Park Department",
       "admission": "Free",
@@ -209,7 +209,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Date corrected 2026-10-18 from September 13 to September 20, 2026. The organizer page (comedyday.org) confirms the 2026 edition, free admission, noon\u20135pm program, and Robin Williams Meadow location, but states the date only inside its header image. The date is corroborated by the SF Recreation and Parks Department's official Tentative Calendars of Special Events ('September 20 Comedy Day at Robin Williams Meadow') and the SF Travel September 2026 guide ('September 20'). The previously published September 13 is the SF Opera in the Park date at the same meadow. See Flagged for Review."
+      "notes": "Date corrected 2026-10-18 from September 13 to September 20, 2026. The organizer page (comedyday.org) confirms the 2026 edition, free admission, noon–5pm program, and Robin Williams Meadow location, but states the date only inside its header image. The date is corroborated by the SF Recreation and Parks Department's official Tentative Calendars of Special Events ('September 20 Comedy Day at Robin Williams Meadow') and the SF Travel September 2026 guide ('September 20'). The previously published September 13 is the SF Opera in the Park date at the same meadow. See Flagged for Review."
     },
     {
       "id": "community-arts-market-presidio-2026",
@@ -217,10 +217,10 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Fairs & nightlife",
-      "date_text": "July 18\u201319, 2026 (second annual)",
+      "date_text": "July 18–19, 2026 (second annual)",
       "start_date": "2026-07-18",
       "end_date": "2026-07-19",
-      "time_text": "10:00am\u20134:00pm",
+      "time_text": "10:00am–4:00pm",
       "location": "Presidio Tunnel Tops, East Meadow, San Francisco",
       "organizer": "Arts.Co.Lab with Presidio Trust",
       "admission": "Free",
@@ -253,7 +253,7 @@
     },
     {
       "id": "day-of-the-dead-procession-2026",
-      "name": "Day of the Dead (D\u00eda de los Muertos) Procession",
+      "name": "Day of the Dead (Día de los Muertos) Procession",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
@@ -265,7 +265,7 @@
       "organizer": "Day of the Dead SF",
       "admission": "",
       "source_url": "https://www.sftravel.com/article/san-francisco-festivals-events-november",
-      "source_label": "SF Travel \u2014 San Francisco festivals and events in November",
+      "source_label": "SF Travel — San Francisco festivals and events in November",
       "source_authority": "Trusted civic source",
       "status": "verified",
       "review_reason": "",
@@ -273,16 +273,16 @@
     },
     {
       "id": "divisadero-farmers-market",
-      "name": "Divisadero Farmers\u2019 Market",
+      "name": "Divisadero Farmers’ Market",
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Food & markets",
       "date_text": "Sunday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "9am\u20131pm",
+      "time_text": "9am–1pm",
       "location": "1377 Fell St., San Francisco",
-      "organizer": "Pacific Coast Farmers\u2019 Market Association",
+      "organizer": "Pacific Coast Farmers’ Market Association",
       "admission": "",
       "source_url": "https://www.pcfma.org/market/divisadero-farmers-market",
       "source_label": "PCFMA market page",
@@ -300,7 +300,7 @@
       "date_text": "First Thursday monthly; next listed November 5, 2026",
       "start_date": "",
       "end_date": "",
-      "time_text": "5pm\u201310pm",
+      "time_text": "5pm–10pm",
       "location": "Second Street between Market and Howard Streets, San Francisco, CA 94105",
       "organizer": "Downtown First Thursdays",
       "admission": "Free with RSVP",
@@ -309,7 +309,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Free monthly street party; the organizer homepage lists the next edition and the 5\u201310pm footprint on Second Street."
+      "notes": "Free monthly street party; the organizer homepage lists the next edition and the 5–10pm footprint on Second Street."
     },
     {
       "id": "exclusion-presidio-exhibition-2026",
@@ -317,10 +317,10 @@
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Books & ideas",
-      "date_text": "Fridays\u2013Sundays through August 31, 2026",
+      "date_text": "Fridays–Sundays through August 31, 2026",
       "start_date": "",
       "end_date": "2026-08-31",
-      "time_text": "10:00am\u20134:00pm",
+      "time_text": "10:00am–4:00pm",
       "location": "Presidio Officers' Club, 50 Moraga Avenue, Presidio, San Francisco",
       "organizer": "Presidio Trust with the Fred T. Korematsu Institute and NJAHS",
       "admission": "Free",
@@ -329,7 +329,7 @@
       "source_authority": "Official venue / federal trust",
       "status": "verified",
       "review_reason": "",
-      "notes": "Award-winning Presidio Trust exhibition on a weekly public schedule (Fridays\u2013Sundays); closing date August 31, 2026 per the press release."
+      "notes": "Award-winning Presidio Trust exhibition on a weekly public schedule (Fridays–Sundays); closing date August 31, 2026 per the press release."
     },
     {
       "id": "escape-from-alcatraz-triathlon-2026",
@@ -345,7 +345,7 @@
       "organizer": "Escape from Alcatraz Triathlon",
       "admission": "",
       "source_url": "https://www.sfmta.com/project-updates/escape-alcatraz-triathlon",
-      "source_label": "SFMTA \u2014 Escape from Alcatraz Triathlon, June 7, 2026",
+      "source_label": "SFMTA — Escape from Alcatraz Triathlon, June 7, 2026",
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
@@ -360,12 +360,12 @@
       "date_text": "Thursday",
       "start_date": "",
       "end_date": "",
-      "time_text": "6pm\u201310pm",
+      "time_text": "6pm–10pm",
       "location": "Exploratorium, Pier 15, San Francisco",
       "organizer": "Exploratorium",
       "admission": "",
       "source_url": "https://www.exploratorium.edu/visit/calendar/after-dark",
-      "source_label": "Exploratorium \u2014 After Dark calendar page",
+      "source_label": "Exploratorium — After Dark calendar page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -380,7 +380,7 @@
       "date_text": "Tuesday, Thursday, and Saturday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "Tue/Thu 10am\u20132pm; Sat 8am\u20132pm",
+      "time_text": "Tue/Thu 10am–2pm; Sat 8am–2pm",
       "location": "Ferry Building, One Ferry Building, San Francisco",
       "organizer": "Foodwise",
       "admission": "",
@@ -400,7 +400,7 @@
       "date_text": "Saturday, August 1, 2026",
       "start_date": "2026-08-01",
       "end_date": "2026-08-01",
-      "time_text": "1:00\u20134:00pm",
+      "time_text": "1:00–4:00pm",
       "location": "Presidio Tunnel Tops, East Meadow, San Francisco",
       "organizer": "Telemundo 48 and NBC Bay Area with Presidio Trust",
       "admission": "Free",
@@ -413,16 +413,16 @@
     },
     {
       "id": "fillmore-farmers-market",
-      "name": "Fillmore Farmers\u2019 Market",
+      "name": "Fillmore Farmers’ Market",
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Food & markets",
       "date_text": "Saturday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "9am\u20131pm",
-      "location": "1700 O\u2019Farrell St., San Francisco",
-      "organizer": "Pacific Coast Farmers\u2019 Market Association",
+      "time_text": "9am–1pm",
+      "location": "1700 O’Farrell St., San Francisco",
+      "organizer": "Pacific Coast Farmers’ Market Association",
       "admission": "",
       "source_url": "https://www.pcfma.org/market/fillmore-farmers-market",
       "source_label": "PCFMA market page",
@@ -437,19 +437,19 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "July 4\u20135, 2026 (July Fourth weekend)",
+      "date_text": "July 4–5, 2026 (July Fourth weekend)",
       "start_date": "2026-07-04",
       "end_date": "2026-07-05",
-      "time_text": "",
+      "time_text": "10am–6pm both days (per SFMTA advisory)",
       "location": "Fillmore District (Fillmore Street), San Francisco",
       "organizer": "Fillmore Jazz Festival",
-      "admission": "",
+      "admission": "Free",
       "source_url": "https://www.fillmorejazzfest.com/",
       "source_label": "Fillmore Jazz Festival official site (Fillmore Merchants Association / Preservation Fund)",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Source replaced 2026-10-18: the previously listed domain fillmorejazzfestival.com is no longer controlled by the organizer. The canonical organizer site fillmorejazzfest.com confirms the 2026 edition was held over the July Fourth weekend (press posts dated July 3\u20135, 2026); the exact July 4\u20135 dates are stated in the SF Travel July 2026 guide (trusted civic source)."
+      "notes": "Source replaced 2026-10-18: the previously listed domain fillmorejazzfestival.com is no longer controlled by the organizer. The canonical organizer site fillmorejazzfest.com confirms the 2026 edition was held over the July Fourth weekend (press posts dated July 3–5, 2026); the exact July 4–5 dates are stated in the SF Travel July 2026 guide (trusted civic source). SFMTA’s service-change advisory (https://www.sfmta.com/project-updates/fillmore-jazz-festival-service-changes) states the 2026 festival ran 10 a.m.–6 p.m. on July 4–5 on Fillmore Street between Jackson and Eddy and calls it the largest free jazz festival on the West Coast."
     },
     {
       "id": "fillmore-jazz-festival-2027",
@@ -457,19 +457,19 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "July 3\u20134, 2027",
+      "date_text": "July 3–4, 2027",
       "start_date": "2027-07-03",
       "end_date": "2027-07-04",
       "time_text": "",
-      "location": "Fillmore District, San Francisco",
-      "organizer": "Fillmore Jazz Festival",
+      "location": "Fillmore Street (12 blocks from Jackson to Eddy Streets), Fillmore District, San Francisco",
+      "organizer": "Fillmore Jazz Festival Preservation Fund & Fillmore Merchants Association",
       "admission": "Free",
       "source_url": "https://fillmorejazzfest.com/",
       "source_label": "Fillmore Jazz Festival official site (fillmorejazzfest.com)",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The previously linked fillmorejazzfestival.com could not be fetched at the 2026-10-18 re-check; the organizer site at fillmorejazzfest.com lists the next edition as July 3\u20134, 2027, free, in the Fillmore District."
+      "notes": "The previously linked fillmorejazzfestival.com could not be fetched at the 2026-10-18 re-check; the organizer site at fillmorejazzfest.com lists the next edition as July 3–4, 2027, free, in the Fillmore District. The official site names the Preservation Fund and the Fillmore Merchants Association as presenters, describes the festival span as “12 blocks from Jackson to Eddy Streets,” and the organizers’ posts call 2027 their 40th anniversary year."
     },
     {
       "id": "flower-piano-2026",
@@ -477,13 +477,13 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "September 10\u201320, 2026",
+      "date_text": "September 10–20, 2026",
       "start_date": "2026-09-10",
       "end_date": "2026-09-20",
       "time_text": "",
       "location": "San Francisco Botanical Garden, Golden Gate Park",
       "organizer": "Gardens of Golden Gate Park",
-      "admission": "Free\u2013$18",
+      "admission": "Free–$18",
       "source_url": "https://gggp.org/event/flower-piano-2026/",
       "source_label": "Gardens of Golden Gate Park event page",
       "source_authority": "Official organizer",
@@ -500,10 +500,10 @@
       "date_text": "Sunday, September 27, 2026",
       "start_date": "2026-09-27",
       "end_date": "2026-09-27",
-      "time_text": "11:00am\u20136:00pm",
-      "location": "Folsom Street between 7th and 13th, cross streets 8th\u201312th (Howard to Harrison) and Dore Street, SoMa, San Francisco",
+      "time_text": "11:00am–6:00pm",
+      "location": "Folsom Street between 7th and 13th, cross streets 8th–12th (Howard to Harrison) and Dore Street, SoMa, San Francisco",
       "organizer": "Folsom Street",
-      "admission": "Donation at gate ($10\u201320 suggested)",
+      "admission": "Donation at gate ($10–20 suggested)",
       "source_url": "https://www.folsomstreet.org/folsom-street-fair",
       "source_label": "Folsom Street Fair official page",
       "source_authority": "Official organizer",
@@ -520,24 +520,24 @@
       "date_text": "Sunday",
       "start_date": "",
       "end_date": "",
-      "time_text": "9:30am\u20131:30pm",
+      "time_text": "9:30am–1:30pm",
       "location": "Fort Mason Center, Marina Boulevard, San Francisco, CA 94109",
       "organizer": "California Farmers' Markets Association",
       "admission": "",
       "source_url": "https://www.cafarmersmkts.com/fort-mason-center-farmers-market",
-      "source_label": "California Farmers' Markets Association \u2014 Fort Mason market page",
+      "source_label": "California Farmers' Markets Association — Fort Mason market page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Listed as every Sunday, 9:30am\u20131:30pm, with 50+ vendors."
+      "notes": "Listed as every Sunday, 9:30am–1:30pm, with 50+ vendors."
     },
     {
       "id": "free-shakespeare-in-the-park-2026",
-      "name": "Free Shakespeare in the Park \u2014 San Francisco performances",
+      "name": "Free Shakespeare in the Park — San Francisco performances",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "September 5\u201327, 2026 (San Francisco run)",
+      "date_text": "September 5–27, 2026 (San Francisco run)",
       "start_date": "2026-09-05",
       "end_date": "2026-09-27",
       "time_text": "2pm",
@@ -545,7 +545,7 @@
       "organizer": "SF Shakespeare Festival",
       "admission": "Free",
       "source_url": "https://sfshakes.org/performance/free-shakes/ac/",
-      "source_label": "SF Shakespeare Festival \u2014 Free Shakespeare performance page",
+      "source_label": "SF Shakespeare Festival — Free Shakespeare performance page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -560,7 +560,7 @@
       "date_text": "Sunday, September 20, 2026",
       "start_date": "2026-09-20",
       "end_date": "2026-09-20",
-      "time_text": "11:00am\u20135:30pm",
+      "time_text": "11:00am–5:30pm",
       "location": "Haight Street between Masonic and Stanyan, San Francisco",
       "organizer": "Haight-Ashbury Street Fair",
       "admission": "Free",
@@ -577,7 +577,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "October 2\u20134, 2026 (Fri\u2013Sun)",
+      "date_text": "October 2–4, 2026 (Fri–Sun)",
       "start_date": "2026-10-02",
       "end_date": "2026-10-04",
       "time_text": "Gates 11:00am Friday, 9:00am Saturday & Sunday; performances end 7:00pm daily",
@@ -589,20 +589,20 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer FAQ confirms Fri Oct 2, Sat Oct 3, Sun Oct 4, 2026, at Hellman Hollow, Lindley & Marx meadows. SF Recreation and Parks' tentative calendar lists an October 2\u20135 event-impact window \u2014 see Flagged for Review for the discrepancy."
+      "notes": "Organizer FAQ confirms Fri Oct 2, Sat Oct 3, Sun Oct 4, 2026, at Hellman Hollow, Lindley & Marx meadows. SF Recreation and Parks' tentative calendar lists an October 2–5 event-impact window — see Flagged for Review for the discrepancy."
     },
     {
       "id": "hayes-valley-farmers-market",
-      "name": "Hayes Valley Farmers\u2019 Market",
+      "name": "Hayes Valley Farmers’ Market",
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Food & markets",
       "date_text": "Saturday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "10am\u20132pm",
+      "time_text": "10am–2pm",
       "location": "450 Hayes St., San Francisco",
-      "organizer": "Pacific Coast Farmers\u2019 Market Association",
+      "organizer": "Pacific Coast Farmers’ Market Association",
       "admission": "",
       "source_url": "https://www.pcfma.org/market/hayes-valley-farmers-market",
       "source_label": "PCFMA market page",
@@ -620,7 +620,7 @@
       "date_text": "Sunday and Wednesday",
       "start_date": "",
       "end_date": "",
-      "time_text": "7am\u20134pm",
+      "time_text": "7am–4pm",
       "location": "Civic Center, Fulton Street and Larkin Street, San Francisco",
       "organizer": "Heart of the City Farmers Market",
       "admission": "",
@@ -629,7 +629,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The organizer site lists Sunday and Wednesday markets, 7am\u20134pm, at Civic Center; it does not use the words 'year-round' in captured text, so none is claimed."
+      "notes": "The organizer site lists Sunday and Wednesday markets, 7am–4pm, at Civic Center; it does not use the words 'year-round' in captured text, so none is claimed."
     },
     {
       "id": "i-am-an-american-exhibition-2026",
@@ -637,10 +637,10 @@
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Books & ideas",
-      "date_text": "Fridays\u2013Tuesdays through August 31, 2026",
+      "date_text": "Fridays–Tuesdays through August 31, 2026",
       "start_date": "",
       "end_date": "2026-08-31",
-      "time_text": "12:00\u20135:00pm",
+      "time_text": "12:00–5:00pm",
       "location": "Military Intelligence Service Historic Learning Center, 640 Mason Street, Presidio, San Francisco",
       "organizer": "National Japanese American Historical Society with Presidio Trust",
       "admission": "Free for veterans, children 12 and under, and NJAHS members; $15 all others",
@@ -649,7 +649,7 @@
       "source_authority": "Official venue / federal trust",
       "status": "verified",
       "review_reason": "",
-      "notes": "National traveling exhibition on a weekly public schedule (Fridays\u2013Tuesdays) in the Presidio; closing date August 31, 2026 per the press release."
+      "notes": "National traveling exhibition on a weekly public schedule (Fridays–Tuesdays) in the Presidio; closing date August 31, 2026 per the press release."
     },
     {
       "id": "illuminate-sf-2026",
@@ -665,7 +665,7 @@
       "organizer": "Illuminate SF",
       "admission": "",
       "source_url": "https://www.sftravel.com/article/san-francisco-festivals-events-november",
-      "source_label": "SF Travel \u2014 San Francisco festivals and events in November",
+      "source_label": "SF Travel — San Francisco festivals and events in November",
       "source_authority": "Trusted civic source",
       "status": "verified",
       "review_reason": "",
@@ -673,16 +673,16 @@
     },
     {
       "id": "inner-sunset-farmers-market",
-      "name": "Inner Sunset Farmers\u2019 Market",
+      "name": "Inner Sunset Farmers’ Market",
       "bucket": "recurring",
       "cadence": "weekly",
       "category": "Food & markets",
       "date_text": "Sunday (year-round)",
       "start_date": "",
       "end_date": "",
-      "time_text": "9am\u20131pm",
+      "time_text": "9am–1pm",
       "location": "1315 8th Ave.; parking lot between 8th and 9th off Irving St., San Francisco",
-      "organizer": "Pacific Coast Farmers\u2019 Market Association / Inner Sunset Park Neighbors",
+      "organizer": "Pacific Coast Farmers’ Market Association / Inner Sunset Park Neighbors",
       "admission": "",
       "source_url": "https://www.pcfma.org/market/inner-sunset-farmers-market",
       "source_label": "PCFMA market page",
@@ -693,23 +693,43 @@
     },
     {
       "id": "international-ocean-film-festival-2026",
-      "name": "International Ocean Film Festival \u2014 San Francisco program",
+      "name": "International Ocean Film Festival — San Francisco program",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "April 10\u201312, 2026 (San Francisco program)",
+      "date_text": "April 10–12, 2026 (San Francisco program)",
       "start_date": "2026-04-10",
       "end_date": "2026-04-12",
-      "time_text": "Fri 4:00\u201311:00 p.m.; Sat 10:00 a.m.\u201311:00 a.m. (as posted); Sun 10:00 a.m.\u20136:00 p.m.",
+      "time_text": "Fri 4:00–11:00 p.m.; Sat 10:00 a.m.–11:00 a.m. (as posted); Sun 10:00 a.m.–6:00 p.m.",
       "location": "Cowell Theater, Pier 2, and BATS Improv Bayfront Theatre, Fort Mason Center for Arts & Culture, 2 Marina Boulevard, San Francisco",
       "organizer": "International Ocean Film Festival",
-      "admission": "$20\u2013$450",
+      "admission": "$20–$450",
       "source_url": "https://fortmason.org/event/international-ocean-film-festival-2026/2026-04-12/",
       "source_label": "Fort Mason Center for Arts & Culture event listing",
       "source_authority": "Official venue / federal trust",
       "status": "verified",
       "review_reason": "",
-      "notes": "Source replaced 2026-10-18: the organizer URLs intloceanfilmfest.org/festival and /awards now return 404 (site restructured around the 2027 edition). The official venue listing at Fort Mason confirms the 23rd annual festival, April 10\u201312, 2026, and the Cowell Theater / Bayfront Theatre location. The venue's posted Saturday window (10:00 a.m.\u201311:00 a.m.) is copied verbatim and appears inconsistent with its own full-day Saturday pass description \u2014 see Flagged for Review. The San Rafael First Look screening (April 2) is outside city limits and is not included in this SF row."
+      "notes": "Source replaced 2026-10-18: the organizer URLs intloceanfilmfest.org/festival and /awards now return 404 (site restructured around the 2027 edition). The official venue listing at Fort Mason confirms the 23rd annual festival, April 10–12, 2026, and the Cowell Theater / Bayfront Theatre location. The venue's posted Saturday window (10:00 a.m.–11:00 a.m.) is copied verbatim and appears inconsistent with its own full-day Saturday pass description — see Flagged for Review. The San Rafael First Look screening (April 2) is outside city limits and is not included in this SF row."
+    },
+    {
+      "id": "international-ocean-film-festival-2027",
+      "name": "International Ocean Film Festival",
+      "bucket": "recurring",
+      "cadence": "annual",
+      "category": "Film & media",
+      "date_text": "April 16–18, 2027",
+      "start_date": "2027-04-16",
+      "end_date": "2027-04-18",
+      "time_text": "",
+      "location": "Fort Mason Center for Arts & Culture, San Francisco",
+      "organizer": "International Ocean Film Festival",
+      "admission": "",
+      "source_url": "https://intloceanfilmfest.org/about",
+      "source_label": "International Ocean Film Festival official site",
+      "source_authority": "Official organizer",
+      "status": "verified",
+      "review_reason": "",
+      "notes": "Rolled forward 2026-10-18: the previously cited /festival page returns 404 and the 2026 edition (April 10–12, Cowell Theater) survives only in stale caches. The live official About page announces \"the 24th Annual IOFF, taking place on April 16-18, 2027 at Fort Mason Center for Arts & Culture in San Francisco\". Times and admission are blank until the organizer publishes 2027 program details. Added 2026-10-18 from the organizer’s live About page; complements the retained 2026-edition row, which is venue-sourced via Fort Mason."
     },
     {
       "id": "italian-heritage-parade-2026",
@@ -732,6 +752,26 @@
       "notes": "Edition-specific organizer retrospective used 2026-10-18: confirms the 158th parade took place Sunday, October 11, 2026, and describes it as the longest-running annual Italian heritage parade in the United States. The parade route is not stated on the retrospective."
     },
     {
+      "id": "italian-heritage-parade-2027",
+      "name": "San Francisco Italian Heritage Parade",
+      "bucket": "recurring",
+      "cadence": "annual",
+      "category": "Community & culture",
+      "date_text": "Sunday, October 10, 2027",
+      "start_date": "2027-10-10",
+      "end_date": "2027-10-10",
+      "time_text": "Parade steps off 12:30pm",
+      "location": "From Jefferson & Powell Streets (Fisherman’s Wharf) down Columbus Avenue through North Beach to Washington Square, San Francisco",
+      "organizer": "Italian Heritage Parade",
+      "admission": "Free",
+      "source_url": "https://sfitalianheritage.org/parade/",
+      "source_label": "Italian Heritage Parade official site",
+      "source_authority": "Official organizer",
+      "status": "verified",
+      "review_reason": "",
+      "notes": "Rolled forward 2026-10-18: the 158th parade ran October 11, 2026 (Grand Marshal Joe Mantegna); the official parade page now announces \"Sunday, October 10th, 2027\" with admission FREE, including the Bank of America Concorso Italiano Auto Show. Added 2026-10-18 from the official parade page; complements the retained 2026-edition row, which is sourced from the organizer’s 158th-parade retrospective."
+    },
+    {
       "id": "jerry-day-2026",
       "name": "Jerry Day",
       "bucket": "recurring",
@@ -740,7 +780,7 @@
       "date_text": "August 1, 2026",
       "start_date": "2026-08-01",
       "end_date": "2026-08-01",
-      "time_text": "11:30am\u20135:45pm",
+      "time_text": "11:30am–5:45pm",
       "location": "Jerry Garcia Amphitheater, McLaren Park, San Francisco",
       "organizer": "Jerry Day",
       "admission": "",
@@ -749,7 +789,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer lists 'Jerry Day 2026 \u2014 24th Anniversary,' August 1, 2026, 11:30am\u20135:45pm at Jerry Garcia Amphitheater. The organizer page does not state admission terms in captured text; SF Travel's 2026 live-music release describes the celebration as free."
+      "notes": "Organizer lists 'Jerry Day 2026 — 24th Anniversary,' August 1, 2026, 11:30am–5:45pm at Jerry Garcia Amphitheater. The organizer page does not state admission terms in captured text; SF Travel's 2026 live-music release describes the celebration as free."
     },
     {
       "id": "juneteenth-bayview-fathers-day-festival-2026",
@@ -820,7 +860,7 @@
       "date_text": "Sunday, June 7, 2026 (sixth annual)",
       "start_date": "2026-06-07",
       "end_date": "2026-06-07",
-      "time_text": "11:00am\u20134:00pm",
+      "time_text": "11:00am–4:00pm",
       "location": "Front plaza, Ferry Building, San Francisco",
       "organizer": "Foodwise",
       "admission": "Free entry (food and drink available for purchase)",
@@ -829,7 +869,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer page confirms the sixth annual event, Sunday, June 7, 2026, 11 a.m.\u20134 p.m., Ferry Building front plaza, free entry. Also listed on the SF.gov Juneteenth 2026 calendar."
+      "notes": "Organizer page confirms the sixth annual event, Sunday, June 7, 2026, 11 a.m.–4 p.m., Ferry Building front plaza, free entry. Also listed on the SF.gov Juneteenth 2026 calendar."
     },
     {
       "id": "lit-crawl-sf-2026",
@@ -840,7 +880,7 @@
       "date_text": "October 24, 2026",
       "start_date": "2026-10-24",
       "end_date": "2026-10-24",
-      "time_text": "Programs include 6:30pm\u20137:30pm; see full schedule",
+      "time_text": "Programs include 6:30pm–7:30pm; see full schedule",
       "location": "Mission District venues, San Francisco",
       "organizer": "Litquake",
       "admission": "Free",
@@ -885,11 +925,11 @@
       "organizer": "Merola Opera Program",
       "admission": "",
       "source_url": "https://merola.org/summerfestival/",
-      "source_label": "Merola Opera Program \u2014 Summer Festival 2026 page",
+      "source_label": "Merola Opera Program — Summer Festival 2026 page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Each summer the program brings young artists to San Francisco for training and performances (organizer cites 69 years of opera training). The captured festival page does not list specific performance dates or venues, so none are shown; the June 25\u2013August 15 span in the peer contribution (PR #9) was not reconfirmed on an organizer page and was removed at reconciliation."
+      "notes": "Each summer the program brings young artists to San Francisco for training and performances (organizer cites 69 years of opera training). The captured festival page does not list specific performance dates or venues, so none are shown; the June 25–August 15 span in the peer contribution (PR #9) was not reconfirmed on an organizer page and was removed at reconciliation."
     },
     {
       "id": "mission-community-market",
@@ -897,10 +937,10 @@
       "bucket": "recurring",
       "cadence": "seasonal",
       "category": "Food & markets",
-      "date_text": "Thursday, mid-March\u2013mid-November",
+      "date_text": "Thursday, mid-March–mid-November",
       "start_date": "",
       "end_date": "",
-      "time_text": "3pm\u20137pm",
+      "time_text": "3pm–7pm",
       "location": "22nd Street between Mission and Valencia / 84 Bartlett St., San Francisco",
       "organizer": "Foodwise",
       "admission": "",
@@ -917,10 +957,10 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "September 19\u201320, 2026",
+      "date_text": "September 19–20, 2026",
       "start_date": "2026-09-19",
       "end_date": "2026-09-20",
-      "time_text": "10:00am\u20134:00pm",
+      "time_text": "10:00am–4:00pm",
       "location": "San Francisco Railway Museum, 77 Steuart Street, San Francisco",
       "organizer": "San Francisco Municipal Transportation Agency",
       "admission": "Free (historic vehicle rides and museum entry)",
@@ -929,7 +969,7 @@
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
-      "notes": "Optional fields completed 2026-10-18 from the SFMTA event page, which states 10 a.m.\u20134 p.m., the 77 Steuart Street museum location, and free rides on rare historic vehicles."
+      "notes": "Optional fields completed 2026-10-18 from the SFMTA event page, which states 10 a.m.–4 p.m., the 77 Steuart Street museum location, and free rides on rare historic vehicles."
     },
     {
       "id": "calacademy-nightlife",
@@ -940,12 +980,12 @@
       "date_text": "Most Thursdays",
       "start_date": "",
       "end_date": "",
-      "time_text": "6pm\u201310pm",
+      "time_text": "6pm–10pm",
       "location": "California Academy of Sciences, 55 Music Concourse Drive, Golden Gate Park, San Francisco",
       "organizer": "California Academy of Sciences",
       "admission": "$26; $5 for EBT cardholders at the ticket window",
       "source_url": "https://www.calacademy.org/nightlife",
-      "source_label": "California Academy of Sciences \u2014 NightLife page",
+      "source_label": "California Academy of Sciences — NightLife page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -957,11 +997,11 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "August 1\u20132, 2026 (52nd annual)",
+      "date_text": "August 1–2, 2026 (52nd annual)",
       "start_date": "2026-08-01",
       "end_date": "2026-08-02",
-      "time_text": "11am\u20136pm",
-      "location": "Japantown, San Francisco (organizer information booth at Post & Buchanan)",
+      "time_text": "11am–6pm",
+      "location": "Japantown, San Francisco — Post Street between Laguna and Fillmore and Osaka Way (organizer’s “How to get here” page)",
       "organizer": "Nihonmachi Street Fair",
       "admission": "",
       "source_url": "https://www.nihonmachistreetfair.org/home-1",
@@ -969,7 +1009,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer page confirms the 52nd annual fair, August 1\u20132, 2026, in Japantown. The exact street span captured in earlier research is not restated on the current page, so the location is limited to what the source states \u2014 see Flagged for Review."
+      "notes": "Organizer page confirms the 52nd annual fair, August 1–2, 2026, in Japantown. The exact street span captured in earlier research is not restated on the current page, so the location is limited to what the source states — see Flagged for Review. Resolved 2026-10-18: the organizer’s How-to-get-here page (nihonmachistreetfair.org/our-community-our-pride-with-performers-1-1) restates the span verbatim (Post Street between Laguna and Fillmore, plus Osaka Way), so the location is no longer limited to the booth landmark."
     },
     {
       "id": "north-beach-festival-2026",
@@ -977,7 +1017,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Fairs & nightlife",
-      "date_text": "June 20\u201321, 2026 (70th annual)",
+      "date_text": "June 20–21, 2026 (70th annual)",
       "start_date": "2026-06-20",
       "end_date": "2026-06-21",
       "time_text": "",
@@ -997,19 +1037,19 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "April 10\u201311 and April 17\u201318, 2027; Grand Parade April 18",
+      "date_text": "April 10–11 and April 17–18, 2027; Grand Parade April 18",
       "start_date": "2027-04-10",
       "end_date": "2027-04-18",
       "time_text": "",
       "location": "Japantown, San Francisco",
       "organizer": "Northern California Cherry Blossom Festival",
-      "admission": "",
+      "admission": "Free",
       "source_url": "https://sfcherryblossom.org/",
       "source_label": "Cherry Blossom Festival official site",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The organizer describes a two-weekend mid-April festival."
+      "notes": "The organizer describes a two-weekend mid-April festival. The official About page states the event “is free and open to the public.”"
     },
     {
       "id": "outside-lands-2026",
@@ -1017,7 +1057,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "August 7\u20139, 2026",
+      "date_text": "August 7–9, 2026",
       "start_date": "2026-08-07",
       "end_date": "2026-08-09",
       "time_text": "",
@@ -1025,7 +1065,7 @@
       "organizer": "Outside Lands",
       "admission": "",
       "source_url": "https://www.sfmta.com/travel-updates/outside-lands-august-7-9-2026",
-      "source_label": "SFMTA travel update \u2014 Outside Lands, August 7\u20139, 2026",
+      "source_label": "SFMTA travel update — Outside Lands, August 7–9, 2026",
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
@@ -1040,20 +1080,20 @@
       "date_text": "Saturday, May 30, 2026 (fourth annual)",
       "start_date": "2026-05-30",
       "end_date": "2026-05-30",
-      "time_text": "12:00\u20134:00pm",
+      "time_text": "12:00–4:00pm",
       "location": "Civil War Parade Ground (Graham Street), Presidio, San Francisco",
       "organizer": "Golden Gate National Parks Conservancy",
-      "admission": "$60\u2013$315",
+      "admission": "$60–$315",
       "source_url": "https://presidio.gov/about/press/presidio-unveils-vibrant-2026-summer-event-lineup",
       "source_label": "Presidio Trust 2026 summer lineup press release (May 7, 2026)",
       "source_authority": "Official venue / federal trust",
       "status": "verified",
       "review_reason": "",
-      "notes": "Fourth annual BrewFest with 15+ local breweries, per the Presidio Trust press release (21+ tasting event; ticket tiers $60\u2013$315 as published)."
+      "notes": "Fourth annual BrewFest with 15+ local breweries, per the Presidio Trust press release (21+ tasting event; ticket tiers $60–$315 as published)."
     },
     {
       "id": "people-in-plazas",
-      "name": "People in Plazas \u2014 Market Street Music Festival",
+      "name": "People in Plazas — Market Street Music Festival",
       "bucket": "recurring",
       "cadence": "seasonal",
       "category": "Music & performing arts",
@@ -1077,10 +1117,10 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "August 8\u20139, 2026 (33rd annual)",
+      "date_text": "August 8–9, 2026 (33rd annual)",
       "start_date": "2026-08-08",
       "end_date": "2026-08-09",
-      "time_text": "Parade Saturday 11:00am\u201312:00pm; festival hours per organizer",
+      "time_text": "Parade Saturday 11:00am–12:00pm; festival hours per organizer",
       "location": "Festival at Yerba Buena Gardens; parade from Civic Center Plaza along Market Street (8th to 4th) ending at 4th & Mission, San Francisco",
       "organizer": "Pistahan Parade and Festival",
       "admission": "Festival free admission",
@@ -1097,19 +1137,19 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "September 26\u201327, 2026",
+      "date_text": "September 26–27, 2026",
       "start_date": "2026-09-26",
       "end_date": "2026-09-27",
-      "time_text": "Concerts 2pm\u201311pm",
+      "time_text": "Concerts 2pm–11pm",
       "location": "Pier 80, San Francisco",
       "organizer": "Portola Music Festival",
       "admission": "",
       "source_url": "https://www.sfmta.com/travel-updates/portola-music-festival-september-26-27-2026",
-      "source_label": "SFMTA travel update \u2014 Portola Music Festival, September 26 & 27, 2026",
+      "source_label": "SFMTA travel update — Portola Music Festival, September 26 & 27, 2026",
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
-      "notes": "SFMTA lists the two-day festival at Pier 80 with concerts 2\u201311pm; SF Travel's 2026 live-music release lists the returning festival as 21+. Prices shown only by third parties were not published."
+      "notes": "SFMTA lists the two-day festival at Pier 80 with concerts 2–11pm; SF Travel's 2026 live-music release lists the returning festival as 21+. Prices shown only by third parties were not published."
     },
     {
       "id": "sf-porchfest-2026",
@@ -1129,7 +1169,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer app confirms May 30, 2026, 8th annual, 100 acts in the Mission, free admission. Set times and venue assignments are announced as acts are confirmed and are therefore left blank. A kick-off party and fundraiser is listed for May 29, 2026, 7\u201311 p.m. at Hotel Utah Saloon (500 4th St)."
+      "notes": "Organizer app confirms May 30, 2026, 8th annual, 100 acts in the Mission, free admission. Set times and venue assignments are announced as acts are confirmed and are therefore left blank. A kick-off party and fundraiser is listed for May 29, 2026, 7–11 p.m. at Hotel Utah Saloon (500 4th St)."
     },
     {
       "id": "sf-sketchfest-2027",
@@ -1137,7 +1177,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "January 14\u201331, 2027",
+      "date_text": "January 14–31, 2027",
       "start_date": "2027-01-14",
       "end_date": "2027-01-31",
       "time_text": "",
@@ -1149,12 +1189,12 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Billed by the organizer as 'The San Francisco Comedy Festival.' The homepage announces SF Sketchfest 2027 (January 14\u201331) with lineup and venues to follow; a 2026 press page supports the annual classification. No venues, times, or prices are shown until posted."
+      "notes": "Billed by the organizer as 'The San Francisco Comedy Festival.' The homepage announces SF Sketchfest 2027 (January 14–31) with lineup and venues to follow; a 2026 press page supports the annual classification. No venues, times, or prices are shown until posted."
     },
     {
       "id": "sf-aloha-run-2026",
       "name": "San Francisco Aloha Run",
-      "bucket": "review",
+      "bucket": "recurring",
       "cadence": "annual",
       "category": "Sports & outdoors",
       "date_text": "September 20, 2026",
@@ -1162,14 +1202,14 @@
       "end_date": "2026-09-20",
       "time_text": "",
       "location": "Crissy Field, San Francisco",
-      "organizer": "San Francisco Aloha Run",
-      "admission": "Registration required for participants",
-      "source_url": "https://sfaloharun.com/",
-      "source_label": "SF Aloha Run official site",
+      "organizer": "Japanese Community Youth Council (JCYC)",
+      "admission": "Paid entry: 5K $80, 10K $85, Keiki Mile/Trot $25 (before taxes and fees)",
+      "source_url": "https://www.sfaloharun.org/",
+      "source_label": "SF Aloha Run official site (sfaloharun.org)",
       "source_authority": "Official organizer",
-      "status": "needs_review",
-      "review_reason": "The organizer site could not be fetched at the 2026-10-18 re-check, so the previously captured September 20, 2026 Crissy Field edition cannot be reconfirmed from a live official page.",
-      "notes": "This SF event is distinct from the Bay Area Aloha Festival, which is not within city limits. Re-verification note (2026-10-18): the organizer site sfaloharun.com could not be retrieved, so the previously captured September 20, 2026 Crissy Field edition cannot be reconfirmed from a live official page and the row is held for review rather than published as verified."
+      "status": "verified",
+      "review_reason": "",
+      "notes": "This SF event is distinct from the Bay Area Aloha Festival, which is not within city limits. Restored to verified 2026-10-18: the previously cited sfaloharun.com did not respond, but the organizer’s live official domain www.sfaloharun.org was fetched and confirms the 16th annual run — “2026 SAN FRANCISCO ALOHA RUN — Sunday, September 20, 2026” at Crissy Field — with posted entry prices; proceeds fund the JCYC Scholarship Programs. Third-party start times conflict, so time is left blank."
     },
     {
       "id": "sf-black-film-festival-2026",
@@ -1177,7 +1217,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "June 18\u201321, 2026",
+      "date_text": "June 18–21, 2026",
       "start_date": "2026-06-18",
       "end_date": "2026-06-21",
       "time_text": "",
@@ -1217,11 +1257,11 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "October 23\u2013November 8, 2026 (in-person); online window follows",
+      "date_text": "October 23–November 8, 2026 (in-person); November 9–30 online",
       "start_date": "2026-10-23",
       "end_date": "2026-11-08",
       "time_text": "",
-      "location": "San Francisco theaters (Lucasfilm Premier Theater, Delancey Street Theater, Catharine Clark Gallery, SHACK15, Brava Theater); online component separate",
+      "location": "San Francisco theaters for the in-person program (Lucasfilm Premier Theater, Delancey Street Theater, Catharine Clark Gallery, Brava Theater); the organizer also lists one November 5 screening at SHACK15, whose address is in Marin County — see flag",
       "organizer": "San Francisco Dance Film Festival",
       "admission": "",
       "source_url": "https://sfdancefilmfest.org/fall-festival-2026/",
@@ -1229,7 +1269,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Only the in-person San Francisco component (through November 8) belongs to this catalog's geographic scope; the organizer also runs an online festival November 9-30. Venues listed by the organizer: Lucasfilm Premier Theater, Delancey Street Theater, Catharine Clark Gallery, SHACK15, and Brava Theater."
+      "notes": "Only the in-person San Francisco component (through November 8) belongs to this catalog's geographic scope; the organizer also runs an online festival November 9-30. Venues listed by the organizer: Lucasfilm Premier Theater, Delancey Street Theater, Catharine Clark Gallery, SHACK15, and Brava Theater. Flagged irregularity (2026-10-18): SHACK15 is not within the City and County of San Francisco; it is named separately rather than folded into the “San Francisco theaters” list. The November 9–30 online window is stated verbatim on the official festival page."
     },
     {
       "id": "fleet-week-sf-2026",
@@ -1237,11 +1277,11 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "Ship tours October 7\u201312; Fleet Fest October 10\u201311; air show October 9\u201311, 2026",
+      "date_text": "Ship tours October 7–12; Fleet Fest October 10–11; air show October 9–11, 2026",
       "start_date": "2026-10-07",
       "end_date": "2026-10-12",
-      "time_text": "Air show noon\u20134:00pm daily, October 9\u201311",
-      "location": "San Francisco waterfront, Marina Green, Fisherman\u2019s Wharf, and city venues",
+      "time_text": "Air show noon–4:00pm daily, October 9–11",
+      "location": "San Francisco waterfront, Marina Green, Fisherman’s Wharf, and city venues",
       "organizer": "San Francisco Fleet Week Association",
       "admission": "Air show general admission free; hospitality packages ticketed",
       "source_url": "https://fleetweeksf.org/",
@@ -1257,7 +1297,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
-      "date_text": "June 26\u201327, 2027",
+      "date_text": "June 26–27, 2027",
       "start_date": "2027-06-26",
       "end_date": "2027-06-27",
       "time_text": "",
@@ -1277,7 +1317,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "May 6\u201310, 2026",
+      "date_text": "May 6–10, 2026",
       "start_date": "2026-05-06",
       "end_date": "2026-05-10",
       "time_text": "",
@@ -1289,18 +1329,18 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The organizer billed the 2026 edition at the Castro Theatre as its 30th festival, which supports the annual classification. A homepage teaser for a future March 11\u201314 edition did not state a year, so no row was created from it."
+      "notes": "The organizer billed the 2026 edition at the Castro Theatre as its 30th festival, which supports the annual classification. A homepage teaser for a future March 11–14 edition did not state a year, so no row was created from it."
     },
     {
       "id": "st-patricks-parade-2026",
-      "name": "San Francisco St. Patrick\u2019s Day Parade & Festival",
+      "name": "San Francisco St. Patrick’s Day Parade & Festival",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Community & culture",
       "date_text": "Saturday, March 14, 2026 (175th annual)",
       "start_date": "2026-03-14",
       "end_date": "2026-03-14",
-      "time_text": "Parade starts 11:30am; Youth Sports Day 11am\u20134pm",
+      "time_text": "Parade starts 11:30am; Youth Sports Day 11am–4pm",
       "location": "Parade from 2nd and Market to Civic Center; Civic Center Plaza, San Francisco",
       "organizer": "United Irish Societies of San Francisco",
       "admission": "Free",
@@ -1309,7 +1349,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer page confirms the 175th parade, Saturday, March 14, 2026, stepping off at 11:30 a.m. from 2nd & Market to Civic Center Plaza, followed by the free Unite SF Festival (Civic Center, 11 a.m.\u20135 p.m.) and Youth Sports Day (Civic Center Plaza, 11 a.m.\u20134 p.m.). The organizer billed 2026 as the 175th anniversary celebration; the associated Unite SF festival is described as free."
+      "notes": "Organizer page confirms the 175th parade, Saturday, March 14, 2026, stepping off at 11:30 a.m. from 2nd & Market to Civic Center Plaza, followed by the free Unite SF Festival (Civic Center, 11 a.m.–5 p.m.) and Youth Sports Day (Civic Center Plaza, 11 a.m.–4 p.m.). The organizer billed 2026 as the 175th anniversary celebration; the associated Unite SF festival is described as free."
     },
     {
       "id": "sf-transgender-film-festival-2026",
@@ -1317,7 +1357,7 @@
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "November 12\u201314, 2026",
+      "date_text": "November 12–14, 2026",
       "start_date": "2026-11-12",
       "end_date": "2026-11-14",
       "time_text": "7pm and 9pm programs",
@@ -1325,7 +1365,7 @@
       "organizer": "San Francisco Transgender Film Festival",
       "admission": "",
       "source_url": "https://sftff.org/festival/2026-festival-schedule/",
-      "source_label": "SF Transgender Film Festival \u2014 2026 festival schedule",
+      "source_label": "SF Transgender Film Festival — 2026 festival schedule",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -1333,11 +1373,11 @@
     },
     {
       "id": "stern-grove-festival-2026",
-      "name": "Stern Grove Festival \u2014 2026 season",
+      "name": "Stern Grove Festival — 2026 season",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "Sundays June 14\u2013August 16, 2026, plus Saturday, August 15",
+      "date_text": "Sundays June 14–August 16, 2026, plus Saturday, August 15",
       "start_date": "2026-06-14",
       "end_date": "2026-08-16",
       "time_text": "",
@@ -1353,7 +1393,7 @@
     },
     {
       "id": "sunday-streets-2026",
-      "name": "Sunday Streets SF \u2014 2026 season",
+      "name": "Sunday Streets SF — 2026 season",
       "bucket": "recurring",
       "cadence": "seasonal",
       "category": "Community & culture",
@@ -1380,10 +1420,10 @@
       "date_text": "Sunday, July 26, 2026",
       "start_date": "2026-07-26",
       "end_date": "2026-07-26",
-      "time_text": "11:00am\u20136:00pm",
+      "time_text": "11:00am–6:00pm",
       "location": "Folsom Street between 8th and 11th, 9th and 10th between Howard and Harrison, and Dore Street, SoMa, San Francisco",
       "organizer": "Folsom Street",
-      "admission": "Donation at gate ($10\u201320 suggested)",
+      "admission": "Donation at gate ($10–20 suggested)",
       "source_url": "https://www.folsomstreet.org/faq",
       "source_label": "Folsom Street FAQ",
       "source_authority": "Official organizer",
@@ -1397,15 +1437,15 @@
       "bucket": "recurring",
       "cadence": "monthly",
       "category": "Fairs & nightlife",
-      "date_text": "Second Thursday monthly, May\u2013October 2026 (May 14; June 11; July 9; August 13; September 10; October 8)",
+      "date_text": "Second Thursday monthly, May–October 2026 (May 14; June 11; July 9; August 13; September 10; October 8)",
       "start_date": "2026-05-14",
       "end_date": "2026-10-08",
-      "time_text": "5pm\u201310pm",
+      "time_text": "5pm–10pm",
       "location": "Valencia Street between 16th and 21st Streets, San Francisco (blocks shift by month)",
       "organizer": "Valencia Corridor Merchants Association with Into The Streets and Civic Joy Fund",
       "admission": "Free",
       "source_url": "https://www.visitvalenciastreet.com/live",
-      "source_label": "Valencia LIVE! \u2014 VCMA official page",
+      "source_label": "Valencia LIVE! — VCMA official page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
@@ -1420,7 +1460,7 @@
       "date_text": "Sunday, September 6, 2026 (third and final weekend of the 2026 festival)",
       "start_date": "2026-09-06",
       "end_date": "2026-09-06",
-      "time_text": "1:00\u20134:00pm",
+      "time_text": "1:00–4:00pm",
       "location": "East Meadow, Presidio Tunnel Tops, San Francisco",
       "organizer": "World Arts West / Presidio Trust",
       "admission": "Free",
@@ -1429,7 +1469,7 @@
       "source_authority": "Official venue / federal trust",
       "status": "verified",
       "review_reason": "",
-      "notes": "Source replaced 2026-10-18: the Presidio event URL previously listed (presidio.gov/explore/events/world-arts-west-dance-festival-2026) returns 404. The dated Presidio Trust press release confirms Sunday, September 6, 2026, 1\u20134 p.m., East Meadow at Presidio Tunnel Tops, free admission, fifth consecutive year, third and final weekend of the 2026 festival."
+      "notes": "Source replaced 2026-10-18: the Presidio event URL previously listed (presidio.gov/explore/events/world-arts-west-dance-festival-2026) returns 404. The dated Presidio Trust press release confirms Sunday, September 6, 2026, 1–4 p.m., East Meadow at Presidio Tunnel Tops, free admission, fifth consecutive year, third and final weekend of the 2026 festival."
     },
     {
       "id": "ybg-festival-2026",
@@ -1437,7 +1477,7 @@
       "bucket": "recurring",
       "cadence": "seasonal",
       "category": "Music & performing arts",
-      "date_text": "May 9\u2013November 13, 2026",
+      "date_text": "May 9–November 13, 2026",
       "start_date": "2026-05-09",
       "end_date": "2026-11-13",
       "time_text": "",
@@ -1445,7 +1485,7 @@
       "organizer": "YBG Festival",
       "admission": "Free",
       "source_url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals",
-      "source_label": "SF Travel press release \u2014 2026 live music lineup (June 11, 2026)",
+      "source_label": "SF Travel press release — 2026 live music lineup (June 11, 2026)",
       "source_authority": "Trusted civic source",
       "status": "verified",
       "review_reason": "",
@@ -1457,11 +1497,11 @@
       "bucket": "special",
       "cadence": "single-event",
       "category": "Professional & academic",
-      "date_text": "December 7\u201311, 2026",
+      "date_text": "December 7–11, 2026",
       "start_date": "2026-12-07",
       "end_date": "2026-12-11",
       "time_text": "",
-      "location": "San Francisco, CA",
+      "location": "Moscone Center, 747 Howard Street, San Francisco",
       "organizer": "American Geophysical Union",
       "admission": "Registration required",
       "source_url": "https://www.agu.org/annual-meeting",
@@ -1469,7 +1509,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The captured AGU page states the 2026 meeting dates and San Francisco, but did not name a venue in text; the previously listed venue was removed rather than inferred."
+      "notes": "The captured agu.org/annual-meeting page names only “San Francisco, CA”, so the venue was initially removed rather than inferred. Restored 2026-10-18 from AGU’s official newsroom release (“7 – 11 December 2026 George R. Moscone Convention Center 747 Howard St. San Francisco, CA 94103”) — see field-level flag."
     },
     {
       "id": "carnaval-pride-night-2026",
@@ -1500,7 +1540,7 @@
       "date_text": "Tuesday, February 17, 2026",
       "start_date": "2026-02-17",
       "end_date": "2026-02-17",
-      "time_text": "5:00\u201310:00pm",
+      "time_text": "5:00–10:00pm",
       "location": "Multiple venues, Mission District, San Francisco",
       "organizer": "Carnaval San Francisco",
       "admission": "Tickets sold (organizer link)",
@@ -1520,7 +1560,7 @@
       "date_text": "Saturday, March 28, 2026",
       "start_date": "2026-03-28",
       "end_date": "2026-03-28",
-      "time_text": "4:00\u20136:00pm",
+      "time_text": "4:00–6:00pm",
       "location": "KQED Headquarters, 2601 Mariposa Street (live event); watch party at Casa de Carnaval, 683 Florida Street, San Francisco",
       "organizer": "Carnaval San Francisco",
       "admission": "Tickets sold (live event listed sold out; watch-party tickets via organizer)",
@@ -1540,7 +1580,7 @@
       "date_text": "Thursday, May 7, 2026",
       "start_date": "2026-05-07",
       "end_date": "2026-05-07",
-      "time_text": "6:00\u201310:00pm",
+      "time_text": "6:00–10:00pm",
       "location": "California Academy of Sciences, 55 Music Concourse Drive, Golden Gate Park, San Francisco",
       "organizer": "Carnaval San Francisco with California Academy of Sciences",
       "admission": "Tickets sold (CalAcademy NightLife); ages 21 and over",
@@ -1560,7 +1600,7 @@
       "date_text": "Wednesday, October 14, 2026",
       "start_date": "2026-10-14",
       "end_date": "2026-10-14",
-      "time_text": "5:00\u20137:00pm",
+      "time_text": "5:00–7:00pm",
       "location": "Casa de Carnaval, 683 Florida Street, San Francisco",
       "organizer": "Carnaval San Francisco (sponsored by Bank of America)",
       "admission": "Free (registration required)",
@@ -1577,19 +1617,19 @@
       "bucket": "special",
       "cadence": "single-event",
       "category": "Professional & academic",
-      "date_text": "October 19\u201321, 2026",
+      "date_text": "October 19–21, 2026",
       "start_date": "2026-10-19",
       "end_date": "2026-10-21",
       "time_text": "",
       "location": "Moscone West, San Francisco",
       "organizer": "Cloudflare",
-      "admission": "Conference pass $595; group pass $495 (5\u20139); Cloudflare University add-on $495",
+      "admission": "Conference pass $595; group pass $495 (5–9); Cloudflare University add-on $495",
       "source_url": "https://www.cloudflare.com/connect/",
       "source_label": "Cloudflare Connect official page",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Canonical event page lists October 19\u201321, 2026 at Moscone West with $595 registration; session times were not stated in captured text. Group and University pricing as listed on the organizer page."
+      "notes": "Canonical event page lists October 19–21, 2026 at Moscone West with $595 registration; session times were not stated in captured text. Group and University pricing as listed on the organizer page."
     },
     {
       "id": "foodwise-black-holiday-market-2026",
@@ -1600,7 +1640,7 @@
       "date_text": "Saturday, December 12, 2026",
       "start_date": "2026-12-12",
       "end_date": "2026-12-12",
-      "time_text": "9:00am\u20132:00pm",
+      "time_text": "9:00am–2:00pm",
       "location": "South arcade, Ferry Building, San Francisco",
       "organizer": "Foodwise",
       "admission": "Free entry (products available for purchase)",
@@ -1609,7 +1649,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Foodwise organizer page confirms December 12, 2026, 9 a.m.\u20132 p.m., south arcade of the Ferry Building, free entry."
+      "notes": "Foodwise organizer page confirms December 12, 2026, 9 a.m.–2 p.m., south arcade of the Ferry Building, free entry."
     },
     {
       "id": "fourth-of-july-fireworks-golden-gate-2026",
@@ -1620,12 +1660,12 @@
       "date_text": "Saturday, July 4, 2026",
       "start_date": "2026-07-04",
       "end_date": "2026-07-04",
-      "time_text": "9:30pm\u20139:45pm",
+      "time_text": "9:30pm–9:45pm",
       "location": "Golden Gate Bridge, San Francisco, CA 94129",
       "organizer": "City and County of San Francisco (Office of the Mayor)",
       "admission": "Free",
       "source_url": "https://www.sf.gov/event-20260704-fourth-of-july-fireworks-on-golden-gate-bridge",
-      "source_label": "SF.gov event page \u2014 Fourth of July fireworks on Golden Gate Bridge",
+      "source_label": "SF.gov event page — Fourth of July fireworks on Golden Gate Bridge",
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
@@ -1637,7 +1677,7 @@
       "bucket": "special",
       "cadence": "single-event",
       "category": "Professional & academic",
-      "date_text": "November 1\u20134, 2026",
+      "date_text": "November 1–4, 2026",
       "start_date": "2026-11-01",
       "end_date": "2026-11-04",
       "time_text": "",
@@ -1649,7 +1689,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer page confirms November 1\u20134, 2026, and names Moscone Center South and the Marriott Marquis as venues. Registration terms are not stated on the linked page."
+      "notes": "Organizer page confirms November 1–4, 2026, and names Moscone Center South and the Marriott Marquis as venues. Registration terms are not stated on the linked page."
     },
     {
       "id": "intertribal-dance-gathering-2026",
@@ -1660,7 +1700,7 @@
       "date_text": "Saturday, May 30, 2026",
       "start_date": "2026-05-30",
       "end_date": "2026-05-30",
-      "time_text": "11:00am\u20134:00pm",
+      "time_text": "11:00am–4:00pm",
       "location": "Presidio Tunnel Tops, East Meadow, San Francisco",
       "organizer": "Native American Health Center",
       "admission": "Free",
@@ -1680,7 +1720,7 @@
       "date_text": "Friday, June 5, 2026",
       "start_date": "2026-06-05",
       "end_date": "2026-06-05",
-      "time_text": "5:00pm\u20138:00pm",
+      "time_text": "5:00pm–8:00pm",
       "location": "San Francisco City Hall, San Francisco",
       "organizer": "San Francisco Human Rights Commission (citywide Juneteenth campaign)",
       "admission": "No-cost (registration via the official Eventbrite link on SF.gov)",
@@ -1697,19 +1737,19 @@
       "bucket": "special",
       "cadence": "single-event",
       "category": "Professional & academic",
-      "date_text": "November 17\u201320, 2026",
+      "date_text": "November 17–20, 2026",
       "start_date": "2026-11-17",
       "end_date": "2026-11-20",
       "time_text": "",
       "location": "Moscone Center, 747 Howard Street, San Francisco",
       "organizer": "Microsoft",
-      "admission": "",
+      "admission": "Registration required",
       "source_url": "https://ignite.microsoft.com/",
       "source_label": "Microsoft Ignite official site",
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer (Microsoft) lists November 17\u201320, 2026, San Francisco. Venue confirmed as Moscone Center by the venue's own official event listing (moscone.com/events/microsoft-ignite-2026). Pass prices are not stated on the linked organizer page and are left blank."
+      "notes": "Organizer (Microsoft) lists November 17–20, 2026, San Francisco. Venue confirmed as Moscone Center by the venue's own official event listing (moscone.com/events/microsoft-ignite-2026). Pass prices are not stated on the linked organizer page and are left blank. The admission field records only the registration requirement shown by the official site’s Register now flow; pass prices remain unstated and are not inferred."
     },
     {
       "id": "presidio-soccer-festival-2026",
@@ -1720,7 +1760,7 @@
       "date_text": "Saturday, June 13, 2026",
       "start_date": "2026-06-13",
       "end_date": "2026-06-13",
-      "time_text": "1:00\u20135:00pm",
+      "time_text": "1:00–5:00pm",
       "location": "Main Parade Lawn, Presidio, San Francisco",
       "organizer": "Telemundo 48 and NBC Bay Area with the Presidio",
       "admission": "Free",
@@ -1737,7 +1777,7 @@
       "bucket": "special",
       "cadence": "dated-program",
       "category": "Music & performing arts",
-      "date_text": "April 29\u2013May 10, 2026",
+      "date_text": "April 29–May 10, 2026",
       "start_date": "2026-04-29",
       "end_date": "2026-05-10",
       "time_text": "",
@@ -1749,7 +1789,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Published as a dated 2026 program rather than assigned an unsupported cadence label. The 2026 page gives April 29\u2013May 10; the organizer homepage locates the festival in Mission District venues. The organizer's office address is never used as a venue."
+      "notes": "Published as a dated 2026 program rather than assigned an unsupported cadence label. The 2026 page gives April 29–May 10; the organizer homepage locates the festival in Mission District venues. The organizer's office address is never used as a venue."
     },
     {
       "id": "sf-marathon-expo-2026",
@@ -1757,10 +1797,10 @@
       "bucket": "special",
       "cadence": "single-event",
       "category": "Sports & outdoors",
-      "date_text": "July 24\u201325, 2026",
+      "date_text": "July 24–25, 2026",
       "start_date": "2026-07-24",
       "end_date": "2026-07-25",
-      "time_text": "July 24, 11am\u20137pm; July 25, 9am\u20135pm",
+      "time_text": "July 24, 11am–7pm; July 25, 9am–5pm",
       "location": "Fort Mason Festival Pavilion, 2 Marina Boulevard, San Francisco",
       "organizer": "The San Francisco Marathon",
       "admission": "",
@@ -1780,7 +1820,7 @@
       "date_text": "Friday, October 30, 2026",
       "start_date": "2026-10-30",
       "end_date": "2026-10-30",
-      "time_text": "3pm\u20139pm",
+      "time_text": "3pm–9pm",
       "location": "Sigmund Stern Grove (19th Avenue & Sloat Boulevard), San Francisco",
       "organizer": "San Francisco Recreation and Park Department",
       "admission": "Free",
@@ -1789,7 +1829,7 @@
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
-      "notes": "SF Recreation and Parks calendar lists Scaregrove 3\u20139 p.m. at Sigmund Stern Grove on October 30, 2026 (corroborated by the department's SF Children & Nature organizer listing and local press). The separate 'Mobile Rec at Scaregrove' 12\u20138 p.m. listing is a different program and does not overwrite the main event hours. See Flagged for Review."
+      "notes": "SF Recreation and Parks calendar lists Scaregrove 3–9 p.m. at Sigmund Stern Grove on October 30, 2026 (corroborated by the department's SF Children & Nature organizer listing and local press). The separate 'Mobile Rec at Scaregrove' 12–8 p.m. listing is a different program and does not overwrite the main event hours. See Flagged for Review."
     },
     {
       "id": "spring-awakening-art-cumbia-2026",
@@ -1800,7 +1840,7 @@
       "date_text": "Saturday, May 16, 2026",
       "start_date": "2026-05-16",
       "end_date": "2026-05-16",
-      "time_text": "12:00\u20133:00pm",
+      "time_text": "12:00–3:00pm",
       "location": "Outpost Meadow, 609 Old Mason Street, Presidio, San Francisco",
       "organizer": "Presidio Trust",
       "admission": "Free",
@@ -1844,20 +1884,20 @@
       "location": "Outside the City and County of San Francisco",
       "organizer": "Bay Area Aloha Festival",
       "admission": "",
-      "source_url": "https://www.bayareaalohafestival.com/",
-      "source_label": "Bay Area Aloha Festival official site (unreachable at 2026-10-18 re-check)",
+      "source_url": "https://www.pica-org.org/faqs",
+      "source_label": "PICA (organizer) official FAQ",
       "source_authority": "Official organizer",
       "status": "outside_city_excluded",
-      "review_reason": "Official materials place this festival outside San Francisco city limits, so it is intentionally excluded from the city-only catalog. (The separate San Francisco Aloha Run is also flagged in this register because its organizer site was unreachable at the 2026-10-18 re-check; the festival site itself could not be fetched then either.)",
-      "notes": "Outside-city exclusion retained from the earlier official capture. Re-verification note (2026-10-18): the organizer site could not be retrieved; the exclusion rests on the earlier captured official location evidence. See Flagged for Review."
+      "review_reason": "Official materials place this festival outside San Francisco city limits: PICA’s FAQ states “August 8-9, 2026 at San Mateo County Event Center (SMCEC), 1346 Saratoga Drive, San Mateo, CA 94403.” It is intentionally excluded; the separate San Francisco Aloha Run is included above.",
+      "notes": "Outside-city exclusion retained. Resolved 2026-10-18: bayareaalohafestival.com returned HTTP 500; the organizer’s (Pacific Islanders’ Cultural Association) live FAQ at pica-org.org confirms the San Mateo County Event Center venue, so the exclusion now rests on a live official source. See Flagged for Review."
     },
     {
       "id": "frameline-2026",
-      "name": "Frameline50 \u2014 San Francisco International LGBTQ+ Film Festival (mixed-geography program)",
+      "name": "Frameline50 — San Francisco International LGBTQ+ Film Festival (mixed-geography program)",
       "bucket": "review",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "June 17\u201327, 2026",
+      "date_text": "June 17–27, 2026",
       "start_date": "2026-06-17",
       "end_date": "2026-06-27",
       "time_text": "",
@@ -1868,7 +1908,7 @@
       "source_label": "Frameline50 dates announcement (official press release)",
       "source_authority": "Official organizer",
       "status": "partial_sf_program",
-      "review_reason": "Frameline's own announcement places Frameline50 (June 17\u201327, 2026) in venues in San Francisco and Oakland, and its Attend page adds Berkeley. The umbrella festival is therefore not city-only and is excluded until a San Francisco-only program record can be separated, like SFFILM and SFJFF.",
+      "review_reason": "Frameline's own announcement places Frameline50 (June 17–27, 2026) in venues in San Francisco and Oakland, and its Attend page adds Berkeley. The umbrella festival is therefore not city-only and is excluded until a San Francisco-only program record can be separated, like SFFILM and SFJFF.",
       "notes": "Not shown in the recurring or special catalog tables."
     },
     {
@@ -1877,7 +1917,7 @@
       "bucket": "review",
       "cadence": "seasonal",
       "category": "Music & performing arts",
-      "date_text": "April\u2013November",
+      "date_text": "April–November",
       "start_date": "",
       "end_date": "",
       "time_text": "Multiple weekly series including Midweek Melodies, Friday Happy Hour, and Crucial Reggae Sundays",
@@ -1888,16 +1928,16 @@
       "source_label": "SF Recreation and Parks Bandshell page",
       "source_authority": "Government source",
       "status": "needs_review",
-      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SF Recreation and Parks Bandshell page. At final-integration re-check on 2026-10-18 that page returned only a script/navigation shell with no program text, so the April\u2013November season, named weekly series, and free admission could not be reconfirmed from the linked source. Held until a readable official page states them.",
+      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SF Recreation and Parks Bandshell page. At final-integration re-check on 2026-10-18 that page returned only a script/navigation shell with no program text, so the April–November season, named weekly series, and free admission could not be reconfirmed from the linked source. Held until a readable official page states them.",
       "notes": "Over 125 free performances through mid-November. One of the oldest professional concert bands in the US. The Golden Gate Park Band has performed since 1882."
     },
     {
       "id": "noise-pop-festival-2026",
-      "name": "Noise Pop Festival \u2014 venue geography unresolved",
+      "name": "Noise Pop Festival — venue geography unresolved",
       "bucket": "review",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "February 19\u2013March 1, 2026",
+      "date_text": "February 19–March 1, 2026",
       "start_date": "2026-02-19",
       "end_date": "2026-03-01",
       "time_text": "",
@@ -1913,7 +1953,7 @@
     },
     {
       "id": "opera-in-the-park-2026",
-      "name": "Opera in the Park \u2014 2026",
+      "name": "Opera in the Park — 2026",
       "bucket": "review",
       "cadence": "annual",
       "category": "Music & performing arts",
@@ -1928,16 +1968,16 @@
       "source_label": "San Francisco Opera cancellation release",
       "source_authority": "Official organizer",
       "status": "cancelled",
-      "review_reason": "San Francisco Opera\u2019s official release says the September 13, 2026 Opera in the Park concert was cancelled. It must not appear as an active event.",
+      "review_reason": "San Francisco Opera’s official release says the September 13, 2026 Opera in the Park concert was cancelled. It must not appear as an active event.",
       "notes": "Retained only as an audit exception."
     },
     {
       "id": "sffilm-festival-2026",
-      "name": "SFFILM Festival \u2014 mixed-geography program",
+      "name": "SFFILM Festival — mixed-geography program",
       "bucket": "review",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "April 24\u2013May 4, 2026",
+      "date_text": "April 24–May 4, 2026",
       "start_date": "2026-04-24",
       "end_date": "2026-05-04",
       "time_text": "",
@@ -1957,7 +1997,7 @@
       "bucket": "review",
       "cadence": "seasonal",
       "category": "Music & performing arts",
-      "date_text": "June\u2013August",
+      "date_text": "June–August",
       "start_date": "",
       "end_date": "",
       "time_text": "",
@@ -1968,12 +2008,12 @@
       "source_label": "SFJAZZ official site",
       "source_authority": "Official organizer",
       "status": "needs_review",
-      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SFJAZZ homepage. At re-check the homepage presents the 2026\u201327 season and retains no 'Summer Sessions' program, June\u2013August span, or listed artists, so the record is held until an organizer page states the summer program.",
-      "notes": "Season-long celebration of jazz and global music. 2026 highlights include KOKOROKO, Wynton Marsalis Septet, Lettuce, Monsieur Perin\u00e9, and Take 6."
+      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SFJAZZ homepage. At re-check the homepage presents the 2026–27 season and retains no 'Summer Sessions' program, June–August span, or listed artists, so the record is held until an organizer page states the summer program.",
+      "notes": "Season-long celebration of jazz and global music. 2026 highlights include KOKOROKO, Wynton Marsalis Septet, Lettuce, Monsieur Periné, and Take 6."
     },
     {
       "id": "sf-fringe-2026",
-      "name": "San Francisco Fringe Festival \u2014 2026 schedule",
+      "name": "San Francisco Fringe Festival — 2026 schedule",
       "bucket": "review",
       "cadence": "",
       "category": "Music & performing arts",
@@ -1993,11 +2033,11 @@
     },
     {
       "id": "sfjff-2026",
-      "name": "San Francisco Jewish Film Festival \u2014 mixed-geography program",
+      "name": "San Francisco Jewish Film Festival — mixed-geography program",
       "bucket": "review",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "July 16\u2013August 2, 2026",
+      "date_text": "July 16–August 2, 2026",
       "start_date": "2026-07-16",
       "end_date": "2026-08-02",
       "time_text": "",
@@ -2005,19 +2045,19 @@
       "organizer": "Jewish Film Institute",
       "admission": "",
       "source_url": "https://jfi.org/film-festival/festival-archive/sfjff-2026",
-      "source_label": "Jewish Film Institute \u2014 SFJFF46 archive page",
+      "source_label": "Jewish Film Institute — SFJFF46 archive page",
       "source_authority": "Official organizer",
       "status": "partial_sf_program",
-      "review_reason": "The official SFJFF46 page (July 16\u2013August 2, 2026) covers a festival whose venue program spans beyond a confirmed city-only listing; no separated San Francisco-only program page was retained. Excluded until a city-only program-level record can be made.",
+      "review_reason": "The official SFJFF46 page (July 16–August 2, 2026) covers a festival whose venue program spans beyond a confirmed city-only listing; no separated San Francisco-only program page was retained. Excluded until a city-only program-level record can be made.",
       "notes": "Not shown in the recurring or special catalog tables."
     },
     {
       "id": "sf-marathon-2026",
-      "name": "San Francisco Marathon \u2014 race weekend",
+      "name": "San Francisco Marathon — race weekend",
       "bucket": "review",
       "cadence": "annual",
       "category": "Sports & outdoors",
-      "date_text": "July 24\u201326, 2026",
+      "date_text": "July 24–26, 2026",
       "start_date": "2026-07-24",
       "end_date": "2026-07-26",
       "time_text": "",
@@ -2037,7 +2077,7 @@
       "bucket": "review",
       "cadence": "annual",
       "category": "Music & performing arts",
-      "date_text": "May 28\u2013June 27, 2026",
+      "date_text": "May 28–June 27, 2026",
       "start_date": "2026-05-28",
       "end_date": "2026-06-27",
       "time_text": "",
@@ -2048,8 +2088,8 @@
       "source_label": "San Francisco Opera official site",
       "source_authority": "Official organizer",
       "status": "needs_review",
-      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SF Opera homepage. At re-check the homepage presents the 2026\u201327 season; the May 28\u2013June 27, 2026 summer span and its productions are not retained on the linked page, so the record is held rather than published from secondary listings.",
-      "notes": "2026 summer season features 'The Barber of Seville' (May 28\u2013June 21) and 'Elektra' (June 7\u201327). Annual Pride concert June 26. Merola Summer Festival June 25\u2013August 15."
+      "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SF Opera homepage. At re-check the homepage presents the 2026–27 season; the May 28–June 27, 2026 summer span and its productions are not retained on the linked page, so the record is held rather than published from secondary listings.",
+      "notes": "2026 summer season features 'The Barber of Seville' (May 28–June 21) and 'Elektra' (June 7–27). Annual Pride concert June 26. Merola Summer Festival June 25–August 15."
     },
     {
       "id": "third-thursdays-on-ellis",
@@ -2098,7 +2138,7 @@
       "id": "flag-fillmore-jazz-domain",
       "event_id": "fillmore-jazz-festival-2026",
       "event": "Fillmore Jazz Festival (2026)",
-      "issue": "The domain previously cited as the official source (fillmorejazzfestival.com) is no longer controlled by the organizer and resolves to unrelated content. The row now uses the organizer's canonical site (fillmorejazzfest.com). Exact 2026 dates (July 4\u20135) are stated by SF Travel and are consistent with the organizer's July Fourth-weekend framing; the organizer page does not restate them in text.",
+      "issue": "The domain previously cited as the official source (fillmorejazzfestival.com) is no longer controlled by the organizer and resolves to unrelated content. The row now uses the organizer's canonical site (fillmorejazzfest.com). Exact 2026 dates (July 4–5) are stated by SF Travel and are consistent with the organizer's July Fourth-weekend framing; the organizer page does not restate them in text. The 2026 row’s hours (10 a.m.–6 p.m., July 4–5) and free admission are now stated from SFMTA’s service-change advisory (government source); the 2027 row carries the organizer-published span (“12 blocks from Jackson to Eddy Streets”) and presenters (Preservation Fund & Fillmore Merchants Association).",
       "sources": [
         {
           "label": "Fillmore Jazz Festival canonical official site",
@@ -2107,18 +2147,22 @@
         {
           "label": "SF Travel July 2026 guide (dates, street span)",
           "url": "https://www.sftravel.com/article/san-francisco-festivals-events-july"
+        },
+        {
+          "label": "SFMTA Fillmore Jazz Festival service changes (2026 advisory)",
+          "url": "https://www.sfmta.com/project-updates/fillmore-jazz-festival-service-changes"
         }
       ],
-      "disposition": "Official source replaced; dates kept with cross-source note. Old domain not labeled official."
+      "disposition": "2026 hours/admission confirmed by SFMTA; 2027 organizer announcement retained as a separate row. Hijacked domain remains flagged."
     },
     {
       "id": "flag-fleet-week-dates",
       "event_id": "fleet-week-sf-2026",
       "event": "San Francisco Fleet Week (2026)",
-      "issue": "Umbrella date-range discrepancy: SF Travel says Fleet Week runs October 4\u201312, 2026; the organizer's calendar page shows day headings October 6\u201312 (with no posted events); the organizer's own component listings state ship tours October 7\u201312 and Fleet Fest October 10\u201311. The air show is consistently October 9\u201311, noon\u20134 p.m. on the organizer's air-show page.",
+      "issue": "Umbrella date-range discrepancy: SF Travel says Fleet Week runs October 4–12, 2026; the organizer's calendar page shows day headings October 6–12 (with no posted events); the organizer's own component listings state ship tours October 7–12 and Fleet Fest October 10–11. The air show is consistently October 9–11, noon–4 p.m. on the organizer's air-show page.",
       "sources": [
         {
-          "label": "SF Travel Fleet Week guide (umbrella Oct 4\u201312)",
+          "label": "SF Travel Fleet Week guide (umbrella Oct 4–12)",
           "url": "https://www.sftravel.com/article/where-you-need-to-watch-blue-angels-fly-over-san-francisco-during-fleet-week"
         },
         {
@@ -2126,7 +2170,7 @@
           "url": "https://fleetweeksf.org/"
         },
         {
-          "label": "Fleet Week air show page (Oct 9\u201311, 2026)",
+          "label": "Fleet Week air show page (Oct 9–11, 2026)",
           "url": "https://fleetweeksf.org/air-show/"
         }
       ],
@@ -2135,8 +2179,8 @@
     {
       "id": "flag-sf-marathon-geography",
       "event_id": "sf-marathon-2026",
-      "event": "San Francisco Marathon \u2014 race weekend (2026)",
-      "issue": "Course geography: the official full-marathon course page describes crossing the Golden Gate Bridge and running its north side (Marin headlands side) before returning to San Francisco, so the full marathon and first half courses are not wholly within city limits (expo, starts, and finishes are in San Francisco). The organizer site also mixes a 2027 marketing header with 2026 race-weekend content; 2026 dates (July 24\u201326) are taken from the 2026 page body, not the 2027 header.",
+      "event": "San Francisco Marathon — race weekend (2026)",
+      "issue": "Course geography: the official full-marathon course page describes crossing the Golden Gate Bridge and running its north side (Marin headlands side) before returning to San Francisco, so the full marathon and first half courses are not wholly within city limits (expo, starts, and finishes are in San Francisco). The organizer site also mixes a 2027 marketing header with 2026 race-weekend content; 2026 dates (July 24–26) are taken from the 2026 page body, not the 2027 header.",
       "sources": [
         {
           "label": "SF Marathon race-weekend page (2026 dates)",
@@ -2153,7 +2197,7 @@
       "id": "flag-hsb-date-window",
       "event_id": "hardly-strictly-bluegrass-2026",
       "event": "Hardly Strictly Bluegrass (2026)",
-      "issue": "Minor date-window discrepancy: the organizer FAQ states Fri Oct 2 \u2013 Sun Oct 4, 2026, while SF Recreation and Parks' Tentative Calendars of Special Events lists 'October 2 - 5' (likely a park-impact window including load-in/out).",
+      "issue": "Minor date-window discrepancy: the organizer FAQ states Fri Oct 2 – Sun Oct 4, 2026, while SF Recreation and Parks' Tentative Calendars of Special Events lists 'October 2 - 5' (likely a park-impact window including load-in/out).",
       "sources": [
         {
           "label": "Hardly Strictly Bluegrass 2026 FAQ (organizer)",
@@ -2164,13 +2208,13 @@
           "url": "https://sfrecpark.org/1310/Tentative-Calendars-of-Special-Events"
         }
       ],
-      "disposition": "Organizer dates (Oct 2\u20134) are published; the RecPark window is recorded here for review."
+      "disposition": "Organizer dates (Oct 2–4) are published; the RecPark window is recorded here for review."
     },
     {
       "id": "flag-ioff-source-hours",
       "event_id": "international-ocean-film-festival-2026",
-      "event": "International Ocean Film Festival \u2014 San Francisco program (2026)",
-      "issue": "Source availability: the organizer's former festival and awards pages now return 404 (site restructured around the 2027 edition), so the row now relies on the official Fort Mason venue listing. On that listing the posted Saturday hours (10:00 a.m.\u201311:00 a.m.) conflict with its own full-day Saturday pass description and are likely a typo; they are copied verbatim rather than corrected.",
+      "event": "International Ocean Film Festival — San Francisco program (2026)",
+      "issue": "Source availability: the organizer's former festival and awards pages now return 404 (site restructured around the 2027 edition), so the row now relies on the official Fort Mason venue listing. On that listing the posted Saturday hours (10:00 a.m.–11:00 a.m.) conflict with its own full-day Saturday pass description and are likely a typo; they are copied verbatim rather than corrected. The upcoming 24th edition (“April 16-18, 2027 at Fort Mason Center for Arts & Culture”) is announced on the organizer’s live About page and is cataloged as a separate dated row (international-ocean-film-festival-2027) with times and admission blank until the 2027 program is published.",
       "sources": [
         {
           "label": "Fort Mason Center event listing (current row source)",
@@ -2179,48 +2223,60 @@
         {
           "label": "Organizer homepage (2027 edition now featured)",
           "url": "https://intloceanfilmfest.org/"
+        },
+        {
+          "label": "IOFF About page (2027 announcement)",
+          "url": "https://intloceanfilmfest.org/about"
         }
       ],
-      "disposition": "Venue listing substituted for the dead organizer URLs; Saturday hours flagged, not adjusted."
+      "disposition": "2026 row remains venue-sourced; a separately sourced 2027 organizer-announcement row is published with unknown optional fields blank."
     },
     {
       "id": "flag-sf-aloha-run-unreachable",
       "event_id": "sf-aloha-run-2026",
       "event": "San Francisco Aloha Run (2026)",
-      "issue": "Source unreachable at re-verification: sfaloharun.com did not respond on 2026-10-18. The captured date (September 20, 2026) and location (Crissy Field) come from the earlier official-site capture and could not be re-confirmed. Failed retrieval is not proof the event is false.",
+      "issue": "Source unreachable at re-verification, then resolved: sfaloharun.com did not respond on 2026-10-18 and the row was temporarily held for review. The organizer’s live official domain www.sfaloharun.org was then located and fetched; it confirms “2026 SAN FRANCISCO ALOHA RUN — Sunday, September 20, 2026” at Crissy Field (16th annual; JCYC; posted entry prices 5K $80 / 10K $85 / Keiki $25 before taxes and fees). The row is restored to verified with the .org source.",
       "sources": [
         {
           "label": "SF Aloha Run official site (unreachable 2026-10-18)",
           "url": "https://sfaloharun.com/"
+        },
+        {
+          "label": "SF Aloha Run official site (live .org domain)",
+          "url": "https://www.sfaloharun.org/"
         }
       ],
-      "disposition": "Row retained with a re-verification warning; values marked unconfirmed at re-verification."
+      "disposition": "Resolved: row restored to verified from the live organizer’s .org domain; replacement source and evidence recorded."
     },
     {
       "id": "flag-bay-area-aloha-unreachable",
       "event_id": "bay-area-aloha-festival",
       "event": "Bay Area Aloha Festival (excluded)",
-      "issue": "The outside-city exclusion is retained from the earlier official capture, but the organizer site did not respond at re-verification (2026-10-18), so the geography evidence could not be independently re-fetched.",
+      "issue": "The outside-city exclusion is retained from the earlier official capture, but the organizer site did not respond at re-verification (2026-10-18), so the geography evidence could not be independently re-fetched. Resolved 2026-10-18: the organizer’s (Pacific Islanders’ Cultural Association) live FAQ at pica-org.org was fetched and confirms “August 8-9, 2026 at San Mateo County Event Center (SMCEC), 1346 Saratoga Drive, San Mateo, CA 94403”; the outside-city exclusion now rests on a live official source and the row cites the PICA FAQ.",
       "sources": [
         {
           "label": "Bay Area Aloha Festival official site (unreachable 2026-10-18)",
           "url": "https://www.bayareaalohafestival.com/"
+        },
+        {
+          "label": "PICA (organizer) official FAQ",
+          "url": "https://www.pica-org.org/faqs"
         }
       ],
-      "disposition": "Exclusion preserved; re-verification gap recorded here."
+      "disposition": "Resolved: source switched to the organizer’s live PICA FAQ, confirming the San Mateo exclusion."
     },
     {
       "id": "flag-scaregrove-listings",
       "event_id": "scaregrove-2026",
       "event": "Scaregrove (2026)",
-      "issue": "The SF Recreation and Parks calendar contains both the main Scaregrove listing (3\u20139 p.m., Stern Grove) and a separate 'Mobile Rec at Scaregrove' listing (12\u20138 p.m.). The main event hours are published; the Mobile Rec program hours are not merged into them.",
+      "issue": "The SF Recreation and Parks calendar contains both the main Scaregrove listing (3–9 p.m., Stern Grove) and a separate 'Mobile Rec at Scaregrove' listing (12–8 p.m.). The main event hours are published; the Mobile Rec program hours are not merged into them.",
       "sources": [
         {
           "label": "SF Recreation and Parks calendar (October 2026)",
           "url": "https://sfrecpark.org/Calendar.aspx"
         },
         {
-          "label": "SF Children & Nature organizer listing (main event 3\u20139 p.m.)",
+          "label": "SF Children & Nature organizer listing (main event 3–9 p.m.)",
           "url": "https://sfchildrennature.org/organizer/san-francisco-recreation-parks/"
         }
       ],
@@ -2230,7 +2286,7 @@
       "id": "flag-carnaval-location-detail",
       "event_id": "carnaval-sf-2026",
       "event": "Carnaval San Francisco (2026)",
-      "issue": "An earlier capture placed the festival 'on Harrison Street (16th\u201324th)'. The organizer's current pages describe the festival as covering 17 blocks in the Mission District and the parade as starting at 24th & Bryant and running Mission Street to 15th; they do not restate the Harrison Street span.",
+      "issue": "An earlier capture placed the festival 'on Harrison Street (16th–24th)'. The organizer's current pages describe the festival as covering 17 blocks in the Mission District and the parade as starting at 24th & Bryant and running Mission Street to 15th; they do not restate the Harrison Street span.",
       "sources": [
         {
           "label": "Carnaval SF special events page (festival + parade)",
@@ -2243,14 +2299,18 @@
       "id": "flag-nihonmachi-street-span",
       "event_id": "nihonmachi-street-fair-2026",
       "event": "Nihonmachi Street Fair (2026)",
-      "issue": "An earlier capture listed the fair footprint as 'Post Street between Laguna and Fillmore and Osaka Way'. The current organizer page confirms Japantown and an information booth at Post & Buchanan but does not restate the street span.",
+      "issue": "An earlier capture listed the fair footprint as 'Post Street between Laguna and Fillmore and Osaka Way'. The current organizer page confirms Japantown and an information booth at Post & Buchanan but does not restate the street span. Resolved 2026-10-18: the organizer’s “How to get here” page restates the span verbatim (Post Street between Laguna and Fillmore, plus Osaka Way); the location field is restored accordingly.",
       "sources": [
         {
           "label": "Nihonmachi Street Fair official site",
           "url": "https://www.nihonmachistreetfair.org/home-1"
+        },
+        {
+          "label": "Nihonmachi Street Fair “How to get here” page",
+          "url": "https://www.nihonmachistreetfair.org/our-community-our-pride-with-performers-1-1"
         }
       ],
-      "disposition": "Location limited to 'Japantown' plus the source-stated info-booth cross street."
+      "disposition": "Resolved: organizer’s live How-to-get-here page confirms the Post Street / Osaka Way footprint; location restored."
     },
     {
       "id": "flag-bay-to-breakers-copy",
@@ -2268,8 +2328,8 @@
     {
       "id": "flag-sffringe-domain",
       "event_id": "sf-fringe-2026",
-      "event": "San Francisco Fringe Festival \u2014 2026 schedule (excluded)",
-      "issue": "The legacy domain sffringe.org now redirects to unrelated third-party content serving a 404 page. It is no longer an official organizer source and is labeled 'Legacy source \u2014 NOT verified official'. No 2026 date, time, or venue could be confirmed from any direct official page.",
+      "event": "San Francisco Fringe Festival — 2026 schedule (excluded)",
+      "issue": "The legacy domain sffringe.org now redirects to unrelated third-party content serving a 404 page. It is no longer an official organizer source and is labeled 'Legacy source — NOT verified official'. No 2026 date, time, or venue could be confirmed from any direct official page.",
       "sources": [
         {
           "label": "Legacy Fringe domain (now unrelated content)",
@@ -2277,6 +2337,53 @@
         }
       ],
       "disposition": "Remains in the review register with blank fields; source authority corrected."
+    },
+    {
+      "id": "flag-agu-venue",
+      "event_id": "agu-annual-meeting-2026",
+      "event": "AGU26 Annual Meeting",
+      "issue": "Venue restoration: the captured agu.org/annual-meeting page states only “San Francisco, CA”, so the venue was first removed rather than inferred. AGU’s official newsroom release then confirmed “7 – 11 December 2026 George R. Moscone Convention Center 747 Howard St. San Francisco, CA 94103”; the location field is restored to Moscone Center on that organizer-official source.",
+      "sources": [
+        {
+          "label": "AGU Annual Meeting official page",
+          "url": "https://www.agu.org/annual-meeting"
+        },
+        {
+          "label": "AGU newsroom: press registration release (venue stated)",
+          "url": "https://news.agu.org/press-release/press-registration-open-for-2026-agu-annual-meeting/"
+        }
+      ],
+      "disposition": "Venue restored from AGU’s official newsroom release; published row now names Moscone Center."
+    },
+    {
+      "id": "flag-italian-heritage-2027",
+      "event_id": "italian-heritage-parade-2027",
+      "event": "San Francisco Italian Heritage Parade (2027)",
+      "issue": "Upcoming-edition row added 2026-10-18: the 158th parade ran Sunday, October 11, 2026 (retained as its own dated row via the organizer’s retrospective), and the official parade page now announces “Sunday, October 10th, 2027” with a 12:30 pm start and admission FREE including the Bank of America Concorso Italiano Auto Show. Route per the parade page: Jefferson & Powell Streets (Fisherman’s Wharf) down Columbus Avenue through North Beach to Washington Square.",
+      "sources": [
+        {
+          "label": "Italian Heritage Parade official parade page (2027)",
+          "url": "https://sfitalianheritage.org/parade/"
+        },
+        {
+          "label": "Organizer retrospective: 158th parade (October 12, 2026)",
+          "url": "https://sfitalianheritage.org/san-francisco-italian-heritage-parade-celebrates-158-years-with-grand-marshal-joe-mantegna/"
+        }
+      ],
+      "disposition": "Future 2027 edition added as a separate verified recurring row; the finished 2026 edition remains separately sourced."
+    },
+    {
+      "id": "flag-sfdff-shack15",
+      "event_id": "sf-dance-film-festival-2026",
+      "event": "San Francisco Dance Film Festival (2026)",
+      "issue": "Out-of-city venue inside the SF schedule: the organizer’s fall-festival page lists one November 5 in-person screening at SHACK15, whose address is in Marin County. The location field now names SHACK15 separately rather than folding it into the “San Francisco theaters” list; the row otherwise keeps the organizer’s own framing for the in-person program.",
+      "sources": [
+        {
+          "label": "SF Dance Film Festival fall 2026 official page",
+          "url": "https://sfdancefilmfest.org/fall-festival-2026/"
+        }
+      ],
+      "disposition": "SF venues are named separately; the out-of-city SHACK15 screening is disclosed in the published row and this flag."
     }
   ]
 }

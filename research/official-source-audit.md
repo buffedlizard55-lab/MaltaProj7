@@ -2,7 +2,7 @@
 
 **Audit date:** 2026-10-18 (original audit, same-day final-integration re-verification of every row, and reconciliation with peer PR #9)
 
-**Geographic rule:** City and County of San Francisco only  
+**Geographic rule:** City and County of San Francisco only
 **Catalog snapshot:** 69 published, source-linked records: 58 regularly occurring and 11 dated/special. 16 non-published records remain on the review register.
 
 ## What was checked
