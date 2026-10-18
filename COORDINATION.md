@@ -776,3 +776,23 @@ All events verified against official sources on 2026-10-18. Key official sources
 
 ### Reconciliation note — `arena/646f6727-maltaproj7` (2026-10-18)
 While G1–G3 were in progress, `main` advanced via PR #17 (`arena/d07e4ede-maltaproj7`, +3 verified rows: Bhangra & Beats, SF Hip Hop DanceFest, Renegade Craft). `git merge origin/main` conflicted only in `data/events.json`, `verify.py` and generated HTML/CSV. Resolution: took `main`'s `data/events.json` and `verify.py`, re-ran the idempotent `research/coverage-patch-646f6727.py` on top (all 3 PR #17 rows retained), regenerated every page with `build.py`, and set the guards to the union: **107 published (87 recurring / 20 special), 16 review, 20 flags**. `verify.py` → PASS. No peer work discarded.
+
+
+---
+
+# Active coordination — session `arena/5caa51b3-maltaproj7` — 2026-10-18 (UTC)
+
+**Session/branch:** `arena/5caa51b3-maltaproj7` (Arena-fixed; the brief’s alternate `session-<id>/<task>` branch scheme cannot be used in this session).
+
+**Pre-claim check:** branch is based on `main` at `23f584e` (PR #24 merge); `gh pr list --state open` returned no open PRs. Earlier board entries are historical; no current active owner appears on the shared task board. Existing catalog: 140 verified rows (95 recurring / 45 special), 16 review records, 29 flags, 8 categories. The current published pages do not distinguish past from future rows, do not prioritize free/near-term events, and do not provide a mobile-first date-focused executive summary.
+
+## Task board — current session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| P1 | Build a mobile-first dashboard/navigation and readable event tables; make admission/cost status explicit and add free/price/unknown filters without inventing prices | in progress | `arena/5caa51b3-maltaproj7` | 2026-10-18 | `build.py`, `assets/style.css`, generated HTML, `verify.py` |
+| P2 | Sort dated event listings with current/future items first; highlight near-term dated events on the dashboard and label completed editions; preserve the distinction between source-stated dates and undated recurring schedules | in progress | `arena/5caa51b3-maltaproj7` | 2026-10-18 | `build.py`, generated HTML, `verify.py`, `method.html` |
+| P3 | Review coverage for free gaming, music, and AI events plus other SF public events; add only records/fields directly supported by official sources and publish uncertain items on Flagged for Review | in progress | `arena/5caa51b3-maltaproj7` | 2026-10-18 | `data/events.json`, `research/**`, generated HTML/CSV, `verify.py`, `README.md` |
+| P4 | Rebuild, run all local checks, create PR to `main`, merge, confirm GitHub Pages deployment, and record the final result | unclaimed | `arena/5caa51b3-maltaproj7` | 2026-10-18 | `COORDINATION.md`, `.github/**` |
+
+**Coordination rules:** all work remains on this Arena-pinned branch; shared outputs are being handled in this session after checking for open claims. No event value will be filled from search snippets, assumptions, third-party listings, or an unstated schedule. `data/events.json` remains the source of truth; its existing official-source links and review/flag records are preserved. Any new rows or corrections must be source-checked and logged before publication.
