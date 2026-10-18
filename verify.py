@@ -42,6 +42,18 @@ def source_link_count(path: Path) -> int:
 
 
 def check_internal_links(path: Path, text: str) -> None:
+    rel = str(path.relative_to(ROOT))
+    # A duplicated HTML id silently breaks the browser-side scripts:
+    # document.getElementById returns the first match, so a heading and a list
+    # sharing an id makes the injected summary overwrite the heading text.
+    seen_ids: dict[str, bool] = {}
+    for element_id in re.findall(r'id="([^"]+)"', text):
+        if element_id in seen_ids:
+            error(f"{rel}: duplicate HTML id {element_id}")
+        seen_ids[element_id] = True
+    for referenced in re.findall(r'aria-labelledby="([^"]+)"', text):
+        if referenced not in seen_ids:
+            error(f"{rel}: aria-labelledby references missing id {referenced}")
     for href in re.findall(r'href="([^"]+)"', text):
         parsed = urlparse(href)
         if parsed.scheme or href.startswith("#") or href.startswith("//"):
@@ -50,10 +62,10 @@ def check_internal_links(path: Path, text: str) -> None:
         try:
             target.relative_to(ROOT)
         except ValueError:
-            error(f"{path.relative_to(ROOT)}: local link escapes repository: {href}")
+            error(f"{rel}: local link escapes repository: {href}")
             continue
         if not target.exists():
-            error(f"{path.relative_to(ROOT)}: broken local link {href}")
+            error(f"{rel}: broken local link {href}")
 
 
 def main() -> int:
@@ -132,14 +144,42 @@ def main() -> int:
     # category created by moving 14 clearly tech/AI/gaming rows out of
     # "Professional & academic". Total: 148 published (98 recurring + 50
     # special), 16 review records, 35 field-level flags, 9 categories.
-    if len(published) != 148:
-        error(f"expected 148 published rows, found {len(published)}")
-    if len(recurring) != 98 or len(special) != 50:
-        error(f"expected 98 recurring / 50 special, found {len(recurring)} / {len(special)}")
+    # 2026-10-18 arena/8c40d1c6-maltaproj7 verification pass (log:
+    # research/verification-8c40d1c6.md, patch: research/patch-8c40d1c6.py):
+    # +6 published special rows added from official organizer/government pages
+    # (Sunday Streets Excelsior 2026, SFIAC and Olympic Club Cornhole Tournament,
+    # and four Foodwise farmers-market cooking demos), cost and note fills on 4
+    # rows (Diplo's Run Club 5K, Exploratorium After Dark, SF Ballet Nutcracker,
+    # Sunday Streets SF), and 6 new field-level flags. Total: 154 published
+    # (98 recurring + 56 special), 16 review records, 41 field-level flags,
+    # 9 categories.
+    # Irregularity noted by this pass: the ledger entry for arena/e79e0de2 above
+    # lists an "SFIAC & Olympic Club Cornhole Tournament" row that is absent from
+    # data/events.json (verified by searching every record id, name and source
+    # URL on 2026-10-18); the row was added in this pass from the SFMTA source
+    # instead, and the discrepancy is logged in COORDINATION.md and published as
+    # flag-ledger-missing-cornhole-row on the Flagged for Review page.
+    # 2026-10-18 arena/56415e75-maltaproj7 integration pass (log:
+    # research/verification-56415e75.md, patch: research/patch-56415e75.py):
+    # +4 published rows added from official organizer/government pages (Afro-Filipino
+    # Jazz Project and Halloween Hoopla from the Yerba Buena Gardens Festival's own
+    # 2026 season press release, SF Tech Week from the SFPL program page and
+    # release, From the E: Harvest Night Market from the organizer's site), a cost
+    # fill on 1 row (From the E Excelsior Night Market, October 23 - the organizer's
+    # site states "free community fun"), field corrections on 3 rows (Lit Crawl SF
+    # hours and no-RSVP wording, GDC 2027 pass-rate window, Day of the Devs time)
+    # and 3 new field-level flags. This session's duplicate Sunday Streets Excelsior
+    # row and duplicate Sunday Streets free-wording flag were dropped in favour of
+    # arena/8c40d1c6's rows. Total: 158 published (101 recurring + 57 special),
+    # 16 review records, 44 field-level flags, 9 categories.
+    if len(published) != 158:
+        error(f"expected 158 published rows, found {len(published)}")
+    if len(recurring) != 101 or len(special) != 57:
+        error(f"expected 101 recurring / 57 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 35:
-        error(f"expected 35 field-level flags, found {len(flags)}")
+    if len(flags) != 44:
+        error(f"expected 44 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
