@@ -1,3 +1,15 @@
+# Active coordination — session arena/f65449c5-maltaproj7 (2026-10-18)
+
+**Branch constraint:** Arena fixes this session to `arena/f65449c5-maltaproj7`; the requested `session-<id>/<task>` naming is not possible. All work remains on this branch. Previous tasks below are merged/historical; `gh pr list --state open` returned no open PRs. Baseline `main`/checkout: `68a0516`.
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
+| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `research/review-f65449c5.md`, `COORDINATION.md` |
+| F3 | Final integration PR / merge / Pages deploy verification | **unclaimed** | — | — | `COORDINATION.md` |
+
+---
+
 # Active coordination — session arena/813e597d-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/813e597d-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/813e597d-maltaproj7`).
