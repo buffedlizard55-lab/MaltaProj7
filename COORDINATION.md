@@ -11,7 +11,7 @@
 | B1 | Line-by-line verification review: audit dataset against brief requirements (city-only SF, verified official sources, date accuracy around 2026-10-18, free vs paid costs, focus on gaming, music, AI); log findings in research | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `research/review-813e597d.md` |
 | B2 | Mobile-friendly UI & Dashboard enhancement: executive summary of upcoming events close to 2026-10-18; upcoming dates highlighted first; clear cost labeling; dedicated focus & filter for free gaming, music, AI events; responsive mobile UX | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
 | B3 | Build & verify: validate all pages, local links, source links, semantic guards; run verify.py | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `build.py`, `verify.py` |
-| B4 | Final integration: PR to `main` with summary of changes, sources, and flagged irregularities; merge without waiting; confirm GitHub Pages deployment; record links | in progress | arena/813e597d-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+| B4 | Final integration: PR to `main` with summary of changes, sources, and flagged irregularities; merge without waiting; confirm GitHub Pages deployment; record links | **done** | arena/813e597d-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
 
 ## Session record — arena/813e597d-maltaproj7 (B1-B4)
 
@@ -33,8 +33,11 @@
 - **B3 (Build & Verification):**
   - `python3 build.py && python3 verify.py` pass completely (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`).
   - All 18 HTML pages verified with zero broken internal links.
-- **B4 (Pull Request, Merge & Deploy):**
-  - Opening pull request from `arena/813e597d-maltaproj7` to `main`, merging without waiting for review, confirming Pages deployment, and recording below.
+- **B4 (Pull Request, Merge & Deploy Publication Record):**
+  - **Pull Request:** [#26](https://github.com/buffedlizard55-lab/MaltaProj7/pull/26) "Integration: Mobile-friendly UI, date-first upcoming ordering, cost clarity, and focus on free gaming, music, AI" — **MERGED** 2026-10-18T10:09:16Z, merge commit [`cbd2415`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/cbd241517fd064ec701e74f4b2ea6ef99e4ce2ff).
+  - **Deploy:** Custom Pages workflow run [39118140299](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39118140299) and pages-build-deployment [39118139863](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39118139863) completed **successfully**.
+  - **Live Site:** Verified live at https://buffedlizard55-lab.github.io/MaltaProj7/ (Pages API status: `built`).
+  - **Final state:** 164 total records (148 published = 98 recurring + 50 special, 16 review records, 34 field-level flags, 9 categories). All tasks complete; flagged items nonblocking.
 
 ---
 
