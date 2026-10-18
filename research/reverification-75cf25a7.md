@@ -1,6 +1,7 @@
 # Conservative admission recheck — session `arena/75cf25a7-maltaproj7`
 
-**Checked:** 2026-10-18 (UTC)  
+**Checked:** 2026-10-18 (UTC)
+
 **Scope:** The admission fields on the two published Sunday Streets 2026 rows, and the corresponding existing flag `flag-sundaystreets-free-wording`. This is a narrow correction, not a claim that the entire catalog was independently live-fetched in this pass.
 
 ## Official organizer pages fetched
