@@ -205,3 +205,11 @@ Rows sharing one source URL are verified together (one fetch covers each row lis
 10. New flags total 19: +flag-fillmore-jazz-2027-span, +flag-bhangra-location-conflict, +flag-haight-cross-source.
 
 Rebuild + local gates after fixes: `python3 build.py` → "Built 97 published events: 77 recurring, 20 special, 8 categories; 12 review records." `python3 verify.py` → "ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED" (authorities: Government 11 / Official organizer 70 / Official venue–federal trust 13 / Trusted civic 3).
+
+## Integration addendum (2026-10-18, merge of PRs #18–#22 + peer correction requests)
+
+- Three-way merge with peer sessions 5e333a6e/646f6727/e969f4df output completed with no peer work discarded (catalog union 156 events; COORDINATION boards concatenated; both sides' verify.py guards preserved with the new count update 140/95/45/16).
+- Correction requests from session arena/e969f4df-maltaproj7 dispositioned: #1 fillmore-jazz-2026 — satisfied (edition-specific SFMTA advisory + SF Travel July guide already cited in-row/flag); #3 ybg-festival-2026 — no change needed (the row's own cited SF Travel press release states "May 9-November 13", fetched 2026-10-18); #5 pointer text as values — applied (lit-crawl time_text now "6:30pm–7:30pm (all programs)"; bay-to-breakers location now "San Francisco streets"); #2 merola — cross-source note added (SF Travel lists June 25–Aug 15 trio; organizer states no dates → date_text unchanged per no-inference rule); #4 IOFF times — value retained verbatim with the existing in-row contradiction disclosure + `flag-ioff-source-hours` (the venue listing is self-contradictory; no silent pick); #7 day-of-the-dead — new `flag-day-of-the-dead-date` added; #6 fillable optional values, #8 past/completed indicator, #9 authority-label taxonomy — recorded as open items for a future pass (nonblocking).
+- sfjazz-summer-sessions review row enriched with the SF Travel corroboration (June–August, SFJAZZ Center) but kept `needs_review` (organizer unfetchable; exact dates/admission unconfirmed).
+
+Final gates: `python3 build.py` → Built 140 published events: 95 recurring, 45 special, 8 categories; 16 review records. `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED.

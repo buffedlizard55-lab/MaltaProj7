@@ -101,7 +101,7 @@
       "start_date": "2027-05-16",
       "end_date": "2027-05-16",
       "time_text": "",
-      "location": "San Francisco streets; official route information is published by the organizer",
+      "location": "San Francisco streets",
       "organizer": "Bay to Breakers",
       "admission": "Registration required",
       "source_url": "https://www.baytobreakers.com/",
@@ -109,7 +109,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Official site describes an annual San Francisco 12K/15K tradition dating to 1912."
+      "notes": "Official site describes an annual San Francisco 12K/15K tradition dating to 1912 (“historic fun run through the streets of San Francisco”). Pointer-style location text removed per correction request from session arena/e969f4df-maltaproj7; specific 2027 route details are not yet published on the linked home page."
     },
     {
       "id": "caamfest-2026",
@@ -269,7 +269,7 @@
       "source_authority": "Trusted civic source",
       "status": "verified",
       "review_reason": "",
-      "notes": "SF Travel describes the Day of the Dead processions and Festival of Altars as annual community events in the Mission District on November 2, 2026. Route and start time are announced by the community organizers and are not stated on the linked page."
+      "notes": "SF Travel describes the Day of the Dead processions and Festival of Altars as annual community events in the Mission District on November 2, 2026. Route and start time are announced by the community organizers and are not stated on the linked page. Source caveat (2026-10-18, per correction request from session arena/e969f4df-maltaproj7): the organizer dayofthedeadsf.org still displays a 2025 edition and states no 2026 date, so this row's date rests on the trusted civic source alone — see flag-day-of-the-dead-date."
     },
     {
       "id": "divisadero-farmers-market",
@@ -880,7 +880,7 @@
       "date_text": "October 24, 2026",
       "start_date": "2026-10-24",
       "end_date": "2026-10-24",
-      "time_text": "Programs include 6:30pm–7:30pm; see full schedule",
+      "time_text": "6:30pm–7:30pm (all programs)",
       "location": "Mission District venues, San Francisco",
       "organizer": "Litquake",
       "admission": "Free",
@@ -889,7 +889,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Organizer calls Lit Crawl the annual Litquake Festival finale."
+      "notes": "Organizer calls Lit Crawl the annual Litquake Festival finale. Official page states: “all programs from 6:30—7:30 PM” (2026-10-18 re-check). Pointer-style time text removed per correction request from session arena/e969f4df-maltaproj7."
     },
     {
       "id": "memorial-day-commemoration-presidio-2026",
@@ -929,7 +929,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "Each summer the program brings young artists to San Francisco for training and performances (organizer cites 69 years of opera training). The captured festival page does not list specific performance dates or venues, so none are shown; the June 25–August 15 span in the peer contribution (PR #9) was not reconfirmed on an organizer page and was removed at reconciliation."
+      "notes": "Each summer the program brings young artists to San Francisco for training and performances (organizer cites 69 years of opera training). The captured festival page does not list specific performance dates or venues, so none are shown; the June 25–August 15 span in the peer contribution (PR #9) was not reconfirmed on an organizer page and was removed at reconciliation. Cross-source note (2026-10-18): SF Travel's 2026 live-music press release lists “Merola Summer Festival … a trio of additional performances from June 25 – August 15” (trusted civic source); organizer dates not published, so date_text stays “Summer 2026” per the no-inference rule."
     },
     {
       "id": "mission-community-market",
@@ -2009,7 +2009,7 @@
       "source_authority": "Official organizer",
       "status": "needs_review",
       "review_reason": "Contributed by peer session arena/08676041 (PR #9) citing the SFJAZZ homepage. At re-check the homepage presents the 2026–27 season and retains no 'Summer Sessions' program, June–August span, or listed artists, so the record is held until an organizer page states the summer program.",
-      "notes": "Season-long celebration of jazz and global music. 2026 highlights include KOKOROKO, Wynton Marsalis Septet, Lettuce, Monsieur Periné, and Take 6."
+      "notes": "Season-long celebration of jazz and global music. 2026 highlights include KOKOROKO, Wynton Marsalis Septet, Lettuce, Monsieur Periné, and Take 6. Cross-source note (2026-10-18): SF Travel's 2026 live-music press release lists SFJAZZ Summer Sessions as June–August at the SFJAZZ Center in Hayes Valley with named 2026 artists (KOKOROKO, Wynton Marsalis Septet, Lettuce, Monsieur Periné, Take 6). The organizer site could not be fetched at re-check, so exact dates/admission stay unconfirmed and the row remains in the review register."
     },
     {
       "id": "sf-fringe-2026",
@@ -3596,6 +3596,23 @@
         }
       ],
       "disposition": "Cross-source fields disclosed; admission blanked pending an official statement."
+    },
+    {
+      "id": "flag-day-of-the-dead-date",
+      "event_id": "day-of-the-dead-procession-2026",
+      "event": "Day of the Dead (Día de los Muertos) Procession (2026)",
+      "issue": "The published date (November 2, 2026) is stated only by SF Travel's November 2026 guide (trusted civic source). The community organizer's site (dayofthedeadsf.org) still displays the 2025 edition and states no 2026 date at the 2026-10-18 re-check. Time and route remain blank.",
+      "sources": [
+        {
+          "label": "SF Travel November 2026 guide (November 2, 2026)",
+          "url": "https://www.sftravel.com/article/san-francisco-festivals-events-november"
+        },
+        {
+          "label": "Day of the Dead SF organizer site (2025 edition shown)",
+          "url": "https://www.dayofthedeadsf.org/"
+        }
+      ],
+      "disposition": "Date kept from the trusted civic source and flagged for human confirmation when the organizer posts the 2026 edition."
     }
   ]
 }
