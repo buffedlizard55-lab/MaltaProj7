@@ -111,10 +111,14 @@ def main() -> int:
     # 2026-10-18 arena/5e333a6e-maltaproj7 coverage-gap pass (audit entry
     # "Coverage-gap pass — arena/5e333a6e"): +32 published (+7 recurring,
     # +25 special), review unchanged -> 139 = 94 + 45, 16 review, 25 flags.
-    if len(published) != 139:
-        error(f"expected 139 published rows, found {len(published)}")
-    if len(recurring) != 94 or len(special) != 45:
-        error(f"expected 94 recurring / 45 special, found {len(recurring)} / {len(special)}")
+    # Audit counts updated 2026-10-18 by session arena/2088b727-maltaproj7 during
+    # three-way integration with PRs #18-#22: +1 verified recurring row
+    # (San Francisco Pride Celebration & Parade 2026) and 3 new field-level flags
+    # (fillmore-jazz-2027-span, bhangra-location-conflict, haight-cross-source).
+    if len(published) != 140:
+        error(f"expected 140 published rows, found {len(published)}")
+    if len(recurring) != 95 or len(special) != 45:
+        error(f"expected 95 recurring / 45 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
 
