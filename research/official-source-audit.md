@@ -49,7 +49,7 @@ Every row below has a source link; dates and locations are the audit-captured va
 | `bay-to-breakers-2027` | Bay to Breakers | Sunday, May 16, 2027 | San Francisco streets; official route information is published by the organizer | [Bay to Breakers official site](https://www.baytobreakers.com/) | Official organizer | verified |
 | `sf-marathon-2026` | San Francisco Marathon — race weekend | July 24–26, 2026 | San Francisco; start and course details vary by distance | [San Francisco Marathon race-weekend page](https://www.thesfmarathon.com/race-weekend/) | Official organizer | verified |
 | `st-patricks-parade-2026` | San Francisco St. Patrick’s Day Parade & Festival | Saturday, March 14, 2026 | Parade from 2nd and Market to Civic Center; Civic Center Plaza, San Francisco | [United Irish Societies parade page](https://uissf.org/st-patricks-day-parade) | Official organizer | verified |
-| `caamfest-2026` | CAAMFest | May 7–10, 2026 | Japantown and Civic Center districts, San Francisco | [CAAMFest 2026 schedule](https://caamfest.com/2026/schedule/) | Official organizer | verified |
+| `caamfest-2026` | CAAMFest — San Francisco program | May 7–10, 2026 (San Francisco program) | AMC Kabuki, Asian Art Museum, KOHO Creative Hub, Koret Auditorium, and New People Cinema, San Francisco | [CAAMFest 2026 schedule](https://caamfest.com/2026/schedule/) | Official organizer | verified |
 | `sf-silent-film-festival-2026` | San Francisco Silent Film Festival | May 6–10, 2026 | Castro Theatre, San Francisco | [Silent Film Festival 2026 page](https://silentfilm.org/festival-2026/) | Official organizer | verified |
 | `international-ocean-film-festival-2026` | International Ocean Film Festival — San Francisco program | April 10–12, 2026 (San Francisco program) | Cowell Theater, Fort Mason Center, San Francisco | [International Ocean Film Festival page](https://intloceanfilmfest.org/festival) | Official organizer | verified |
 | `sf-black-film-festival-2026` | San Francisco Black Film Festival | June 18–21, 2026 | San Francisco; venue schedule on organizer site | [SF Black Film Festival official site](https://sfbff.org/) | Official organizer | verified |
@@ -104,6 +104,7 @@ Every row below has a source link; dates and locations are the audit-captured va
 | Opera in the Park 2026 | The organizer’s cancellation release overrides any earlier promotional listing. The event is kept in the review register only. |
 | Bay Area Aloha Festival | Excluded after official location evidence placed it outside SF city limits. This does not affect the separately sourced SF Aloha Run. |
 | Juneteenth city programs | A direct SF.gov 2026 page was used to distinguish the June 7 waterfront program, June 13 Fillmore Freedom Celebration, and June 20 Market Street Parade. |
+| CAAMFest umbrella scope | The published record is limited and titled as the San Francisco program, using named SF venues in the official 2026 schedule; it does not claim the umbrella festival is city-exclusive. |
 
 ## Data handoff
 

@@ -392,15 +392,15 @@
     },
     {
       "id": "caamfest-2026",
-      "name": "CAAMFest",
+      "name": "CAAMFest — San Francisco program",
       "bucket": "recurring",
       "cadence": "annual",
       "category": "Film & media",
-      "date_text": "May 7–10, 2026",
+      "date_text": "May 7–10, 2026 (San Francisco program)",
       "start_date": "2026-05-07",
       "end_date": "2026-05-10",
       "time_text": "Program-specific times",
-      "location": "Japantown and Civic Center districts, San Francisco",
+      "location": "AMC Kabuki, Asian Art Museum, KOHO Creative Hub, Koret Auditorium, and New People Cinema, San Francisco",
       "organizer": "Center for Asian American Media",
       "admission": "Program-specific",
       "source_url": "https://caamfest.com/2026/schedule/",
@@ -408,7 +408,7 @@
       "source_authority": "Official organizer",
       "status": "verified",
       "review_reason": "",
-      "notes": "The 2026 schedule lists named San Francisco venues and describes CAAMFest as in its 44th year."
+      "notes": "This record is limited to the named San Francisco venues in the official 2026 schedule; it does not represent the umbrella festival as city-exclusive."
     },
     {
       "id": "sf-silent-film-festival-2026",
