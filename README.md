@@ -7,7 +7,7 @@ A static GitHub Pages catalog of **publicly advertised events in the City and Co
 - **69 publishable city-only rows:** 58 regularly occurring and 11 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including reconciliation with a parallel peer contribution, PR #9).
 - **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
-- **Five review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or lack essential direct-source evidence.
+- **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification and four peer contributions held at reconciliation).
 
 The catalog is a reproducible snapshot of official-source evidence, **not** a claim to list every private, unlisted, or newly announced event in San Francisco. Dates and operational details can change; check the linked source before attending.
 
