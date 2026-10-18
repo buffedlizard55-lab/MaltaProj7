@@ -1,3 +1,34 @@
+# Active coordination — session arena/56415e75-maltaproj7 (2026-10-18)
+
+**Branch constraint:** Arena pins this session to `arena/56415e75-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used (same documented deviation as every prior session in this ledger). All work stays on this branch.
+
+**Pre-claim inspection (2026-10-18T11:0xZ):** `origin/main` at `68a0516` (merge of PR #26). `gh pr list --state open` → none. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+
+**Live peer detected:** branch `arena/f65449c5-maltaproj7` (commit `9e1b0e3`, 2026-10-18T10:56Z) has claimed **F1** (`build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md`) and **F2** (`research/review-f65449c5.md`). **This session does not touch any file in F1/F2 scope** and will not create `research/review-f65449c5.md`.
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| G1 | Line-by-line official-source verification pass over the published catalog (free gaming / music / AI rows first, then every upcoming row), correcting or blanking any value not confirmable from the linked official publisher | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
+| G2 | Coverage pass: add newly verified **free** SF events (gaming, music, AI first) with official-publisher links; demote/flag anything that cannot be confirmed | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
+| G3 | Analysis & findings register (counts by cost/date/category, irregularities with source links) for the site's findings sections | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `research/findings-56415e75.md` |
+| G4 | Integration (F3) if still unclaimed when G1–G3 land: merge peer work, rebuild, re-verify line by line, PR to `main`, merge, confirm Pages deploy, record links | **unclaimed (deferred)** | — | — | `COORDINATION.md` |
+
+**Handoff note for the integration session (F3/G4):** G1–G3 change `data/events.json` only. Because `build.py` is in the peer's F1 scope, this session does **not** commit regenerated `*.html` or `data/events.csv`. The integration session must run `python3 build.py && python3 verify.py` after merging so generated pages and the CSV match the merged dataset.
+
+---
+
+# Active coordination — session arena/f65449c5-maltaproj7 (2026-10-18)
+
+**Branch constraint:** Arena fixes this session to `arena/f65449c5-maltaproj7`; the requested `session-<id>/<task>` naming is not possible. All work remains on this branch. Previous tasks below are merged/historical; `gh pr list --state open` returned no open PRs. Baseline `main`/checkout: `68a0516`.
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
+| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `research/review-f65449c5.md`, `COORDINATION.md` |
+| F3 | Final integration PR / merge / Pages deploy verification | **unclaimed** | — | — | `COORDINATION.md` |
+
+---
+
 # Active coordination — session arena/813e597d-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/813e597d-maltaproj7 (platform-fixed branch; per system prompt all work stays on `arena/813e597d-maltaproj7`).
