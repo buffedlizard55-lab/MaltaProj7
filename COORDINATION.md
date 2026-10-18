@@ -13,7 +13,7 @@ Because every prior task is done and merged, this session acts as the **final in
 | R1 | Repo review: line-by-line audit of data, build, verify, site pages against the project brief | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | read-only review; findings into `COORDINATION.md`, `research/**` |
 | R2 | Independent re-verification of all 54 published rows + 5 review records against their official source URLs (direct fetch, no snippets) | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `research/reverification-55c58947.md` (new, all 59 rows logged), `data/events.json` where a source contradicted a row |
 | R3 | Fix irregularities found in R1/R2; rebuild site; run verify.py | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `data/**`, `research/**`, generated HTML via `build.py`; verify.py assertions unchanged (counts stable) |
-| R4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | in progress | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | `COORDINATION.md`, PR metadata |
+| R4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | DONE | arena/55c58947-maltaproj7 | 2026-10-18T03:00Z | PR #14 merged; Pages workflow and API confirmed below |
 
 Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of another session's claimed scope (none are active); unverified values stay blank and are flagged, never inferred; flagged items do not block merge.
 
@@ -58,6 +58,12 @@ While PR #14 was being opened, `main` advanced from `5614df2` to `160b1f2` via t
 
 **Post-merge push handoff:** immediately before pushing the multi-parent reconciliation merge, `git pull --rebase origin arena/55c58947-maltaproj7` was attempted as required. Git attempted to flatten the merge and conflicted in `data/events.json` and generated `data/events.csv` while replaying upstream integration commit `db83e21`; the rebase was aborted rather than discard or re-resolve already-preserved peer work. The resolved merge commit remains intact, its source data and generated outputs already pass `build.py`, `verify.py`, and whitespace checks, and it is pushed as a merge commit rather than rewritten.
 
+## Publication record — R4 complete
+
+- **Pull request:** [#14](https://github.com/buffedlizard55-lab/MaltaProj7/pull/14), “Final integration: line-by-line re-verification of all 59 rows, corrections, and dead-source resolutions,” **MERGED** 2026-10-18T03:58:28Z without waiting for approval, as required. Merge commit: [`1d94987`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/1d9498772c2cee768035bfb7fb4bf8802cc0c50b).
+- **Deployment:** [Deploy static site to GitHub Pages run 39095475606](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39095475606) completed **successfully** for commit `1d94987`; its CI “Verify data and internal links” step passed before deployment. GitHub Pages API then reported `status: built`, HTTPS enforced, source `main` `/`, at https://buffedlizard55-lab.github.io/MaltaProj7/.
+- **Published dataset at this merge:** 105 total records: **93 verified city-only rows** (74 recurring / 19 special), **12 review-register rows**, and **16 field-level flags**, all with source links. Local final checks: `python3 build.py` → Built 93 published events / 74 recurring / 19 special / 8 categories / 12 review records; `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED; whitespace/merge-marker checks clean.
+- **Nonblocking platform notice:** the successful Pages workflow emitted GitHub-hosted-runner migration notices (Node.js 20 actions forced onto Node 24; `ubuntu-latest` planned migration to Ubuntu 26). These are upstream action-runner notices, not build, link, verification, or deployment failures.
 
 ---
 
