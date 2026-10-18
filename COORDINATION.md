@@ -1,3 +1,33 @@
+# Active coordination — session arena/e79e0de2-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/e79e0de2-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same documented deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T09:41Z):** `origin/main` at `23f584e` (merge of PR #24). `gh pr list --state all` → PRs #1–#24 all **MERGED**; no open PRs. `git branch -a` → only `main` and this session's `arena/e79e0de2-maltaproj7` (no other remote branches, no other live session). Every board below is historical (all tasks done/merged), so no peer claim is outstanding and this session takes the remaining brief-driven work plus the final integration role the brief assigns to the last session.
+
+**Local baseline:** `python3 build.py && python3 verify.py` → `Built 140 published events: 95 recurring, 45 special, 8 categories; 16 review records.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED` (published=140 recurring=95 special=45 review=16 flags=29 categories=8).
+
+**Brief gaps this session closes (each is an explicit, still-open item):**
+1. *"organized by date with upcoming dates highlighted first"* — not implemented: `recurring.html` sorts by cadence, `special.html` sorts by date ascending (so **past 2026 editions sort first**), `all-events.html` sorts by bucket/category/name, and **no page labels a row upcoming vs. completed** (92 of 140 published rows are past-dated as of the audit date).
+2. *"executive summary highlighting upcoming events close to today's current date"* — the dashboard has counts but no "next up" summary.
+3. *"clearly label how much it costs to go to the event"* / *"focusing on free events"* — the Admission column exists but **74 of 140 published rows have a blank admission cell**; there is no cost filter, no free-event view, and no free/paid labelling.
+4. *"gaming, music, AI"* focus — audio/visual coverage is present (GDC, RSA, Dreamforce, Confluent Current, Cloudflare Connect, Ignite) but there is no AI/ML-specific row and no explicit gaming/AI focus surface.
+5. Mobile friendliness — viewport meta and one media query exist, but wide 8-column tables only scroll horizontally on phones; no stacked card layout.
+6. `README.md` counts are stale (says 139 published / 25 flags; the dataset is 140 / 29).
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| E1 | Date-first organization: new `upcoming.html` (upcoming-first, date-sorted), per-row `Upcoming`/`Completed` status badges (build-time + live refresh), client-side date/name/category/cost sorting on every table | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `*.html` + `categories/*.html` + `assets/style.css` |
+| E2 | Cost clarity + free-event focus: cost column with explicit `Free`/paid/not-stated labelling, cost filter, new `free.html` view, dashboard "Free to attend" metric | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `*.html` + `assets/style.css` |
+| E3 | Executive summary: dashboard "Next up" panel driven by the live current date (nearest upcoming events), plus 7/30/90-day counts | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), generated `index.html` |
+| E4 | Mobile-first tables: stacked card layout under 720px using `data-label` attributes; tap-target/typography pass | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `build.py` (generator), `assets/style.css` |
+| E5 | Coverage + cost verification: fill `admission` only where the official source states it; add gaming / music / AI rows (and other missing major SF programs) only from an official organizer/venue/government page fetched and quoted in `research/` | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `data/events.json`, `research/verification-e79e0de2.md` (new) |
+| E6 | Docs + guards: refresh `README.md` counts, extend `method.html` with the new analysis/findings, update `verify.py` count guards and add checks for the new pages/fields | in progress | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `README.md`, `verify.py`, `research/official-source-audit.md`, `build.py` (method page) |
+| E7 | Final integration: rebuild, verify, local link crawl, PR to `main` with summary + sources + flagged irregularities, merge without waiting, confirm Pages deploy, record links here | unclaimed | arena/e79e0de2-maltaproj7 | 2026-10-18T09:41Z | `COORDINATION.md`, `.github/**` |
+
+Rules honored: small frequent commits; `git pull --rebase` before every push; no editing of files owned by another live session (none exist); unverified values stay blank and are flagged, never inferred; flagged items do not block merge. Verification = direct fetch of the official publisher page via the sandbox fetch tool (confirmed working this session); no search-snippet or memory-based values are used.
+
 # Active coordination — session arena/2088b727-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/2088b727-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation every prior session logged).
