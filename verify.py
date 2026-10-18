@@ -108,10 +108,16 @@ def main() -> int:
     # Market — recurring/seasonal; SF International Hip Hop DanceFest —
     # recurring/annual; Renegade Craft Fair — special/single-event). Final
     # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
-    if len(published) != 96:
-        error(f"expected 96 published rows, found {len(published)}")
-    if len(recurring) != 76 or len(special) != 20:
-        error(f"expected 76 recurring / 20 special, found {len(recurring)} / {len(special)}")
+    # Stable audit counts updated 2026-10-18 by session arena/2088b727-maltaproj7:
+    # +1 verified recurring row added from live official pages (San Francisco
+    # Pride Celebration & Parade 2026, sfpride.org/celebration/ + /parade/),
+    # and 3 new field-level flags (fillmore-jazz-2027-span,
+    # bhangra-location-conflict, haight-cross-source) -> 19 flags total.
+    # Final total: 97 published (77 recurring + 20 special), 12 review, 19 flags.
+    if len(published) != 97:
+        error(f"expected 97 published rows, found {len(published)}")
+    if len(recurring) != 77 or len(special) != 20:
+        error(f"expected 77 recurring / 20 special, found {len(recurring)} / {len(special)}")
     if len(review) != 12:
         error(f"expected 12 review records, found {len(review)}")
 
