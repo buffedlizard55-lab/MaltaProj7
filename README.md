@@ -1,10 +1,10 @@
 # San Francisco Events — official-source catalog
 
-A static GitHub Pages catalog of **publicly advertised events in the City and County of San Francisco**. It separates **regularly occurring** events (weekly, seasonal, and annual traditions) from **dated special events** and makes the audit boundary visible rather than presenting an unsupported “all events” claim.
+A static GitHub Pages catalog of **publicly advertised events in the City and County of San Francisco**. It separates **regularly occurring** events (weekly, monthly, seasonal, and annual traditions) from **dated special events** and makes the audit boundary visible rather than presenting an unsupported "all events" claim.
 
 ## What is included
 
-- **54 publishable city-only rows:** 46 regularly occurring and 8 special events, checked on **2026-10-18**.
+- **70 publishable city-only rows:** 62 regularly occurring and 8 special events, checked on **2026-10-18**.
 - **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
 - **Five review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or lack essential direct-source evidence.

@@ -93,10 +93,10 @@ def main() -> int:
     categories = sorted({event["category"] for event in published})
 
     # Stable audit counts are a guard against accidental loss of catalog/review rows.
-    if len(published) != 54:
-        error(f"expected 54 published rows, found {len(published)}")
-    if len(recurring) != 46 or len(special) != 8:
-        error(f"expected 46 recurring / 8 special, found {len(recurring)} / {len(special)}")
+    if len(published) != 70:
+        error(f"expected 70 published rows, found {len(published)}")
+    if len(recurring) != 62 or len(special) != 8:
+        error(f"expected 62 recurring / 8 special, found {len(recurring)} / {len(special)}")
     if len(review) != 5:
         error(f"expected 5 review records, found {len(review)}")
     if catalog.get("geography") != "City and County of San Francisco only":
