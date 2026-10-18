@@ -877,3 +877,20 @@ embedded-dataset coverage, the new category and its page, and updated stable cou
 
 ### E7 — Final integration (IN PROGRESS)
 Push → pull request to `main` → merge → confirm the GitHub Pages deploy → record the PR and merge result here.
+
+### E7 — Final integration (DONE)
+
+| Item | Result |
+| --- | --- |
+| Branch | `arena/e79e0de2-maltaproj7` → pushed to `origin` |
+| Pull request | **#25** — https://github.com/buffedlizard55-lab/MaltaProj7/pull/25 |
+| PR title | "Date-first rebuild: upcoming-first ordering, live executive summary, cost labels on every row, new Upcoming/Free pages" |
+| Merge | **MERGED** 2026-10-18T09:51:18Z (merge commit `0817fa170684937937d19ae991de9ffefd787ba6`) into `main`, without waiting for approval, as instructed |
+| GitHub Pages | Workflow run **39116973347** ("Deploy static site to GitHub Pages", push to `main`) → **status: completed, conclusion: success**. The workflow re-runs `build.py` and `verify.py` before uploading, so the published build passed the same guards. |
+| Live site | https://buffedlizard55-lab.github.io/MaltaProj7/ — confirmed live after the deploy: the dashboard's next-up panel renders "Oct 18 today — Diplo's Run Club San Francisco 5K", "Oct 19 tomorrow — Cloudflare Connect", "Oct 23 in 5 days …", the ongoing programs are labelled "ongoing — ends …", the strip reads "Today: October 18, 2026 · Starting in 7 days: 7 · Starting in 30 days: 21 · Starting in 90 days: 28 · Running now: 4", and `free.html` / `upcoming.html` / the new category page all serve correctly. |
+| New pages live | `/upcoming.html`, `/free.html`, `/categories/technology-ai-and-gaming.html` |
+| Post-merge link spot-check | 8 further published source URLs re-fetched after the merge — AI Engineer World's Fair 2026 (Jun 30–Jul 2, 2026, Moscone Center), Atlassian Team '27 (Apr 20–22, 2027, Moscone Center), Hayes Valley Farmers' Market (450 Hayes St, Saturdays 10 a.m.–2 p.m., year-round), sf.gov Juneteenth 2026 (no-cost citywide events; Mayor's Kickoff Jun 5 5–8 p.m.; Waterfront Jun 7 11 a.m.–4 p.m.; parade Jun 20 11 a.m.; Freedom Celebration Jun 13), Stern Grove 2026 lineup (11 dated concerts, GA lottery tickets, reserved tables, Community Box Office), Fillmore Jazz Festival (Jul 3–4, 2027 confirmed; "one of San Francisco's largest free music events"), RSAC ("RSAC 2027 Conference will take place April 5-8, 2027, in San Francisco at the Moscone Center"), Dreamforce 2027 ("September 21-23, 2027 | San Francisco and Salesforce+", no venue named — the existing venue flag still applies). All eight resolved and matched the catalog. |
+| Final dataset | 164 records = **148 published city-only rows (98 recurring + 50 special)** + 16 review-register records; **34 field-level flags**; **9 categories**; 54 upcoming and 56 free-or-partly-free rows as of 2026-10-18. |
+| Final gates | `python3 build.py` → "Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free." `python3 verify.py` → "ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED" (also re-run green inside the Pages workflow). |
+
+**Final state: every task E1–E7 is done. The site is live at https://buffedlizard55-lab.github.io/MaltaProj7/.**
