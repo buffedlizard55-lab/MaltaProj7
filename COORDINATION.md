@@ -1,3 +1,22 @@
+# Active coordination — session arena/646f6727-maltaproj7 (2026-10-18)
+
+**Session ID:** arena/646f6727-maltaproj7 (platform-fixed branch; `session-<id>/<task>` naming cannot be used — same deviation earlier sessions logged).
+
+**Pre-claim inspection (2026-10-18T06:00Z):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty. No remote branches other than `main`. Every task on the boards below is DONE and merged. Local baseline: `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16). Because no other claim is active, this session acts as the **final integration session** for its own scope and is permitted to touch shared outputs.
+
+## Task board — this session
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| G1 | Coverage-gap review: identify major recurring/special SF events absent from `data/events.json`; add only rows confirmable from an official organizer/venue/government page (direct fetch) | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json`, `research/coverage-gap-646f6727.md` (new) |
+| G2 | Spot re-verification of existing rows with time-sensitive sources + review register; correct/flag drift | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (flags), `research/coverage-gap-646f6727.md` |
+| G3 | Rebuild site, update `verify.py` count guards with audit entry, confirm no broken local links | unclaimed → claimed with G1 | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | generated HTML/CSS/CSV via `build.py`, `verify.py`, `research/official-source-audit.md`, `README.md` |
+| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | pending | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
+
+Rules honored: `git pull --rebase` before every push; small commits; unverified values stay blank and are flagged; nothing marked verified without an inspected official source link.
+
+---
+
 # Active coordination — session arena/55c58947-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
