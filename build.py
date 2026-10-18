@@ -748,6 +748,55 @@ def build() -> None:
   )}</ul></div></noscript>
 </section>
 
+<section aria-labelledby="focus-disciplines">
+  <div class="section-head"><h2 id="focus-disciplines">Focus: Free events for Gaming, Music, AI &amp; beyond</h2>
+  <p>Prioritized public access opportunities across the requested focus disciplines in San Francisco.</p></div>
+  <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+    <div class="card" style="cursor: default;">
+      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🎮 Gaming Focus</span>
+      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">San Francisco hosts premier video game industry and indie developer activations:</p>
+      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
+        <li><strong>Day of the Devs SF Edition</strong>: Free admission celebration of indie games at The Midway.</li>
+        <li><strong>GDC Festival of Gaming</strong>: Global game development conference and industry summit at Moscone Center (March 1–5, 2027).</li>
+      </ul>
+      <p style="margin: 0.8rem 0 0;"><a href="categories/technology-ai-and-gaming.html"><strong>Open Technology, AI &amp; gaming category →</strong></a></p>
+    </div>
+    <div class="card" style="cursor: default;">
+      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🎵 Free Music Focus</span>
+      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">12 verified 100% free music and performing arts traditions across the city:</p>
+      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
+        <li><strong>Hardly Strictly Bluegrass</strong>: Golden Gate Park (100% free, no tickets needed).</li>
+        <li><strong>Stern Grove Festival</strong>: Sigmund Stern Grove (free Sunday concerts by lottery).</li>
+        <li><strong>Fillmore Jazz Festival</strong>: 12-block free live jazz festival over July 4th weekend.</li>
+        <li><strong>Golden Gate Park Band</strong>: 25 free Sunday concerts at the Bandshell.</li>
+        <li><strong>YBG Festival</strong>: 6-month free outdoor performing arts series in Yerba Buena Gardens.</li>
+      </ul>
+      <p style="margin: 0.8rem 0 0;"><a href="categories/music-and-performing-arts.html"><strong>Open Music &amp; performing arts category →</strong></a></p>
+    </div>
+    <div class="card" style="cursor: default;">
+      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🤖 AI &amp; Cutting-Edge Tech</span>
+      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">Major artificial intelligence and developer summits headquartered in San Francisco:</p>
+      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
+        <li><strong>Microsoft Ignite</strong>: Enterprise AI and Copilot flagship at Moscone Center.</li>
+        <li><strong>AI Engineer Code Summit &amp; World's Fair</strong>: LLM and AI engineering conferences.</li>
+        <li><strong>Cloudflare Connect &amp; Current SF</strong>: Workers AI and real-time streaming data.</li>
+        <li><strong>TechCrunch Disrupt 2026</strong>: Premier AI startup conference and Battlefield.</li>
+      </ul>
+      <p style="margin: 0.8rem 0 0;"><a href="categories/technology-ai-and-gaming.html"><strong>View all AI &amp; tech events →</strong></a></p>
+    </div>
+    <div class="card" style="cursor: default;">
+      <span class="card-label" style="font-size: 1.1rem; color: #0f172a;">🌟 Everything Else After</span>
+      <p style="font-size: 0.88rem; color: #475569; margin: 0.5rem 0;">Free civic traditions, parades, night markets, and museum days:</p>
+      <ul style="font-size: 0.84rem; padding-left: 1.1rem; margin: 0; color: #334155;">
+        <li><strong>de Young &amp; Legion of Honor</strong>: Free Saturdays for Bay Area residents &amp; Free First Tuesdays.</li>
+        <li><strong>SF Pride &amp; Chinese New Year Parades</strong>: Free public viewing along historic routes.</li>
+        <li><strong>Downtown First Thursdays &amp; Off the Grid</strong>: Free entry street parties and night markets.</li>
+      </ul>
+      <p style="margin: 0.8rem 0 0;"><a href="free.html"><strong>Browse all 56 free / partly-free events →</strong></a></p>
+    </div>
+  </div>
+</section>
+
 <section aria-labelledby="at-a-glance">
   <div class="section-head"><h2 id="at-a-glance">At a glance</h2><p>Counts are derived directly from the verified dataset.</p></div>
   <div class="cards">
