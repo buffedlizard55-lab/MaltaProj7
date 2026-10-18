@@ -77,6 +77,26 @@ schedule that could be quoted as a cadence.
 | `flag-sunday-streets-free-wording` | The organizer states "fun, free activities", not "free admission". The `Free` label rests on that exact wording. |
 | `flag-ybgf-season-end-source` | The November 13, 2026 season end date is sourced from SF Travel, not from the organizer, whose release says only "from May to November" and "NOVEMBER programs to be announced". |
 
+## 4b. Verified findings handed to the peer's F1 pass (not applied here)
+
+`data/events.json` was claimed by `arena/8c40d1c6-maltaproj7` (F1) while this session was running, so
+these two verified results are recorded rather than applied. Both come from the organizer's own site,
+<https://www.fromtheesf.com/>, read on 2026-10-18:
+
+1. **Cost fill — `from-the-e-night-market-2026-10-23`.** The row's admission is blank and its
+   organizer reads "Organizer not named in source" because the row was built from the SFMTA travel
+   update. The organizer's site states the programme "means free community fun" and lists
+   "From the E: Fall Festival Night Market — Fri, Oct 23 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY
+   FUN! ✨️". Suggested fill: `admission: "Free"`,
+   `admission_source_url: "https://www.fromtheesf.com/"`, organizer "From the E Excelsior Night
+   Market". SFMTA remains the source for the date, hours and street footprint.
+2. **New free row — From the E: Harvest Night Market.** The same organizer page lists
+   "From the E: Harvest Night Market — Fri, Nov 20 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY
+   FUN! ✨️". A dated free row for **Friday, November 20, 2026** at Ocean Avenue & Mission Street,
+   Excelsior, is supportable from that page. No hours are stated for that edition, so `time_text`
+   should stay blank rather than borrow the monthly "second Saturday 5pm–10pm" wording, which does
+   not match a Friday date.
+
 ## 5. Honest coverage statement — what this pass did **not** re-fetch
 
 This session re-fetched official pages for the rows above (the brief's focus

@@ -80,7 +80,14 @@ SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
    Oct 24 Afro-Filipino Jazz Project, Oct 31 Halloween Hoopla). The flag can be narrowed accordingly.
 3. **`verify.py` count guards (F3 scope, this session did not edit them):** published `148 → 152`,
    recurring/special `98 / 50 → 100 / 52`, flags `35 → 38`.
-4. **Rebuild required (F2/F3 scope):** generated `*.html`, `categories/*.html` and `data/events.csv`
+4. **Two verified results ready to apply (F1 scope — found after this session stopped editing
+   `data/events.json`):** from the organizer's own site <https://www.fromtheesf.com/> (read
+   2026-10-18) — (a) `from-the-e-night-market-2026-10-23` can take `admission: "Free"` with
+   `admission_source_url: "https://www.fromtheesf.com/"` ("✨️ FREE COMMUNITY FUN! ✨️"); (b) a new free
+   dated row **From the E: Harvest Night Market, Friday November 20, 2026, Ocean Ave & Mission St,
+   Excelsior** is supportable from the same page (no hours published → leave `time_text` blank).
+   Details in `research/verification-56415e75.md` §4b.
+5. **Rebuild required (F2/F3 scope):** generated `*.html`, `categories/*.html` and `data/events.csv`
    on this branch are still the merged `origin/main` copies; run `python3 build.py && python3
    verify.py` before publishing so pages and CSV match the 152-row dataset. Local result on
    2026-10-18 with the merged data: `build.py` succeeds (`Built 152 published events: 100 recurring,
