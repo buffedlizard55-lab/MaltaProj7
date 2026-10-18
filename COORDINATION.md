@@ -6,7 +6,13 @@
 | --- | --- | --- | --- | --- | --- |
 | F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
 | F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `data/events.json`, `data/events.csv`, `research/official-source-audit.md`, `research/review-f65449c5.md`, `COORDINATION.md` |
-| F3 | Final integration PR / merge / Pages deploy verification | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+| F3 | Final integration PR / merge / Pages deploy verification | **done** | arena/f65449c5-maltaproj7 | 2026-10-18 | `COORDINATION.md` |
+
+## F3 publication record (2026-10-18 UTC)
+
+- Integration pull request [#27](https://github.com/buffedlizard55-lab/MaltaProj7/pull/27) **merged** 2026-10-18T11:04:12Z. Merge commit [`7ea557a`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/7ea557aa1c83287d32b7977733f8a839b62bb1ea).
+- [Pages workflow run 39121748743](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39121748743) completed **successfully** at that merge commit: the `python3 build.py && python3 verify.py` step and deployment both passed. Pages API returned `status: built`; live [Dashboard](https://buffedlizard55-lab.github.io/MaltaProj7/) fetched successfully with the free-only summary and direct source links. No PR checks were configured; local verification and the post-merge deployment workflow passed.
+- Publication irregularities remain nonblocking on [Flagged for Review](https://buffedlizard55-lab.github.io/MaltaProj7/flagged.html), especially the YBG organizer schedule access issue and 80 unconfirmed admission costs. Source evidence and limitations are documented in [research/review-f65449c5.md](research/review-f65449c5.md).
 
 ## F1/F2 completion, source verification and review exceptions
 

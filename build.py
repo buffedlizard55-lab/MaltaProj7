@@ -153,7 +153,7 @@ def cost_cell(event: dict) -> str:
             "Not stated</span>" + (f'<span class="cost-detail">{esc(admission)}</span>' if admission else "")
         )
     text = f'<span class="cost cost-{kind}">{esc(label)}</span>'
-    if admission:
+    if admission and not (kind == "free" and admission.lower() == "free"):
         text += f'<span class="cost-detail">{esc(admission)}</span>'
     if event.get("admission_source_url"):
         text += f'<a class="evidence-link" href="{esc(event["admission_source_url"])}" target="_blank" rel="noopener noreferrer">Admission evidence ↗</a>'
