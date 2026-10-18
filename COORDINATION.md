@@ -8,12 +8,30 @@
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| G1 | Coverage-gap review: identify major recurring/special SF events absent from `data/events.json`; add only rows confirmable from an official organizer/venue/government page (direct fetch) | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json`, `research/coverage-gap-646f6727.md` (new) |
-| G2 | Spot re-verification of existing rows with time-sensitive sources + review register; correct/flag drift | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (flags), `research/coverage-gap-646f6727.md` |
-| G3 | Rebuild site, update `verify.py` count guards with audit entry, confirm no broken local links | unclaimed → claimed with G1 | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | generated HTML/CSS/CSV via `build.py`, `verify.py`, `research/official-source-audit.md`, `README.md` |
-| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | pending | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
+| G1 | Coverage-gap review: identify major recurring/special SF events absent from `data/events.json`; add only rows confirmable from an official organizer/venue/government page (direct fetch) | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json`, `research/coverage-gap-646f6727.md` (new) |
+| G2 | Spot re-verification of existing rows with time-sensitive sources + review register; correct/flag drift | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (flags), `research/coverage-gap-646f6727.md` |
+| G3 | Rebuild site, update `verify.py` count guards with audit entry, confirm no broken local links | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | generated HTML/CSS/CSV via `build.py`, `verify.py`, `research/official-source-audit.md`, `README.md` |
+| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
 
 Rules honored: `git pull --rebase` before every push; small commits; unverified values stay blank and are flagged; nothing marked verified without an inspected official source link.
+
+## G1–G3 outcome (2026-10-18, commits 6d76c25 → 826bc63)
+
+**Sources & verification:** every new value was read by direct fetch of the official page on 2026-10-18; quoted evidence per row is in `research/coverage-gap-646f6727.md`; reproducible patch `research/coverage-patch-646f6727.py`.
+
+**Added (11 published rows, all official organizer sources):** GDC Festival of Gaming Mar 1–5 2027 (gdconf.com); RSA Conference Apr 5–8 2027 (RSAC closing press release); Dreamforce Sep 21–23 2027 (Salesforce save-the-date); J.P. Morgan Healthcare Conference Jan 11–14 2027, invitation-only (jpmorgan.com); TechCrunch Disrupt Oct 13–15 2026 (techcrunch.com/events); Chinatown Autumn Moon Festival Sep 19–20 2026, 11am–5pm, Grant Ave, free (moonfestival.org); Chinese New Year Flower Market Fair Jan 30–31 2027 (chineseparade.com); Trans March Jun 26 2026, Dolores Park 3–6pm (transmarch.org); Golden Gate Park Band Apr–Sep 2026 Sunday season, free (goldengateparkband.org); SF Ballet Nutcracker Dec 4–27 2026, War Memorial Opera House (sfballet.org); Off the Grid Fort Mason Night Market, select Fridays May–Dec 2026, 5–10pm, free (offthegrid.com).
+
+**Review records (4, published on Flagged for Review, nonblocking):** How Weird Street Faire — organizer states the faire ended after 2024 (`cancelled`); Union Street Festival — both domains hijacked, no official source (`needs_review`, blank); SF Dyke March Jun 26 2027 — location not stated on official page (`needs_review`); Litquake 2026 — multi-city schedule (`partial_sf_program`).
+
+**Irregularities flagged (4 new field flags, 20 total):** `unionstreetfestival.com` serves casino spam and `sresproductions.com` redirects off-domain; Dreamforce 2027 venue not named; TechCrunch Disrupt event page blocked (Cloudflare) / 404; Bay to Breakers homepage mixes "May 16, 2027" headline with "before May 18" sidebar copy.
+
+**Not added (no readable official source):** SF Dragon Boat Festival (domain expired), Union Square holiday events (JS-only page), SF Symphony season (loading shell), Kaiser SF Half (fetch failed).
+
+**Spot re-verification (G2):** Downtown First Thursdays, SF Sketchfest 2027, Cloudflare Connect 2026, Bay to Breakers 2027 re-fetched — all PASS (B2B with the copy irregularity above).
+
+**Build/verify:** `python3 build.py` → Built 104 published events: 85 recurring, 19 special, 8 categories; 16 review records. `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED. Local link crawl of all generated HTML: 0 broken links. `verify.py` guards 93/74/19/12 → 104/85/19/16 with entry in `research/official-source-audit.md`.
+
+G4 (PR → merge → Pages confirmation) recorded below once complete.
 
 ---
 
