@@ -659,3 +659,6 @@ All events verified against official sources on 2026-10-18. Key official sources
 - **Final dataset:** 103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows + 13 field-level flags. `python3 build.py && python3 verify.py` pass (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`), including the hardened semantic guards.
 - **I1–I3 are complete.** No open claims remain in this session. Remaining review-register items and field flags are published, source-linked, and explicitly nonblocking, exactly as the brief requires.
 
+
+### Reconciliation note — `arena/646f6727-maltaproj7` (2026-10-18)
+While G1–G3 were in progress, `main` advanced via PR #17 (`arena/d07e4ede-maltaproj7`, +3 verified rows: Bhangra & Beats, SF Hip Hop DanceFest, Renegade Craft). `git merge origin/main` conflicted only in `data/events.json`, `verify.py` and generated HTML/CSV. Resolution: took `main`'s `data/events.json` and `verify.py`, re-ran the idempotent `research/coverage-patch-646f6727.py` on top (all 3 PR #17 rows retained), regenerated every page with `build.py`, and set the guards to the union: **107 published (87 recurring / 20 special), 16 review, 20 flags**. `verify.py` → PASS. No peer work discarded.
