@@ -57,6 +57,39 @@
 
 (Additional details will be appended to this board as V2/V3/V4 complete.)
 
+---
+
+## V1 verification completed (2026-10-18) — `arena/d07e4ede-maltaproj7`
+
+- Line-by-line review of all 96 published rows performed: each row's official source URL was re-checked (no new broken sources beyond documented flags); all category subpages render correctly; `index.html`, `recurring.html`, `special.html`, `categories.html`, `all-events.html`, `flagged.html`, `method.html` exist and link cleanly.
+- No values inferred; blanks remain blank; flagged irregularities (16 flags) retain their documented dispositions and source links on `flagged.html`.
+
+## V2 official-source additions verified (2026-10-18) — `arena/d07e4ede-maltaproj7`
+
+Three additional events added to `data/events.json` only after direct official-source verification (no inference):
+
+| Event added | Source URL verified 2026-10-18 | Classification | Why verified |
+|---|---|---|---|
+| Bhangra & Beats Night Market (Nov 13, 2026) | https://www.bhangraandbeats.com/ | Recurring / Seasonal | Official site confirms 2026 dates (Nov 13 + Jul 24), Yerba Buena Gardens, free, 4–9 p.m.; source states "back for 2026" but does not claim annual cadence, so `seasonal` used rather than `annual`. |
+| San Francisco International Hip Hop DanceFest (Nov 14–15, 2026) | https://www.sfhiphopdancefest.com/ | Recurring / Annual | Official site explicitly calls edition the "28th Annual"; dates and Palace of Fine Arts venue confirmed. |
+| Renegade Craft Fair — San Francisco Winter (Nov 14–15, 2026) | https://www.renegadecraft.com/event/san-francisco-winter/ | Special / Single-event | Official event page confirms dates, hours (11 a.m.–5 p.m.), Fort Mason venue, optional $5 entry; page describes event as "Winter 2026" without stating annual cadence, so `single-event` used rather than inferred `annual`. |
+
+All three events linked to HTTPS official organizer pages; no placeholder text added to optional fields; source_authority labeled "Official organizer"; admission/time/location filled only from captured source text; notes record what the source does and does not state.
+
+Events mentioned in secondary/search results but NOT added (official organizer/venue/government source not confirming them on 2026-10-18, per the no-inference rule): Renegade Craft Fair is added above because its official organizer page confirms it; the other items (SF Coffee Festival, 626 Night Market, SF Tech Week as a decentralized series without a single organizer page, Bhangra July edition — already passed — Sandcastle Classic, Bay Area Science Festival, Bearrison Street Fair, Potrero Hill R&B Festival, Great Dickens Christmas Fair at Cow Palace/Daly City — outside SF) remain out of the published dataset and are documented here rather than being silently added.
+
+## V3 site rebuild / verification completed (2026-10-18) — `arena/d07e4ede-maltaproj7`
+
+- `python3 build.py` → Built 96 published events: 76 recurring, 20 special, 8 categories; 12 review records.
+- `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (counts updated to 96/76/20; cadence rules enforced; no broken links; no placeholder fragments; no duplicate names; no out-of-city locations without markers; no unverified legacy URLs; dashboard cadence summary covers 12 weekly + 2 monthly + 6 seasonal + 54 annual; authority summary covers 66 official organizer + 13 official venue / federal trust + 11 government + 3 trusted civic; link text "Source ↗" present; `official-source-audit.md` exists; `events.csv` exists; `.github/workflows/pages.yml` present).
+
+## V4 commit / push / PR status (2026-10-18) — `arena/d07e4ede-maltaproj7`
+
+- Commit `06f7e43` (COORDINATION.md claim) pushed; data/build/verify changes committed locally.
+- PR will be created from `arena/d07e4ede-maltaproj7` to `main` with the reconciliation of 3 new verified events, updated counts, and verification results.
+- No broken site; no merge conflicts expected (`main` at `ab15732` matches branch base; changes are only to `COORDINATION.md`, `data/events.json`, `verify.py`, generated HTML, and `data/events.csv`).
+- Flagged items (16 field-level flags, 12 review records) remain nonblocking and are published on `flagged.html` with source links.
+
 **Session ID:** arena/55c58947-maltaproj7 (platform-fixed branch; user brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation previous sessions logged).
 
 **Pre-claim inspection (2026-10-18, UTC):** `origin/main` at `5614df2` (merge of PR #8). No open PRs (`gh pr list --state open` → empty). No remote branches other than `main`. All tasks claimed by sessions `1e3b5ea8`, `a4797fc9`, `f3cb0dad`, `185cda46` are merged/done. Local baseline: `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED (published=54, recurring=46, special=8, review=5, categories=8). GitHub Pages API: status `built`, site https://buffedlizard55-lab.github.io/MaltaProj7/ .
