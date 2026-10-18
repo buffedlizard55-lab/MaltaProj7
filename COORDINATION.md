@@ -5,7 +5,7 @@
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
 | F1 | Make primary dashboard and free page strictly free AND upcoming; separate paid/mixed/unknown; fix live date/filter defects; support mobile and accessible links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md` |
-| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `research/review-f65449c5.md`, `COORDINATION.md` |
+| F2 | Independently review sourced cost/date rows, record any irregularities and bounds, test local build & links | **in progress** | arena/f65449c5-maltaproj7 | 2026-10-18 | `data/events.json`, `data/events.csv`, `research/official-source-audit.md`, `research/review-f65449c5.md`, `COORDINATION.md` |
 | F3 | Final integration PR / merge / Pages deploy verification | **unclaimed** | — | — | `COORDINATION.md` |
 
 ---
