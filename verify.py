@@ -198,18 +198,19 @@ def main() -> int:
     # survive as R3 and R11 in research/review-3977d9cb.md. This session also re-verified
     # peer rows against their official sources (From the E editions, Sunday Streets
     # Excelsior, Foodwise demos) - see research/reverification-3977d9cb.md.
-    # Total: 171 published (110 recurring + 61 special), 18 review records,
-    # 58 field-level flags, 9 categories. (Counts moved 2026-10-18 by
-    # arena/2e5715f9-maltaproj7 coverage-gap closure: +9 published rows,
-    # +1 review record, +7 flags.)
-    if len(published) != 171:
-        error(f"expected 171 published rows, found {len(published)}")
-    if len(recurring) != 110 or len(special) != 61:
-        error(f"expected 110 recurring / 61 special, found {len(recurring)} / {len(special)}")
+    # Total: 176 published (111 recurring + 65 special), 18 review records,
+    # 64 field-level flags, 9 categories. Counts reflect the 2026-10-18 integration
+    # union: arena/83fc57b1 (+5 events, +5 flags), arena/2e5715f9-maltaproj7
+    # (+9 published rows, +1 review record, +7 flags, +1 schema-normalization flag),
+    # and arena/75cf25a7's Sunday Streets admission blanking (no count change).
+    if len(published) != 176:
+        error(f"expected 176 published rows, found {len(published)}")
+    if len(recurring) != 111 or len(special) != 65:
+        error(f"expected 111 recurring / 65 special, found {len(recurring)} / {len(special)}")
     if len(review) != 18:
         error(f"expected 18 review records, found {len(review)}")
-    if len(flags) != 58:
-        error(f"expected 58 field-level flags, found {len(flags)}")
+    if len(flags) != 64:
+        error(f"expected 64 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -232,6 +233,8 @@ def main() -> int:
     placeholder_fragments = (
         "see organizer", "see schedule", "program-specific", "see race", "see neighborhood",
         "see performance", "see sfmta", "see city", "see presidio", "not stated in captured",
+        "no admission charge is stated", "no admission price is stated", "no admission charge was stated",
+        "no admission price was stated", "does not state an admission charge", "does not state an admission price",
         "see official", "see event page", "varies; see", "tba", "tbd",
     )
     sf_markers = (
@@ -484,16 +487,32 @@ def main() -> int:
             ranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', table)
             if ranks != sorted(ranks):
                 error(f"{label}: rows in the {heading.group(1) if heading else '?'} focus block are not date-first")
-    # A label stating 'Free' cannot be derived from a waived fundraising goal.
+    # A label stating 'Free' cannot be derived from a waived fundraising goal,
+    # registration-only wording, or a record that explicitly says the source did
+    # not state an admission price.
     if cost_class("No fundraising minimum required") != "not-stated":
         error("fundraising minimum misclassified as free admission")
     if cost_class("Registration required") != "not-stated":
         error("registration alone misclassified as a paid ticket")
+    if cost_class("Free (no admission charge is stated)") != "not-stated":
+        error("source-silent admission wording misclassified as free")
     # Duplicate DOM IDs break the live executive summary or the focus jump links.
     for path in [*root_pages, *category_pages]:
         ids = re.findall(r'<[a-z][^>]*\sid="([^"]+)"', read(path), re.I)
         if len(ids) != len(set(ids)):
             error(f"{path.relative_to(ROOT)}: duplicate HTML ids")
+    # The Sunday Streets source confirms free activities, not an event-admission
+    # price. Keep both 2026 rows unpriced and preserve the source-linked finding.
+    sunday_streets_ids = {"sunday-streets-2026", "sunday-streets-excelsior-2026"}
+    for event in published:
+        if event.get("id") in sunday_streets_ids and str(event.get("admission", "")).strip():
+            error(f"{event['id']}: admission must stay blank; the source confirms free activities but not free event entry")
+    sunday_flag = next((flag for flag in flags if flag.get("id") == "flag-sundaystreets-free-wording"), None)
+    if not sunday_flag:
+        error("missing flag-sundaystreets-free-wording for the source-silent admission value")
+    elif html.escape(sunday_flag.get("issue", ""), quote=True) not in flagged_html:
+        error("flagged.html does not expose the Sunday Streets admission-evidence finding")
+
     # Rows whose source did not establish a price are disclosed on Flagged.
     for event in cost_not_stated:
         if html.escape(event["name"], quote=True) not in flagged_html:

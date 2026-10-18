@@ -40,6 +40,53 @@ below instead of edited.
 
 ---
 
+# Active coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/75cf25a7-maltaproj7`. Arena pins this session to the named branch; the requested
+`session-<id>/<task>` branch naming cannot be used here, so all changes stay on the platform-fixed branch.
+
+**Pre-claim snapshot:** the local checkout was at `4877da9` (PR #35); `gh pr list --state open` showed no open PRs,
+and the baseline `python3 build.py && python3 verify.py` passed (162 published rows, 17 review records, 51
+field-level flags). Before the claim could be pushed, required pull-rebases fetched newer merged peer work: `0fb0c33`
+(PRs #36–#37, session `arena/55c5243c-maltaproj7`) and then `347cf32` (PR #38, session
+`arena/04813d69-maltaproj7`). Both rebase conflicts were confined to this shared coordination ledger because each
+session prepended its own record. They were resolved by retaining the complete upstream ledger verbatim and adding
+this session's record; no peer source, review, README, tests, workflow, data or generated pages were discarded. PR #38
+records the same Sunday Streets source text but treated its quoted “free activities” wording as sufficient for the
+free list; this session applied the user's stricter “leave unconfirmed values blank” rule to the admission field only.
+
+## Task board — arena/75cf25a7-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| T1 | Conservative admission-evidence reconciliation for Sunday Streets: re-check official wording, blank admission where unstated, update the existing flag/counts, rebuild, verify and document | **done** | arena/75cf25a7-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `research/reverification-75cf25a7.md`, `README.md`, `build.py`, `verify.py`, `data/events.csv`, generated HTML |
+| T2 | Final integration: create a PR from this fixed branch, merge after build/tests pass, confirm GitHub Pages deployment, and record PR/deploy outcome | **done** | arena/75cf25a7-maltaproj7 | 2026-10-18T17:09Z | `COORDINATION.md`, PR #39, Pages runs 39148412274 / 39148411327 |
+
+## T1 completion record — source evidence, decision, and checks
+
+- **Official pages fetched 2026-10-18:** [Sunday Streets 2026 season](https://sundaystreetssf.com/) lists “Tenderloin • June 14th”, “Mission • July 19th”, “Bayview • August 23rd”, “Excelsior • October 18th”; [About](https://sundaystreetssf.com/about/) states, “Event routes are 1-4 miles in length, with fun, free activities provided by local nonprofits, community groups and small businesses”; [Excelsior 2026](https://sundaystreetssf.com/sunday-streets-excelsior-2026/) gives “Sunday, October 18, 2026 · 11 AM – 4 PM” and “Mission Street between Geneva Avenue and Theresa Street,” and lists a separate “Excelsior 5k Walktober” with a registration link. No admission price appears in the returned page content. All chunks for the About and Excelsior pages were read.
+- **Decision:** the organizer confirms that activities are free, but does not state free event admission or a general attendee price. `admission` is now blank on `sunday-streets-2026` and `sunday-streets-excelsior-2026`; neither row is counted in the confirmed-free main pages. They remain source-linked in the full catalog and on Flagged for Review as **Not stated**. This does not assert that an entry fee is charged. The separate 5K registration price remains unverified.
+- **Flagging:** retained and updated `flag-sundaystreets-free-wording` with the source wording, decision, and official links; the issue is nonblocking and visible on the site's Flagged for Review page. No new flag was added.
+- **Derived counts:** 18 dated confirmed-free upcoming rows; 54 free, 12 partly free, 16 paid/ticketed and 80 not stated overall; 67 published rows upcoming overall; 162 published (102 recurring + 60 special), 17 review records, 51 flags, nine categories.
+- **Verification:** `python3 -m unittest discover -s tests -v` — 11 passed; `python3 build.py` — built all 162 rows/pages; `python3 verify.py` — `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`. The verifier now guards the source-silent admission wording and requires both Sunday Streets fields to stay blank with the flag rendered. Row-set checks confirm neither appears in the Dashboard/Upcoming/Free tables; local links (including the new research log) resolve. Changes are in commit `d614395` on `arena/75cf25a7-maltaproj7`.
+
+## T2 publication record — arena/75cf25a7-maltaproj7
+
+| Item | Result |
+| --- | --- |
+| Pull request | [#39](https://github.com/buffedlizard55-lab/MaltaProj7/pull/39) — “Correct Sunday Streets admission status in free event listings” — **MERGED** |
+| Merge | `f1149c79009722d85412be4f1ca784782e79df5d`, merged 2026-10-18T17:11:16Z |
+| Build / validation workflow | [39148412274](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39148412274) — **success**; the unit tests, build, and verifier all passed |
+| GitHub Pages build/deploy | [39148411327](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39148411327) — **success**; Pages API status `built` at https://buffedlizard55-lab.github.io/MaltaProj7/ |
+| Live check | Fetched the deployed Dashboard, Free upcoming page, and Flagged for Review page after deployment. Dashboard and Free page show **18 dated free upcoming**; the focus split is Gaming 0 / Music 4 / AI 0 / Everything else 14. Sunday Streets is absent from the free tables, appears as **Not stated** in the cost register, and its updated finding and official source links appear on Flagged for Review. |
+| Nonblocking irregularity | GitHub Actions reported Node.js 20 deprecation/forced Node.js 24 and an `ubuntu-latest` migration notice for Oct 19, 2026. These are runner/action maintenance warnings; both workflows completed successfully and do not affect event data or the deployed pages. |
+| Scope note | The site remains a bounded source-linked snapshot, not an exhaustive enumeration of every public, private, newly announced, or unlisted San Francisco event. |
+
+---
+
+
+---
+
 # Active coordination — session arena/04813d69-maltaproj7 (2026-10-18)
 
 **Session ID:** `arena/04813d69-maltaproj7` (platform-fixed branch; per Arena environment rules all work stays on `arena/04813d69-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented deviation as every prior session in this ledger).
@@ -73,10 +120,10 @@ below instead of edited.
 | --- | --- |
 | Pull request | https://github.com/buffedlizard55-lab/MaltaProj7/pull/38 — "Line-by-line audit 04813d69: 179-row structural re-verification, targeted From the E fetches, README refresh (no data changes)" |
 | Branch merged | `arena/04813d69-maltaproj7` → `main`, merged without waiting per brief; `mergeable`/`CLEAN`, no required checks |
-| Merge commit | _to be recorded after merge_ |
+| Merge commit | `347cf3298c086ceb8ae6e436b7dc1f72494b2c69` merged 2026-10-18T16:58:30Z |
 | Main before this merge | `0fb0c33` (PR #37, arena/55c5243c) |
 | Gate before merge | `python3 -m unittest discover -s tests -v && python3 build.py && python3 verify.py` → 11 passed / Built 162 published events: 102 recurring, 60 special, 9 categories; 17 review records; 67 upcoming; 68 free or partly free. / ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED |
-| Pages workflow | _to be recorded after merge-triggered run_ |
+| Pages workflow | Build+verify run [39147432391](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39147432391) **success** (11 tests + build + verifier); Pages deploy [39147431879](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39147431879) **success**; Pages API `built` at https://buffedlizard55-lab.github.io/MaltaProj7/ (verified `20 dated free upcoming` in live HTML) |
 | Live site | https://buffedlizard55-lab.github.io/MaltaProj7/ — dashboard renders 20 dated free upcoming (executive summary nearest today: Sunday Streets Excelsior finale Oct 18, From the E Oct 23, YBG Afro-Filipino Oct 24, etc.), Gaming 0 / Music 4 / AI 0 focus blocks honestly flagged, paid section separate, flagged page with 17 review + 51 flags + 78 not-stated costs |
 | Flagged / unverified | Published on `flagged.html` nonblocking; honests Gaming/AI coverage gaps, From the E cadence inconsistency, HSB 2027 unconfirmed, Open Source AI cost/time, Shipyard source interstitial, etc. |
 | Nothing discarded | All prior boards and research retained verbatim; no peer data overwritten |
@@ -132,6 +179,53 @@ brief-driven work (C1–C6 below) and the integration role.
 | C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | **done — re-applied on the merged baseline** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
 | C6 | Final integration: reconcile parallel sessions, rebuild, verify, crawl local links, PR to `main`, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T12:40Z | `COORDINATION.md`, PR #34, Pages runs 39128285934 / 39128285806 |
 
+
+
+## Merge reconciliation — arena/2e5715f9-maltaproj7 integration (W4, 2026-10-18)
+
+**What happened.** After W1–W3 were committed on this branch, peer sessions landed PRs #37–#41 on
+`main` (04813d69's V1–V6 line-by-line audit + docs; 55c5243c bookkeeping; 75cf25a7's Sunday Streets
+admission-evidence reconciliation, which **blanked both Sunday Streets admission fields** and added
+classifier guards for source-silent wording; 83fc57b1's coverage pass with **+5 verified rows**
+(Daytona & Oracle AI Builders Oct 20 — free; Overmind Arcade Oct 20 — cost unstated; SF Diwali
+Festival Nov 8 — free; Godot Gamedev Meetup at Noisebridge — free monthly; Voxel51 Physical AI
+Workshop Oct 28 — cost unstated) and +5 flags). `git merge origin/main` stopped on conflicts in
+`data/events.json`, `verify.py`, `COORDINATION.md`, `README.md` and all 18 generated pages.
+
+**How it was resolved — nothing from any session was discarded.**
+1. **Generated HTML/CSV** were never hand-merged: each conflicted page was reset and **regenerated**
+   from the merged `data/events.json` with `python3 build.py`.
+2. **`data/events.json`** was resolved as a true union, written by script: peer 83fc57b1's 184 rows
+   (including their 5 new rows and the 75cf25a7 Sunday Streets blanking) **plus** this session's 10
+   records; peer flags kept verbatim **plus** this session's 7 flags and the two coverage-gap
+   disposition updates **plus** one integration flag (`flag-peer-flag-schema-83fc57b1`).
+3. **Flag-schema irregularity (flagged, nonblocking):** 83fc57b1's five flags used `flag_id`
+   instead of the register's `id` and carried no `sources` array. At integration each was
+   normalized — `id` added from `flag_id` (original keys kept), `sources` populated from the linked
+   row's own official source URLs where `event_id` resolved. No issue/disposition wording was
+   altered. Documented in `flag-peer-flag-schema-83fc57b1` on the Flagged page.
+4. **`verify.py`** kept both sessions' work: 75cf25a7/83fc57b1's new guards (source-silent admission
+   hints, Sunday Streets blank-admission guard) **and** this session's cadence/authority vocabulary
+   extensions (`bimonthly`, `frequent`, `drop-in`, `irregular`; `Unverified press report`); count
+   guards moved to the union totals **176 published / 111 recurring / 65 special / 18 review /
+   64 flags**.
+5. **`build.py`** auto-merged: 75cf25a7's `UNSTATED_ADMISSION_HINTS` classifier fix + this session's
+   dynamic cadence summary (which their incoming rows also need — Noisebridge "monthly", Daytona
+   "single-date" special) coexist.
+6. **`README.md`** keeps 75cf25a7's stricter admission wording ("free activities" ≠ free admission)
+   and their Sunday Streets note, with counts refreshed to the union (22 dated free-upcoming; 64
+   free / 12 partly free / 16 paid / 84 not-stated).
+7. **Independent re-verification of peer rows at integration:** the four headline peer rows were
+   re-checked against their own source URLs during reconciliation (Daytona/Oracle Luma listing —
+   "Free (registration and host approval required)"; Diwali Eventbrite — "Free (RSVP encouraged)";
+   Noisebridge wiki — "Free (donations to Noisebridge welcome)"; Overmind/Voxel51 pages — no price
+   stated). All four cost statements match the peers' fields; nothing contradicted.
+
+**Post-merge state:** 176 published rows (111 recurring, 65 special), 18 review records, 64 flags,
+9 categories; **22 dated free-upcoming rows**; focus blocks Gaming 0 / Music 5 / AI 1 / Everything
+else 16. `python3 build.py && python3 verify.py` and `python3 -m unittest tests.test_verifier`
+(11 tests) pass on the merged tree. The dated-free-AI gap is now closed by the peer's Daytona row;
+the dated-free-gaming gap remains honestly open (flagged).
 
 ## Session record — arena/2e5715f9-maltaproj7 (W1–W4)
 

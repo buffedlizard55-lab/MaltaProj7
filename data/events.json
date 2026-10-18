@@ -7,8 +7,8 @@
   "row_standard": "Every published row carries an organizer, venue, or government source link. Dates, hours, locations, and admissions are shown only when stated in the linked source captured for this audit.",
   "field_policy": "An em dash means the linked source did not state that optional field in the captured record. Rows needing a decision, scope correction, or an essential missing value are separated on the Flagged for Review page.",
   "sources_policy": "Official organizer, official venue, or government sources. A small number of records use SF Travel, the City and County's official destination marketing organization, or a municipal arts calendar; those are labeled trusted civic sources.",
-  "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7 + arena/55c58947-maltaproj7 final integration (independent 59-row re-verification, merged) + arena/646f6727-maltaproj7 coverage-gap additions (2026-10-18); arena/5e333a6e-maltaproj7 coverage-gap pass (Moscone, SFMTA, FAMSF, organizer sources); arena/56415e75-maltaproj7 official-source re-check and free-event coverage pass (2026-10-18); arena/3977d9cb-maltaproj7 free-first restructure + verification pass (2026-10-18) arena/2e5715f9-maltaproj7 coverage-gap closure (free music/gaming/AI programs, NYE fireworks tradition, +9 records, +7 flags, 2 coverage-gap dispositions updated); ",
-  "last_reverification": "2026-10-18 — arena/3977d9cb-maltaproj7 re-fetched the official pages behind the near-term upcoming rows (SFMTA travel updates for Lower Polk Live and the From the E Excelsior Night Market, Foodwise event pages, Sunday Streets SF season and Excelsior pages, Hardly Strictly Bluegrass, Day of the Devs) and added three rows plus one review record from official organizer pages (Shipyard Trust for the Arts Fall Open Studios, Open Source AI Week Debate Night and Awards Night). Log: research/reverification-3977d9cb.md. 2026-10-18 — every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md. A third parallel re-verification (arena/55c58947-maltaproj7, log: research/reverification-55c58947.md) independently fetched all 59 rows of the pre-expansion catalog and was reconciled into this dataset on 2026-10-18."
+  "updated_by": "arena/08676041-maltaproj7 + arena/1bde1cd1-maltaproj7 re-verification, reconciled and finalized by arena/d71d78cc-maltaproj7 + arena/55c58947-maltaproj7 final integration (independent 59-row re-verification, merged) + arena/646f6727-maltaproj7 coverage-gap additions (2026-10-18); arena/5e333a6e-maltaproj7 coverage-gap pass (Moscone, SFMTA, FAMSF, organizer sources); arena/56415e75-maltaproj7 official-source re-check and free-event coverage pass (2026-10-18); arena/3977d9cb-maltaproj7 free-first restructure + verification pass (2026-10-18); arena/75cf25a7-maltaproj7 targeted admission evidence reconciliation (2026-10-18) arena/2e5715f9-maltaproj7 coverage-gap closure (free music/gaming/AI programs, NYE fireworks tradition, +9 records, +7 flags, 2 coverage-gap dispositions updated) merged with arena/83fc57b1/arena/75cf25a7/arena/04813d69 peer work (union, nothing discarded);",
+  "last_reverification": "2026-10-18 — arena/3977d9cb-maltaproj7 re-fetched the official pages behind the near-term upcoming rows (SFMTA travel updates for Lower Polk Live and the From the E Excelsior Night Market, Foodwise event pages, Sunday Streets SF season and Excelsior pages, Hardly Strictly Bluegrass, Day of the Devs) and added three rows plus one review record from official organizer pages (Shipyard Trust for the Arts Fall Open Studios, Open Source AI Week Debate Night and Awards Night). Log: research/reverification-3977d9cb.md. 2026-10-18 — every row's source URL was re-fetched from the official publisher page (organizer, official venue, or government source) by the integration sessions; corrections, residual findings, and cross-session reconciliation are recorded in flags and research/official-source-audit.md. A third parallel re-verification (arena/55c58947-maltaproj7, log: research/reverification-55c58947.md) independently fetched all 59 rows of the pre-expansion catalog and was reconciled into this dataset on 2026-10-18. 2026-10-18 — arena/75cf25a7-maltaproj7 re-fetched the Sunday Streets SF official season, About, and Excelsior pages; it left both Sunday Streets admission fields blank because the pages state that activities are free but do not state an event admission price. Log: research/reverification-75cf25a7.md."
  },
  "events": [
   {
@@ -1485,13 +1485,13 @@
    "time_text": "",
    "location": "Tenderloin, Mission, Bayview, and Excelsior, San Francisco",
    "organizer": "Sunday Streets SF",
-   "admission": "Free (open-streets program: the organizer states Sunday Streets events feature \"fun, free activities provided by local nonprofits, community groups and small businesses\"; no admission charge is stated anywhere on the site)",
+   "admission": "",
    "source_url": "https://sundaystreetssf.com/",
    "source_label": "Sunday Streets SF 2026 season page",
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The source confirms four 2026 city-neighborhood events: Tenderloin Jun 14, Mission Jul 19, Bayview Aug 23, Excelsior Oct 18; times and routes vary by neighborhood. Re-verified 2026-10-18 (arena/8c40d1c6): the organizer's About page states Sunday Streets is 'a program of the nonprofit Livable City presented in partnership with the SFMTA, San Francisco Department of Public Health, and the City and County of San Francisco' and that events offer 'fun, free activities provided by local nonprofits, community groups and small businesses'. No admission charge is stated anywhere on the site; the free label rests on that organizer statement - see flag-sundaystreets-free-wording. The Excelsior edition is also published as its own dated row (sunday-streets-excelsior-2026)."
+   "notes": "The source confirms four 2026 city-neighborhood events: Tenderloin Jun 14, Mission Jul 19, Bayview Aug 23, Excelsior Oct 18; times and routes vary by neighborhood. Re-verified 2026-10-18 (arena/8c40d1c6): the organizer's About page states Sunday Streets is 'a program of the nonprofit Livable City presented in partnership with the SFMTA, San Francisco Department of Public Health, and the City and County of San Francisco' and that events offer 'fun, free activities provided by local nonprofits, community groups and small businesses'. The About page describes routes with “fun, free activities” but does not state the event admission cost. Under the no-inference policy, admission is blank; see flag-sundaystreets-free-wording and research/reverification-75cf25a7.md. The Excelsior edition is also published as its own dated row (sunday-streets-excelsior-2026)."
   },
   {
    "id": "up-your-alley-2026",
@@ -3407,13 +3407,13 @@
    "time_text": "11 a.m.–4 p.m.",
    "location": "Mission Street between Geneva Avenue and Theresa Street, with Ocean Avenue between Persia Avenue and Mission Street also closed, Excelsior, San Francisco",
    "organizer": "Livable City / Sunday Streets SF (in partnership with the SFMTA)",
-   "admission": "Free (open-streets program: the organizer states Sunday Streets events feature “fun, free activities provided by local nonprofits, community groups and small businesses”; no admission charge is stated anywhere on the site)",
+   "admission": "",
    "source_url": "https://sundaystreetssf.com/sunday-streets-excelsior-2026/",
    "source_label": "Sunday Streets SF — Excelsior 2026 event page",
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "Added 2026-10-18 (arena/8c40d1c6). Organizer event page: “Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 on Mission Street between Geneva Avenue and Theresa Street from 11am to 4pm”, with a Lucha Libre showcase, Salvi Soul Encuentro zone, Kultura Crawl food tasting, Polynesian dance performances, a family hub and a community clothing swap. SFMTA's weekly advisory independently confirms the same date and 11 a.m.–4 p.m. window. The free label rests on the organizer's About page (“fun, free activities provided by local nonprofits, community groups and small businesses”); the site states no separate admission charge — see flag-sundaystreets-free-wording. The season row (sunday-streets-2026) covers the full 2026 programme."
+   "notes": "Added 2026-10-18 (arena/8c40d1c6). Organizer event page: “Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 on Mission Street between Geneva Avenue and Theresa Street from 11am to 4pm”, with a Lucha Libre showcase, Salvi Soul Encuentro zone, Kultura Crawl food tasting, Polynesian dance performances, a family hub and a community clothing swap. SFMTA's weekly advisory independently confirms the same date and 11 a.m.–4 p.m. window. The About page describes “fun, free activities” but does not state event admission cost. The event page separately links to Excelsior 5k Walktober registration, without stating its price. Under the no-inference policy, admission is blank; see flag-sundaystreets-free-wording and research/reverification-75cf25a7.md. The season row (sunday-streets-2026) covers the full 2026 programme."
   },
   {
    "id": "sfiac-olympic-club-cornhole-2026-10-23",
@@ -3594,6 +3594,109 @@
    "status": "verified",
    "review_reason": "",
    "notes": "The organizer's site (read 2026-10-18) lists “From the E: Harvest Night Market — Fri, Nov 20 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️” and describes the programme as “free community fun”. Hours are not published for this edition, so the time field is left blank rather than borrowed from the organizer's general monthly wording (“the second Saturday of the month from 5pm-10pm”), which does not match a Friday date. The October 23, 2026 edition is catalogued separately from the SFMTA travel update."
+  },
+  {
+   "id": "daytona-oracle-ai-builders-sf-2026-10-20",
+   "name": "Daytona & Oracle AI Builders — SF, October 2026",
+   "bucket": "special",
+   "cadence": "single-date",
+   "category": "Technology, AI & gaming",
+   "date_text": "Tuesday, October 20, 2026",
+   "start_date": "2026-10-20",
+   "end_date": "2026-10-20",
+   "time_text": "5:30–8:00 p.m.",
+   "location": "San Francisco (address released to approved registrants)",
+   "organizer": "Daytona (event partner: Oracle)",
+   "admission": "Free (registration and host approval required)",
+   "admission_source_url": "https://luma.com/ai-builders-sf-oct",
+   "source_url": "https://www.daytona.io/events",
+   "source_label": "Daytona official events listing (daytona.io/events)",
+   "source_authority": "Official organizer",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "Added 2026-10-18. Daytona's official events page lists 'Daytona & Oracle AI Builders - SF, October 2026' as a meetup in San Francisco on Oct 20, 2026. The official Luma registration lists price 0 USD (General Admission, free), 5:30–8:00 PM PDT, 'Approval Required', 'Register to See Address'."
+  },
+  {
+   "id": "overmind-arcade-osai-week-2026-10-20",
+   "name": "Overmind Arcade (Open Source AI Week)",
+   "bucket": "special",
+   "cadence": "single-date",
+   "category": "Technology, AI & gaming",
+   "date_text": "Tuesday, October 20, 2026",
+   "start_date": "2026-10-20",
+   "end_date": "2026-10-20",
+   "time_text": "6:00 p.m.",
+   "location": "Joey the Cat's Arcade, 3252 19th Street, San Francisco",
+   "organizer": "Open Source AI Week (hosted by Tyler Edwards)",
+   "admission": "",
+   "source_url": "https://opensourceaiweek.com/#calendar",
+   "source_label": "Open Source AI Week official calendar (opensourceaiweek.com)",
+   "source_authority": "Official organizer",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "Added 2026-10-18. The official Open Source AI Week calendar lists Overmind Arcade at 'Oct 20, 2026 · 6:00 PM · Joey the Cat's Arcade, San Francisco' with description 'Open source has always been a multiplayer game — for one night it's literal.' The calendar does not publish a ticket price; the linked Luma listing shows 'Approval Required' with no price tier, so admission is left blank."
+  },
+  {
+   "id": "sf-diwali-festival-yerba-buena-gardens-2026",
+   "name": "San Francisco Diwali Festival at Yerba Buena Gardens",
+   "bucket": "special",
+   "cadence": "single-date",
+   "category": "Community & culture",
+   "date_text": "Sunday, November 8, 2026",
+   "start_date": "2026-11-08",
+   "end_date": "2026-11-08",
+   "time_text": "1:00–5:00 p.m.",
+   "location": "Yerba Buena Gardens (750 Howard Street), San Francisco",
+   "organizer": "Yerba Buena Gardens Conservancy (in partnership with Creative Collective SF)",
+   "admission": "Free (RSVP encouraged)",
+   "source_url": "https://www.eventbrite.com/e/san-francisco-diwali-festival-sunday-nov-8-tickets-1996184565772",
+   "source_label": "Yerba Buena Gardens Special Events — SF Diwali Festival official Eventbrite",
+   "source_authority": "Official venue",
+   "admission_source_url": "https://www.eventbrite.com/e/san-francisco-diwali-festival-sunday-nov-8-tickets-1996184565772",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "Added 2026-10-18. Organizer's official Eventbrite, hosted by Yerba Buena Gardens Special Events, states Sunday November 8, 1-5 PM, Yerba Buena Gardens, 750 Howard Street, with performers Alam Khan, Raaga School of Music, Rang De Bollywood, DJ Mumbai Rani, and The Dhol King. Free (RSVP encouraged)."
+  },
+  {
+   "id": "noisebridge-godot-gamedev-meetup",
+   "name": "Godot Gamedev Meetup at Noisebridge",
+   "bucket": "recurring",
+   "cadence": "monthly",
+   "category": "Technology, AI & gaming",
+   "date_text": "Third Saturday monthly, 2:00–6:00 p.m.",
+   "start_date": "",
+   "end_date": "",
+   "time_text": "2:00–6:00 p.m.",
+   "location": "Noisebridge Hackerspace, 272 Capp Street, San Francisco",
+   "organizer": "Noisebridge Hackerspace (Bay Area Godot Meetup)",
+   "admission": "Free (donations to Noisebridge welcome)",
+   "source_url": "https://www.noisebridge.net/wiki/Category:Global_Game_Jam",
+   "source_label": "Noisebridge wiki — game dev / Godot programs (Games Guild, Godot Meetup 3rd Saturday)",
+   "source_authority": "Official venue",
+   "admission_source_url": "https://www.noisebridge.net/wiki/GDC_2026_IndieSmash",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "Added 2026-10-18. Noisebridge wiki lists 'Godot Meetup 3rd Saturday' as a recurring free program; GDC_2026_IndieSmash page says 'Cost: Free, donate to Noisebridge welcome.' No single dated 2026 session published on an official page, so dated fields are blank."
+  },
+  {
+   "id": "voxel51-physical-ai-workshop-sf-2026-10-28",
+   "name": "San Francisco Physical AI Workshop and Meetup (Voxel51 × Nebius)",
+   "bucket": "special",
+   "cadence": "single-date",
+   "category": "Technology, AI & gaming",
+   "date_text": "Wednesday, October 28, 2026",
+   "start_date": "2026-10-28",
+   "end_date": "2026-10-28",
+   "time_text": "5:30–8:30 p.m.",
+   "location": "Antler San Francisco (3rd Floor), 144 Townsend Street, San Francisco",
+   "organizer": "Voxel51 (co-presented with Nebius)",
+   "admission": "",
+   "source_url": "https://voxel51.com/events/san-francisco-physical-ai-workshop-and-meetup-october-28-2026",
+   "source_label": "Voxel51 official event page — San Francisco Physical AI Workshop & Meetup",
+   "source_authority": "Official organizer",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "Added 2026-10-18. Voxel51's event page lists Oct 28, 2026, 5:30-8:30 PM PDT at Antler San Francisco, 144 Townsend St, with networking/food/drinks, hands-on FiftyOne workshop and lightning talks. The page does not state a price; the linked Eventbrite also does not list a price tier, so admission is left blank."
   },
   {
    "id": "mapp-2026-12-05",
@@ -4434,7 +4537,7 @@
    "id": "flag-sundaystreets-free-wording",
    "event_id": "sunday-streets-2026",
    "event": "Sunday Streets SF (2026 season) and the Excelsior edition",
-   "issue": "Wording nuance: no Sunday Streets page uses the phrase “free admission”. The free label rests on the organizer's About-page statement that the events feature “fun, free activities provided by local nonprofits, community groups and small businesses”, combined with the absence of any stated admission charge and the programme's description as an open-streets programme run with the SFMTA. Exhibitor fees ($35, free for organisations on the route) and sponsorships are how the programme is funded, which is a separate matter from attendee admission.",
+   "issue": "The organizer’s About page says the routes feature “fun, free activities” but does not state an event admission price. The October 18 Excelsior event page also links to a separate Excelsior 5k Walktober registration; its price is not stated there. Earlier records treated the free-activities wording plus the absence of a stated admission charge as proof of free event admission. That exceeded the no-inference policy.",
    "sources": [
     {
      "label": "Sunday Streets SF — About",
@@ -4449,7 +4552,7 @@
      "url": "https://www.sfmta.com/press-releases/sfmta-transit-and-traffic-advisory-week-thursday-october-15-through-wednesday-october-21-2026"
     }
    ],
-   "disposition": "Both rows are labelled Free with the supporting quote copied into the notes; human reviewer can downgrade to “not stated” if a stricter reading is preferred."
+   "disposition": "Conservative resolution after re-fetching the organizer pages on 2026-10-18: admission is blank for both the 2026 season and the Excelsior edition. They render as “Not stated” and are excluded from the confirmed-free upcoming lists; this does not assert that an entry fee is charged. The separate 5k registration price remains unverified. Source text and decision: research/reverification-75cf25a7.md."
   },
   {
    "id": "flag-cornhole-cost-unstated",
@@ -4700,6 +4803,78 @@
    ]
   },
   {
+   "flag_id": "flag-daytona-ai-builders-address-hidden",
+   "event_id": "daytona-oracle-ai-builders-sf-2026-10-20",
+   "event": "Daytona & Oracle AI Builders — SF, October 2026",
+   "issue": "Daytona's official Luma registration hides the exact SF address until attendee approval ('Register to See Address'). Daytona.io lists only 'San Francisco, United States'.",
+   "disposition": "Recorded with city-only location; venue will update when Daytona publishes an address.",
+   "added_by": "arena/83fc57b1-maltaproj7",
+   "added": "2026-10-18",
+   "id": "flag-daytona-ai-builders-address-hidden",
+   "sources": [
+    {
+     "label": "Daytona official events listing (daytona.io/events)",
+     "url": "https://www.daytona.io/events"
+    },
+    {
+     "label": "Admission evidence — Daytona & Oracle AI Builders — SF, October 2026",
+     "url": "https://luma.com/ai-builders-sf-oct"
+    }
+   ]
+  },
+  {
+   "flag_id": "flag-overmind-arcade-cost",
+   "event_id": "overmind-arcade-osai-week-2026-10-20",
+   "event": "Overmind Arcade (Open Source AI Week)",
+   "issue": "Open Source AI Week's official calendar lists Overmind Arcade but does not state a ticket price; the linked Luma listing shows Approval Required with no price tier.",
+   "disposition": "Leave admission blank; treat as cost-not-stated until OSAI Week publishes pricing.",
+   "added_by": "arena/83fc57b1-maltaproj7",
+   "added": "2026-10-18",
+   "id": "flag-overmind-arcade-cost",
+   "sources": [
+    {
+     "label": "Open Source AI Week official calendar (opensourceaiweek.com)",
+     "url": "https://opensourceaiweek.com/#calendar"
+    }
+   ]
+  },
+  {
+   "flag_id": "flag-voxel51-physical-ai-cost",
+   "event_id": "voxel51-physical-ai-workshop-sf-2026-10-28",
+   "event": "San Francisco Physical AI Workshop and Meetup (Voxel51 × Nebius)",
+   "issue": "Voxel51's official event page does not state a ticket price; the Eventbrite registration shows 'Get tickets' but no tier price.",
+   "disposition": "Leave admission blank; re-check Voxel51 and Eventbrite for pricing before marking as free.",
+   "added_by": "arena/83fc57b1-maltaproj7",
+   "added": "2026-10-18",
+   "id": "flag-voxel51-physical-ai-cost",
+   "sources": [
+    {
+     "label": "Voxel51 official event page — San Francisco Physical AI Workshop & Meetup",
+     "url": "https://voxel51.com/events/san-francisco-physical-ai-workshop-and-meetup-october-28-2026"
+    }
+   ]
+  },
+  {
+   "flag_id": "flag-no-confirmed-free-dated-gaming-oct-dec-2026",
+   "event_id": "",
+   "event": "",
+   "issue": "As of 2026-10-18, no San Francisco gaming event with both a confirmed free-admission statement AND a confirmed upcoming single date in Oct-Dec 2026 was found on an official organizer page.",
+   "disposition": "Re-run coverage search as new events are announced.",
+   "added_by": "arena/83fc57b1-maltaproj7",
+   "added": "2026-10-18",
+   "id": "flag-no-confirmed-free-dated-gaming-oct-dec-2026"
+  },
+  {
+   "flag_id": "flag-ybfestival-november-programs-tba",
+   "event_id": "",
+   "event": "",
+   "issue": "Yerba Buena Gardens Festival press materials state 'November programs to be announced'; ybgfestival.org is behind reCAPTCHA as of 2026-10-18.",
+   "disposition": "Re-verify ybgfestival.org in November.",
+   "added_by": "arena/83fc57b1-maltaproj7",
+   "added": "2026-10-18",
+   "id": "flag-ybfestival-november-programs-tba"
+  },
+  {
    "id": "flag-detour-free-play-condition",
    "event_id": "detour-free-play-tuesday",
    "event": "The Detour — Free Play Tuesday (first Tuesdays)",
@@ -4813,6 +4988,19 @@
     }
    ],
    "disposition": "Rejected as out-of-city; recorded for manual review and future-pass awareness. Nonblocking."
+  },
+  {
+   "id": "flag-peer-flag-schema-83fc57b1",
+   "event_id": "",
+   "event": "Flag register schema irregularity (arena/83fc57b1-maltaproj7 flags)",
+   "issue": "Integration note, nonblocking: five flags added by peer session arena/83fc57b1-maltaproj7 (flag-daytona-ai-builders-address-hidden, flag-overmind-arcade-cost, flag-voxel51-physical-ai-cost, flag-no-confirmed-free-dated-gaming-oct-dec-2026, flag-ybfestival-november-programs-tba) used the key \"flag_id\" instead of the register's \"id\" and carried no \"sources\" array, so they would render on Flagged for Review without official source links. At integration (arena/2e5715f9-maltaproj7) each was normalized: \"id\" was added from \"flag_id\" (original keys kept verbatim) and \"sources\" was populated from the linked row's own official source URLs where an event_id resolved. The two flags without an event_id keep empty sources; their issue text names their sources. No issue or disposition text was altered.",
+   "sources": [
+    {
+     "label": "Peer patch script (raw flag definitions)",
+     "url": "https://github.com/buffedlizard55-lab/MaltaProj7/blob/main/research/patch-83fc57b1.py"
+    }
+   ],
+   "disposition": "Schema normalized at integration; peer wording preserved verbatim. Nonblocking."
   }
  ]
 }

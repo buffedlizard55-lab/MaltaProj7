@@ -114,6 +114,11 @@ def validate(catalog: dict, events: list[dict]) -> None:
 # Markers taken only from the wording of the sourced admission text.
 FREE_HINTS = ("free", "no-cost", "no cost", "suggested")
 PAID_HINTS = ("$", "tickets sold", "pass", "paid entry")
+UNSTATED_ADMISSION_HINTS = (
+    "no admission charge is stated", "no admission price is stated",
+    "no admission charge was stated", "no admission price was stated",
+    "does not state an admission charge", "does not state an admission price",
+)
 # A free statement that also names a ticketed/paid option is "mixed", not "free".
 TICKETED_HINTS = ("ticketed", "tickets sold", "reserved", "seating tickets", "hospitality packages")
 
@@ -121,8 +126,9 @@ TICKETED_HINTS = ("ticketed", "tickets sold", "reserved", "seating tickets", "ho
 def cost_class(admission: str) -> str:
     """Classify sourced admission wording; registration alone is not a price."""
     text = (admission or "").strip().lower()
-    if not text or "no fundraising minimum" in text:
-        # A waived fundraising minimum is not proof that admission costs $0.
+    if not text or "no fundraising minimum" in text or any(hint in text for hint in UNSTATED_ADMISSION_HINTS):
+        # A waived fundraising minimum or an explicit note that the source is silent
+        # is not proof that admission costs $0.
         return "not-stated"
     has_free = any(hint in text for hint in FREE_HINTS)
     if has_free:
@@ -998,8 +1004,7 @@ linked official page stated. Nothing is inferred from an event's type. A waived 
 <a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with earlier passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
-<a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. Values not stated by a source
-were blanked and flagged rather than inferred. Static link checks do not live-fetch external sites; consult the organizer for changes.</p></section>
+<a href="research/reverification-55c58947.md">research/reverification-55c58947.md</a>. A focused recheck fetched the Sunday Streets official season, About, and Excelsior pages on 2026-10-18; because the source calls the activities free but does not state an event admission price, both Sunday Streets admission fields were blanked. See <a href="research/reverification-75cf25a7.md">the quoted source log</a>. Values not stated by a source were blanked and flagged rather than inferred. Static link checks do not live-fetch external sites; consult the organizer for changes.</p></section>
 <section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in
 <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is
 <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing
