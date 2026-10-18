@@ -58,7 +58,7 @@ CATEGORIES = {
 }
 STATUSES = {"verified", "needs_review", "partial_sf_program", "outside_city_excluded", "cancelled"}
 AUTHORITIES = {
-    "Official organizer", "Official venue / federal trust", "Government source",
+    "Official organizer", "Official venue", "Official venue / federal trust", "Government source",
     "Trusted civic source", "Unverified legacy URL",
 }
 BUCKETS = {"recurring", "special", "review"}

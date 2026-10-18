@@ -474,3 +474,43 @@ Merola Summer Festival “Summer 2026” not a sourced date), **1 FAIL on one fi
 window), **1 FAIL on one field** (YBG Festival 2026 season end “November 13”), **1 PASS·FLAG** (Day of the Dead
 Procession — organizer has not published a 2026 edition), **1 PASS with a source-side inconsistency** (Heart of the
 City Farmers Market homepage still prints pre-2023 hours).
+
+---
+
+## Part 5 — post-merge addendum (2026-10-18, after PRs #17–#21)
+
+While this audit was in progress, sessions `arena/646f6727-maltaproj7` and `arena/5e333a6e-maltaproj7` completed their
+coverage/integration tasks and merged (PRs #17–#21). The catalog is now **155 records: 139 published (94 recurring,
+45 special), 16 review records, 25 field-level flags**. This session merged `main` (resolving the add/add
+`COORDINATION.md` conflict by keeping both boards verbatim) and re-ran everything against the combined data:
+
+- `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED
+  (published=139, recurring=94, special=45, review=16, flags=25, categories=8).
+- `python3 research/audit_checks_e969f4df.py` → **0 errors, 3 warnings, 105 notes**; 197 internal references, all
+  resolved; 526 external references over 94 hosts; `data/events.csv` 155 rows = record count. The 3 warnings are
+  the same three doubled traditions as Part 2 (Fillmore Jazz, International Ocean Film Festival, Italian Heritage
+  Parade — 2026 + 2027 rows each), still unresolved in the merged data.
+- All five FAIL findings from Part 1 are **still present verbatim** in the merged data (checked 2026-10-18):
+  `fillmore-jazz-festival-2026` still publishes “July 4–5, 2026” citing the homepage that now announces 2027 only;
+  `merola-summer-festival` still publishes “Summer 2026”; `ybg-festival-2026` still publishes “May 9–November 13,
+  2026” from an SF Travel press release; `international-ocean-film-festival-2026` still prints the “Sat 10:00
+  a.m.–11:00 a.m. (as posted)” window; `lit-crawl-sf-2026` and `bay-to-breakers-2027` still carry pointer clauses.
+- New-taxonomy note: the merged catalog uses both `Official venue` (19 rows, mostly Moscone Center listings) and
+  `Official venue / federal trust` (13 rows). Both are defensible, but one label or an explicit definition of the
+  split should be chosen so readers are not left guessing why two near-identical authorities exist.
+
+**Independent spot re-verification of peer-added upcoming rows (this session, official sources):**
+
+| Row | Verdict | Official evidence |
+| --- | --- | --- |
+| Bhangra & Beats Night Market (`bhangra-beats-night-market-2026`) | **PASS** | Organizer: “Happening on two Fridays—**July 24 and November 13** (Diwali edition)—from **4pm–9pm**, this **FREE** event will transform **Yerba Buena Gardens, Jessie Square, and Yerba Buena Lane**” (bhangraandbeats.com). Note: SF Travel's November guide says “Clay and Battery streets” — stale; the row correctly follows the organizer. |
+| San Francisco International Hip Hop DanceFest (`sf-hip-hop-dance-festival-2026`) | **PASS·GAP** | Organizer: “Micaya Presents The **28th Annual** San Francisco International Hip Hop DanceFest — **Saturday, November 14, 2026, 7:00 PM** … **Sunday, November 15, 2026, 12:00 PM** and **5:00 PM** — **Palace of Fine Arts Theatre**” (sfhiphopdancefest.com). Dates/edition/venue match; `time_text` is blank although 7pm / 12pm / 5pm are official. |
+| Renegade Craft Fair — San Francisco Winter (`renegade-craft-fair-2026`) | **PASS** | Organizer: “**11/14/2026 11:00 am – 5:00 pm … 11/15/2026 11:00 am – 5:00 pm** … Fort Mason Center Festival Pavilion, **2 Marina Blvd., San Francisco, CA 94123**” and participation kit: “there is a **$5 suggested entry** at the door” (renegadecraft.com). Row matches, including the $5 suggested-entry wording. |
+| San Francisco Ballet — Nutcracker (`sf-ballet-nutcracker-2026`) | **PASS** | Organizer: “**DEC 4–27** … Location **War Memorial Opera House** … **Fri Dec 04 7:00 pm**” (sfballet.org/productions/nutcracker). Row matches; dark days (Dec 7/14/21/25) exist but are not claimed. |
+| Chinese New Year Flower Market Fair 2027 (`chinese-new-year-flower-market-fair-2027`) | **PASS** | Organizer: “The 2027 Flower Market Fair is scheduled for **Sat. & Sun. Jan. 30 & 31 @ Grant between Clay and Broadway**” (chineseparade.com/flowermarketfair). Row matches exactly. |
+
+Moscone-Calendar-sourced conference rows added by peers (Current San Francisco, Winter FancyFaire, ASCO GI/GU,
+SPIE Photonics West, ORS, TDX, AAD, AMCP, Atlassian Team '27, ASRS, GDC, RSA Conference 2027, Dreamforce 2027,
+J.P. Morgan Healthcare Conference) were **not** re-fetched this session; their source is the venue's official events
+calendar and their row text already discloses where the venue is not stated (“venue not stated on official page”,
+“Listed on the Moscone Center events calendar”), which is the correct non-inferential treatment.
