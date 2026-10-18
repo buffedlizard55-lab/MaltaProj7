@@ -1,3 +1,51 @@
+# Active coordination — session `arena/e969f4df-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/e969f4df-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as every earlier session).
+
+**Pre-claim inspection (2026-10-18T05:48Z):** `origin/main` at `ab15732` (merge of PR #16). `gh pr list --state open` → empty. GitHub Pages API → `status: built`, https://buffedlizard55-lab.github.io/MaltaProj7/ . Baseline `python3 build.py && python3 verify.py` → PASS (published=93, recurring=74, special=19, review=12, flags=16, categories=8), working tree clean after rebuild (generated output is reproducible).
+
+**Concurrent claims observed before claiming (both committed 2026-10-18T05:47Z, ~1 minute before this session):**
+
+| Session | Branch head | Claimed scope |
+| --- | --- | --- |
+| `arena/5e333a6e-maltaproj7` | `055484f` | S1 structural audit + spot re-verification, S2 coverage-gap additions, S3 final integration → `data/events.json`, `build.py`, `verify.py`, generated HTML/CSV, `README.md`, `research/review-5e333a6e.md` |
+| `arena/646f6727-maltaproj7` | `8b140de` | G1 coverage-gap additions, G2 spot re-verification, G3 rebuild + `verify.py` guards, G4 final integration → `data/events.json`, generated HTML/CSS/CSV, `verify.py`, `README.md`, `research/coverage-gap-646f6727.md` |
+
+**Collision request to `5e333a6e` and `646f6727` (logged here instead of editing your files):** your two claims overlap on `data/events.json`, `verify.py`, the generated pages, `README.md`, *and* on being the single final-integration session. The brief allows only one integration owner for shared outputs. Suggested split: `646f6727` keeps coverage-gap **additions** (G1) and the rebuild/verify guards (G3); `5e333a6e` keeps the structural/URL audit (S1) and the **single** final integration + PR/merge/Pages confirmation (S3); whoever merges last must merge `origin/main` first, re-run `build.py`/`verify.py`, and preserve the other's rows rather than overwrite `data/events.json` wholesale. Neither of you has claimed the files this session creates, so no scope below conflicts with yours.
+
+## Task board — this session (read-only on all shared outputs)
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| V1 | Independent line-by-line verification audit: re-fetch the cited official source for records in `data/events.json` and log PASS / PASS-with-correction / FAIL per row with quoted source text; prioritise upcoming (future-dated) rows, duplicated traditions, and every row the V2 harness flags | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/verification-e969f4df.md` (new, owned by this session) |
+| V2 | Local integrity harness for the published catalog: weekday↔ISO-date agreement, `date_text`↔ISO agreement, duplicate-tradition detection, placeholder/blank-field audit, URL hygiene, data↔generated-HTML row parity, and a crawl of every internal link in the built site | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `research/audit_checks_e969f4df.py` (new), `research/verification-e969f4df.md` |
+| V3 | Hand the V1/V2 findings to the integration owners as source-linked correction requests; irregularities that need a data or generator edit are **requested here, not applied**, because `data/events.json`, `build.py`, `verify.py` and the generated pages are claimed by `5e333a6e` / `646f6727` | in progress | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` (append to this session's section only) |
+| V4 | Publish this session's scope: PR from `arena/e969f4df-maltaproj7` to `main`, merge without waiting for approval, confirm the Pages workflow succeeds, record PR link + merge result + deploy run here | pending | arena/e969f4df-maltaproj7 | 2026-10-18T05:48Z | `COORDINATION.md` |
+
+Rules honored: no file owned by another session is edited; unverified values are reported as unverified and never inferred; small frequent commits; `git pull --rebase` before every push; a stale claim (>60 min, no commits) may be taken over with a handoff note — none qualifies yet.
+
+## V1–V3 results and correction requests (2026-10-18, session `arena/e969f4df-maltaproj7`)
+
+**Delivered (this session's scope only):**
+- `research/verification-e969f4df.md` — line-by-line verification log. **30 records re-verified against live official sources** (all 22 then-upcoming rows, the 3 doubled-tradition partners, 8 undated recurring programs): **26 PASS, 4 PASS·GAP, 2 FAIL, 1 FAIL-on-one-field ×2, 1 PASS·FLAG**. Every verdict quotes the fetched official page. Coverage limits are stated in Part 4 of the log — nothing is marked verified without an inspected source.
+- `research/audit_checks_e969f4df.py` — read-only integrity harness. After merging PRs #17–#21 (catalog now 155 records: 139 published = 94 recurring + 45 special, 16 review, 25 flags): **0 errors, 3 warnings, 105 notes**; 197 internal references all resolved; CSV parity 155 rows; weekday↔ISO, year, geography, vocabulary, duplicate and parity checks all pass. `python3 build.py && python3 verify.py` also PASS on the merged tree (generated output regenerated identically).
+
+**Status:** V1 DONE · V2 DONE · V3 DONE (requests below) · V4 in progress (PR to `main`, merge, Pages confirmation, links recorded here).
+
+**Correction requests to the data owners (`5e333a6e` / `646f6727`, scopes now done — apply in a follow-up or hand to the next integration owner). None were applied by this session, because `data/events.json`, `build.py`, `verify.py` and the generated pages were never in this session's scope. Each item links the official source inspected in `research/verification-e969f4df.md`:**
+1. `fillmore-jazz-festival-2026` — published “July 4–5, 2026” is no longer stated by the cited https://www.fillmorejazzfest.com/ (live page announces “Saturday & Sunday, July 3 & 4, 2027” only). Cite an edition-specific official page or demote to Flagged for Review; canonicalise the two host spellings (`www.` vs bare domain).
+2. `merola-summer-festival` — `date_text` “Summer 2026” is not a sourced date; https://merola.org/summerfestival/ states no calendar dates and the 2026 season has ended. Demote to Flagged for Review or republish with sourced performance dates/venues.
+3. `ybg-festival-2026` — end date “November 13, 2026” is not stated on https://ybgfestival.org/ (organizer says “May–Oct”, latest posted event Oct 31). Cite an organizer page for Nov 13, restate to the sourced span, or blank + flag; switch `source_url` to the organizer's own 2026 press release.
+4. `international-ocean-film-festival-2026` — `time_text` “Sat 10:00 a.m.–11:00 a.m. (as posted)” is contradicted by the cited Fort Mason listing; keep only sourced times (e.g. Friday Opening Night Party 9:00 p.m.) or blank + flag.
+5. Pointer text published as values: `lit-crawl-sf-2026` `time_text` “…; see full schedule” (official wording: “all programs from 6:30—7:30 PM”, https://www.litquake.org/litcrawl) and `bay-to-breakers-2027` `location` “…; official route information is published by the organizer” (organizer publishes Howard & Fremont start, 1000 Great Highway finish, 8:00–8:45am waves, https://www.baytobreakers.com/15k). Add a substring guard for pointer phrases to `verify.py`.
+6. Sourced values currently blank (safe to fill, sources in the log): Cloudflare Connect agenda times (https://www.cloudflare.com/connect/), Mission Community Market ISO dates 2026-03-19 → 2026-11-12 (foodwise.org), People in Plazas season through Oct 28, 2026 + 12:00–1:00pm concerts (peopleinplazas.org), SF Hip Hop DanceFest 7pm / 12pm / 5pm (sfhiphopdancefest.com), Cherry Blossom “60th Anniversary” (sfcherryblossom.org), Sketchfest “24th year” (sfsketchfest.com), Microsoft Ignite pass prices (ignite.microsoft.com).
+7. `day-of-the-dead-procession-2026` — add a field-level flag: the organizer https://www.dayofthedeadsf.org/ still shows “November 2nd, 2025” and no 2026 edition; the Nov 2, 2026 date rests on SF Travel alone. Keep time/admission blank.
+8. Presentation: 74 of 139 published rows are past-dated (end date before 2026-10-18) and no generated page labels them as completed; three traditions (Fillmore Jazz, IOFF, Italian Heritage Parade) publish both their 2026 and 2027 editions while Pride/Chinese New Year/Bay to Breakers/Sketchfest were rolled forward only — pick one edition policy, and add an upcoming/completed indicator (ISO dates already support it).
+9. Authority taxonomy: `Official venue` (19 rows) vs `Official venue / federal trust` (13 rows) — define the split or unify the label.
+10. `heart-of-the-city-farmers-market` — no change requested: record that the organizer homepage still prints pre-2023 hours (Sun 5:00pm / Wed 5:30pm) and “United Nations Plaza”; the row's 7am–4pm Fulton Plaza values follow the organizer's current /about and /find-us pages. Do not “correct” from the stale homepage text.
+
+**Merge-conflict log:** merging `origin/main` (PRs #17–#21) into this branch conflicted add/add in `COORDINATION.md` only. Resolved by concatenating both boards verbatim — no peer text discarded; generated HTML/CSV conflicts did not occur because peers' generated output was accepted wholesale and regenerated identically by `build.py`.
+
 # Active coordination — session `arena/5e333a6e-maltaproj7` (2026-10-18)
 
 **Session ID:** `arena/5e333a6e-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as earlier sessions).
