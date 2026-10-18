@@ -806,3 +806,74 @@ All events verified against official sources on 2026-10-18. Key official sources
 
 ### Reconciliation note — `arena/646f6727-maltaproj7` (2026-10-18)
 While G1–G3 were in progress, `main` advanced via PR #17 (`arena/d07e4ede-maltaproj7`, +3 verified rows: Bhangra & Beats, SF Hip Hop DanceFest, Renegade Craft). `git merge origin/main` conflicted only in `data/events.json`, `verify.py` and generated HTML/CSV. Resolution: took `main`'s `data/events.json` and `verify.py`, re-ran the idempotent `research/coverage-patch-646f6727.py` on top (all 3 PR #17 rows retained), regenerated every page with `build.py`, and set the guards to the union: **107 published (87 recurring / 20 special), 16 review, 20 flags**. `verify.py` → PASS. No peer work discarded.
+
+---
+
+## Session `arena/e79e0de2-maltaproj7` — progress record (E1–E6 done, E7 in progress)
+
+**Branch:** `arena/e79e0de2-maltaproj7` (pinned by the Arena platform; see the deviation note at the top of this board).
+**Audit date:** 2026-10-18. **Catalog `as_of`:** 2026-10-18.
+
+### E1 — Date-first organization (DONE)
+Every list is now generated with **upcoming rows first**, ordered by start date; completed editions are pushed
+to the bottom and badged *Completed*; multi-week programs that are still running are badged *Ongoing now*.
+An inline script recomputes each row's status and "in N days" label against the visitor's real current date, so
+the static build never goes stale. New root page `upcoming.html` ("All events by date") added; `recurring.html`,
+`special.html`, `all-events.html` and all nine category pages use the same ordering.
+
+### E2 — Cost clarity and free-first focus (DONE)
+New **Cost** column on every row. The sourced admission text is classified as
+**Free (44)**, **Free or partly free (12)**, **Paid / ticketed (17)**, or **Not stated (75)** — derived only from
+the wording the linked official page used. "Not stated" is never treated as free; all 75 such rows are listed with
+their source links in a new "Cost not stated in the linked source" table on the Flagged for Review page.
+New root page `free.html` ("Free to attend") lists every row the source describes as free or partly free, and the
+dashboard has a "Free to attend — coming up" panel.
+
+### E3 — Executive summary (DONE)
+The dashboard now has a live **Executive summary — next up** panel: the ten dated events closest to today (plus up
+to three programs running right now), each with a relative date, category, list, location, cost badge and source
+link, next to a strip showing today's date and the number of events **starting in 7 / 30 / 90 days** and **running
+now**. A build-time list is included under `<noscript>` for readers without JavaScript.
+
+### E4 — Mobile card layout (DONE)
+Under 760 px each table row becomes a labelled card using `data-label` attributes on every cell, so every field
+stays readable on a phone instead of scrolling a 960 px grid sideways. Nav, filter bar, hero and next-up list all
+reflow to one column. `assets/style.css` regenerated from `build.py`'s `STYLE` block.
+
+### E5 — Coverage and cost verification (DONE)
+41 published rows plus all new candidates were re-fetched from their live official pages this session; every URL
+resolved (HTTP 200) and no dead link was found. Ten new rows were added from official sources, two rows were
+re-sourced to the organiser's own page, eleven cost/time fields were filled from official copy, and 14 clearly
+technical rows were recategorised into a new **Technology, AI & gaming** category. Full row-by-row log with quoted
+source text: `research/verification-e79e0de2.md`; reproducible data patch: `research/patch-e79e0de2.py`; audit
+appendix: `research/official-source-audit.md`.
+
+**Final counts:** 164 records = **148 published city-only rows (98 recurring + 50 special)** + 16 review-register
+records; **34 field-level flags**; **9 categories**. `python3 build.py` → "Built 148 published events: 98 recurring,
+50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free." `python3 verify.py` →
+"ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED".
+
+**Irregularities recorded (nonblocking, all on the Flagged for Review page with source links):**
+- Potrero Hill Festival hours — organiser says 10 a.m.–5 p.m., SFMTA says 4:30 p.m. and 4 p.m. (flag updated).
+- Hayes Valley shared-spaces hours (Fri 4–10 p.m., Sat 7 a.m.–10 p.m.) vs the PCFMA market page (Sat 10 a.m.–2 p.m.).
+- Day of the Devs and AI Engineer Code: 2027 editions not announced, so no 2027 date is published.
+- GDC 2027 prices are early rates with published deadlines (Oct 9, Dec 11, 2026, …).
+- SF Dance Film Festival: only the masterclass is stated free; individual screening prices are not printed.
+- Pre-existing flags retained: Bhangra & Beats location conflict, Bay to Breakers "May 18" copy, Dreamforce 2027
+  and J.P. Morgan 2027 venues not named, TechCrunch Disrupt event page behind a Cloudflare challenge, SFDFF SHACK15
+  screening outside the city, Day of the Dead date resting on SF Travel alone.
+- **Out-of-city item excluded:** the SFMTA advisory for Oct 15–21, 2026 also covers the *Top of the Hill Festival*
+  in **Daly City** — deliberately not published.
+- Dead/moved pages noted: `moscone.com/events/current-san-francisco` (the year suffix is required; the dataset
+  already cites the correct URL) and `intloceanfilmfest.org/tickets` (the About page is the working 2027 source).
+
+### E6 — Documentation and guards (DONE)
+`README.md` rewritten to describe the date-first ordering, the cost-label policy, the new pages and the current
+counts. `method.html` documents the publish rule, the ordering/executive-summary behaviour, the four cost classes
+with a legend, the bounded findings, and the directory/coverage boundaries. `verify.py` gained new guards:
+date-first ordering (upcoming rows first, ascending dates, first row upcoming), free-page membership
+(free/partly-free rows only, exact count), cost-not-stated disclosure on the Flagged page, dashboard section and
+embedded-dataset coverage, the new category and its page, and updated stable counts with an audit-entry comment.
+
+### E7 — Final integration (IN PROGRESS)
+Push → pull request to `main` → merge → confirm the GitHub Pages deploy → record the PR and merge result here.
