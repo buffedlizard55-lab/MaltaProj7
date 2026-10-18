@@ -889,7 +889,7 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "Organizer calls Lit Crawl the annual Litquake Festival finale. litquake.org/litcrawl (re-fetched 2026-10-18) states “OCTOBER 24, 2026”, “the world’s largest free pop-up literary event” and “all programs from 6:30—7:30 PM”. The organizer's own schedule instance (litcrawlsf2026.sched.com, linked from that page and fetched 2026-10-18) states “Saturday, October 24th from 5:00-9:00pm” and “No RSVPs are necessary, just show up! Seating + space are first come, first serve.” Pointer-style time text removed per correction request from session arena/e969f4df-maltaproj7. See flag-litcrawl-suggested-donation."
+   "notes": "Organizer calls Lit Crawl the annual Litquake Festival finale. Official page states: “all programs from 6:30—7:30 PM” (2026-10-18 re-check). Pointer-style time text removed per correction request from session arena/e969f4df-maltaproj7. Re-checked 2026-10-18 (arena/56415e75) against the organizer's own schedule instance (litcrawlsf2026.sched.com, linked from litquake.org/litcrawl): “Lit Crawl San Francisco is a massive, one-night literary pub crawl through San Francisco’s Mission District on Saturday, October 24th from 5:00-9:00pm” and “No RSVPs are necessary, just show up! Seating + space are first come, first serve.” The crawl window is therefore published alongside the 6:30–7:30 p.m. per-program slot; see flag-litcrawl-suggested-donation."
   },
   {
    "id": "memorial-day-commemoration-presidio-2026",
@@ -1404,14 +1404,13 @@
    "time_text": "",
    "location": "Tenderloin, Mission, Bayview, and Excelsior, San Francisco",
    "organizer": "Sunday Streets SF",
-   "admission": "Free",
+   "admission": "",
    "source_url": "https://sundaystreetssf.com/",
    "source_label": "Sunday Streets SF 2026 season page",
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The source confirms four 2026 city-neighborhood events; times and routes vary by neighborhood. The organizer's About page states the programme runs on “car-free spaces for all to enjoy” with “fun, free activities provided by local nonprofits, community groups and small businesses” (basis for the Free cost label — see flag-sunday-streets-free-wording). The October 18 Excelsior finale, 11 a.m.–4 p.m., is also listed by the San Francisco Recreation and Park Department calendar (sfrecpark.org/Calendar.aspx, fetched 2026-10-18) as “Mobile Rec at Sunday Streets … on Mission Street between Avalon Avenue and Geneva Avenue” — see flag-sunday-streets-route-conflict.",
-   "admission_source_url": "https://sundaystreetssf.com/about/"
+   "notes": "The source confirms four 2026 city-neighborhood events; times and routes vary by neighborhood."
   },
   {
    "id": "up-your-alley-2026",
@@ -1492,7 +1491,7 @@
    "source_authority": "Trusted civic source",
    "status": "verified",
    "review_reason": "",
-   "notes": "The festival's own homepage was behind a reCAPTCHA at the 2026-10-18 re-check; SF Travel, the City and County's official destination marketing organization, lists the free 2026 season at Yerba Buena Gardens and is the source of the November 13 season end date; see flag-ybg-2026-source-availability. The organizer's own 2026 season press release (https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf) independently confirms the 26th season of “free outdoor music, theater, circus, dance, poetry and children’s programs” opening Saturday, May 9 at 2:00pm with “Over 100+ Free Performances from May to November”. Individual program times are on the festival site."
+   "notes": "The festival's own homepage was behind a reCAPTCHA at the 2026-10-18 re-check; SF Travel, the City and County's official destination marketing organization, lists the free 2026 season at Yerba Buena Gardens. Individual program times are on the festival site. Corroborated 2026-10-18 (arena/56415e75) directly against the organizer: the festival's own 2026 season press release (https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf) is readable and states “Over 100+ Free Performances from May to November in Downtown San Francisco”, a season opener on “Saturday, May 9, 2:00pm”, and the October programmes (Oct 10 Follow the Music, Oct 11 Dance Day, Oct 12 Indigenous Peoples Day, Oct 17 Joe Bataan, Oct 24 Afro-Filipino Jazz Project, Oct 31 26th Annual Halloween Hoopla). The November 13 end date remains sourced from the SF Travel release rather than from the organizer, whose release says only “from May to November” with “NOVEMBER programs to be announced”."
   },
   {
    "id": "agu-annual-meeting-2026",
@@ -2192,7 +2191,7 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "Header states 'March 1-5, 2027 — Moscone Center, San Francisco, CA'. Passes & Pricing page re-fetched 2026-10-18: the page now asks visitors to “Register by December 11 at 11:59pm PT to lock in our Early Rate” and its rate table lists Super Early (deadline Fri Oct 9, 2026) $1,149 / $499 / $299 / $149 / $99 / $99, Early (deadline Fri Dec 11, 2026) $1,249 / $549 / $299 / $175 / $125 / $125, Regular (Fri Feb 5, 2027) $1,449 / $649 / $349 / $199 / $149 / $149, Final (Fri Feb 26, 2027) $1,649 / $749 / $399 / $249 / $199 / $199 and Onsite (Mar 5, 2027) $1,849 / $849 / $399 / $299 / $249 / $249 for Game Changer / Festival / Indie-Start-Up-Academic / Festival Hall only / Business Hall only / 1-Day Career. See flag-gdc-2027-pass-deadlines."
+   "notes": "Header states 'March 1-5, 2027 — Moscone Center, San Francisco, CA'. Passes & Pricing page lists early-rate prices (Festival $549, Game Changer $1,249, Indie/Start-up/Academic $299, Festival Hall only $175, Business Hall only $125, 1-Day Career $125) and a super-early deadline of Fri Oct 9, 2026, an early deadline of Fri Dec 11, 2026, and higher regular/final/onsite rates after that. See flag-gdc-2027-pass-deadlines. Re-checked 2026-10-18 (arena/56415e75): the page now asks visitors to “Register by December 11 at 11:59pm PT to lock in our Early Rate”, and its rate table reads Super Early (Fri Oct 9, 2026) $1,149 / $499 / $299 / $149 / $99 / $99, Early (Fri Dec 11, 2026) $1,249 / $549 / $299 / $175 / $125 / $125, Regular (Fri Feb 5, 2027) $1,449 / $649 / $349 / $199 / $149 / $149, Final (Fri Feb 26, 2027) $1,649 / $749 / $399 / $249 / $199 / $199, Onsite (Mar 5, 2027) $1,849 / $849 / $399 / $299 / $249 / $249 across Game Changer / Festival / Indie-Start-Up-Academic / Festival Hall only / Business Hall only / 1-Day Career."
   },
   {
    "id": "rsa-conference-2027",
@@ -3025,14 +3024,15 @@
    "end_date": "2026-10-23",
    "time_text": "4:30–8:30 p.m.",
    "location": "Ocean Avenue between Mission Street and Persia Avenue, Excelsior, San Francisco",
-   "organizer": "Organizer not named in source",
-   "admission": "",
+   "organizer": "From the E Excelsior Night Market",
+   "admission": "Free",
    "source_url": "https://www.sfmta.com/travel-updates/e-night-market-friday-october-23-2026",
    "source_label": "SFMTA travel update: From the E Night Market",
    "source_authority": "Government source",
    "status": "verified",
    "review_reason": "",
-   "notes": "Added 2026-10-18 (arena/5e333a6e). SFMTA states food, crafts, entertainment, and live music, 4:30–8:30pm. Recurrence is not stated by the source and is not inferred."
+   "notes": "Added 2026-10-18 (arena/5e333a6e). SFMTA states food, crafts, entertainment, and live music, 4:30–8:30pm. Recurrence is not stated by the source and is not inferred. Cost and organizer filled 2026-10-18 (arena/56415e75) from the organizer's own site (fromtheesf.com), which describes the programme as “free community fun” and lists “From the E: Fall Festival Night Market — Fri, Oct 23 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️”. SFMTA remains the source for the date, hours and street footprint.",
+   "admission_source_url": "https://www.fromtheesf.com/"
   },
   {
    "id": "noe-valley-night-market-2026-10-27",
@@ -3172,7 +3172,7 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "Official event page: “Day of the Devs returns to the Midway in San Francisco for the 2026 In-Person Celebration: San Francisco Edition!” The organizer's In-Person Events index lists “8 Mar 2026 • 3pm to 8pm • San Francisco, CA” and “67 Games shown”, and states “Admission is always free, for developers and players alike, and open to all ages.” Location block: “The Midway, 900 Marin Street, San Francisco, 94124, CA”. Time filled 2026-10-18 from that organizer listing. No 2027 edition is announced yet."
+   "notes": "Official event page: \"Day of the Devs returns to the Midway in San Francisco for the 2026 In-Person Celebration: San Francisco Edition!\" and \"Our last physical event brought together more than 60 inspiring indie games and developers ... all free with no costs either to developers or attendees.\" Location block: \"The Midway, 900 Marin Street, San Francisco, 94124, CA\". The organizer's In-Person Events index lists \"8 Mar 2026 • 67 Games shown\" and describes the San Francisco edition as the flagship annual event. No 2027 edition is announced yet. Time filled 2026-10-18 (arena/56415e75) from the organizer's In-Person Events index, which lists “8 Mar 2026 • 3pm to 8pm • San Francisco, CA” and states “Admission is always free, for developers and players alike, and open to all ages.”"
   },
   {
    "id": "union-square-park-programs",
@@ -3295,27 +3295,6 @@
    "notes": "Official page: \"Tuesday, November 24, 2026, 10:00 am - 2:00 pm\", Market Happening, Ferry Plaza. \"You'll find our regular Tuesday farms along with some special guest vendors.\" The page does not state an admission charge, so the cost field is left blank rather than inferred."
   },
   {
-   "id": "sunday-streets-excelsior-2026-10-18",
-   "name": "Sunday Streets — Excelsior Community Block Party (2026 season finale)",
-   "bucket": "special",
-   "cadence": "single-date",
-   "category": "Community & culture",
-   "date_text": "Sunday, October 18, 2026",
-   "start_date": "2026-10-18",
-   "end_date": "2026-10-18",
-   "time_text": "11:00 a.m.–4:00 p.m.",
-   "location": "Mission Street between Geneva Avenue and Theresa Street, Excelsior, San Francisco",
-   "organizer": "Sunday Streets SF (Livable City) with SFMTA and the City and County of San Francisco",
-   "admission": "Free",
-   "admission_source_url": "https://sundaystreetssf.com/about/",
-   "source_url": "https://sundaystreetssf.com/sunday-streets-excelsior-2026/",
-   "source_label": "Sunday Streets Excelsior 2026 official event page",
-   "source_authority": "Official organizer",
-   "status": "verified",
-   "review_reason": "",
-   "notes": "Organizer's event page (fetched 2026-10-18): “Excelsior Community Block Party — Mission Street between Geneva Avenue and Theresa Street — Sunday, October 18, 2026 ‧ 11 AM – 4 PM” and “Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 … nearly a mile of car-free streets”. Cost basis: the organizer's About page describes “fun, free activities provided by local nonprofits, community groups and small businesses” (see flag-sunday-streets-free-wording). Date and hours independently listed by the SF Recreation and Park Department calendar (sfrecpark.org/Calendar.aspx). The 2026 season itself is catalogued separately as “Sunday Streets SF — 2026 season”."
-  },
-  {
    "id": "ybgf-afro-filipino-jazz-project-2026",
    "name": "Afro-Filipino Jazz Project (Yerba Buena Gardens Festival)",
    "bucket": "special",
@@ -3333,7 +3312,7 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The organizer's 2026 season press release lists “Afro-Filipino Jazz Project, Saturday, October 24, 2:00pm” among the free outdoor programmes of the 26th season, which the same release describes as “Over 100+ Free Performances from May to November in Downtown San Francisco”. The 2026 season is catalogued separately as “YBG Festival (Yerba Buena Gardens Festival)”."
+   "notes": "The organizer's 2026 season press release (read 2026-10-18) lists “Afro-Filipino Jazz Project, Saturday, October 24, 2:00pm” among the free outdoor programmes of the 26th season, which the same release describes as “Over 100+ Free Performances from May to November in Downtown San Francisco”. The 2026 season itself is catalogued separately as “YBG Festival (Yerba Buena Gardens Festival)”."
   },
   {
    "id": "ybgf-halloween-hoopla-2026",
@@ -3353,7 +3332,7 @@
    "source_authority": "Official organizer",
    "status": "verified",
    "review_reason": "",
-   "notes": "The organizer's 2026 season press release lists “26th Annual Halloween Hoopla, Saturday, October 31, Noon” as part of the free 26th season; the edition number stated by the organizer is the basis for the annual cadence. An end time is not stated in the release, so only the noon start is published."
+   "notes": "The organizer's 2026 season press release (read 2026-10-18) lists “26th Annual Halloween Hoopla, Saturday, October 31, Noon” as part of the free 26th season; the edition number stated by the organizer is the basis for the annual cadence. No end time is stated, so only the noon start is published."
   },
   {
    "id": "sf-tech-week-2026",
@@ -3373,7 +3352,27 @@
    "source_authority": "Government source",
    "status": "verified",
    "review_reason": "",
-   "notes": "SFPL's Tech Week program page states “May 9-16, 2026 … Take your next step with technology during Tech Week … All programs are free” and notes that “Tech Week is produced by a coalition of Bay Area organizations”. The library's own release (sfpl.org/releases/2026-04-24/level-tech-week-san-francisco-public-library) describes the annual programme: “From May 9–16, San Francisco Public Library (SFPL) is offering over 30 free workshops for its annual Tech Week.” SFPL's events pages state that “all programs and events are free and open to the public”. Individual workshop times are not published here."
+   "notes": "SFPL's Tech Week program page (read 2026-10-18) states “May 9-16, 2026 … Take your next step with technology during Tech Week … All programs are free” and notes that “Tech Week is produced by a coalition of Bay Area organizations”. The library's own release (sfpl.org/releases/2026-04-24/level-tech-week-san-francisco-public-library) describes it as annual: “From May 9–16, San Francisco Public Library (SFPL) is offering over 30 free workshops for its annual Tech Week.” SFPL's events pages state that “all programs and events are free and open to the public”. Individual workshop times are not published here."
+  },
+  {
+   "id": "from-the-e-harvest-night-market-2026-11-20",
+   "name": "From the E: Harvest Night Market (Excelsior)",
+   "bucket": "recurring",
+   "cadence": "monthly",
+   "category": "Food & markets",
+   "date_text": "Friday, November 20, 2026",
+   "start_date": "2026-11-20",
+   "end_date": "2026-11-20",
+   "time_text": "",
+   "location": "Ocean Avenue & Mission Street, Excelsior, San Francisco",
+   "organizer": "From the E Excelsior Night Market",
+   "admission": "Free",
+   "source_url": "https://www.fromtheesf.com/",
+   "source_label": "From the E Excelsior Night Market official site",
+   "source_authority": "Official organizer",
+   "status": "verified",
+   "review_reason": "",
+   "notes": "The organizer's site (read 2026-10-18) lists “From the E: Harvest Night Market — Fri, Nov 20 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️” and describes the programme as “free community fun”. Hours are not published for this edition, so the time field is left blank rather than borrowed from the organizer's general monthly wording (“the second Saturday of the month from 5pm-10pm”), which does not match a Friday date. The October 23, 2026 edition is catalogued separately from the SFMTA travel update."
   }
  ],
  "flags": [
@@ -3982,23 +3981,6 @@
    "disposition": "Cost label stays Free with the donation wording documented. Nonblocking."
   },
   {
-   "id": "flag-sunday-streets-route-conflict",
-   "event_id": "sunday-streets-excelsior-2026-10-18",
-   "event": "Sunday Streets — Excelsior Community Block Party (2026 season finale)",
-   "issue": "The organizer states the October 18, 2026 route as “Mission Street between Geneva Avenue and Theresa Street”, while the SF Recreation and Park Department calendar entry for the same date describes “Mobile Rec at Sunday Streets on Mission Street between Avalon Avenue and Geneva Avenue”. The row follows the organizer's route; the city listing describes the Rec & Park activity location on the same closed corridor and is not treated as a second, different event.",
-   "sources": [
-    {
-     "label": "Sunday Streets Excelsior 2026 official event page",
-     "url": "https://sundaystreetssf.com/sunday-streets-excelsior-2026/"
-    },
-    {
-     "label": "SF Recreation and Park Department calendar",
-     "url": "https://sfrecpark.org/Calendar.aspx"
-    }
-   ],
-   "disposition": "Organizer route published; discrepancy documented. Nonblocking."
-  },
-  {
    "id": "flag-sunday-streets-free-wording",
    "event_id": "sunday-streets-2026",
    "event": "Sunday Streets SF — 2026 season",
@@ -4014,6 +3996,23 @@
     }
    ],
    "disposition": "Free label retained with its exact source wording recorded. Nonblocking."
+  },
+  {
+   "id": "flag-from-the-e-general-hours-mismatch",
+   "event_id": "from-the-e-harvest-night-market-2026-11-20",
+   "event": "From the E: Harvest Night Market (Excelsior)",
+   "issue": "The organizer's site describes the Excelsior Night Market as running “the second Saturday of the month from 5pm -10pm”, but the 2026 editions it lists (August 21, September 18, October 23, November 20) are Fridays and SFMTA publishes 4:30–8:30 p.m. for the October edition. The row therefore publishes no hours for the November 20 edition instead of reusing either wording.",
+   "sources": [
+    {
+     "label": "From the E Excelsior Night Market official site",
+     "url": "https://www.fromtheesf.com/"
+    },
+    {
+     "label": "SFMTA travel update — From the E Night Market, October 23, 2026",
+     "url": "https://www.sfmta.com/travel-updates/e-night-market-friday-october-23-2026"
+    }
+   ],
+   "disposition": "Time left blank and the conflict documented. Nonblocking."
   }
  ]
 }

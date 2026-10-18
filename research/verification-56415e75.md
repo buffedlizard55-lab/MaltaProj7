@@ -6,9 +6,12 @@ session changed or added is listed below with the URL that stated it. Nothing wa
 inferred, averaged, or carried over from a secondary listing.
 
 Data touched: `data/events.json` only (via `research/patch-56415e75.py`).
-Baseline before this pass: 148 published (98 recurring / 50 special), 16 review
-records, 34 flags. After this pass: **152 published (100 recurring / 52
-special), 16 review records, 38 flags.**
+Baseline (`origin/main`, `a9f96b6`): 148 published (98 recurring / 50 special), 16
+review records, 35 flags. Applied to that baseline this pass yields **152
+published (101 recurring / 51 special), 16 review records, 38 flags**; the patch is
+idempotent and skips anything a concurrent session has already published, so the
+same script re-applied after merging `arena/8c40d1c6-maltaproj7` adds only the rows
+and flags that are still missing.
 
 ## 1. Method
 
@@ -55,10 +58,23 @@ confirmation below is a page-read result, not a raw HTTP check.
 
 | Row | Date | Cost | Official source |
 | --- | --- | --- | --- |
-| Sunday Streets — Excelsior Community Block Party (2026 season finale) | Sun Oct 18, 2026, 11 a.m.–4 p.m., Mission St between Geneva and Theresa | Free | <https://sundaystreetssf.com/sunday-streets-excelsior-2026/> |
 | Afro-Filipino Jazz Project (Yerba Buena Gardens Festival) | Sat Oct 24, 2026, 2 p.m., Yerba Buena Gardens | Free | <https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf> |
 | Halloween Hoopla (Yerba Buena Gardens Festival, 26th annual) | Sat Oct 31, 2026, noon, Yerba Buena Gardens | Free | <https://ybgfestival.org/wp-content/uploads/2026/04/YBGF-2026-PR.pdf> |
 | SF Tech Week — San Francisco Public Library programs (2026) | May 9–16, 2026, SFPL Main Library, 100 Larkin St | Free ("All programs are free") | <https://sfpl.org/locations/main-library/bridge-main-5th-floor/sf-tech-week> + <https://sfpl.org/releases/2026-04-24/level-tech-week-san-francisco-public-library> |
+| From the E: Harvest Night Market (Excelsior) | Fri Nov 20, 2026, Ocean Ave & Mission St | Free ("FREE COMMUNITY FUN!") | <https://www.fromtheesf.com/> |
+
+Plus one **cost fill** on an existing row: `from-the-e-night-market-2026-10-23` was published with a
+blank admission and "Organizer not named in source" because it was built from the SFMTA travel update.
+The organizer's own site states the programme "means free community fun" and lists the October 23
+edition as "✨️ FREE COMMUNITY FUN! ✨️", so the row now carries `admission: Free` with
+`admission_source_url: https://www.fromtheesf.com/` and the organizer name; SFMTA remains the source
+for the date, hours and street footprint.
+
+**Deduplicated against a concurrent session.** This session also prepared a dated row for the Sunday
+Streets Excelsior finale (Oct 18, 2026). `arena/8c40d1c6-maltaproj7` published the same event as
+`sunday-streets-excelsior-2026` from the same organizer page, so this session's duplicate row is not
+added; the patch skips it by name. The same applies to the Sunday Streets "free wording" flag, which
+that session filed as `flag-sundaystreets-free-wording`.
 
 Candidates that were **rejected** rather than published: *Boo at the Zoo*
 (SF Recreation and Park calendar, Oct 31) was not added because no official page
@@ -73,18 +89,17 @@ schedule that could be quoted as a cadence.
 | Flag | Finding |
 | --- | --- |
 | `flag-litcrawl-suggested-donation` | Litquake's festival listing labels Lit Crawl "FREE, $10-15 suggested donation" while the crawl's own pages present it as free with no RSVP. Cost label stays `Free`; the wording is documented. |
-| `flag-sunday-streets-route-conflict` | Organizer route (Mission St, Geneva ↔ Theresa) differs from the SF Rec & Park calendar's description of the same closed corridor (Mission St, Avalon ↔ Geneva). Organizer wording published. |
-| `flag-sunday-streets-free-wording` | The organizer states "fun, free activities", not "free admission". The `Free` label rests on that exact wording. |
-| `flag-ybgf-season-end-source` | The November 13, 2026 season end date is sourced from SF Travel, not from the organizer, whose release says only "from May to November" and "NOVEMBER programs to be announced". |
+| `flag-sunday-streets-route-conflict` | Organizer route (Mission St, Geneva ↔ Theresa) differs from the SF Rec & Park calendar's description of the same closed corridor (Mission St, Avalon ↔ Geneva). Organizer wording published. Attaches to `sunday-streets-excelsior-2026`, so it only lands once that row exists in the merged data. |
+| `flag-from-the-e-general-hours-mismatch` | The organizer's general "second Saturday, 5–10 p.m." wording contradicts the Friday dates and SFMTA's 4:30–8:30 p.m. hours for the 2026 editions; no hours are published for the November 20 edition. |
+| `flag-sunday-streets-free-wording` | The organizer states "fun, free activities", not "free admission". Dropped automatically when a peer session's equivalent flag (`flag-sundaystreets-free-wording`) is present. |
 
-## 4b. Verified findings handed to the peer's F1 pass (not applied here)
+## 4b. From the E — organizer-site evidence (applied)
 
-`data/events.json` was claimed by `arena/8c40d1c6-maltaproj7` (F1) while this session was running, so
-these two verified results are recorded rather than applied. Both come from the organizer's own site,
-<https://www.fromtheesf.com/>, read on 2026-10-18:
+Both results below come from the organizer's own site, <https://www.fromtheesf.com/>, read on
+2026-10-18, and are applied by `research/patch-56415e75.py`:
 
-1. **Cost fill — `from-the-e-night-market-2026-10-23`.** The row's admission is blank and its
-   organizer reads "Organizer not named in source" because the row was built from the SFMTA travel
+1. **Cost fill — `from-the-e-night-market-2026-10-23`.** The row's admission was blank and its
+   organizer read "Organizer not named in source" because the row was built from the SFMTA travel
    update. The organizer's site states the programme "means free community fun" and lists
    "From the E: Fall Festival Night Market — Fri, Oct 23 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY
    FUN! ✨️". Suggested fill: `admission: "Free"`,
@@ -92,10 +107,11 @@ these two verified results are recorded rather than applied. Both come from the 
    Market". SFMTA remains the source for the date, hours and street footprint.
 2. **New free row — From the E: Harvest Night Market.** The same organizer page lists
    "From the E: Harvest Night Market — Fri, Nov 20 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY
-   FUN! ✨️". A dated free row for **Friday, November 20, 2026** at Ocean Avenue & Mission Street,
-   Excelsior, is supportable from that page. No hours are stated for that edition, so `time_text`
-   should stay blank rather than borrow the monthly "second Saturday 5pm–10pm" wording, which does
-   not match a Friday date.
+   FUN! ✨️". Added as a dated free row for **Friday, November 20, 2026** at Ocean Avenue & Mission
+   Street, Excelsior. No hours are published for that edition, so `time_text` stays blank rather than
+   borrowing the organizer's general monthly wording ("the second Saturday of the month from 5pm
+   -10pm"), which does not match a Friday date — the mismatch is filed as
+   `flag-from-the-e-general-hours-mismatch`.
 
 ## 5. Honest coverage statement — what this pass did **not** re-fetch
 
@@ -118,8 +134,8 @@ by session `arena/f65449c5-maltaproj7` (task F1), so this session did not edit
 it. The guards must be updated when this data lands:
 
 - published rows `148 → 152`
-- recurring / special `98 / 50 → 100 / 52`
-- field-level flags `34 → 38`
+- recurring / special `98 / 50 → 101 / 51`
+- field-level flags `35 → 38`
 
 Generated pages (`*.html`, `categories/*.html`) and `data/events.csv` also need a
 `python3 build.py` rebuild, because `build.py` is in the same F1 scope. With the
