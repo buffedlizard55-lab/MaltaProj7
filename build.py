@@ -793,6 +793,7 @@ def build() -> None:
     <a class="card" href="recurring.html"><span class="metric">{len(recurring)}</span><span class="card-label">Recurring</span><span class="card-note">Weekly, monthly, seasonal, annual</span></a>
     <a class="card" href="special.html"><span class="metric">{len(special)}</span><span class="card-label">Special</span><span class="card-note">Dated one-offs and programs</span></a>
     <a class="card" href="categories.html"><span class="metric">{len(categories)}</span><span class="card-label">Categories</span><span class="card-note">Audited rows by subject</span></a>
+    <a class="card" href="paid.html"><span class="metric">{len(paid_rows) + len(mixed_rows)}</span><span class="card-label">Paid &amp; partly free</span><span class="card-note">Separate catalog, never in the free list</span></a>
     <a class="card" href="all-events.html"><span class="metric">{len(published)}</span><span class="card-label">All source-linked rows</span><span class="card-note">Including past and non-free</span></a>
     <a class="card" href="flagged.html"><span class="metric">{len(review)}</span><span class="card-label">Flagged for Review</span><span class="card-note">Plus costs not confirmed</span></a>
   </div>
@@ -989,7 +990,8 @@ linked official page stated. Nothing is inferred from an event's type. A waived 
 </ul>
 <p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
 <section class="panel"><h3>Line-by-line verification</h3><p>The eight primary free-upcoming rows were rechecked for this session with field-level source evidence in
-<a href="research/review-f65449c5.md">research/review-f65449c5.md</a>. Prior catalog-wide auditing is recorded in
+<a href="research/review-f65449c5.md">research/review-f65449c5.md</a>. A parallel pass re-fetched 41 official pages on 2026-10-18 — every row still upcoming or ongoing, plus the gaming, music and AI rows and the free recurring programmes — and is logged with quoted source text in
+<a href="research/verification-8c40d1c6.md">research/verification-8c40d1c6.md</a> (patch: <a href="research/patch-8c40d1c6.py">research/patch-8c40d1c6.py</a>); it added six rows, filled four cost fields and recorded six field-level flags. Prior catalog-wide auditing is recorded in
 <a href="research/verification-e79e0de2.md">research/verification-e79e0de2.md</a>, with earlier passes in
 <a href="research/reverification-2088b727.md">research/reverification-2088b727.md</a>,
 <a href="research/verification-e969f4df.md">research/verification-e969f4df.md</a> and
