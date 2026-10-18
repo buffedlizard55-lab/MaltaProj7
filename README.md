@@ -17,6 +17,7 @@ Gaming and AI have no dated free upcoming entry verified in this snapshot; the d
 No package installation is needed for the published site or its standard checks:
 
 ```sh
+python3 -m unittest discover -s tests -v
 python3 build.py
 python3 verify.py
 ```
@@ -24,3 +25,5 @@ python3 verify.py
 `data/events.json` is the source of truth. The build regenerates all root/category HTML pages, `assets/style.css` and `data/events.csv`. The verifier checks row sets and official source links on the free, paid and review pages; date and cost separation; duplicate IDs; local links; and data shape. It also enforces the current row and flag counts (162 published / 102 recurring / 60 special / 17 review / 51 flags), compares each cost-sorted page's rendered rows against the expected `(name, date-rank)` identity set so a duplicated or swapped row cannot hide behind a shared official URL, checks that the Gaming → Music → AI → Everything else focus sections keep that order and stay date-first inside each block, and rejects placeholder admission or time text, so a rebuild that silently drops rows fails instead of shipping. It **does not live-fetch all external URLs**; evidence from the earlier audits and the targeted current recheck is documented in `research/`. A local browser-DOM smoke test of the live client-side date logic is recorded in `research/review-f65449c5.md` and `research/verification-8c40d1c6.md`.
 
 GitHub Pages is deployed by `.github/workflows/pages.yml` from `main`. Coordination, PRs, source review and deployment status are recorded in [COORDINATION.md](COORDINATION.md).
+
+Local link verification also resolves same-page and cross-page HTML fragments (including percent-encoded IDs), rejects directory links without an index, and runs 11 isolated regression tests before Pages deployment. This is structural validation, not a live external-source crawl. The [latest independent maintenance audit](research/review-55c5243c.md) distinguishes targeted source rechecks from inherited evidence.

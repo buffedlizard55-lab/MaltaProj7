@@ -56,9 +56,9 @@ def check_internal_links(path: Path, text: str) -> None:
             error(f"{rel}: aria-labelledby references missing id {referenced}")
     for href in re.findall(r'href="([^"]+)"', text):
         parsed = urlparse(href)
-        if parsed.scheme or href.startswith("#") or href.startswith("//"):
+        if parsed.scheme or href.startswith("//"):
             continue
-        target = (path.parent / unquote(parsed.path)).resolve()
+        target = (path.parent / unquote(parsed.path)).resolve() if parsed.path else path.resolve()
         try:
             target.relative_to(ROOT)
         except ValueError:
@@ -66,6 +66,17 @@ def check_internal_links(path: Path, text: str) -> None:
             continue
         if not target.exists():
             error(f"{rel}: broken local link {href}")
+            continue
+        if target.is_dir():
+            target = target / "index.html"
+            if not target.is_file():
+                error(f"{rel}: local directory has no index.html: {href}")
+                continue
+        if parsed.fragment and target.suffix.lower() == ".html":
+            target_text = text if target == path.resolve() else read(target)
+            target_ids = set(re.findall(r'''\bid\s*=\s*["']([^"']+)["']''', target_text))
+            if unquote(parsed.fragment) not in target_ids:
+                error(f"{rel}: broken local fragment {href}")
 
 
 def main() -> int:
