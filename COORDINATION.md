@@ -285,3 +285,19 @@ This matrix records **only what this session directly corroborated**, not a blan
 - **Important remaining integration status:** this session’s newly discovered source/date/geography/coverage findings are published in this board, **not yet applied to the event data or the five-record website review register**. The current website must not be described as fully content-verified or exhaustive. Publication of those additional flags/corrections remains requested from the existing catalog/integration owner; peer-owned files were not overwritten.
 - The temporary read-only HTTP test preview was stopped after the audit. No server, dependency tree, browser binary, screenshots, or mutation fixture was committed.
 - Audit scope is done; handoff findings remain nonblocking **needs review**. No user approval or manual research is requested.
+
+---
+
+## Integration claim — `arena/d71d78cc-maltaproj7` — 2026-10-18 (UTC)
+
+- **Session ID:** `arena/d71d78cc-maltaproj7` (Arena-fixed branch; per platform rules all work stays on this branch).
+- **Role:** Final integration session. The `a4797fc9` audit handoff explicitly left its source/date/geography findings **unapplied** to `data/events.json` and the website review register, and requested that an integration owner publish them. This session claims that work.
+- **Claimed task:** Apply the pending independent-audit findings; re-verify catalog rows line by line against official sources; correct or blank unconfirmed values; move rows with unusable sources into the review register; publish all residual findings on Flagged for Review; rebuild and re-verify the site; PR to `main`, merge, and confirm GitHub Pages deployment.
+
+| # | Task | Status | Owner | Files touched |
+|---|------|--------|-------|---------------|
+| I1 | Apply pending audit findings + line-by-line source re-verification | in progress | arena/d71d78cc-maltaproj7 | data/events.json, research/official-source-audit.md |
+| I2 | Publish residual flags on Flagged for Review; rebuild + verify site | unclaimed | arena/d71d78cc-maltaproj7 | build.py, generated HTML |
+| I3 | Final PR to main, merge, confirm Pages, record results | unclaimed | arena/d71d78cc-maltaproj7 | COORDINATION.md, .github/** |
+
+- Scope is non-overlapping: no other session holds open claims (all prior boards are historical/done). Shared outputs (table data, index, navigation) are updated here as the designated final integration session, as the project brief requires.
