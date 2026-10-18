@@ -108,10 +108,13 @@ def main() -> int:
     # Market — recurring/seasonal; SF International Hip Hop DanceFest —
     # recurring/annual; Renegade Craft Fair — special/single-event). Final
     # total: 96 published (76 recurring + 20 special), 12 review, 16 flags.
-    if len(published) != 107:
-        error(f"expected 107 published rows, found {len(published)}")
-    if len(recurring) != 87 or len(special) != 20:
-        error(f"expected 87 recurring / 20 special, found {len(recurring)} / {len(special)}")
+    # 2026-10-18 arena/5e333a6e-maltaproj7 coverage-gap pass (audit entry
+    # "Coverage-gap pass — arena/5e333a6e"): +32 published (+7 recurring,
+    # +25 special), review unchanged -> 139 = 94 + 45, 16 review, 25 flags.
+    if len(published) != 139:
+        error(f"expected 139 published rows, found {len(published)}")
+    if len(recurring) != 94 or len(special) != 45:
+        error(f"expected 94 recurring / 45 special, found {len(recurring)} / {len(special)}")
     if len(review) != 16:
         error(f"expected 16 review records, found {len(review)}")
 
