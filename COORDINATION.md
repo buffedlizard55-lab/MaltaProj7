@@ -52,7 +52,8 @@
 
 ### Publication record
 
-- **Pull request:** see the entry appended at the end of this file after the merge.
+- **Pull request [#29](https://github.com/buffedlizard55-lab/MaltaProj7/pull/29)** — *Free-first SF events catalog: verified 41 rows, 6 new free events, separate paid section*, branch `arena/8c40d1c6-maltaproj7` → `main`. It integrates the parallel session `arena/f65449c5-maltaproj7` (PRs #27–#28): the branch was merged with `git merge origin/main` rather than rebased, and the conflicts were resolved file by file as described in the parallel-session note above. The PR body lists the sources used and the five review items above.
+- **Merge commit and Pages workflow run:** recorded in the follow-up PR opened after the merge (the merge commit sha only exists once GitHub merges), because the publication record has to travel through a PR like any other change. See the entry appended under this heading.
 
 ---
 
