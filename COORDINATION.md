@@ -1,3 +1,49 @@
+# Active coordination — session arena/2e5715f9-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/2e5715f9-maltaproj7` (platform-fixed branch; per this environment's rules all work stays on
+`arena/2e5715f9-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented
+deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T16:58Z):** `git fetch` → `origin/main` at `2ae30f3` (PR #36 merged, link-fragment
+harness by peer `arena/55c5243c-maltaproj7`); PRs #1–#36 all **MERGED**, none open. Live peer session
+`arena/04813d69-maltaproj7` pushed its V1–V6 claim at 16:52–16:54Z (whole-catalog re-verification, UI audit, data
+integrity, verifier, docs, integration). To keep scopes **non-overlapping and complementary**, this session does NOT
+re-claim V1–V6 substance. It claims only the remaining brief-driven gap: **coverage-gap closure — discovery of NEW
+free San Francisco events from official sources** (the ledger's standing `flag-free-gaming-coverage-gap` and
+`flag-free-ai-coverage-gap`, plus the thin Nov 2026–Feb 2027 free-event window), with its own research/patch file
+names. Baseline `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS
+PASSED (162 published / 102 recurring / 60 special / 17 review / 51 flags) on `2ae30f3`.
+
+## Task board — arena/2e5715f9-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| W1 | Coverage-gap closure: discover NEW free SF events from official organizer/venue/government sources — priority (a) free gaming, (b) free AI, (c) free music, (d) free dated events 2026-10-19 → 2027-02-28 missing from the catalog; quote the official wording for every value; reject anything unconfirmable | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `research/verification-2e5715f9.md`, `research/patch-2e5715f9.py` |
+| W2 | Additive data patch only: new rows + new flags (never edits peer-sourced field values); count-line updates in `verify.py` and `README.md` only (surgical, conflict-friendly) | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `verify.py` (count guards), `README.md` (counts), generated `*.html` via `build.py` |
+| W3 | Disposition updates for `flag-free-gaming-coverage-gap` / `flag-free-ai-coverage-gap` **only if W1 closes them** (with sources); otherwise leave intact and add new flags for anything irregular found | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json` (flags), `COORDINATION.md` |
+| W4 | Final integration for this branch: `git pull --rebase`/merge peer work without discarding it, rebuild, run full `verify.py` + `tests/test_verifier.py`, crawl local links, PR to `main`, merge without waiting, confirm Pages deploy, record PR + deploy links | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `COORDINATION.md`, PR link, Pages runs |
+
+## Shared-file protocol (agreed unilaterally, visible to peers)
+
+`data/events.json`, `verify.py`, `README.md`, `build.py`, generated HTML and `COORDINATION.md` are shared with peer
+`arena/04813d69-maltaproj7` (V1–V6). This session's edits to shared files are limited to **additive event/flag
+upserts and count-line updates**; peer-sourced field values are never rewritten here. If a peer commit lands first,
+integration merges both sides and re-verifies the union line by line. Any row a peer is already re-verifying is
+left to the peer; this session touches only rows it discovers anew. Requests for peer-owned changes are logged
+below instead of edited.
+
+## Session log — arena/2e5715f9-maltaproj7
+
+- 2026-10-18T16:58Z: Pre-claim inspection + baseline verified on `2ae30f3`. W1–W4 claimed. Peer `arena/04813d69-maltaproj7`
+  acknowledged (V1–V6); this session stays complementary (new-event coverage only). Branch naming deviation
+  documented above. Claim pushed immediately per the brief.
+
+---
+
+# Active coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+
+---
+
 # Active coordination — session arena/83fc57b1-maltaproj7 (2026-10-18) — Z5 PUBLISHED
 
 **Session ID:** `arena/83fc57b1-maltaproj7` (platform-fixed branch; per system prompt all work stays on this branch).
@@ -35,6 +81,9 @@
 ---
 
 # Historical coordination — session arena/75cf25a7-maltaproj7 (2026-10-18)
+
+---
+
 
 **Session ID:** `arena/75cf25a7-maltaproj7`. Arena pins this session to the named branch; the requested
 `session-<id>/<task>` branch naming cannot be used here, so all changes stay on the platform-fixed branch.
@@ -75,6 +124,9 @@ free list; this session applied the user's stricter “leave unconfirmed values 
 | Live check | Fetched the deployed Dashboard, Free upcoming page, and Flagged for Review page after deployment. Dashboard and Free page show **18 dated free upcoming**; the focus split is Gaming 0 / Music 4 / AI 0 / Everything else 14. Sunday Streets is absent from the free tables, appears as **Not stated** in the cost register, and its updated finding and official source links appear on Flagged for Review. |
 | Nonblocking irregularity | GitHub Actions reported Node.js 20 deprecation/forced Node.js 24 and an `ubuntu-latest` migration notice for Oct 19, 2026. These are runner/action maintenance warnings; both workflows completed successfully and do not affect event data or the deployed pages. |
 | Scope note | The site remains a bounded source-linked snapshot, not an exhaustive enumeration of every public, private, newly announced, or unlisted San Francisco event. |
+
+---
+
 
 ---
 
@@ -169,6 +221,103 @@ brief-driven work (C1–C6 below) and the integration role.
 | C4 | Verification harness: keep every existing guard, add guards for the free/paid separation, re-run the local link crawl | **done — re-applied on the merged baseline** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `verify.py` |
 | C5 | Docs: refresh `README.md` and the Method & sources page for the free-first structure and this session's findings | **done — re-applied on the merged baseline** | arena/3977d9cb-maltaproj7 | 2026-10-18T11:05Z | `README.md`, `build.py` (method page) |
 | C6 | Final integration: reconcile parallel sessions, rebuild, verify, crawl local links, PR to `main`, merge without waiting, confirm GitHub Pages deploy, record PR/deploy links | **done** | arena/3977d9cb-maltaproj7 | 2026-10-18T12:40Z | `COORDINATION.md`, PR #34, Pages runs 39128285934 / 39128285806 |
+
+
+
+## Merge reconciliation — arena/2e5715f9-maltaproj7 integration (W4, 2026-10-18)
+
+**What happened.** After W1–W3 were committed on this branch, peer sessions landed PRs #37–#41 on
+`main` (04813d69's V1–V6 line-by-line audit + docs; 55c5243c bookkeeping; 75cf25a7's Sunday Streets
+admission-evidence reconciliation, which **blanked both Sunday Streets admission fields** and added
+classifier guards for source-silent wording; 83fc57b1's coverage pass with **+5 verified rows**
+(Daytona & Oracle AI Builders Oct 20 — free; Overmind Arcade Oct 20 — cost unstated; SF Diwali
+Festival Nov 8 — free; Godot Gamedev Meetup at Noisebridge — free monthly; Voxel51 Physical AI
+Workshop Oct 28 — cost unstated) and +5 flags). `git merge origin/main` stopped on conflicts in
+`data/events.json`, `verify.py`, `COORDINATION.md`, `README.md` and all 18 generated pages.
+
+**How it was resolved — nothing from any session was discarded.**
+1. **Generated HTML/CSV** were never hand-merged: each conflicted page was reset and **regenerated**
+   from the merged `data/events.json` with `python3 build.py`.
+2. **`data/events.json`** was resolved as a true union, written by script: peer 83fc57b1's 184 rows
+   (including their 5 new rows and the 75cf25a7 Sunday Streets blanking) **plus** this session's 10
+   records; peer flags kept verbatim **plus** this session's 7 flags and the two coverage-gap
+   disposition updates **plus** one integration flag (`flag-peer-flag-schema-83fc57b1`).
+3. **Flag-schema irregularity (flagged, nonblocking):** 83fc57b1's five flags used `flag_id`
+   instead of the register's `id` and carried no `sources` array. At integration each was
+   normalized — `id` added from `flag_id` (original keys kept), `sources` populated from the linked
+   row's own official source URLs where `event_id` resolved. No issue/disposition wording was
+   altered. Documented in `flag-peer-flag-schema-83fc57b1` on the Flagged page.
+4. **`verify.py`** kept both sessions' work: 75cf25a7/83fc57b1's new guards (source-silent admission
+   hints, Sunday Streets blank-admission guard) **and** this session's cadence/authority vocabulary
+   extensions (`bimonthly`, `frequent`, `drop-in`, `irregular`; `Unverified press report`); count
+   guards moved to the union totals **176 published / 111 recurring / 65 special / 18 review /
+   64 flags**.
+5. **`build.py`** auto-merged: 75cf25a7's `UNSTATED_ADMISSION_HINTS` classifier fix + this session's
+   dynamic cadence summary (which their incoming rows also need — Noisebridge "monthly", Daytona
+   "single-date" special) coexist.
+6. **`README.md`** keeps 75cf25a7's stricter admission wording ("free activities" ≠ free admission)
+   and their Sunday Streets note, with counts refreshed to the union (22 dated free-upcoming; 64
+   free / 12 partly free / 16 paid / 84 not-stated).
+7. **Independent re-verification of peer rows at integration:** the four headline peer rows were
+   re-checked against their own source URLs during reconciliation (Daytona/Oracle Luma listing —
+   "Free (registration and host approval required)"; Diwali Eventbrite — "Free (RSVP encouraged)";
+   Noisebridge wiki — "Free (donations to Noisebridge welcome)"; Overmind/Voxel51 pages — no price
+   stated). All four cost statements match the peers' fields; nothing contradicted.
+
+**Post-merge state:** 176 published rows (111 recurring, 65 special), 18 review records, 64 flags,
+9 categories; **22 dated free-upcoming rows**; focus blocks Gaming 0 / Music 5 / AI 1 / Everything
+else 16. `python3 build.py && python3 verify.py` and `python3 -m unittest tests.test_verifier`
+(11 tests) pass on the merged tree. The dated-free-AI gap is now closed by the peer's Daytona row;
+the dated-free-gaming gap remains honestly open (flagged).
+
+## Session record — arena/2e5715f9-maltaproj7 (W1–W4)
+
+- **W1 (Coverage-gap closure).** Discovered and verified **9 new records** from official sources on
+  2026-10-18, every value quoted in `research/verification-2e5715f9.md`: **free music** — MAPP
+  (Mission Arts Performance Project) December 5, 2026 edition ("MAPP is always free", mappsf.com)
+  and Noontime Concerts (free weekly Tuesday classical series at Old St. Mary's plus its dated
+  11/10/2026 Angela Lee & Marc Teicholz concert, noontimeconcerts.org); **free gaming** — The
+  Detour Free Play Tuesday (monthly first Tuesdays, "all of our arcade games for free with a food
+  or beverage purchase", detoursf.com) and Gaming at The Mix at SFPL (drop-in + monthly gaming
+  tournaments, sfpl.org, government source); **free AI** — AI Engineering SF (Latent.Space) whose
+  organizer page states "This is a free event, thanks to AWS for the lovely venue" (luma.com/aieng);
+  **everything else** — New Year's Eve Fireworks on the SF waterfront (Port of San Francisco,
+  sfport.com; undated annual tradition, 2026–27 edition not yet posted); plus The Detour Tuesday
+  Board Game Night and AI Tinkerers San Francisco with **cost left blank** (official pages state no
+  price — never inferred) and one **review record** (Small Change Arcade grand opening — press-only
+  evidence; organizer site silent). **14 rejected candidates** are logged with reasons in §3 of the
+  verification log — including the would-be "SF Mondays" free gaming nights whose official calendar
+  maps to Westminster, **Colorado** (Street Fighter Mondays, not San Francisco), recorded as
+  `flag-akihabara-sf-mondays-out-of-city` so no later pass re-adds them.
+- **W2 (Additive patch).** `research/patch-2e5715f9.py` (idempotent; re-run confirmed +0) applied the
+  9 records and 7 new flags; count guards in `verify.py` moved to **171 published / 110 recurring /
+  61 special / 18 review / 58 flags** and README counts refreshed (22 dated free-upcoming; 63 free /
+  12 partly free / 16 paid / 80 not-stated across all rows). Two coordinated shared-file edits beyond
+  bare counts: `verify.py`'s cadence whitelist gained the source-stated regularities `bimonthly`,
+  `frequent`, `drop-in`, `irregular` (MAPP "every two months"; AI Tinkerers "25 events in the last
+  12 months"; The Mix drop-in; AI Engineering SF irregular) and its review-authority whitelist gained
+  `Unverified press report`; `build.py`'s cadence summary now lists **any** recurring cadence
+  dynamically (the verify guard already required every cadence to appear) and its method prose
+  mentions other source-stated regularities. Without these, honest cadence strings would have been
+  forced into false weekly/monthly labels.
+- **W3 (Flag dispositions).** `flag-free-gaming-coverage-gap` and `flag-free-ai-coverage-gap` are
+  **partially closed** with sources: free gaming and free AI *programs* are now catalogued from
+  official pages, but none publishes dated future occurrences, so the dated-free-gaming and
+  dated-free-AI counts remain 0 and the dashboard keeps its honest "no dated, free upcoming event"
+  notices. 7 new flags published for every irregularity found (conditional-free wording at The
+  Detour; unstated costs on Detour weekly programs and AI Tinkerers; SFPL free-statement provenance;
+  NYE edition unannounced + trusted-civic cost wording; Small Change press-only source; Akihabara
+  out-of-city rejection).
+- **Verification performed.** `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG,
+  SOURCE-LINK, AND NAVIGATION CHECKS PASSED (171/110/61/18/58); `python3 -m unittest
+  tests.test_verifier` → 11 tests OK; focus blocks render Gaming 0 / Music 6 / AI 0 / Everything
+  else 16 = the 22 confirmed-free dated-upcoming rows; Noontime (Nov 10) and MAPP (Dec 5) appear in
+  the live executive summary; no not-stated row leaks into the free main tables.
+- **Irregularities handed to the owner (all nonblocking, all on Flagged for Review with source
+  links):** flag-detour-free-play-condition, flag-detour-weekly-cost-unstated,
+  flag-sfpl-free-statement-capture, flag-ai-tinkerers-cost-unstated,
+  flag-nye-fireworks-edition-unannounced, flag-small-change-arcade-source,
+  flag-akihabara-sf-mondays-out-of-city.
 
 ## Merge conflict and reconciliation log (required by the brief)
 

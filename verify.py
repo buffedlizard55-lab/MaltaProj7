@@ -198,23 +198,31 @@ def main() -> int:
     # survive as R3 and R11 in research/review-3977d9cb.md. This session also re-verified
     # peer rows against their official sources (From the E editions, Sunday Streets
     # Excelsior, Foodwise demos) - see research/reverification-3977d9cb.md.
-    # Total: 167 published (103 recurring + 64 special), 17 review records,
-    # 56 field-level flags, 9 categories (arena/83fc57b1 added 5 events + 5 flags).
-    if len(published) != 167:
-        error(f"expected 167 published rows, found {len(published)}")
-    if len(recurring) != 103 or len(special) != 64:
-        error(f"expected 103 recurring / 64 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 17:
-        error(f"expected 17 review records, found {len(review)}")
-    if len(flags) != 56:
-        error(f"expected 56 field-level flags, found {len(flags)}")
+    # Total: 176 published (111 recurring + 65 special), 18 review records,
+    # 64 field-level flags, 9 categories. Counts reflect the 2026-10-18 integration
+    # union: arena/83fc57b1 (+5 events, +5 flags), arena/2e5715f9-maltaproj7
+    # (+9 published rows, +1 review record, +7 flags, +1 schema-normalization flag),
+    # and arena/75cf25a7's Sunday Streets admission blanking (no count change).
+    if len(published) != 176:
+        error(f"expected 176 published rows, found {len(published)}")
+    if len(recurring) != 111 or len(special) != 65:
+        error(f"expected 111 recurring / 65 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 18:
+        error(f"expected 18 review records, found {len(review)}")
+    if len(flags) != 64:
+        error(f"expected 64 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
     # cadences, duplicates under new ids, and end < start) ---
     allowed_statuses = {"verified", "partial_sf_program", "needs_review", "cancelled", "outside_city_excluded"}
     allowed_cadences = {
-        "recurring": {"weekly", "monthly", "seasonal", "annual"},
+        # The four classic classes plus source-stated regularities added 2026-10-18 by
+        # arena/2e5715f9-maltaproj7: "bimonthly" (MAPP: "first Saturday of the month
+        # every two months"), "frequent" (AI Tinkerers SF: "25 events in the last 12
+        # months"), "drop-in" (SFPL The Mix open-hours program with monthly
+        # tournaments), "irregular" (AI Engineering SF series with no fixed cadence).
+        "recurring": {"weekly", "monthly", "seasonal", "annual", "bimonthly", "frequent", "drop-in", "irregular"},
         "special": {"single-date", "single-event", "dated-program"},
     }
     allowed_authorities = {
@@ -289,7 +297,7 @@ def main() -> int:
             location = str(event.get("location", "")).lower()
             if not any(marker in location for marker in sf_markers):
                 error(f"{event_id}: published location has no San Francisco indicator: {event.get('location')!r}")
-        elif event.get("source_authority") not in allowed_authorities | {"Unverified legacy URL"}:
+        elif event.get("source_authority") not in allowed_authorities | {"Unverified legacy URL", "Unverified press report"}:
             error(f"{event_id}: unknown review source_authority {event.get('source_authority')!r}")
     if catalog.get("geography") != "City and County of San Francisco only":
         error("catalog geography statement does not enforce city-only scope")

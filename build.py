@@ -723,9 +723,12 @@ def build() -> None:
 
 
     cadence_order = ("weekly", "monthly", "seasonal", "annual")
+    # Any other source-stated cadence (bimonthly, frequent, drop-in, irregular, ...)
+    # is listed too, so the summary never silently drops a recurring group.
+    other_cadences = sorted(cadence for cadence in cadence_counts if cadence not in cadence_order)
     cadence_summary = ", ".join(
         f"<strong>{cadence_counts[cadence]} {cadence}</strong>"
-        for cadence in cadence_order if cadence_counts.get(cadence)
+        for cadence in (*cadence_order, *other_cadences) if cadence_counts.get(cadence)
     )
     top_categories = ", ".join(
         f"<strong>{esc(category)} ({count})</strong>"
@@ -856,7 +859,7 @@ remain for historical reference. For unknown prices see <a href="flagged.html">F
 
     recurring_body = f"""
 <section class="section-head"><div><h2>Regularly occurring events</h2>
-<p>Weekly, monthly, seasonal, and annual programs with a recurring cadence stated by the source,
+<p>Weekly, monthly, seasonal, annual, and other source-stated recurring programs with a cadence stated by the source,
 ordered with upcoming dates first.</p></div><p>{len(recurring)} verified rows</p></section>
 {filter_controls(categories, key='recurring')}
 {table_with_filter_rows(recurring, key='recurring', as_of=as_of)}
@@ -994,7 +997,7 @@ linked official page stated. Nothing is inferred from an event's type. A waived 
 <li><a href="https://sfcityguides.org/">San Francisco City Guides</a>: free volunteer-led walking tours (70+ tours, a program of SFPL); individual tours run on varying schedules via their tour finder.</li>
 <li><a href="https://sfrecpark.org/Calendar.aspx">SF Recreation and Park calendar</a>: park programs and seasonal city events; individual dated listings (for example Scaregrove) become special-event rows.</li>
 </ul>
-<p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a fixed cadence (weekly, monthly, seasonal, or annual). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
+<p>Boundaries applied in this snapshot: recurring rows are created only when an organizer, venue, or government page states a recurring cadence (weekly, monthly, seasonal, annual, or another source-stated regularity such as bimonthly, frequent, or drop-in). Candidates seen only in secondary coverage or in roundup articles are not listed until directly verified. Well-known look-alikes outside the City and County are excluded: the Great Dickens Christmas Fair is at the Cow Palace in Daly City, and airport programs at SFO sit in San Mateo County.</p></section>
 <section class="panel"><h3>Line-by-line verification</h3><p>The eight primary free-upcoming rows were rechecked for this session with field-level source evidence in
 <a href="research/review-f65449c5.md">research/review-f65449c5.md</a>. A parallel pass re-fetched 41 official pages on 2026-10-18 — every row still upcoming or ongoing, plus the gaming, music and AI rows and the free recurring programmes — and is logged with quoted source text in
 <a href="research/verification-8c40d1c6.md">research/verification-8c40d1c6.md</a> (patch: <a href="research/patch-8c40d1c6.py">research/patch-8c40d1c6.py</a>); it added six rows, filled four cost fields and recorded six field-level flags. Prior catalog-wide auditing is recorded in
