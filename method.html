@@ -1,20 +1,57 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Method &amp; Sources — SF Events</title><link rel="stylesheet" href="assets/style.css"></head><body><header><div class="wrap"><h1>San Francisco Events</h1><p>City of San Francisco only · Recurring vs. Annual / Special · Every row linked to an official source · Checked 18 Oct 2026</p></div></header><main class="wrap"><nav><a class="" href="index.html">Home</a><a class="" href="recurring.html">Recurring</a><a class="" href="annual-special.html">Annual / Special</a><a class="" href="all-events.html">All events</a><a class="" href="flagged.html">Flagged for Review</a><a class="active" href="method.html">Method & Sources</a></nav><h2>Method &amp; Sources</h2>
-<h3>Rules followed, line by line</h3>
-<ol>
-<li><b>San Francisco only.</b> An event is included only if its official source places it inside the City &amp; County of San Francisco. Regional events with non-SF venues were excluded and logged on the Flagged page.</li>
-<li><b>Two types only.</b> <i>Recurring</i> = repeats weekly, monthly, or as a seasonal series within the year. <i>Annual / Special</i> = once-a-year festival, parade, race, or special edition. Seasonal series that are also annual traditions (e.g. Stern Grove) are classed Recurring because they repeat weekly within their season — the season is stated in the row.</li>
-<li><b>Official sources only.</b> Priority: (1) City &amp; County of San Francisco (<code>sf.gov</code>, <code>sfrecpark.org</code>, <code>sfenvironment.org</code>, <code>sfpl.org</code>); (2) the event’s own organiser/venue (e.g. Foodwise, SF Pride, SFFILM, Exploratorium, California Academy of Sciences); (3) SF Travel, San Francisco’s official destination organisation, for round-ups where the organiser page was not the source checked. Every table row links to the exact page used.</li>
-<li><b>No inference.</b> If a source did not state cost, exact venue, or hours, the field is blank in <code>data/events.json</code> / <code>data/events.csv</code> and rendered as “unverified” on the site. See Flagged page.</li>
-<li><b>Dates.</b> 2026 dates are shown only as stated by the linked source at check date (18 Oct 2026). Where two official sources disagree, the discrepancy is flagged, not silently resolved.</li>
-</ol>
-<h3>Analysis (only what the verified data supports)</h3>
-<ul>
-<li>The verified list is heaviest in <b>Music</b> and <b>Food &amp; Markets / Community</b> recurring programming, and in summer–autumn annual festivals (June–October), reflecting the official sources checked — this is a property of those sources, not a claim about all SF activity.</li>
-<li>Recurring anchors are weekly farmers markets, Thursday museum late-nights (Exploratorium / Cal Academy), library &amp; City Guides programming, and seasonal free concert series (Stern Grove, Yerba Buena Gardens Festival, Sunday Streets).</li>
-<li>Several flagship annual events are free to attend per their official sources (Pride, Stern Grove, Yerba Buena Gardens Festival, Sunday Streets, Hardly Strictly Bluegrass); most others did not state cost on the page checked, so cost is blank — not assumed ticketed.</li>
-</ul>
-<h3>Source publishers used</h3>
-<p>City &amp; County of San Francisco (sf.gov, SF Recreation &amp; Parks, SF Environment, SF Public Library) · SF Travel · Foodwise · Heart of the City Farmers Market · Exploratorium · California Academy of Sciences · SF City Guides · Stern Grove Festival Association · Yerba Buena Gardens Festival · Sunday Streets SF / Livable City · San Francisco Pride · Chinese New Year Festival &amp; Parade · SFFILM. Full URL per row in the tables and in <code>data/events.json</code>.</p>
-<h3>Rebuild &amp; verify</h3>
-<p><code>python3 build.py</code> regenerates all pages from <code>data/events.json</code> (and rewrites <code>data/events.csv</code>). <code>python3 verify.py</code> checks: every row has an official source URL, no blank names/types/categories, SF-only exclusions are not present, internal links resolve to files, and counts match the generated pages.</p>
-</main><footer class="wrap">Scope note: this is a verified, source-linked list from official city, organizer and official destination sources found at check date — not a claim that every private or one-off event in SF is included. Unverifiable fields are left blank in the data and shown as “unverified”. See Method & Sources.</footer><script>const q=document.querySelector("#q"),c=document.querySelector("#cat");function f(){let s=(q?q.value.toLowerCase():""),k=c?c.value:"";document.querySelectorAll("tbody tr").forEach(r=>{r.style.display=(!s||r.textContent.toLowerCase().includes(s))&&(!k||r.textContent.includes(k))?"":"none"})};if(q)q.oninput=f;if(c)c.onchange=f;</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Official-source San Francisco city events catalog, separated into regularly occurring and special events.">
+  <title>Method &amp; sources · San Francisco Events</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><div class="shell">
+  <p class="eyebrow">Official-source catalog · 2026-10-18</p>
+  <h1>San Francisco Events</h1>
+  <p class="lede">City and County of San Francisco only. Regularly occurring events are separated from one-off or dated special events; every listed row links to the source used for verification.</p>
+</div></header>
+<main id="content" class="shell main">
+<nav class="nav" aria-label="Primary"><a class="" href="index.html">Dashboard</a><a class="" href="recurring.html">Regularly occurring</a><a class="" href="special.html">Special events</a><a class="" href="categories.html">Categories</a><a class="" href="all-events.html">All events</a><a class="" href="flagged.html">Flagged for Review</a><a class="active" href="method.html">Method & sources</a></nav>
+
+<section class="section-head"><div><h2>Method, sources, and findings</h2><p>A reproducible snapshot of publicly advertised San Francisco city events.</p></div></section>
+<section class="panel"><h3>Publish rule</h3><ol>
+<li>Each active row needs a title, source-stated date/cadence, San Francisco city location, organizer, and HTTPS source link.</li>
+<li>Accepted sources are official organizers, official venues, government sources, and clearly labeled trusted civic sources. The source type is visible in every row.</li>
+<li>Optional time and admission fields are not inferred. An em dash means the captured source did not state that optional value.</li>
+<li>Multi-city programs, cancelled events, outside-city events, and records missing essential evidence are not added to public tables. They stay on <a href="flagged.html">Flagged for Review</a> with a source and explanation.</li>
+</ol></section>
+<section class="panel"><h3>Findings, bounded by this dataset</h3><ul class="analysis-list">
+<li>The audit has 46 recurring and 8 dated-special verified rows across 8 categories.</li>
+<li>37 recurring rows are annual traditions, alongside 6 weekly and 3 seasonal programs. The classification is based on cadence, not whether an event is free or public.</li>
+<li>The catalog has the most audited rows in Community &amp; culture, Food &amp; markets, and Music &amp; performing arts. This describes the verified source set, not all activity in San Francisco.</li>
+<li>The review register makes scope and cancellation decisions visible instead of deleting difficult records or asserting unsupported city-only coverage.</li>
+</ul></section>
+<section class="panel"><h3>Audit trail and maintenance</h3><p>The complete row-level research matrix is in <a href="research/official-source-audit.md">research/official-source-audit.md</a>. The machine-readable source of truth is <a href="data/events.json">data/events.json</a>; <a href="data/events.csv">data/events.csv</a> is an export. Before changing a row, re-check the official source and update the review reason when evidence is incomplete or conflicting.</p><p>This site is intentionally not an exhaustive claim: private, newly announced, or unlisted events can exist outside this dated source audit.</p></section>
+
+</main>
+<footer class="site-footer"><div class="shell">
+  <p><strong>Scope:</strong> Publicly advertised events and recurring public programs located within the City and County of San Francisco. This is a dated, reproducible catalog; it does not claim to enumerate every private, newly announced, or unlisted event.</p>
+  <p>An em dash means the linked source did not state that optional field in the captured record. Rows needing a decision, scope correction, or an essential missing value are separated on the Flagged for Review page. Read the <a href="method.html">method and findings</a> or the row-level <a href="research/official-source-audit.md">source audit</a>.</p>
+</div></footer>
+<script>
+for (const table of document.querySelectorAll('[data-filter-table]')) {
+  const input = document.querySelector(`#${table.dataset.search}`);
+  const select = document.querySelector(`#${table.dataset.category}`);
+  const filter = () => {
+    const term = (input?.value || '').toLowerCase();
+    const category = select?.value || '';
+    for (const row of table.tBodies[0].rows) {
+      const matchText = !term || row.textContent.toLowerCase().includes(term);
+      const matchCategory = !category || row.dataset.category === category;
+      row.hidden = !(matchText && matchCategory);
+    }
+  };
+  input?.addEventListener('input', filter); select?.addEventListener('change', filter);
+}
+</script>
+</body>
+</html>
