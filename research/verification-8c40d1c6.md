@@ -113,9 +113,16 @@ passed by the check date and are not re-listed as upcoming.
    searching every id, name and source URL on 2026-10-18 returns nothing. The row was added in this
    pass from the SFMTA source instead. Recorded in `COORDINATION.md` and on the Flagged for Review
    page.
-2. **Scaregrove could not be re-read.** `sfrecpark.org/Calendar.aspx` renders its listings with
-   JavaScript; a text fetch returns only the loading state. The row is retained on the earlier
-   verification and flagged for manual re-check (`flag-scaregrove-recheck`).
+2. **Scaregrove — raised in this pass, resolved during the merge (flag withdrawn).**
+   `sfrecpark.org/Calendar.aspx` renders its listings with JavaScript; a text fetch returns only the
+   loading state, so this pass flagged the row for manual re-check. The parallel session
+   `arena/f65449c5-maltaproj7` had already re-pointed the row to the department's own event-detail
+   page, `sfrecpark.org/Calendar.aspx?EID=10822`, which prints **Date: October 30, 2026; Time: 3:00
+   PM – 9:00 PM; Location: Sigmund Stern Grove, 19th Avenue and Sloat Boulevard; Cost: Free** and
+   describes the "annual free Halloween event" with a haunted house, carnival rides, a haunted maze,
+   arts and crafts, live entertainment and food for sale. The free label and the 3–9 p.m. hours are
+   therefore confirmed directly by the city, so no new flag is carried for this row and the row's
+   `notes` field records this page's quoted values.
 3. **Three price gaps remain** where an official page states a ticket requirement but no figure:
    Diplo's Run Club (`flag-diplos-price-unstated`), Exploratorium After Dark
    (`flag-exploratorium-price-unstated`) and SF Ballet's Nutcracker
@@ -134,5 +141,23 @@ passed by the check date and are not re-listed as upcoming.
 * Re-fetched official pages for **41 rows** (all still-upcoming rows in the focus window plus the
   gaming/music/AI rows and the free-recurring programs).
 * 4 cost fills, 1 time-text fill, 6 new published rows, 6 new field-level flags, ~35 note updates.
-* `python3 build.py` → 154 published rows (98 recurring + 56 special), 16 review records, 40 flags.
+* `python3 build.py` → 154 published rows (98 recurring + 56 special), 16 review records, 41 flags.
 * `python3 verify.py` → `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+
+## 6. Merge with the parallel session `arena/f65449c5-maltaproj7` (2026-10-18)
+
+While this pass was being prepared, PRs #27 and #28 landed on `main` from a parallel session working
+the same brief (free-only primary views plus a separate paid page). This branch was integrated with
+`git merge origin/main` and the conflicts resolved as follows:
+
+* `data/events.json` taken from `main` and then rebuilt by re-running the idempotent patch script
+  `research/patch-8c40d1c6.py`, so this pass's 6 rows, 4 cost fills, 1 time fix and 6 flags sit on
+  top of the peer session's data (Cherry Blossom and YBG `admission_source_url` values, the
+  Scaregrove re-source, and `flag-ybg-2026-source-availability` are all retained).
+* `build.py` / `verify.py` taken from `main` and re-extended with this pass's additions (method-page
+  links to this log and the patch script, the dashboard card for the paid page, stable counts
+  154 / 98 / 56 / 16 / 41, and the duplicate-`id` / dangling-`aria-labelledby` guard).
+* One wording change forced by the shared classifier: the Exploratorium row now reads "Tickets sold"
+  (the shared `cost_class` treats "tickets required" as *not stated*), which keeps it in the paid
+  section instead of the unstated one.
+* `flag-scaregrove-recheck` was withdrawn — see irregularity 2 above.

@@ -53,7 +53,7 @@ FIELD_UPDATES: dict[str, dict[str, str]] = {
     },
     "exploratorium-after-dark": {
         "admission": (
-            "Tickets required (18+; advance tickets recommended). Price is not stated on the "
+            "Tickets sold (18+; advance tickets strongly recommended). Price is not stated on "
             "official After Dark page."
         ),
         "notes": (
@@ -394,10 +394,15 @@ FIELD_UPDATES: dict[str, dict[str, str]] = {
             "October 30, 2026 (corroborated by the department's SF Children & Nature organizer "
             "listing and local press). The separate 'Mobile Rec at Scaregrove' 12-8 p.m. listing is "
             "a different program and does not overwrite the main event hours. See Flagged for "
-            "Review. Re-check note 2026-10-18 (arena/8c40d1c6): the department calendar is a "
-            "JavaScript-rendered list, so the individual listing could not be re-read directly in "
-            "this pass; the row is retained on the earlier verification and is flagged for manual "
-            "re-check - see flag-scaregrove-recheck."
+            "Review. Re-verified 2026-10-18 (arena/8c40d1c6) against the department's own "
+            "event-detail page (sfrecpark.org/Calendar.aspx?EID=10822, re-pointed to that page by "
+            "session arena/f65449c5-maltaproj7): its Event Details block prints Date: October 30, "
+            "2026; Time: 3:00 PM - 9:00 PM; Location: Sigmund Stern Grove, 19th Avenue and Sloat "
+            "Boulevard; Cost: Free, and the listing calls it the \"annual free Halloween event\" "
+            "with a haunted house, carnival rides, a haunted maze, arts and crafts, live "
+            "entertainment and food for sale. The free label is confirmed directly by the city "
+            "page, which resolves the earlier limitation (the department's main calendar view is "
+            "JavaScript-rendered), so no flag is carried for this row."
         ),
     },
     "lower-polk-live-2026-10-23": {
@@ -782,30 +787,7 @@ NEW_FLAGS: list[dict] = [
             "Row added in this session and published; the historical ledger entry is left intact "
             "and corrected here and in COORDINATION.md so the discrepancy is visible."
         ),
-    },
-    {
-        "id": "flag-scaregrove-recheck",
-        "event_id": "scaregrove-2026",
-        "event": "Scaregrove (Oct 30, 2026, Sigmund Stern Grove)",
-        "issue": (
-            "Re-check limitation: the linked source (SF Recreation and Park Department calendar) "
-            "is a JavaScript-rendered list, so the individual Scaregrove listing could not be "
-            "re-read directly in the 2026-10-18 pass; the page returns its loading state to a "
-            "text-only fetch. The row is retained on the earlier verification (date, 3-9 p.m. "
-            "hours, Sigmund Stern Grove, free admission) and needs a manual confirmation against "
-            "the rendered calendar or the department's programme listing before the event date."
-        ),
-        "sources": [
-            {
-                "label": "SF Recreation and Park Department calendar (JS-rendered)",
-                "url": "https://sfrecpark.org/Calendar.aspx",
-            }
-        ],
-        "disposition": (
-            "Row retained as verified from the prior pass and flagged for manual re-check; no "
-            "value changed in this session."
-        ),
-    },
+    }
 ]
 
 

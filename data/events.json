@@ -363,7 +363,7 @@
       "time_text": "6pm–10pm",
       "location": "Exploratorium, Pier 15, San Francisco",
       "organizer": "Exploratorium",
-      "admission": "Tickets required (18+; advance tickets recommended). Price is not stated on the official After Dark page.",
+      "admission": "Tickets sold (18+; advance tickets strongly recommended). Price is not stated on official After Dark page.",
       "source_url": "https://www.exploratorium.edu/visit/calendar/after-dark",
       "source_label": "Exploratorium — After Dark calendar page",
       "source_authority": "Official organizer",
@@ -1044,6 +1044,7 @@
       "location": "Japantown, San Francisco",
       "organizer": "Northern California Cherry Blossom Festival",
       "admission": "Free",
+      "admission_source_url": "https://sfcherryblossom.org/about/",
       "source_url": "https://sfcherryblossom.org/",
       "source_label": "Cherry Blossom Festival official site",
       "source_authority": "Official organizer",
@@ -1484,6 +1485,7 @@
       "location": "Yerba Buena Gardens, San Francisco",
       "organizer": "YBG Festival",
       "admission": "Free",
+      "admission_source_url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf",
       "source_url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals",
       "source_label": "SF Travel press release — 2026 live music lineup (June 11, 2026)",
       "source_authority": "Trusted civic source",
@@ -1824,12 +1826,12 @@
       "location": "Sigmund Stern Grove (19th Avenue & Sloat Boulevard), San Francisco",
       "organizer": "San Francisco Recreation and Park Department",
       "admission": "Free",
-      "source_url": "https://sfrecpark.org/Calendar.aspx",
-      "source_label": "SF Recreation and Park calendar",
+      "source_url": "https://sfrecpark.org/Calendar.aspx?EID=10822",
+      "source_label": "SF Recreation & Parks — Scaregrove 2026 event details",
       "source_authority": "Government source",
       "status": "verified",
       "review_reason": "",
-      "notes": "SF Recreation and Parks calendar lists Scaregrove 3-9 p.m. at Sigmund Stern Grove on October 30, 2026 (corroborated by the department's SF Children & Nature organizer listing and local press). The separate 'Mobile Rec at Scaregrove' 12-8 p.m. listing is a different program and does not overwrite the main event hours. See Flagged for Review. Re-check note 2026-10-18 (arena/8c40d1c6): the department calendar is a JavaScript-rendered list, so the individual listing could not be re-read directly in this pass; the row is retained on the earlier verification and is flagged for manual re-check - see flag-scaregrove-recheck."
+      "notes": "SF Recreation and Parks calendar lists Scaregrove 3-9 p.m. at Sigmund Stern Grove on October 30, 2026 (corroborated by the department's SF Children & Nature organizer listing and local press). The separate 'Mobile Rec at Scaregrove' 12-8 p.m. listing is a different program and does not overwrite the main event hours. See Flagged for Review. Re-verified 2026-10-18 (arena/8c40d1c6) against the department's own event-detail page (sfrecpark.org/Calendar.aspx?EID=10822, re-pointed to that page by session arena/f65449c5-maltaproj7): its Event Details block prints Date: October 30, 2026; Time: 3:00 PM - 9:00 PM; Location: Sigmund Stern Grove, 19th Avenue and Sloat Boulevard; Cost: Free, and the listing calls it the \"annual free Halloween event\" with a haunted house, carnival rides, a haunted maze, arts and crafts, live entertainment and food for sale. The free label is confirmed directly by the city page, which resolves the earlier limitation (the department's main calendar view is JavaScript-rendered), so no flag is carried for this row."
     },
     {
       "id": "spring-awakening-art-cumbia-2026",
@@ -3976,6 +3978,27 @@
       "disposition": "Cost structure published; individual prices left blank. Flagged for review, nonblocking."
     },
     {
+      "id": "flag-ybg-2026-source-availability",
+      "event_id": "ybg-festival-2026",
+      "event": "Yerba Buena Gardens Festival (2026 season)",
+      "issue": "The linked SF Travel page (the city's official destination-marketing organization) reports a free festival season May 9–November 13, 2026. The organizer's homepage returned only a reCAPTCHA response during this review, so the individual remaining performance schedule could not be independently checked against the organizer. The city Arts Commission describes its programs as admission-free, but does not enumerate specific 2026 show dates. A season end date is not a promise of a performance today.",
+      "sources": [
+        {
+          "label": "SF Travel — 2026 live music release (date window and free admission)",
+          "url": "https://www.sftravel.com/media/press-release/san-francisco-amplifies-its-2026-live-music-scene-expanded-lineup-festivals"
+        },
+        {
+          "label": "SF Arts Commission FY26 funding recommendations (free programming)",
+          "url": "https://media.api.sf.gov/documents/FY26_Funding_Recommendations_-_Corrected.pdf"
+        },
+        {
+          "label": "Yerba Buena Gardens Festival — official organizer (schedule inaccessible during review)",
+          "url": "https://ybgfestival.org/"
+        }
+      ],
+      "disposition": "Season-level row retained with trusted civic source and flagged. Re-check individual performances against organizer before visiting; no unsourced individual dates added."
+    },
+    {
       "id": "flag-diplos-price-unstated",
       "event_id": "diplos-run-club-5k-sf-2026",
       "event": "Diplo's Run Club San Francisco 5K (2026)",
@@ -4051,19 +4074,6 @@
         }
       ],
       "disposition": "Row published with a blank cost (the row appears under “Cost not stated” on Flagged for Review); add a fee only when an official organiser page states one."
-    },
-    {
-      "id": "flag-scaregrove-recheck",
-      "event_id": "scaregrove-2026",
-      "event": "Scaregrove (Oct 30, 2026, Sigmund Stern Grove)",
-      "issue": "Re-check limitation: the linked source (SF Recreation and Park Department calendar) is a JavaScript-rendered list, so the individual Scaregrove listing could not be re-read directly in the 2026-10-18 pass; the page returns its loading state to a text-only fetch. The row is retained on the earlier verification (date, 3-9 p.m. hours, Sigmund Stern Grove, free admission) and needs a manual confirmation against the rendered calendar or the department's programme listing before the event date.",
-      "sources": [
-        {
-          "label": "SF Recreation and Park Department calendar (JS-rendered)",
-          "url": "https://sfrecpark.org/Calendar.aspx"
-        }
-      ],
-      "disposition": "Row retained as verified from the prior pass and flagged for manual re-check; no value changed in this session."
     },
     {
       "id": "flag-ledger-missing-cornhole-row",
