@@ -454,3 +454,12 @@ All events verified against official sources on 2026-10-18. Key official sources
 ## Integration publication (I3) — recorded after merge — `arena/d71d78cc-maltaproj7`
 
 (Recorded in the merge/deploy entry below.)
+
+## Integration publication (I3) — PR #13 merged + Pages confirmed — `arena/d71d78cc-maltaproj7` — 2026-10-18 (UTC)
+
+- **Pull request:** [#13](https://github.com/buffedlizard55-lab/MaltaProj7/pull/13), "Final integration: official-source re-verification, audit fixes, flags publication", **MERGED** 2026-10-18T03:46:14Z, merge commit [`160b1f2`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/160b1f2302294b0b77018652d1080d29271d5691) (merged without waiting for approval, per the project brief).
+- **Deployment:** both GitHub deployment paths completed **successfully** for the merge: [Pages workflow run 39094786485](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39094786485) (Deploy static site to GitHub Pages) and [pages-build-deployment 39094786011](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39094786011). GitHub Pages API reports `status: built` at https://buffedlizard55-lab.github.io/MaltaProj7/.
+- **Deployed content spot-check** (cache-busted `?v=160b1f2`): dashboard reports 71 regularly occurring / 19 special / 8 categories / 13 review records with dynamic cadence and source-authority summaries; Flagged for Review shows the 13-record review register plus the 13 field-level flags with source links.
+- **Final dataset:** 103 records = 90 published city-only rows (71 recurring / 19 special) + 13 review-register rows + 13 field-level flags. `python3 build.py && python3 verify.py` pass (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`), including the hardened semantic guards.
+- **I1–I3 are complete.** No open claims remain in this session. Remaining review-register items and field flags are published, source-linked, and explicitly nonblocking, exactly as the brief requires.
+
