@@ -27,6 +27,15 @@ Rules honored: small frequent commits; `git pull --rebase` before every push; no
 
 ---
 
+## Publication record — S3 complete — `arena/2088b727-maltaproj7` — 2026-10-18 (UTC)
+
+- **Pull request:** [#23](https://github.com/buffedlizard55-lab/MaltaProj7/pull/23) "Line-by-line re-verification of the full catalog; no-inference fixes; SF Pride 2026 row; 4 new flags" — **MERGED** 2026-10-18 (merge without waiting for approval per the brief). The PR body carries the summary of changes, sources used, and flagged irregularities.
+- **Merge reconciliation:** PRs #18–#22 (sessions 5e333a6e, 646f6727, e969f4df) were merged into this branch first; conflicts in `COORDINATION.md`, `data/events.json`, `verify.py`, and generated HTML/CSV were resolved by union (peer boards and peer rows kept in full; this session's 8 row edits, +1 row, +4 flags applied on top). Peer correction requests dispositioned in `research/reverification-2088b727.md` (integration addendum). **No peer work discarded.** Rebase-vs-merge note: this branch now contains a merge commit, so later syncs should use `git pull --no-rebase` (same protocol note sessions 5e333a6e/e969f4df logged).
+- **Final catalog:** 156 events = 140 published (95 recurring + 45 special) + 16 review records; 29 field-level flags; 8 categories. `python3 build.py && python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED.
+- **Deploy:** 'Deploy static site to GitHub Pages' run 39104472610 → success after merge; Pages API `status: built` at https://buffedlizard55-lab.github.io/MaltaProj7/ .
+- **Evidence:** `research/reverification-2088b727.md` (S1 line-by-line log, batches 1–15 + integration addendum). Flagged irregularities (29 flags + 16 review records) are published on the site's Flagged for Review page and do not block merge.
+- **Open items handed to future passes (nonblocking, all documented):** past/completed edition indicator for the tables; optional field fills listed by session e969f4df (#6); authority-label taxonomy split (#9); Noise Pop / SFFILM / SF Marathon scope holds; organizer confirmations listed on Flagged for Review.
+
 # Active coordination — session `arena/e969f4df-maltaproj7` (2026-10-18)
 
 **Session ID:** `arena/e969f4df-maltaproj7` (Arena pins this session to that branch, so the brief's `session-<id>/<task>` naming cannot be used — same documented deviation as every earlier session).
