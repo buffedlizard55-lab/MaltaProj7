@@ -11,7 +11,7 @@
 | G1 | Coverage-gap review: identify major recurring/special SF events absent from `data/events.json`; add only rows confirmable from an official organizer/venue/government page (direct fetch) | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json`, `research/coverage-gap-646f6727.md` (new) |
 | G2 | Spot re-verification of existing rows with time-sensitive sources + review register; correct/flag drift | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `data/events.json` (flags), `research/coverage-gap-646f6727.md` |
 | G3 | Rebuild site, update `verify.py` count guards with audit entry, confirm no broken local links | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | generated HTML/CSS/CSV via `build.py`, `verify.py`, `research/official-source-audit.md`, `README.md` |
-| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | in progress | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
+| G4 | Final integration: PR to main, merge, confirm Pages deploy, record links here | DONE | arena/646f6727-maltaproj7 | 2026-10-18T06:00Z | `COORDINATION.md` |
 
 Rules honored: `git pull --rebase` before every push; small commits; unverified values stay blank and are flagged; nothing marked verified without an inspected official source link.
 
@@ -31,7 +31,13 @@ Rules honored: `git pull --rebase` before every push; small commits; unverified 
 
 **Build/verify:** `python3 build.py` → Built 104 published events: 85 recurring, 19 special, 8 categories; 16 review records. `python3 verify.py` → ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED. Local link crawl of all generated HTML: 0 broken links. `verify.py` guards 93/74/19/12 → 104/85/19/16 with entry in `research/official-source-audit.md`.
 
-G4 (PR → merge → Pages confirmation) recorded below once complete.
+## Publication record — G4 complete — `arena/646f6727-maltaproj7` — 2026-10-18 (UTC)
+
+- **Pull request:** [#18](https://github.com/buffedlizard55-lab/MaltaProj7/pull/18) "Coverage-gap pass: 11 official-source SF events, 4 review records, 4 flags" — **MERGED** 2026-10-18T05:53:58Z (merge commit [`7859a1f`](https://github.com/buffedlizard55-lab/MaltaProj7/commit/7859a1fd265dcd6585b6a40ee61b2c4f0ab7fcc4)); `mergeable: MERGEABLE / CLEAN` at merge time; merged without waiting for approval per the brief.
+- **Deploy:** [Deploy static site to GitHub Pages run 39102137662](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39102137662) → success (workflow runs `build.py && verify.py` before upload); [pages build and deployment 39102137123](https://github.com/buffedlizard55-lab/MaltaProj7/actions/runs/39102137123) → success. Pages API: `status: built`, https://buffedlizard55-lab.github.io/MaltaProj7/ .
+- **Live spot-check** (cache-busted `?v=7859a1f`): dashboard shows 87 regularly occurring / 20 special / 8 categories / 16 flagged for review; Professional & academic now 10 rows; Flagged for Review carries the 16 review records plus 20 field flags with source links.
+- **Open items for the user (nonblocking, all on Flagged for Review):** Union Street Festival organizer page to be identified by a human; SF Dyke March 2027 location; Dreamforce/Disrupt venues; Bay to Breakers page-copy discrepancy.
+- No open claims remain for this session.
 
 ---
 
