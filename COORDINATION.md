@@ -21,7 +21,7 @@ PASSED (162 published / 102 recurring / 60 special / 17 review / 51 flags) on `2
 | W1 | Coverage-gap closure: discover NEW free SF events from official organizer/venue/government sources — priority (a) free gaming, (b) free AI, (c) free music, (d) free dated events 2026-10-19 → 2027-02-28 missing from the catalog; quote the official wording for every value; reject anything unconfirmable | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `research/verification-2e5715f9.md`, `research/patch-2e5715f9.py` |
 | W2 | Additive data patch only: new rows + new flags (never edits peer-sourced field values); count-line updates in `verify.py` and `README.md` only (surgical, conflict-friendly) | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json`, `verify.py` (count guards), `README.md` (counts), generated `*.html` via `build.py` |
 | W3 | Disposition updates for `flag-free-gaming-coverage-gap` / `flag-free-ai-coverage-gap` **only if W1 closes them** (with sources); otherwise leave intact and add new flags for anything irregular found | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `data/events.json` (flags), `COORDINATION.md` |
-| W4 | Final integration for this branch: `git pull --rebase`/merge peer work without discarding it, rebuild, run full `verify.py` + `tests/test_verifier.py`, crawl local links, PR to `main`, merge without waiting, confirm Pages deploy, record PR + deploy links | **in progress** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `COORDINATION.md`, PR link, Pages runs |
+| W4 | Final integration for this branch: `git pull --rebase`/merge peer work without discarding it, rebuild, run full `verify.py` + `tests/test_verifier.py`, crawl local links, PR to `main`, merge without waiting, confirm Pages deploy, record PR + deploy links | **done** | arena/2e5715f9-maltaproj7 | 2026-10-18T16:58Z | `COORDINATION.md`, PR link, Pages runs |
 
 ## Shared-file protocol (agreed unilaterally, visible to peers)
 
@@ -269,6 +269,27 @@ Workshop Oct 28 — cost unstated) and +5 flags). `git merge origin/main` stoppe
 else 16. `python3 build.py && python3 verify.py` and `python3 -m unittest tests.test_verifier`
 (11 tests) pass on the merged tree. The dated-free-AI gap is now closed by the peer's Daytona row;
 the dated-free-gaming gap remains honestly open (flagged).
+
+
+## Publication record — arena/2e5715f9-maltaproj7 (2026-10-18)
+
+- **PR #43** — "Coverage-gap closure + peer-work integration: free gaming/AI/music programs, NYE
+  tradition (176/111/65/18/64)" — https://github.com/buffedlizard55-lab/MaltaProj7/pull/43 —
+  **MERGED** (merge commit on `main`). First merge attempt stopped on `main` movement (peer PR #42);
+  `COORDINATION.md` was union-merged with the peer publication record — nothing discarded — and the
+  PR was re-pushed and merged once GitHub reported `MERGEABLE/CLEAN`.
+- **Pages deployment:** workflow run **39150363727** ("Deploy static site to GitHub Pages",
+  merge commit of PR #43) — **completed/success** (test gate + deploy); `pages-build-deployment`
+  run 39150363405 completed; `gh api repos/.../pages` reports **status: built** at
+  https://buffedlizard55-lab.github.io/MaltaProj7/ .
+- **Live content spot-check (fetched from the deployed URL after the build):** executive summary
+  lists Daytona & Oracle AI Builders (Oct 20), From the E (Oct 23), Afro-Filipino Jazz (Oct 24),
+  Lit Crawl, Scaregrove, Foodwise/Halloween Hoopla (Oct 31), Diwali (Nov 8), Noontime Concerts
+  (Nov 10), Bhangra & Beats (Nov 13) and the ongoing Hunters Point/YBG season entries; focus blocks
+  render **Gaming 0 (honest notice) / Music 6 / AI 1 / Everything else**; every row carries its
+  official source link and the new admission-evidence links (MAPP, Noontime, SFPL, Daytona).
+- Final state on `main`: **176 published rows (111 recurring, 65 special), 18 review records,
+  64 field-level flags, 9 categories; 22 dated free-upcoming rows.**
 
 ## Session record — arena/2e5715f9-maltaproj7 (W1–W4)
 
