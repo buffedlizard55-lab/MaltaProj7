@@ -301,3 +301,34 @@ This matrix records **only what this session directly corroborated**, not a blan
 | I3 | Final PR to main, merge, confirm Pages, record results | unclaimed | arena/d71d78cc-maltaproj7 | COORDINATION.md, .github/** |
 
 - Scope is non-overlapping: no other session holds open claims (all prior boards are historical/done). Shared outputs (table data, index, navigation) are updated here as the designated final integration session, as the project brief requires.
+
+## Final integration completed — `arena/d71d78cc-maltaproj7` — 2026-10-18 (UTC)
+
+| # | Task | Status | Result |
+|---|------|--------|--------|
+| I1 | Apply pending audit findings + line-by-line source re-verification | **done** | All 77 records' sources re-fetched from official publisher pages on 2026-10-18; 38 rows corrected/completed, 18 rows added (each from an official source), review-register dispositions confirmed. |
+| I2 | Publish residual flags on Flagged for Review; rebuild + verify site | **done** | 13 field-level flags registered in `data/events.json` `flags` and rendered on `flagged.html` with source links; `python3 build.py && python3 verify.py` pass (`ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`). |
+| I3 | Final PR to main, merge, confirm Pages, record results | done at merge time | PR and deploy links recorded in the entry below this one after the merge. |
+
+**Integration record (I1/I2 details):**
+
+- **Verification approach:** each `source_url` in `data/events.json` was re-fetched on 2026-10-18 via the sandbox fetch tool and the row's core claims (name, date/cadence, city location) were confirmed in the returned text. Values not stated by the linked source are blank. Nothing was inferred.
+- **Audit dispositions applied** (full table preserved in `research/official-source-audit.md`, section "Final integration re-verification"):
+  - `fillmore-jazz-festival-2026` — source replaced with https://www.fillmorejazzfest.com/ (old domain is no longer organizer-controlled); July 4–5, 2026 per SF Travel + organizer press; domain swap flagged.
+  - `international-ocean-film-festival-2026` — kept; re-sourced to the Fort Mason venue listing (organizer /festival and /awards are 404); $20–450; posted Saturday hours copied verbatim and flagged; San Rafael First Look (outside SF) excluded.
+  - `world-arts-west-dance-festival-2026` — filled from the dated Presidio Trust press release (Sep 6, 2026, 1–4pm, East Meadow at Presidio Tunnel Tops, free); event URL 404 noted.
+  - `sf-marathon-2026` — July 24–26, 2026; SF-scoped components kept; full marathon & 1st half cross the Golden Gate Bridge into the Marin headlands side (flagged as not wholly city-contained); organizer 2027 header vs 2026 body flagged.
+  - `fleet-week-sf-2026` — component dates from the organizer (ship tours Oct 7–12, air show Oct 9–11 noon–4pm, Fleet Fest Oct 10–11) with the SF Travel umbrella Oct 4–12; umbrella discrepancy flagged (organizer calendar headings Oct 6–12, no posted events).
+  - `comedy-day-2026` — **date corrected Sep 13 → Sunday, September 20, 2026** (SF Rec & Parks Tentative Calendars + SF Travel + organizer edition page; organizer states the date only in a banner image). Sep 13 was Opera in the Park's date at the same meadow. Correction flagged for manual review.
+  - `sf-international-arts-festival-2026` — dates corrected to **April 29–May 10, 2026** per the official 2026 archive.
+  - `sf-fringe-2026` — stays `needs_review`; source authority relabeled "Legacy source — NOT verified official" (sffringe.org now serves unrelated 404 content).
+  - Confirm-fills completed for Italian Heritage Parade (Oct 11, 2026 retrospective), SF Porchfest (May 30, 2026, 8th annual, free), Sundown Cinema (Jul 24, 7pm, Civil War Parade Ground, free), Scaregrove (Oct 30, 3–9pm, free), Foodwise Black Holiday Market (Dec 12, 9am–2pm), Cloudflare Connect (Oct 19–21, Moscone West, $595), INFORMS (Nov 1–4, Moscone South & Marriott Marquis), Microsoft Ignite (Nov 17–20, Moscone Center), AGU (Dec 7–11, San Francisco — venue precision left blank), Muni Heritage Weekend (Sep 19–20, 10am–4pm, 77 Steuart, free), Juneteenth trio (Jun 7/13/20 per SF.gov + Foodwise), Haight-Ashbury Street Fair (Sep 20, Haight Masonic–Stanyan per SFMTA), SF Aloha Run (**flagged**: organizer site unreachable at re-verification; values retained from earlier capture).
+- **Coverage additions (officially listed, verified):** Presidio Trust 2026 summer lineup (Memorial Day Commemoration, BrewFest, Intertribal Dance Gathering, Soccer Festival, Community Arts Market, Fiesta en el Parque, Deaf Dance Festival, Spring Awakening, and the two Presidio exhibitions), SF.gov Mayor's Juneteenth Kickoff and Bayview Father's Day Festival, and the Carnaval SF season events (Fat Tuesday kickoff, King & Queen competition, CubaCaribe 20th annual, Pride Night, CalAcademy Nightlife, Small Business Mixer).
+- **Dataset after integration:** 77 records = 72 published (55 recurring / 17 special) + 5 review-register; 13 field-level flags; 8 categories. Machine-readable source of truth: `data/events.json`; reproducible patch: `research/integration-patch-2026-10-18.py`.
+- **Standards preserved:** every published row links an official organizer/venue/government (or labeled trusted civic) source; no value was inferred; unconfirmable values stay blank or are flagged; cancelled/multi-city/outside-city items remain review-only and never enter city-only tables.
+
+---
+
+## Integration publication (I3) — recorded after merge — `arena/d71d78cc-maltaproj7`
+
+(Completed at merge time; see the merge/deploy entry appended below.)
