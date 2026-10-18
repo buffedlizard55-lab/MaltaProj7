@@ -1,3 +1,21 @@
+# Active coordination — session `arena/df3b1811-maltaproj7` (2026-10-18)
+
+**Session ID:** `arena/df3b1811-maltaproj7` (Arena-fixed branch; the requested `session-<id>/<task>` worktree naming is unavailable in this pinned session. All work will stay on the platform branch.)
+
+**Pre-claim inspection (2026-10-18 UTC):** Read the full shared task board; the prior session entries are historical and published. `gh pr list --state open` returned no open PRs. GitHub Pages reports `status: built` at https://buffedlizard55-lab.github.io/MaltaProj7/ (latest Pages workflow run 39104525575 succeeded). Baseline `python3 build.py && python3 verify.py` passes (140 published rows: 95 recurring, 45 special; 16 review records; 29 flags; 8 categories). No competing live claim was found. This session claims the sole integration role below; shared data, index/navigation, and generated output will only be changed by this owner.
+
+## Task board — session `arena/df3b1811-maltaproj7`
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| F1 | Review current/future rows for near-term dates and explicit admission/cost evidence; directly verify relevant official sources; research and add only city-only, source-confirmed upcoming gaming, AI, music, and free events; log unresolved items rather than infer | in progress | `arena/df3b1811-maltaproj7` | 2026-10-18 | `data/events.json`, `research/current-events-refresh-2026-10-18.md` (new), `COORDINATION.md` |
+| F2 | Improve the dashboard executive summary (current/upcoming-first), chronological browse order, explicit cost/free/unverified labeling and filters, and mobile table usability; strengthen local verification tests and update project docs | unclaimed | `arena/df3b1811-maltaproj7` | 2026-10-18 | `build.py`, `verify.py`, `assets/style.css`, generated root/category HTML and `data/events.csv`, `README.md` |
+| F3 | Final integration: rebuild, run all local checks, inspect internal links and generated output, create PR from this fixed branch to `main`, merge only after checks pass, confirm GitHub Pages deployment, and record results | unclaimed | `arena/df3b1811-maltaproj7` | 2026-10-18 | `COORDINATION.md`, `.github/**` |
+
+**Rules:** preserve all existing peer work; only claim/modify the scopes above; every new/changed event fact must be directly supported by an official organizer, venue, or government source; leave unconfirmed values empty and surface them as unverified; keep the city-only boundary explicit; dated snapshot is 2026-10-18. Do not claim the catalog is exhaustive. Before each push, sync the fixed branch with `git pull --rebase` when its remote ref exists. The fixed Arena branch is the sole branch used; no alternate worktree/branch will be created.
+
+---
+
 # Active coordination — session arena/2088b727-maltaproj7 (2026-10-18)
 
 **Session ID:** arena/2088b727-maltaproj7 (platform-fixed branch; the brief's `session-<id>/<task>` naming cannot be used because Arena pins this session to its branch — same deviation every prior session logged).
