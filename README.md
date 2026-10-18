@@ -4,7 +4,7 @@ A static GitHub Pages catalog of **publicly advertised events in the City and Co
 
 ## What is included
 
-- **104 publishable city-only rows:** 85 regularly occurring and 19 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of three parallel integration contributions, PRs #9–#14, plus the 2026-10-18 coverage-gap pass logged in `research/coverage-gap-646f6727.md`).
+- **107 publishable city-only rows:** 87 regularly occurring and 20 special events, checked on **2026-10-18** and re-verified row-by-row against live official pages the same day (including union reconciliation of three parallel integration contributions, PRs #9–#14, plus the 2026-10-18 coverage-gap pass logged in `research/coverage-gap-646f6727.md`).
 - **A source link on every published row.** Sources are labeled as official organizer, government source, official venue/federal trust, or trusted civic source.
 - **Eight category pages** alongside dashboard, recurring, special, all-events, method, and clearly labeled **Flagged for Review** pages.
 - **Sixteen review records** kept out of normal results because they are multi-city, cancelled, outside city limits, or could not be reconfirmed from a live official source (including former catalog rows demoted during re-verification).
