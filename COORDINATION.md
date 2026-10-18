@@ -377,3 +377,12 @@ All events verified against official sources on 2026-10-18. Key official sources
 3. SF Opera in the Park cancelled (Sep 13, 2026) due to strike — retained as review-only
 4. SFFILM Festival and SFJFF are multi-city — retained as review-only
 5. SF Fringe Festival source (sffringe.org) redirects to unrelated domain — retained as review-only
+
+### Publication result
+
+- Pull request [#9](https://github.com/buffedlizard55-lab/MaltaProj7/pull/9), **Add 16 verified SF events, fix source URLs and data corrections**, merged at 2026-10-18.
+- GitHub Actions deployment run **39092203072** completed successfully.
+- GitHub Pages reports `built`. Live site verified at https://buffedlizard55-lab.github.io/MaltaProj7/
+- Dashboard shows: 62 recurring / 8 special / 8 categories / 5 review
+- All local catalog, source-link, and navigation checks passed
+- Site is live and operational
