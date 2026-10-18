@@ -2,18 +2,54 @@
 
 **Branch constraint:** Arena pins this session to `arena/56415e75-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used (same documented deviation as every prior session in this ledger). All work stays on this branch.
 
-**Pre-claim inspection (2026-10-18T11:0xZ):** `origin/main` at `68a0516` (merge of PR #26). `gh pr list --state open` → none. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
+**Pre-claim inspection (2026-10-18T10:58Z):** `origin/main` at `68a0516` (merge of PR #26). `gh pr list --state open` → none. Baseline `python3 build.py && python3 verify.py` → `Built 148 published events: 98 recurring, 50 special, 9 categories; 16 review records; 54 upcoming; 56 free or partly free.` / `ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED`.
 
 **Live peer detected:** branch `arena/f65449c5-maltaproj7` (commit `9e1b0e3`, 2026-10-18T10:56Z) has claimed **F1** (`build.py`, `assets/style.css`, generated `*.html`, `categories/*.html`, `verify.py`, `README.md`) and **F2** (`research/review-f65449c5.md`). **This session does not touch any file in F1/F2 scope** and will not create `research/review-f65449c5.md`.
 
 | ID | Task | Status | Owner | Claimed (UTC) | File scope |
 | --- | --- | --- | --- | --- | --- |
-| G1 | Line-by-line official-source verification pass over the published catalog (free gaming / music / AI rows first, then every upcoming row), correcting or blanking any value not confirmable from the linked official publisher | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
-| G2 | Coverage pass: add newly verified **free** SF events (gaming, music, AI first) with official-publisher links; demote/flag anything that cannot be confirmed | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
-| G3 | Analysis & findings register (counts by cost/date/category, irregularities with source links) for the site's findings sections | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `research/findings-56415e75.md` |
-| G4 | Integration (F3) if still unclaimed when G1–G3 land: merge peer work, rebuild, re-verify line by line, PR to `main`, merge, confirm Pages deploy, record links | **unclaimed (deferred)** | — | — | `COORDINATION.md` |
+| G1 | Line-by-line official-source verification pass over the published catalog (free gaming / music / AI rows first, then every upcoming row), correcting or blanking any value not confirmable from the linked official publisher | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
+| G2 | Coverage pass: add newly verified **free** SF events (gaming, music, AI first) with official-publisher links; demote/flag anything that cannot be confirmed | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `data/events.json`, `research/verification-56415e75.md` |
+| G3 | Analysis & findings register (counts by cost/date/category, irregularities with source links) for the site's findings sections | **done** | arena/56415e75-maltaproj7 | 2026-10-18 | `research/findings-56415e75.md` |
+| G4 | Integration (F3): merge peer work, rebuild, re-verify line by line, PR to `main`, merge, confirm Pages deploy, record links | **in progress** | arena/56415e75-maltaproj7 | 2026-10-18 | `COORDINATION.md`, `verify.py` (count guards only), generated `*.html`, `data/events.csv` |
 
-**Handoff note for the integration session (F3/G4):** G1–G3 change `data/events.json` only. Because `build.py` is in the peer's F1 scope, this session does **not** commit regenerated `*.html` or `data/events.csv`. The integration session must run `python3 build.py && python3 verify.py` after merging so generated pages and the CSV match the merged dataset.
+## Session record — arena/56415e75-maltaproj7 (G1–G3)
+
+- **G1 — Official-source verification (live page reads, 2026-10-18):** re-verified 14 rows against the
+  live official publisher pages — Hardly Strictly Bluegrass, Fillmore Jazz Festival (2026 and 2027
+  editions), Lit Crawl SF, Scaregrove, GDC Festival of Gaming 2027, Day of the Devs SF Edition 2026,
+  SF Pride 2027, Chinese New Year Parade 2027, Italian Heritage Parade 2027, Bay to Breakers 2027,
+  Cherry Blossom Festival 2027, Sunday Streets 2026, YBG Festival 2026. Row-by-row results, the exact
+  official URLs read, and the two corrections applied (Lit Crawl hours/cost wording; GDC pass-rate
+  window whose super-early deadline had already passed) are in `research/verification-56415e75.md`.
+- **G2 — Free-event coverage:** +4 verified rows, all free, all city-only, all with an official
+  publisher link — Sunday Streets Excelsior finale (Oct 18), Afro-Filipino Jazz Project at YBG
+  (Oct 24), Halloween Hoopla at YBG (Oct 31), SF Tech Week SFPL programs (May 9–16). Two candidates
+  were rejected rather than published (Boo at the Zoo — no official admission statement; SFPL branch
+  gaming listings — past/cancelled or no quotable cadence). Reproducible patch:
+  `research/patch-56415e75.py`.
+- **G3 — Findings register:** `research/findings-56415e75.md`. Headline: 51 free + 10 partly free of
+  152 published rows; **74 rows (49%) have no price published by their official source** and are
+  labelled *Cost not stated*, never free; only 2 of the 17 gaming/AI rows are free.
+- **Flags:** +4 (`flag-litcrawl-suggested-donation`, `flag-sunday-streets-route-conflict`,
+  `flag-sunday-streets-free-wording`, `flag-ybgf-season-end-source`) → 38 total. All nonblocking.
+
+### Cross-session request (file required because the files are in F1 scope)
+
+G1–G3 change `data/events.json` only. `verify.py` and `build.py` are inside the scope claimed by
+`arena/f65449c5-maltaproj7` (F1), so this session did **not** edit them and did **not** commit
+regenerated `*.html` or `data/events.csv` (they were restored to `HEAD` after the local test build).
+The integration step (G4/F3) must therefore:
+
+1. `python3 research/patch-56415e75.py` is already applied in this branch — no need to re-run.
+2. Update the three stale count guards in `verify.py`: published `148 → 152`,
+   recurring/special `98 / 50 → 100 / 52`, flags `34 → 38`.
+3. Run `python3 build.py && python3 verify.py` so generated pages and the CSV match the merged data.
+
+Verified locally on 2026-10-18: with the data patched, `python3 build.py` succeeds
+(`Built 152 published events: 100 recurring, 52 special, 9 categories; 16 review records; 57 upcoming;
+61 free or partly free.`) and `python3 verify.py` fails **only** on those three count guards — all
+source-link, page-count, date-ordering, cost-label and navigation checks pass.
 
 ---
 
