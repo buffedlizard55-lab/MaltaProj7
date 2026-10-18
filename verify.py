@@ -244,6 +244,17 @@ def main() -> int:
     for expected in (f">{len(published)}<", f">{len(recurring)}<", f">{len(special)}<", f">{len(review)}<"):
         if expected not in index_html:
             error(f"dashboard missing expected metric {expected}")
+    # Dashboard prose summaries must cover every cadence and authority present
+    # (guards against hardcoded summary sentences silently dropping a group).
+    from collections import Counter as _Counter
+    for cadence, count in _Counter(event["cadence"] for event in recurring).items():
+        if f"<strong>{count} {cadence}</strong>" not in index_html:
+            error(f"dashboard cadence summary missing {count} {cadence}")
+    for authority, count in _Counter(event["source_authority"] for event in published).items():
+        if f"<strong>{count} {html.escape(authority.lower())}</strong>" not in index_html:
+            error(f"dashboard authority summary missing {count} {authority}")
+    if "Official source ↗" in index_html or "Official source ↗" in all_html:
+        error("generated pages still use the inaccurate 'Official source' link text")
 
     if not (ROOT / "research" / "official-source-audit.md").exists():
         error("missing research/official-source-audit.md")
