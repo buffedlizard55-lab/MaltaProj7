@@ -46,26 +46,47 @@ no work lost) and replaced with `git merge origin/main`.
 2. `COORDINATION.md` was merged by hand: all three peer boards and every historical section are retained verbatim,
    with this session's board prepended (this file).
 3. This session's **unique, additive** work was then re-applied on the merged baseline:
-   - **4 data records** that exist in no peer branch — Hunters Point Shipyard Fall Open Studios (Oct 17–18, 2026,
+   - **5 data records** that exist in no peer branch — Hunters Point Shipyard Fall Open Studios (Oct 17–18, 2026,
      *free admission & parking*), Open Source AI Week — Open Weight Debate Night (Oct 19, 2026), Open Source AI
-     Awards Night (Oct 23, 2026), and Open Source AI Week 2026 as a `partial_sf_program` review record;
-   - **6 field-level flags** that duplicate no peer flag (checked id-by-id against all 44): the two Open Source AI
+     Awards Night (Oct 23, 2026), Open Source AI Week 2026 as a `partial_sf_program` review record, and From the E:
+     Holiday Night Market (Fri Dec 11, 2026, 4:30–8:30 p.m., Ocean Avenue & Mission Street, free) which this
+     session found on the organizer's own event page **while re-verifying the peers' Oct 23 and Nov 20 From the E
+     rows** — the merged catalog carried only two of the three 2026 editions;
+   - **7 field-level flags** that duplicate no peer flag (checked id-by-id against all 44): the two Open Source AI
      cost/time findings, the shipyardartists.com access failure, the unconfirmed Hardly Strictly Bluegrass 2027
-     dates, and the free-gaming and free-AI coverage gaps;
+     dates, the free-gaming and free-AI coverage gaps, and the From the E cadence inconsistency (the three editions
+     now carry three different cadence labels across two sessions — `flag-from-the-e-cadence-inconsistency`);
    - the two research logs `research/reverification-3977d9cb.md` and `research/review-3977d9cb.md`, plus the
-     idempotent `research/patch-3977d9cb.py`.
+     idempotent `research/patch-3977d9cb.py` (re-based on `2f21f34`; it now converts this session's flags to main's
+     `event_id`/`event`/`issue`/`disposition` schema and uses main's optional `admission_source_url` field).
 4. Two flags this session had drafted were **dropped as duplicates of peer work** rather than merged:
    `flag-registration-only-cost-class` (peers already fixed the classifier and carry `flag-diplos-price-unstated`,
    `flag-nutcracker-price-unstated`, `flag-cornhole-cost-unstated` etc.) and `flag-dual-edition-cost-evidence`
    (covered by the peers' `flag-italian-heritage-2027`). Both observations remain documented in
    `research/review-3977d9cb.md` as R3 and R11 with their resolution.
 5. This session's superseded generator rewrite (its own `paid.html`, focus cards, `restricted` cost class, nav and
-   CSS changes) was **not** re-applied over the peers' generator. Its genuinely additive parts that the merged site
-   still lacks — a mobile navigation pass and the extra free/paid row-identity guards — were re-implemented against
-   `origin/main`'s `build.py` / `verify.py` rather than pasted over them.
+   CSS changes) was **not** re-applied over the peers' generator. Its genuinely additive parts were re-implemented
+   against `origin/main`'s code rather than pasted over it: `verify.py` gained a `(data-name, data-daterank)`
+   identity-set comparison for `index.html` / `upcoming.html` / `free.html` / `paid.html` (main compared source-URL
+   multisets only, which cannot see two editions sharing one official URL), explicit free/paid separation and
+   "no published price" leak checks, a Gaming → Music → AI → Everything else focus-section order check, and a
+   per-focus-block date-order check; `verify.py`'s stable counts moved to 162 / 102 / 60 / 17 / 51; `README.md`'s
+   counts were updated in place. The mobile navigation pass was **not** re-applied because main's
+   `assets/style.css` already ships one (horizontally scrollable nav, card-style table rows, single-column hero),
+   and main's "Date not published" label for the 20 undated rows was kept in preference to this session's wording.
+6. **Integration re-verification of peer rows** (the brief's verification duty for combined data): 5 of the 10
+   peer-added rows were re-fetched from their official pages on 2026-10-18 — https://www.fromtheesf.com/ and its
+   Holiday event page, https://sundaystreetssf.com/sunday-streets-excelsior-2026/,
+   https://foodwise.org/events/sofia-jimenez-tutuli-mexican-bakery/ — all confirmed, with quoted text and the one
+   resulting addition in §6 of `research/reverification-3977d9cb.md`. The remaining peer rows (two YBG Festival
+   rows, the SFPL SF Tech Week row, the SFMTA cornhole row, three further Foodwise demos) keep their official
+   source links and the peers' quoted evidence; they were not independently re-fetched in this pass.
 
-**Post-merge state:** see the session record below and the PR description; `python3 build.py && python3 verify.py`
-passes on the merged tree before the PR is opened.
+**Post-merge state:** **162 published rows (102 recurring + 60 special), 17 review records, 51 field-level flags,
+9 categories; 20 rows are both confirmed free and dated upcoming; 67 rows are upcoming overall.**
+`python3 build.py && python3 verify.py` passes on the merged tree (all new guards mutation-tested: a duplicated
+row, a swapped pair inside a focus block and a renamed focus section each fail the build). See the session record
+below and the PR description.
 
 ## Session record — arena/3977d9cb-maltaproj7 (C1–C6)
 

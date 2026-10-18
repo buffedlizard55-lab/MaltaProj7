@@ -126,3 +126,34 @@ Resulting split after this pass: **151 published rows → 57 free or partly free
   the free/paid separation, focus ordering, date-first ordering, source-link coverage and local navigation.
 * Every new row and every new flag carries its own official source link on the generated pages, so each line can be
   re-checked by hand from the live site.
+
+
+## 6. Integration re-verification of peer rows (added after the merge with main `2f21f34`)
+
+While this session worked, three parallel sessions merged PRs #27—#33 into `main`, adding 10 published rows and
+changing 7 admission values. As the final integration session I re-fetched the official pages behind the peer rows
+that most affect the free lists. Quotes are verbatim from the pages fetched on 2026-10-18.
+
+| Peer row | Official page re-fetched | What the page says | Result |
+| --- | --- | --- | --- |
+| `from-the-e-night-market-2026-10-23` (cost filled as Free by arena/56415e75) | https://www.fromtheesf.com/ | ✨️ three 2026 editions listed: "From the E: Fall Festival Night Market — Fri, Oct 23 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️", "From the E: Harvest Night Market — Fri, Nov 20 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️", "From the E: Holiday Night Market — Fri, Dec 11 — Ocean Ave & Mission St — ✨️ FREE COMMUNITY FUN! ✨️" | Confirms the Free label and the `admission_source_url`. **New finding:** a third edition (Dec 11) was missing from the catalog — added as `from-the-e-holiday-night-market-2026-12-11`. |
+| `from-the-e-harvest-night-market-2026-11-20` (added by arena/56415e75, hours left blank) | https://www.fromtheesf.com/ | same homepage listing, "Fri, Nov 20", no hours on the homepage | Confirms the row and the decision to leave the time blank rather than borrow the organizer's general "second Saturday of the month from 5pm-10pm" wording (which is a Friday series) — see `flag-from-the-e-general-hours-mismatch`. |
+| new row `from-the-e-holiday-night-market-2026-12-11` (added by this session) | https://www.fromtheesf.com/events/from-the-e-holiday-night-market | "From the E: Holiday Night Market"; "Fri, Dec 11 | Ocean Ave & Mission St"; "✨️ FREE COMMUNITY FUN! ✨️ From The E: Excelsior Night Market"; "Time & Location: Dec 11, 2026, 4:30 PM — 8:30 PM"; "Ocean Ave & Mission St, San Francisco, CA 94112, USA"; "RSVP Here"; "Registration closes Dec 11, 2026, 7:00 PM" | Date, hours, street footprint and free admission all come from the organizer's own event page. An RSVP is not an admission charge, so the row is classed free, not mixed. |
+| `sunday-streets-excelsior-2026` (added by arena/8c40d1c6, admission Free) | https://sundaystreetssf.com/sunday-streets-excelsior-2026/ (fetched independently by this session) | "Sunday Streets is excited to host the 2026 season finale in the Excelsior on Sunday, October 18 on Mission Street between Geneva Avenue and Theresa Street from 11am to 4pm"; a Lucha Libre showcase, Salvi Soul Encuentro, Kultura Crawl, Polynesian dance, family hub and clothing swap; **no admission charge stated anywhere on the page** | Date, hours and street footprint confirmed. The Free label rests on the organizer's About-page wording ("fun, free activities provided by local nonprofits, community groups and small businesses"), exactly as the peer recorded; `flag-sundaystreets-free-wording` publishes that reasoning for a human to downgrade if a stricter reading is preferred. Cross-check consistent — no change made. |
+| `foodwise-sofia-jimenez-demo-2026-10-31` (added by arena/56415e75, admission Free) | https://foodwise.org/events/sofia-jimenez-tutuli-mexican-bakery/ | "Saturday, October 31, 2026, 11:00 am - 11:45 am"; "Foodwise Demo"; "Ferry Plaza"; "All demos take place in the Foodwise Classroom (green tent in front of the Ferry Building) and are **free to the public**, with recipes and samples for all." | Confirms date, time, venue and the free label from the organizer's own page. |
+
+Not independently re-fetched in this pass (they carry official source links and the peers' quoted evidence in
+`research/verification-56415e75.md` / `research/verification-8c40d1c6.md`): the two Yerba Buena Gardens Festival rows
+(source: the festival's own 2026 season press-release PDF), the SFPL SF Tech Week row, the SFMTA SFIAC/Olympic Club
+cornhole row (admission deliberately left blank) and three further Foodwise demo rows. Coverage of this integration
+re-check is therefore 5 of the 10 peer-added rows plus the 7 changed admission values reviewed against the peers'
+quoted text.
+
+## 7. Post-merge reproducibility
+
+* `research/patch-3977d9cb.py` was re-based on main `2f21f34`: it now adds 4 published rows + 1 review record and
+  7 flags that main did not carry, and drops the 2 flags this session had drafted that duplicate peer flags.
+* Final counts after `python3 build.py && python3 verify.py`: **162 published (102 recurring + 60 special),
+  17 review records, 51 field-level flags, 9 categories, 20 rows that are both confirmed free and dated upcoming,
+  67 upcoming rows overall**. All checks pass, including the identity-set, focus-order and per-block date-order
+  guards added to `verify.py` during integration.

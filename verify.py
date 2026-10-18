@@ -170,16 +170,33 @@ def main() -> int:
     # hours and no-RSVP wording, GDC 2027 pass-rate window, Day of the Devs time)
     # and 3 new field-level flags. This session's duplicate Sunday Streets Excelsior
     # row and duplicate Sunday Streets free-wording flag were dropped in favour of
-    # arena/8c40d1c6's rows. Total: 158 published (101 recurring + 57 special),
-    # 16 review records, 44 field-level flags, 9 categories.
-    if len(published) != 158:
-        error(f"expected 158 published rows, found {len(published)}")
-    if len(recurring) != 101 or len(special) != 57:
-        error(f"expected 101 recurring / 57 special, found {len(recurring)} / {len(special)}")
-    if len(review) != 16:
-        error(f"expected 16 review records, found {len(review)}")
-    if len(flags) != 44:
-        error(f"expected 44 field-level flags, found {len(flags)}")
+    # arena/8c40d1c6's rows.
+    # 2026-10-18 arena/3977d9cb-maltaproj7 final integration pass (merged origin/main
+    # 2f21f34 into this branch, keeping main's architecture and data for every shared
+    # file; log: COORDINATION.md "merge-conflict & reconciliation log", evidence:
+    # research/reverification-3977d9cb.md and research/review-3977d9cb.md, patch:
+    # research/patch-3977d9cb.py): +4 published rows and 1 review record from official
+    # organizer pages that main did not carry (Hunters Point Shipyard Fall Open Studios
+    # from the Shipyard Trust for the Arts Eventbrite listing corroborated by
+    # thepointart.com; Open Source AI Week Debate Night and Awards Night; the From the E
+    # Holiday Night Market, Dec 11, from the organizer's own event page) and +7
+    # field-level flags (open-source AI cost gap, awards-night time discrepancy,
+    # shipyardartists.com interstitial, unconfirmed HSB 2027 dates, free gaming and free
+    # AI coverage gaps, From the E cadence inconsistency). Two flags drafted by this
+    # session were dropped as duplicates of peer flags already on main; both observations
+    # survive as R3 and R11 in research/review-3977d9cb.md. This session also re-verified
+    # peer rows against their official sources (From the E editions, Sunday Streets
+    # Excelsior, Foodwise demos) - see research/reverification-3977d9cb.md.
+    # Total: 162 published (102 recurring + 60 special), 17 review records,
+    # 51 field-level flags, 9 categories.
+    if len(published) != 162:
+        error(f"expected 162 published rows, found {len(published)}")
+    if len(recurring) != 102 or len(special) != 60:
+        error(f"expected 102 recurring / 60 special, found {len(recurring)} / {len(special)}")
+    if len(review) != 17:
+        error(f"expected 17 review records, found {len(review)}")
+    if len(flags) != 51:
+        error(f"expected 51 field-level flags, found {len(flags)}")
 
     # --- hardened semantic checks (added after mutation testing showed the shape
     # checks alone accepted example.com sources, out-of-city venues, fabricated
@@ -381,6 +398,74 @@ def main() -> int:
     dateranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', upcoming_html)
     if dateranks != sorted(dateranks):
         error("upcoming.html is not date-first")
+
+    # --- free/paid separation guards (2026-10-18, arena/3977d9cb-maltaproj7) ---
+    # Row identity is compared as (data-name, data-daterank) rather than by source URL:
+    # two editions of one series can share an official URL, so a URL multiset alone can
+    # hide a duplicated, dropped or swapped row.
+    def row_identities(page_html: str) -> Counter:
+        identities = Counter()
+        for row in re.findall(r'<tr data-category="[^>]+>', page_html):
+            name = re.search(r'data-name="([^"]*)"', row)
+            rank = re.search(r'data-daterank="([^"]*)"', row)
+            identities[(html.unescape(name.group(1)) if name else "",
+                        html.unescape(rank.group(1)) if rank else "")] += 1
+        return identities
+
+    def expected_identities(rows: list[dict]) -> Counter:
+        identities = Counter()
+        for event in rows:
+            status = event_status(event, as_of)
+            group = 0 if status == "upcoming" else (1 if status == "undated" else 2)
+            when = event.get("start_date") or event.get("end_date") or "9999-99-99"
+            # build.py renders data-name lowercased, so compare case-insensitively.
+            identities[(event["name"].lower(), f"{group}-{when}")] += 1
+        return identities
+
+    paid_html = read(ROOT / "paid.html")
+    for label, page_html, rows in (
+        ("index.html", index_html, free_rows),
+        ("upcoming.html", upcoming_html, free_rows),
+        ("free.html", free_html, free_rows),
+        ("paid.html", paid_html, paid_rows + mixed_rows),
+    ):
+        actual = row_identities(page_html)
+        wanted = expected_identities(rows)
+        if actual != wanted:
+            missing = wanted - actual
+            extra = actual - wanted
+            detail = "; ".join(
+                [f"missing {sorted(missing)[:3]}" if missing else "",
+                 f"unexpected {sorted(extra)[:3]}" if extra else ""]
+            ).strip("; ")
+            error(f"{label}: row identity set differs from the expected {len(rows)} rows ({detail})")
+    # The free section must never show a paid/mixed row, and the paid section must never
+    # show a confirmed-free row. Rows whose source stated no price belong to neither.
+    free_names = {event["name"] for event in free_rows}
+    paid_names = {event["name"] for event in paid_rows + mixed_rows}
+    not_stated_names = {event["name"] for event in cost_not_stated}
+    overlap = free_names & paid_names
+    if overlap:
+        error(f"free/paid separation broken for {sorted(overlap)}")
+    for label, page_html in (("index.html", index_html), ("upcoming.html", upcoming_html),
+                             ("free.html", free_html), ("paid.html", paid_html)):
+        rendered = {name for name, _ in row_identities(page_html)}
+        leaked = rendered & not_stated_names
+        if leaked:
+            error(f"{label}: rows with no published price leaked into a cost-sorted page: {sorted(leaked)}")
+    # Focus sections stay Gaming -> Music -> AI -> Everything else, and each block stays
+    # date-first internally (the page as a whole is focus-first, so a page-wide
+    # monotonic check would be wrong here).
+    for label, page_html, prefix in (("index.html", index_html, "home-"), ("free.html", free_html, "free-")):
+        sections = re.findall(r'<h3 id="' + re.escape(prefix) + r'([a-z\-]+)">', page_html)
+        if sections != ["gaming", "music", "ai", "everything-else"]:
+            error(f"{label}: focus sections out of order or incomplete: {sections}")
+        for chunk in re.split(r'(?=<h3 id="' + re.escape(prefix) + r')', page_html)[1:]:
+            heading = re.search(r'<h3 id="' + re.escape(prefix) + r'([a-z\-]+)">', chunk)
+            table = chunk.split("</table>")[0]
+            ranks = re.findall(r'data-daterank="([0-9]-\d{4}-\d{2}-\d{2})"', table)
+            if ranks != sorted(ranks):
+                error(f"{label}: rows in the {heading.group(1) if heading else '?'} focus block are not date-first")
     # A label stating 'Free' cannot be derived from a waived fundraising goal.
     if cost_class("No fundraising minimum required") != "not-stated":
         error("fundraising minimum misclassified as free admission")

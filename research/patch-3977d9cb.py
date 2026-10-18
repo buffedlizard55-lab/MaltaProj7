@@ -6,6 +6,20 @@ quoted in `notes`, in `research/reverification-3977d9cb.md`, or in the flag text
 Nothing is inferred: where the official page published no price, `admission` stays
 blank and a flag records the gap.
 
+Re-based 2026-10-18 on the merged main (commit 2f21f34) after three parallel
+sessions landed PRs #27—#33: the four records and six flags below are still absent from
+main, while two flags this session had drafted were DROPPED as duplicates of peer work
+already on main (flag-registration-only-cost-class — main's classifier already returns
+"not-stated" for registration-only wording and main carries flag-diplos-price-unstated,
+flag-nutcracker-price-unstated and flag-cornhole-cost-unstated; flag-dual-edition-cost-evidence
+— main carries flag-italian-heritage-2027). Both observations remain recorded as R3 and R11
+in research/review-3977d9cb.md. Integration also added a fifth published row (From the E:
+Holiday Night Market, Fri Dec 11 2026) read from the organizer's own event page, plus
+flag-from-the-e-cadence-inconsistency.
+
+Counts move from the merged baseline: published 158 — 162 (recurring 101 — 102,
+special 57 — 60), review 16 — 17, flags 44 — 51.
+
 Run:  python3 research/patch-3977d9cb.py     (idempotent)
 """
 from __future__ import annotations
@@ -30,6 +44,8 @@ NEW_PUBLISHED = [
         "location": "Hunters Point Shipyard, 451 Galvez Ave, and Islais Creek Studios, 1 Rankin St, San Francisco",
         "organizer": "Shipyard Trust for the Arts",
         "admission": "Free admission & parking (optional supporter ticket)",
+        "admission_source_url": "https://www.thepointart.com/hunters-point-shipyard",
+    "admission_source_url": "https://www.thepointart.com/hunters-point-shipyard",
         "source_url": "https://www.eventbrite.com/e/shipyard-open-studios-fall-2026-registration-1992234233221",
         "source_label": "Shipyard Trust for the Arts — official Shipyard Open Studios Fall 2026 listing",
         "source_authority": "Official organizer",
@@ -106,6 +122,36 @@ NEW_PUBLISHED = [
             "Required\"; the row keeps the official event page's 5:00–9:00 p.m. and the conflict is recorded "
             "in flag-open-source-ai-awards-time. No price is published on either page, so admission is left "
             "blank rather than inferred — see flag-open-source-ai-cost."
+        ),
+    },
+    {
+        "id": "from-the-e-holiday-night-market-2026-12-11",
+        "name": "From the E: Holiday Night Market (Excelsior)",
+        "bucket": "special",
+        "cadence": "single-date",
+        "category": "Food & markets",
+        "date_text": "Friday, December 11, 2026",
+        "start_date": "2026-12-11",
+        "end_date": "2026-12-11",
+        "time_text": "4:30—8:30 p.m.",
+        "location": "Ocean Avenue & Mission Street, Excelsior, San Francisco",
+        "organizer": "From the E Excelsior Night Market",
+        "admission": "Free",
+        "source_url": "https://www.fromtheesf.com/events/from-the-e-holiday-night-market",
+        "source_label": "From the E — Holiday Night Market official event page",
+        "source_authority": "Official organizer",
+        "status": "verified",
+        "review_reason": "",
+        "notes": (
+            "Added 2026-10-18 (arena/3977d9cb-maltaproj7) during final integration. The organizer's event "
+            "page reads \"From the E: Holiday Night Market — Fri, Dec 11 — Ocean Ave & Mission St — "
+            "✨️ FREE COMMUNITY FUN! ✨️\" and gives \"Time & Location: Dec 11, 2026, 4:30 PM — 8:30 PM; "
+            "Ocean Ave & Mission St, San Francisco, CA 94112, USA\", with an RSVP link and \"Registration "
+            "closes Dec 11, 2026, 7:00 PM\" (an RSVP is not an admission charge). The organizer's homepage "
+            "lists three dated 2026 editions (Fall Festival Oct 23, Harvest Nov 20, Holiday Dec 11) but the "
+            "event page states no recurrence rule, so cadence is recorded as single-date rather than inferred "
+            "— see flag-from-the-e-cadence-inconsistency. The Oct 23 and Nov 20 editions were catalogued by "
+            "arena/5e333a6e-maltaproj7 and arena/56415e75-maltaproj7."
         ),
     },
 ]
@@ -291,55 +337,37 @@ NEW_FLAGS = [
         ),
     },
     {
-        "id": "flag-dual-edition-cost-evidence",
-        "event_id": "italian-heritage-parade-2026",
-        "event": "Same annual event held as two edition rows with different cost evidence",
+        "id": "flag-from-the-e-cadence-inconsistency",
+        "event_id": "from-the-e-holiday-night-market-2026-12-11",
+        "event": "From the E Excelsior Night Market (2026 editions)",
         "issue": (
-            "Three annual traditions are catalogued twice — once for the completed 2026 edition and once for a "
-            "confirmed 2027 edition — and the two rows do not carry the same cost evidence. Italian Heritage "
-            "Parade: the 2026 row (sourced from the organizer's 158th-parade retrospective) publishes no price, "
-            "while the 2027 row (sourced from the organizer's parade page) states admission FREE. San Francisco "
-            "Pride Celebration & Parade: the 2026 row states a free celebration with ticketed grandstands, while "
-            "the 2027 row publishes no price yet. Fillmore Jazz Festival carries FREE on both editions. The "
-            "consequence on the site is that one edition of the same parade appears in the free main list and the "
-            "other appears in the separate non-free section, because each row reports only what its own source "
-            "stated."
+            "The three From the E 2026 editions carry different cadence labels: Oct 23 is "
+            "special/single-date (SFMTA source, recurrence not stated), Nov 20 is recurring/monthly "
+            "(organizer homepage), Dec 11 is special/single-date (organizer event page). The organizer "
+            "publishes three dated editions but no recurrence rule, and its own general wording (\"the "
+            "second Saturday of the month from 5pm-10pm\") does not match Friday dates — see "
+            "flag-from-the-e-general-hours-mismatch. A human owner may want one cadence convention for "
+            "the series."
+        ),
+        "disposition": (
+            "Catalogued as single-date. A human owner can pick one convention: date each edition as "
+            "single-date, or publish one recurring/monthly "
+            "series row listing all three 2026 dates."
         ),
         "sources": [
-            {"label": "Italian Heritage Parade — official parade page (2027, admission FREE)", "url": "https://sfitalianheritage.org/parade/"},
-            {"label": "Italian Heritage Parade — organizer retrospective on the 158th parade (2026 edition, no price stated)", "url": "https://sfitalianheritage.org/san-francisco-italian-heritage-parade-celebrates-158-years-with-grand-marshal-joe-mantegna/"},
-            {"label": "SF Pride official site (2027 row source)", "url": "https://sfpride.org/"},
-            {"label": "Fillmore Jazz Festival official site", "url": "https://fillmorejazzfest.com/"},
+            {
+                "label": "From the E — Holiday Night Market official event page",
+                "url": "https://www.fromtheesf.com/events/from-the-e-holiday-night-market",
+            },
+            {
+                "label": "From the E Excelsior Night Market official site",
+                "url": "https://www.fromtheesf.com/",
+            },
+            {
+                "label": "SFMTA travel update: From the E Night Market (Oct 23, 2026)",
+                "url": "https://www.sfmta.com/travel-updates/e-night-market-friday-october-23-2026",
+            },
         ],
-        "disposition": (
-            "Both editions are kept, each labelled only with what its own source states; no cost was copied "
-            "between editions because that would be an inference. Flagged so a human can decide whether the "
-            "completed-edition rows should be retired once the 2027 editions are documented. Nonblocking."
-        ),
-    },
-    {
-        "id": "flag-registration-only-cost-class",
-        "event_id": "microsoft-ignite-2026",
-        "event": "Rows whose source states registration or invitation only (no price)",
-        "issue": (
-            "Four published rows carry sourced admission text that names a gate but no price: \"Registration "
-            "required\" (Microsoft Ignite, AGU26 Annual Meeting, Bay to Breakers) and \"By invitation only "
-            "(invitations not transferable)\" (J.P. Morgan Healthcare Conference). The previous cost classifier "
-            "counted the words \"registration required\" and \"invitation only\" as evidence of a paid ticket, "
-            "which is an inference: none of those official pages states a price in the captured text. They are "
-            "now labelled \"Registration / invitation — cost not published\" instead of \"Paid / ticketed\"."
-        ),
-        "sources": [
-            {"label": "Microsoft Ignite official site", "url": "https://ignite.microsoft.com/"},
-            {"label": "AGU26 Annual Meeting official page (row source)", "url": "https://www.agu.org/annual-meeting"},
-            {"label": "Bay to Breakers official site (row source)", "url": "https://www.baytobreakers.com/"},
-            {"label": "J.P. Morgan Health Care Conference official page (row source)", "url": "https://www.jpmorgan.com/about-us/events-conferences/health-care-conference"},
-        ],
-        "disposition": (
-            "Classifier refined in build.py (new \"restricted\" cost class). These rows stay out of the "
-            "free-events main section and are listed in the separate non-free section with the sourced wording "
-            "visible, so no price is asserted and no row is promoted to free. Nonblocking."
-        ),
     },
 ]
 

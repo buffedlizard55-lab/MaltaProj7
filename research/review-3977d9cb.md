@@ -75,3 +75,53 @@ only; 77 with no published price; 17 review records; 42 field-level flags; 57 ro
 6. `flag-open-source-ai-cost`, `flag-open-source-ai-awards-time` — the two new AI rows' cost and the one-hour time conflict.
 7. `flag-shipyard-open-studios-source` — re-point the source link when `shipyardartists.com` serves content again.
 8. R17/R18 above — thin venue/organizer values and the three SF Travel–sourced rows.
+
+
+## 5. Integration addendum — status of every finding after merging main `2f21f34` (2026-10-18)
+
+This register was written against the pre-merge baseline (148 published / 16 review / 34 flags). Three parallel
+sessions then merged PRs #27—#33 into `main`, which adopted a stricter free-first architecture of its own. On merge,
+**every shared file was resolved to main's version** (`build.py`, `verify.py`, `data/events.json`, `data/events.csv`,
+`assets/style.css`, `README.md` and all 18 generated pages); only `COORDINATION.md` was hand-merged. Nothing from any
+session was discarded. Status of each finding:
+
+| # | Finding | Status in the merged site |
+| --- | --- | --- |
+| R1 | Paid events rendered under a "Free events" heading (GDC $125—$1,249, Cloudflare Connect $595) | **Resolved by main.** `free.html`/`upcoming.html`/`index.html` render only rows whose sourced admission text classifies as free and that are dated upcoming; paid and mixed rows live on `paid.html`; `verify.py` asserts both the row sets and the `data-cost` values per page. |
+| R2 | Dashboard prose counts that could not be re-derived | **Resolved by main.** Every dashboard metric is generated from `data/events.json`, and `verify.py` asserts the cadence and authority summaries against the data. |
+| R3 | Registration-only wording inferred as a paid ticket | **Resolved by main, flag dropped as a duplicate.** Main's `cost_class()` returns `not-stated` for registration-only wording (`verify.py` has an explicit regression check), and main carries `flag-diplos-price-unstated`, `flag-nutcracker-price-unstated`, `flag-cornhole-cost-unstated`. My drafted `flag-registration-only-cost-class` was therefore **not** re-added; the observation is retained here only. |
+| R4 | No free-only main section | **Resolved by main** (free-first nav: Dashboard → Upcoming → Free upcoming → Paid & partly free → •). |
+| R5 | Executive summary not free-first | **Resolved by main** (`#today-strip`, `#next-up-list` and the focus tables are built from the confirmed-free upcoming rows only, re-computed in the browser against the visitor's date). |
+| R6 | `build.py` and `verify.py` disagreed on counts | **Resolved this session.** `verify.py`'s stable guards now read 162 published / 102 recurring / 60 special / 17 review / 51 flags, and the page-count expectations still recompute from the data. |
+| R7 | Row checks used name substrings, which collide across editions | **Improved this session on top of main's checks.** Main compares a multiset of row source URLs; I added a `(data-name, data-daterank)` identity-set comparison for `index.html`, `upcoming.html`, `free.html` and `paid.html`, plus explicit free/paid separation and "no price published" leak checks. Mutation-tested: a duplicated row, a swapped pair and a renamed focus section each fail the build. |
+| R8 | No ordering guard for the free lists | **Improved this session.** Main asserts `upcoming.html` is date-first; I added a per-focus-block ordering check, because `free.html`/`index.html` are focus-first and a page-wide monotonic check would be wrong there. |
+| R9 | Focus gaps invisible to the reader | **Resolved by main.** Empty focus groups render "0 confirmed free upcoming as of 2026-10-18" plus "No dated, free upcoming event in this focus area is confirmed in this snapshot. Paid or cost-unknown events are not presented as free." My `flag-free-gaming-coverage-gap` and `flag-free-ai-coverage-gap` document why, and were re-added (main had neither). |
+| R10 | Hardly Strictly Bluegrass 2027 dates aggregator-only | **Flag re-added** as `flag-hsb-2027-dates-unconfirmed`; it complements main's `flag-hsb-date-window` (2026 window discrepancy). No 2027 row was created. |
+| R11 | Completed 2026 editions kept next to documented 2027 editions without cost evidence | **Flag dropped as a duplicate** of main's `flag-italian-heritage-2027`. Observation retained here only. |
+| R12 | `shipyardartists.com` serves a bot interstitial | **Flag re-added** as `flag-shipyard-open-studios-source`; the Shipyard row's source is the organizer's Eventbrite listing with `thepointart.com` linked as admission evidence. |
+| R13 | 20 undated rows | **Left as main has it.** Main labels them "Date not published", which is accurate; my proposed "Repeating — no single date" wording was **not** re-applied, to avoid churning deployed pages for no gain. |
+| R14 | Inline `style` attributes | **Effectively resolved by main** — the generated pages carry one inline colour attribute on `index.html`; all other styling is in `assets/style.css`, which already includes a full mobile pass (horizontally scrollable nav, card-style table rows, single-column hero). My pre-merge CSS/nav work was therefore not re-applied. |
+| R15 | Stale `README.md` counts | **Resolved this session additively** — main's README was kept and its counts updated to 162 / 102 / 60 / 17 / 51 (20 free + dated upcoming, 56 free overall, 12 partly free, 16 paid, 78 no confirmed cost), plus the new verifier guards and a link to this session's research logs. My earlier full README rewrite is superseded. |
+| R16 | Empty "Historical" header in `COORDINATION.md` | **Still open, out of scope.** Main's ledger contains the `arena/813e597d-maltaproj7` board twice (once under "Active coordination", once under "Historical"). It was left byte-identical during the hand-merge rather than edited. |
+| R17 | 7 rows with vague venues and 4 with "Organizer not named" | **Still open for the owner** — no value was invented to fill any gap. Re-counted post-merge: 4 published rows still carry a vague venue value (`illuminate-sf-2026`, `sf-dance-film-festival-2026`, `carnaval-fat-tuesday-2026`, `sf-open-studios-2026`) and 3 still name no organizer (`cole-valley-street-fair-2026`, `clement-street-art-fair-2026`, `lower-polk-live-2026-10-23`); the parallel sessions filled some of the values this register originally counted. Every one of those rows still carries an official source link. |
+| R18 | 3 rows sourced to `sftravel.com` (Day of the Dead Procession, Illuminate SF, YBG Festival) | **Still open for the owner** — unchanged. For YBG, main now cites the festival's own 2026 season press release for two of its rows, which reduces reliance on the tourism board. |
+
+### Deliberately not re-applied from this session's pre-merge work
+
+The generator rewrite committed as `a4bebcb` (a `restricted` cost class, a separate `paid.html` implementation,
+focus cards, a rewritten nav and CSS, and a rewritten README) is **superseded by main's stricter equivalents** and was
+overwritten with main's versions during the merge. Only the additive pieces listed above (data rows, flags, verifier
+guards, README counts) were re-applied.
+
+### Added during integration
+
+* `from-the-e-holiday-night-market-2026-12-11` — the third 2026 From the E edition, found while re-verifying the
+  peers' Oct 23 and Nov 20 rows against https://www.fromtheesf.com/ and its Holiday event page (free, 4:30—8:30 p.m.,
+  Ocean Avenue & Mission Street).
+* `flag-from-the-e-cadence-inconsistency` — the three From the E editions now carry three different cadence labels
+  across two sessions; a human owner should pick one convention.
+
+Post-integration counts, all re-derived from `data/events.json`: **162 published rows (102 regularly occurring + 60
+special) across 9 categories; 68 free or partly free (56 free, 12 mixed), of which 20 are dated and upcoming; 16 with
+evidence of paid entry; 78 with no confirmed admission cost; 67 rows still upcoming as of 2026-10-18; 17 review
+records; 51 field-level flags.** `python3 build.py && python3 verify.py` is green.
