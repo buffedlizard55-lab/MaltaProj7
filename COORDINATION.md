@@ -1,3 +1,24 @@
+# Active coordination — session arena/04813d69-maltaproj7 (2026-10-18)
+
+**Session ID:** `arena/04813d69-maltaproj7` (platform-fixed branch; per Arena environment rules all work stays on `arena/04813d69-maltaproj7`, so the brief's `session-<id>/<task>` branch naming cannot be used — same documented deviation as every prior session in this ledger).
+
+**Pre-claim inspection (2026-10-18T16:52Z):** `git fetch origin --prune` → `origin/main` at `4877da9` (PR #35 merged); `gh pr list --state all` shows PRs #1–#35 all **MERGED**, none open; `git branch -a` shows only `main` and this session's `arena/04813d69-maltaproj7` (no other live session). Baseline `python3 build.py && python3 verify.py` → `Built 162 published events: 102 recurring, 60 special, 9 categories; 17 review records; 67 upcoming; 40 free or partly free. / ALL LOCAL CATALOG, SOURCE-LINK, AND NAVIGATION CHECKS PASSED` (162/102/60/17/51). This session claims remaining brief-driven work (V1–V6) and the final integration role.
+
+## Task board — arena/04813d69-maltaproj7
+
+| ID | Task | Status | Owner | Claimed (UTC) | File scope |
+| --- | --- | --- | --- | --- | --- |
+| V1 | Line-by-line official-source re-verification (all 162 published + 17 review rows; free/gaming/music/AI focus; date/cost/location/cadence); log quoted source text and flag irregularities | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `research/reverification-04813d69.md`, `research/review-04813d69.md` |
+| V2 | Mobile-friendly UI & date-first audit: confirm upcoming-first ordering, executive summary (free near today), cost labeling, Gaming→Music→AI→Everything else focus, recurring vs special separation, clean dashboard (flagged as needs_review does not block) | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `build.py`, `assets/style.css`, generated `*.html`, `categories/*.html` |
+| V3 | Data integrity & SF-only scope: verify city-only geography, no inferred values, paid separate section, free main section contains only confirmed-free dated upcoming rows | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `data/events.json`, `data/events.csv`, `research/patch-04813d69.py` (if needed) |
+| V4 | Verification harness & link crawl: keep all guards, confirm source-link separation, local links, ID uniqueness, cost/date guards, live browser date logic | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `verify.py` |
+| V5 | Docs: refresh README and Method & sources for current snapshot counts and this session's findings | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `README.md`, `build.py` (method page) |
+| V6 | Final integration: reconcile (no peer conflicts on this baseline), rebuild, verify, crawl local links, PR to main, merge without waiting, confirm Pages deploy, record links | **in progress** | arena/04813d69-maltaproj7 | 2026-10-18T16:52Z | `COORDINATION.md`, PR link, Pages runs |
+
+## Session log — arena/04813d69-maltaproj7
+
+- 2026-10-18T16:52Z: Claimed V1–V6 on baseline 4877da9; no peer branches so no file conflicts; work stays on platform-fixed branch per environment rules.
+
 # Active coordination — arena/55c5243c-maltaproj7
 
 Session fixed to `arena/55c5243c-maltaproj7`; no alternate branch created. Inspected all existing boards: prior tasks complete; origin/main is 4877da9, no open PRs on claim.
